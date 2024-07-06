@@ -70,36 +70,37 @@ $(function () {
 
   /* email */
 
-  $(".email-toggle-btn").on("click", function() {
+  $(".email-toggle-btn").on("click", function () {
     $(".email-wrapper").toggleClass("email-toggled")
-  }), $(".email-toggle-btn-mobile").on("click", function() {
+  }), $(".email-toggle-btn-mobile").on("click", function () {
     $(".email-wrapper").removeClass("email-toggled")
-  }), $(".compose-mail-btn").on("click", function() {
+  }), $(".compose-mail-btn").on("click", function () {
     $(".compose-mail-popup").show()
-  }), $(".compose-mail-close").on("click", function() {
+  }), $(".compose-mail-close").on("click", function () {
     $(".compose-mail-popup").hide()
-  }), 
-
-
-  /* chat */
-
-  $(".chat-toggle-btn").on("click", function() {
-    $(".chat-wrapper").toggleClass("chat-toggled")
-  }), $(".chat-toggle-btn-mobile").on("click", function() {
-    $(".chat-wrapper").removeClass("chat-toggled")
   }),
 
 
+    /* chat */
 
-  /* switcher */
+    $(".chat-toggle-btn").on("click", function () {
+      $(".chat-wrapper").toggleClass("chat-toggled")
+    }), $(".chat-toggle-btn-mobile").on("click", function () {
+      $(".chat-wrapper").removeClass("chat-toggled")
+    }),
 
-  $("#BlueTheme").on("click", function () {
-    $("html").attr("data-bs-theme", "blue-theme")
-  }),
 
-  $("#LightTheme").on("click", function () {
-    $("html").attr("data-bs-theme", "light")
-  }),
+
+    /* switcher */
+    $("#LightTheme").on("click", function () {
+      $("html").attr("data-bs-theme", "light")
+    }),
+
+    $("#BlueTheme").on("click", function () {
+      $("html").attr("data-bs-theme", "blue-theme")
+    }),
+
+
 
     $("#DarkTheme").on("click", function () {
       $("html").attr("data-bs-theme", "dark")
