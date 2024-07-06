@@ -2,7 +2,7 @@
    <aside class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
       <div class="logo-icon">
-        <img src="{{ URL::asset('build/images/logo-icon.png') }}" class="logo-img" alt="">
+        <img src="{{ URL::asset('build/images/miliraicon.png') }}" class="logo-img" alt="">
       </div>
       <div class="logo-name flex-grow-1">
         <h5 class="mb-0">Milira Admin</h5>
@@ -29,7 +29,9 @@
               <div class="menu-title">Sales</div>
             </a>
             <ul>
-              <li><a href="{{ url('/widgets-data') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
+              <li><a href="{{ url('/ecommerce-orders') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
+              </li>
+              <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Order Details</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Shipments</a>
               </li>
@@ -49,7 +51,9 @@
               <div class="menu-title">Catalog</div>
             </a>
             <ul>
-              <li><a href="{{ url('/widgets-data') }}"><i class="material-icons-outlined">arrow_right</i>Products</a>
+            <li><a href="{{ url('/ecommerce-add-product') }}"><i class="material-icons-outlined">arrow_right</i>Add Product</a>
+              </li>
+              <li><a href="{{ url('/ecommerce-products') }}"><i class="material-icons-outlined">arrow_right</i>Products</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Categories</a>
               </li>
@@ -63,12 +67,14 @@
 
           <li>
             <a href="javascript:;" class="has-arrow">
-              <div class="parent-icon"><i class="material-icons-outlined"></i>
+              <div class="parent-icon"><i class="material-icons-outlined">group</i>
               </div>
               <div class="menu-title">Customers</div>
             </a>
             <ul>
-              <li><a href="{{ url('/widgets-data') }}"><i class="material-icons-outlined">arrow_right</i>Customers</a>
+            <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Customers</a>
+              </li>
+              <li><a href="{{ url('/ecommerce-customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Customer Details</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Reviews</a>
               </li>

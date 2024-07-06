@@ -6,7 +6,7 @@
     <link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-    <x-page-title title="Ecommerce" subtitle="Add Product" />
+    
 
     <div class="row">
         <div class="col-12 col-lg-8">
@@ -17,7 +17,11 @@
                         <input type="text" class="form-control" placeholder="write title here....">
                     </div>
                     <div class="mb-4">
-                        <h5 class="mb-3">Product Description</h5>
+                        <h5 class="mb-3">Small Description</h5>
+                        <textarea class="form-control" cols="4" rows="6" placeholder="write a description here.."></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <h5 class="mb-3">Description</h5>
                         <textarea class="form-control" cols="4" rows="6" placeholder="write a description here.."></textarea>
                     </div>
                     <div class="mb-4">
@@ -38,15 +42,15 @@
                                     <button class="nav-link active px-4 rounded-0" data-bs-toggle="pill"
                                         data-bs-target="#Shipping" type="button"><i
                                             class="bi bi-truck-front-fill me-2"></i>Shipping</button>
-                                    <button class="nav-link px-4 rounded-0" data-bs-toggle="pill"
+                                   <!--  <button class="nav-link px-4 rounded-0" data-bs-toggle="pill"
                                         data-bs-target="#GlobalDelivery" type="button"><i
                                             class="bi bi-globe me-2"></i>Global Delivery</button>
                                     <button class="nav-link px-4 rounded-0" data-bs-toggle="pill"
                                         data-bs-target="#Attributes" type="button"><i
                                             class="bi bi-hdd-rack-fill me-2"></i>Attributes</button>
                                     <button class="nav-link px-4 rounded-0" data-bs-toggle="pill" data-bs-target="#Advanced"
-                                        type="button"><i class="bi bi-handbag-fill me-2"></i>Advanced</button>
-                                </div>
+                                        type="button"><i class="bi bi-handbag-fill me-2"></i>Advanced</button>-->
+                                </div> 
                             </div>
                             <div class="col-12 col-lg-9">
                                 <div class="tab-content">
@@ -139,7 +143,7 @@
                                                     href="#!">Delivery terms and conditions </a>for details.</p>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="GlobalDelivery">
+                                    <!-- <div class="tab-pane fade" id="GlobalDelivery">
                                         <div class="d-flex flex-column h-100">
                                             <h6 class="mb-3">Global Delivery</h6>
                                             <div class="flex-1">
@@ -182,7 +186,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="tab-pane fade" id="Attributes">
                                         <h6 class="mb-3">Attributes</h6>
                                         <div class="form-check">
@@ -281,10 +285,10 @@
                                         class="bi bi-x"></i></a>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                             <label for="Vendor" class="form-label">Vendor</label>
                             <input type="text" class="form-control" id="Vendor" placeholder="Vendor">
-                        </div>
+                        </div> -->
                     </div><!--end row-->
                 </div>
             </div>
@@ -293,10 +297,7 @@
                 <div class="card-body">
                     <h5 class="mb-3">Variants</h5>
                     <div class="row g-3">
-                        <div class="col-12">
-                            <label for="Brand" class="form-label">Brand</label>
-                            <input type="text" class="form-control" id="Brand" placeholder="Brand">
-                        </div>
+                       
                         <div class="col-12">
                             <label for="SKU" class="form-label">SKU</label>
                             <input type="text" class="form-control" id="SKU" placeholder="SKU">

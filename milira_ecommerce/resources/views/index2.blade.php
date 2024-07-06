@@ -3,7 +3,7 @@
     Index 2
 @endsection
 @section('content')
-    <x-page-title title="Dashboard" subtitle="eCommerce" />
+    
 
     <div class="row">
         <div class="col-12 col-lg-4 col-xxl-4 d-flex">
