@@ -41,9 +41,8 @@
                         <h5 class="mb-3">Display Images</h5>
                         <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
                     </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Product</button>
-                    </div>
+                    
+                
             </div>
         </div>
     </div>
@@ -91,7 +90,8 @@
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
