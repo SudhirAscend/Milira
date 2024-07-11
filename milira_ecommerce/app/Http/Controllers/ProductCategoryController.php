@@ -23,4 +23,10 @@ class ProductCategoryController extends Controller
 
         return redirect()->route('admin.product_categories.create')->with('success', 'Category added successfully.');
     }
+
+    public function index()
+    {
+        $categories = ProductCategory::all();
+        return view('admin.product_categories.index', compact('categories'));
+    }
 }
