@@ -965,101 +965,6 @@ button {
   margin-bottom: 1rem;
 }
 
-.footer {
-  background: url("../assets/images/homepage-one/footer-bg.webp");
-  font-family: "League Spartan", sans-serif;
-}
-
-.footer-padding {
-  padding-bottom: 12rem !important;
-}
-
-.footer-service-section {
-  background-color: #AE1C9A;
-  padding: 2.8rem;
-  margin-top: -11rem;
-  border-radius: 4px;
-}
-.footer-service-section .service-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-}
-.footer-service-section .service-wrapper .service-info {
-  font-size: 1.6rem;
-  color: #FFFFFF;
-  margin-bottom: 0;
-}
-.footer-service-section .service-wrapper .service-details {
-  font-size: 1.4rem;
-  font-weight: 400;
-}
-@media (max-width:1023px) {
-  .footer-service-section .gy-4 {
-    --bs-gutter-y: 2rem;
-  }
-  .footer-service-section .service-wrapper {
-    justify-content: flex-start;
-  }
-}
-@media only screen and (min-width: 767px) and (max-width: 1200px) {
-  .footer-service-section .service-wrapper {
-    align-items: flex-start;
-  }
-}
-
-.footer-section {
-  padding-top: 6rem;
-}
-.footer-section .logo {
-  margin-bottom: 6rem;
-}
-.footer-section .footer-heading {
-  font-size: 2rem;
-  color: #FFFFFF;
-}
-.footer-section .footer-title {
-  margin-bottom: 1.8rem;
-}
-.footer-section .footer-link a {
-  color: #c8c8c8;
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-.footer-section .footer-link a:hover {
-  color: #AE1C9A;
-  text-decoration: underline;
-}
-.footer-section .footer-link p {
-  color: #c8c8c8;
-}
-.footer-section .footer-link ul {
-  padding-left: 0;
-}
-.footer-section .footer-link ul li {
-  margin-bottom: 2rem;
-}
-.footer-section .footer-link .address {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 1.5rem;
-}
-.footer-section .contact-link {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 2rem;
-}
-@media (max-width:767px) {
-  .footer-section .footer-link a {
-    font-size: 1.5rem !important;
-  }
-}
 
 .product-info {
   background: #FFFFFF;
@@ -1322,4 +1227,74 @@ a.dropdown-sort-item {
   font-weight: 500;
   font-family: "inter","serif";
   padding: 15px 30px;
+}
+
+/* Footer */
+
+footer {
+  background-color: var(--primary-color);
+  margin-top: 20px;
+}
+
+.foot-logo img {
+  height: 50px;
+}
+
+.foot-logo {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.foot-title h4 {
+  color: #fff;
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.foot-items ul li a {
+  color: var(--secondary-color);
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.foot-items ul li {
+  padding-top: 20px;
+}
+
+.footer-details {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.foot-navigation {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.social p {
+  text-align: end;
+}
+
+.social p span a {
+  padding: 0px 10px;
+  color: var(--secondary-color);
+}
+
+.social p span a:hover {
+  color: #fff;
+}
+
+.copyrights {
+  border-top: 1px solid var(--secondary-color);
+}
+
+.footer-content {
+  border-top: 1px solid var(--secondary-color);
+}
+
+@media (max-width: 767px) {
+  .social p {
+    text-align: start;
+    margin-top: 20px;
+  }
 }
