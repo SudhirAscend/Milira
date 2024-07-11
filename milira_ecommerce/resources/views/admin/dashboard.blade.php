@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Index 2
+   Owner Dashboard
 @endsection
 @section('content')
     
