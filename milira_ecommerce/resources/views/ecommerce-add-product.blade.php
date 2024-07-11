@@ -6,6 +6,16 @@
 
 @push('css')
     <link href="{{ URL::asset('build/plugins/fancy-file-uploader/fancy_fileupload.css') }}" rel="stylesheet">
+    <style>
+        .card-body h5 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .form-control {
+            margin-bottom: 15px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -17,22 +27,26 @@
                     @csrf
                     <div class="mb-4">
                         <h5 class="mb-3">Product Title</h5>
-                        <input type="text" class="form-control" name="title" placeholder="write title here...." required>
+                        <input type="text" class="form-control" name="title" placeholder="Write title here..." required>
                     </div>
                     <div class="mb-4">
                         <h5 class="mb-3">Small Description</h5>
-                        <textarea class="form-control" name="small_description" cols="4" rows="6" placeholder="write a description here.."></textarea>
+                        <textarea class="form-control" name="small_description" cols="4" rows="6" placeholder="Write a small description here..."></textarea>
                     </div>
                     <div class="mb-4">
                         <h5 class="mb-3">Description</h5>
-                        <textarea class="form-control" name="description" cols="4" rows="6" placeholder="write a description here.."></textarea>
+                        <textarea class="form-control" name="description" cols="4" rows="6" placeholder="Write a description here..."></textarea>
                     </div>
                     <div class="mb-4">
-                        <h5 class="mb-3">Display images</h5>
+                        <h5 class="mb-3">Display Images</h5>
                         <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
                     </div>
                     
-                    <div class="col-12 col-lg-4">
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <h5 class="mb-3">Organize</h5>
@@ -57,7 +71,7 @@
                 </div><!--end row-->
             </div>
         </div>
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-body">
                 <h5 class="mb-3">Variants</h5>
                 <div class="row g-3">
@@ -73,15 +87,11 @@
                         <label for="Size" class="form-label">Size</label>
                         <input type="text" class="form-control" id="Size" name="size" placeholder="Size">
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-                    
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -91,7 +101,6 @@
 @push('script')
     <!--bootstrap js-->
     <script src="{{ URL::asset('build/js/bootstrap.bundle.min.js') }}"></script>
-
     <!--plugins-->
     <script src="{{ URL::asset('build/js/jquery.min.js') }}"></script>
     <!--plugins-->

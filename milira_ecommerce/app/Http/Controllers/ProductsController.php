@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ProductsController extends Controller
 {
@@ -31,11 +33,22 @@ class ProductsController extends Controller
         $product->title = $request->title;
         $product->small_description = $request->small_description;
         $product->description = $request->description;
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
-            $path = $file->store('public/images');
-            $product->images = $path;
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads', $filename, 'public');
+
+            if ($path) {
+                Log::info('File uploaded to: ' . $path);
+                $product->images = $path;
+            } else {
+                Log::error('File upload failed.');
+            }
+        } else {
+            Log::warning('No file was uploaded.');
         }
+
         $product->category = $request->category;
         $product->collection = $request->collection;
         $product->tags = $request->tags;

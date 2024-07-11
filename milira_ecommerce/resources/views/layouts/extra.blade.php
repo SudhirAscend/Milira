@@ -147,8 +147,8 @@
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="staticBackdrop">
       <div class="offcanvas-header border-bottom h-70">
           <div class="">
-              <h5 class="mb-0">Theme Customizer</h5>
-              <p class="mb-0">Customize your theme</p>
+              <h5 class="mb-0">Customize your Layout</h5>
+              <p class="mb-0">Change the look of your dashboard</p>
           </div>
           <a href="javascript:;" class="primaery-menu-close" data-bs-dismiss="offcanvas">
               <i class="material-icons-outlined">close</i>
@@ -156,7 +156,7 @@
       </div>
       <div class="offcanvas-body">
           <div>
-              <p>Theme variation</p>
+              <p>Mode</p>
 
               <div class="row g-3">
                   <div class="col-12 col-xl-6">
