@@ -29,17 +29,10 @@
                     </div>
                     <div class="mb-4">
                         <h5 class="mb-3">Display images</h5>
-                        <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png" multiple>
+                        <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
                     </div>
                     
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Product</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4">
         <div class="card">
             <div class="card-body">
                 <h5 class="mb-3">Organize</h5>
@@ -81,6 +74,14 @@
                         <input type="text" class="form-control" id="Size" name="size" placeholder="Size">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Add Product</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
