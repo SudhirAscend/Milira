@@ -20,16 +20,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $category)
+            @if(isset($categories) && $categories->count() > 0)
+                @foreach ($categories as $category)
+                    <tr>
+                        <td>{{ $category->id }}</td>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>
+                            <!-- You can add actions like edit and delete here -->
+                        </td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td>{{ $category->id }}</td>
-                    <td>{{ $category->name }}</td>
-                    <td>{{ $category->description }}</td>
-                    <td>
-                        <!-- You can add actions like edit and delete here -->
-                    </td>
+                    <td colspan="4">No categories found</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
 </div>
