@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -23,11 +23,20 @@ class ProductCategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $category = new ProductCategory();
         $category->name = $request->name;
         $category->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('uploads/categories', $filename, 'public');
+            $category->image = $filename;
+        }
+
         $category->save();
 
         return redirect()->route('admin.product_categories.index')->with('success', 'Category added successfully.');
@@ -37,11 +46,13 @@ class ProductCategoryController extends Controller
     {
         $category = ProductCategory::findOrFail($id);
 
-        // Set category_id to NULL for associated products
-        Product::where('category_id', $id)->update(['category_id' => null]);
+        // Delete the image from storage
+        if ($category->image) {
+            Storage::disk('public')->delete('uploads/categories/' . $category->image);
+        }
 
         $category->delete();
 
-        return redirect()->route('admin.product_categories.index')->with('success', 'Category and associated products updated successfully.');
+        return redirect()->route('admin.product_categories.index')->with('success', 'Category and associated products deleted successfully.');
     }
 }
