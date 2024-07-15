@@ -38,11 +38,9 @@
                         <textarea class="form-control" name="description" cols="4" rows="6" placeholder="Write a description here..."></textarea>
                     </div>
                     <div class="mb-4">
-                        <h5 class="mb-3">Display Images</h5>
-                        <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
-                    </div>
-                    
-                
+        <h5 class="mb-3">Display Images</h5>
+        <input type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
+    </div>
             </div>
         </div>
     </div>
@@ -54,10 +52,9 @@
                     <div class="col-12">
                         <label for="AddCategory" class="form-label">Category</label>
                         <select class="form-select" id="AddCategory" name="category">
-                            <option value="Topwear">Topwear</option>
-                            <option value="Bottomwear">Bottomwear</option>
-                            <option value="Casual Tshirt">Casual Tshirt</option>
-                            <option value="Electronic">Electronic</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-12">
