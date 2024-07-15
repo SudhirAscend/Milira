@@ -1,3 +1,5 @@
+// resources/views/admin/products/create.blade.php
+
 @extends('layouts.app')
 
 @section('title')
