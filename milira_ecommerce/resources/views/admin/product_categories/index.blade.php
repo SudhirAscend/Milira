@@ -1,9 +1,12 @@
-// resources/views/admin/product_categories/index.blade.php
 @extends('layouts.app')
+
+@section('title')
+    Categories
+@endsection
 
 @section('content')
 <div class="container">
-    <h2>Product Categories</h2>
+    <h2>Categories</h2>
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -11,30 +14,28 @@
         </div>
     @endif
 
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
-                <th>S No</th> <!-- Added S No column -->
                 <th>Name</th>
                 <th>Description</th>
-               
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @if(isset($categories) && $categories->count() > 0)
-                @foreach ($categories as $category)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td> <!-- Serial number -->
-                        <td>{{ $category->name }}</td>
-                        <td>{{ $category->description }}</td>
-                       
-                    </tr>
-                @endforeach
-            @else
+            @foreach ($categories as $category)
                 <tr>
-                    <td colspan="4">No categories found</td>
+                    <td>{{ $category->name }}</td>
+                    <td>{{ $category->description }}</td>
+                    <td>
+                        <form action="{{ route('admin.product_categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this category?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-            @endif
+            @endforeach
         </tbody>
     </table>
 </div>

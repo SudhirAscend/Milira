@@ -10,6 +10,7 @@ Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
     Route::get('product_categories/create', [ProductCategoryController::class, 'create'])->name('admin.product_categories.create');
     Route::post('product_categories', [ProductCategoryController::class, 'store'])->name('admin.product_categories.store');
+    Route::delete('product_categories/{id}', [ProductCategoryController::class, 'destroy'])->name('admin.product_categories.destroy');
 
     Route::get('products', [ProductsController::class, 'index'])->name('products.index');
     Route::get('products/create', [ProductsController::class, 'create'])->name('products.create');
