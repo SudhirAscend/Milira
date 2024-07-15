@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+/* google-font */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+/* Colors */
+
+:root {
+    --primary-color: #000000;
+    --secondary-color: #7B7B7B;
+
+    --default-text: "inter";
+
+}google-font */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 10px;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background: #f8f8f8;
+  overflow-x: hidden;
+}
+
+h5 {
+  color: #232532;
+  font-family: "Jost", sans-serif;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 3rem;
+  margin-bottom: 0;
+}
+
+a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #232532;
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+}
+
+p {
+  font-size: 15px;
+  color: #797979;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0;
+}
+
+.container {
+  max-width: 132.1rem;
+}
+@media (max-width:767px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+input {
+  font-size: 1.3rem;
+}
+
+input[type=checkbox] {
+  accent-color: var(--primary-color);
+}
+
+.shop-btn {
+  padding: 1.2rem 3.4rem;
+  margin: 4rem 0;
+  text-align: center;
+  border-radius: 3rem;
+  display: inline-block;
+  background: var(--primary-color);
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+  color: #FFFFFF;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+}
+.shop-btn::after {
+  content: " ";
+  width: 0%;
+  height: 100%;
+  background: #232532;
+  position: absolute;
+  transition: all 0.4s ease-in-out;
+  right: 0;
+  top: 0;
+  z-index: -3;
+}
+.shop-btn:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: 155px;
+  transform: 0.5s;  
+}
+.shop-btn:hover::after {
+  right: auto;
+  left: 0;
+  width: 100%;
+}
+
+.product-description .tab-item .product-feature ul li::marker {
+  font-size: 1.5rem;
+}
+
+.review-form {
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+}
+.review-form .comment-title {
+  margin-bottom: 3rem;
+}
+.review-form .form-control {
+  border: 1px solid rgba(174, 28, 154, 0.08);
+  box-shadow: none;
+  color: #232532;
+}
+
+.review-form label {
+  font-family: "Jost", sans-serif;
+  font-size: 1.5rem;
+  color: #797979;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+.review-form .review-inner-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.review-form .review-inner-form .review-form-name {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+.review-form input {
+  height: 5rem;
+}
+.review-form input {
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+}
+@media (max-width:767px) {
+  .review-form .comment-title {
+    font-size: 2rem;
+  }
+  .review-form .review-inner-form {
+    flex-direction: column;
+  }
+}
+
+
+.login-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+}
+.login-section .review-form {
+  width: 51.2rem;
+  height: 63rem;
+  background-color: #FFFFFF;
+  padding: 4rem;
+  border-radius: 0.5rem;
+}
+.login-section .review-form .comment-title {
+  text-align: center;
+  margin-top: 5rem;
+}
+.login-section .review-form .review-inner-form {
+  display: block;
+  width: 100%;
+}
+.login-section .review-form .shop-btn {
+  width: 100%;
+  margin: 0 0 2rem 0;
+}
+.login-section .review-form .shop-btn::after {
+  display: none;
+}
+.login-section .review-form .shop-account {
+  color: #797979;
+  font-size: 1.3rem;
+}
+.login-section .review-form .shop-account a {
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+@media (max-width:767px) {
+  .login-section .review-form {
+    padding: 2rem;
+    height: auto;
+  }
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0px;
+}
+.checkbox .forget-pass p {
+  color: var(--secondary-color);
+}
+
+.checkbox-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.checkbox-item .address {
+  font-size: 1.5rem;
+}
+.privacy-section .policy .policy-features ul li::marker {
+  font-size: 2rem;
+}/*# sourceMappingURL=style.css.map */
