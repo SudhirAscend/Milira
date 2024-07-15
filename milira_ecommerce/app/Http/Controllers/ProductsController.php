@@ -20,46 +20,46 @@ class ProductsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'small_description' => 'nullable|string',
-            'description' => 'nullable|string',
-            'images' => 'nullable|array',
-            'images.*' => 'file|mimes:jpeg,png,jpg|max:2048',
-            'category' => 'nullable|string',
-            'collection' => 'nullable|string',
-            'tags' => 'nullable|string',
-            'sku' => 'nullable|string',
-            'color' => 'nullable|string',
-            'size' => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'small_description' => 'nullable|string',
+        'description' => 'nullable|string',
+        'images' => 'nullable|array',
+        'images.*' => 'file|mimes:jpeg,png,jpg|max:2048',
+        'category' => 'nullable|string',
+        'collection' => 'nullable|string',
+        'tags' => 'nullable|string',
+        'sku' => 'nullable|string',
+        'color' => 'nullable|string',
+        'size' => 'nullable|string',
+    ]);
 
-        $product = new Product();
-        $product->title = $request->title;
-        $product->small_description = $request->small_description;
-        $product->description = $request->description;
+    $product = new Product();
+    $product->title = $request->title;
+    $product->small_description = $request->small_description;
+    $product->description = $request->description;
 
-        if ($request->hasFile('images')) {
-            $images = [];
-            foreach ($request->file('images') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('uploads', $filename, 'public');
-                $images[] = $path;
-            }
-            $product->images = $images;
+    if ($request->hasFile('images')) {
+        $images = [];
+        foreach ($request->file('images') as $index => $file) {
+            $filename = $request->title . '_' . $index . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('uploads', $filename, 'public');
+            $images[] = $path;
         }
-
-        $product->category = $request->category;
-        $product->collection = $request->collection;
-        $product->tags = $request->tags;
-        $product->sku = $request->sku;
-        $product->color = $request->color;
-        $product->size = $request->size;
-        $product->save();
-
-        return redirect()->route('products.index')->with('success', 'Product added successfully.');
+        $product->images = $images;
     }
+
+    $product->category = $request->category;
+    $product->collection = $request->collection;
+    $product->tags = $request->tags;
+    $product->sku = $request->sku;
+    $product->color = $request->color;
+    $product->size = $request->size;
+    $product->save();
+
+    return redirect()->route('products.index')->with('success', 'Product added successfully.');
+}
 
     public function edit($id)
     {
@@ -83,22 +83,22 @@ class ProductsController extends Controller
             'color' => 'nullable|string',
             'size' => 'nullable|string',
         ]);
-
+    
         $product = Product::findOrFail($id);
         $product->title = $request->title;
         $product->small_description = $request->small_description;
         $product->description = $request->description;
-
+    
         if ($request->hasFile('images')) {
             $images = [];
-            foreach ($request->file('images') as $file) {
-                $filename = time() . '_' . $file->getClientOriginalName();
+            foreach ($request->file('images') as $index => $file) {
+                $filename = $request->title . '_' . $index . '.' . $file->getClientOriginalExtension();
                 $path = $file->storeAs('uploads', $filename, 'public');
                 $images[] = $path;
             }
             $product->images = $images;
         }
-
+    
         $product->category = $request->category;
         $product->collection = $request->collection;
         $product->tags = $request->tags;
@@ -106,10 +106,9 @@ class ProductsController extends Controller
         $product->color = $request->color;
         $product->size = $request->size;
         $product->save();
-
+    
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
-
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
