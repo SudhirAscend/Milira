@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ShopController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -19,4 +20,9 @@ Route::prefix('admin')->group(function () {
     Route::put('products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
 });
+
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::post('/filter-products-by-category', [ShopController::class, 'filterProductsByCategory'])->name('filter.products.by.category');
+
 

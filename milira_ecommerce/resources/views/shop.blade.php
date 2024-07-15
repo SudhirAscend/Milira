@@ -8,26 +8,25 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="./assets/images/logos/favicon.png">
+    <link rel="icon" href="{{ asset('assets/images/logos/favicon.png') }}">
 
-    <!--title  -->
-    <title>Milira-Shop</title>
+<!--title  -->
+<title>Milira-Shop</title>
 
+<!--------------- swiper-css ---------------->
+<link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
 
-    <!--------------- swiper-css ---------------->
-    <link rel="stylesheet" href="./css/swiper10-bundle.min.css">
+<!--------------- bootstrap-css ---------------->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--------------- bootstrap-css ---------------->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!---------------------- Range Slider ------------------->
+<link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
 
-    <!---------------------- Range Slider ------------------->
-    <link rel="stylesheet" href="css/nouislider.min.css">
+<!---------------------- Scroll ------------------->
+<link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
 
-    <!---------------------- Scroll ------------------->
-    <link rel="stylesheet" href="css/aos-3.0.0.css">
-
-    <!--------------- additional-css ---------------->
-    <link rel="stylesheet" href="./css/shop.css">
+<!--------------- additional-css ---------------->
+<link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
 
 
 
@@ -836,10 +835,11 @@
                 <div class="col-lg-9">
                     <div class="product-sidebar-section" data-aos="fade-up">
                         <div class="row g-5">
+                        @foreach ($products as $product)
                             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
                                 <div class="card product">
                                     <div class="card-body">
-                                        <img src="./assets/images/product/product_1.png" alt="" class="pdt-img">
+                                    <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
                                         <div class="card-hover">
                                             <div class="hover-icons text-center">
                                                 <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
@@ -849,10 +849,10 @@
                                         </div>
                                         <div class="container">
                                             <div class="pdt-title">
-                                                <h6>Embellished Diamond and White Gold Necklace Set</h6>
+                                                <h6>{{ $product->title }}</h6>
                                             </div>
                                             <div class="pdt-price">
-                                                <h6>₹20,000</h6>
+                                            <h6>{{ $product->collection }}</h6>
                                             </div>
                                             <div class="pdt-rating mt-4">
                                                 <p>
@@ -861,24 +861,26 @@
                                                     <i class="bi bi-star-fill"></i>
                                                     <i class="bi bi-star-fill"></i>
                                                     <i class="bi bi-star-half"></i>
-                                                    <span>(4.5 reviews)</span>
+                                                    <span>({{ $product->reviews }} reviews)</span>
                                                 </p>
                                             </div>
                                             <div class="pdt-shop text-center mt-5">
                                                 <div class="row">
                                                     <div class="col-9">
-                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                                        <button class="cart-btn">Buy Now <i
+                                                                class="bi bi-bag-heart-fill"></i></button>
                                                     </div>
                                                     <div class="col-3">
-                                                        <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                                        <button class="cart-btn"><i
+                                                                class="bi bi-cart-check-fill"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
-                            
+                            @endforeach
                             
                             <div class="col-lg-12">
                                 <div class="product-deal-section" data-aos="fade-up">
@@ -1046,23 +1048,13 @@
 
 
     <!--------------- jQuery ---------------->
-    <script src="assets/js/jquery_3.7.1.min.js"></script>
-
-    <!--------------- bootstrap-js ---------------->
+    <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/shopus.js') }}"></script>
 
-    <!--------------- Range-Slider-js ---------------->
-    <script src="assets/js/nouislider.min.js"></script>
-
-    <!--------------- scroll-Animation-js ---------------->
-    <script src="assets/js/aos-3.0.0.js"></script>
-
-    <!--------------- swiper-js ---------------->
-    <script src="assets/js/swiper10-bundle.min.js"></script>
-
-    <!--------------- additional-js ---------------->
-    <script src="assets/js/shopus.js"></script>
 
 
 </body>
