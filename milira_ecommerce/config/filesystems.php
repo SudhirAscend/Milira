@@ -1,7 +1,4 @@
-// config/filesystems.php
 <?php
-
-// config/filesystems.php
 
 return [
 
@@ -23,7 +20,7 @@ return [
             'throw' => false,
         ],
 
-       
+        // You can add more disks here if needed
 
     ],
 
