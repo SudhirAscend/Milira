@@ -861,12 +861,10 @@ button.cat-dropdown {
 }
 button.cat-dropdown::before{
   font-family: "bootstrap-icons";
-  content: "\f3c6";
+  content: "\f5c7";
   color: #fff;
+  font-size: 16px;
   margin-right: 8px;
-  font-size: 25px;
-  background-color: var(--secondary-color);
-  padding: 10px;
   border-radius: 150px;
 }
 .dropdown-categories a {
