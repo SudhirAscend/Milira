@@ -332,10 +332,9 @@ button {
 }
 
 /* Header */
-
 .header-top-section {
-  border-bottom: 1px solid var(--primary-color);
-  background: var(--primary-color)
+  border-bottom: 1px solid #AE1C9A;
+  background: var(--primary-color);
 }
 
 .header-top {
@@ -354,7 +353,7 @@ button {
   gap: 2rem;
 }
 .header-top .header-contact .contact-number {
-  color: #FFFFFF;
+  color: #fff;
   font-weight: 700;
 }
 
@@ -394,7 +393,7 @@ button {
   z-index: 2;
   left: -15rem;
   top: 5rem;
-  border-top: 3px solid #AE1C9A;
+  border-top: 3px solid var(--primary-color);
   border-radius: 0.5rem;
   opacity: 0;
   visibility: hidden;
@@ -486,7 +485,7 @@ button {
   display: none;
 }
 .header-center .header-cart-items .header-cart .cart-submenu .cart-wrapper-section .cart-btn .checkout-btn {
-  background: #AE1C9A;
+  background: var(--primary-color);
   color: #FFFFFF;
 }
 .header-center .header-cart-items .header-cart:hover .cart-submenu {
@@ -553,7 +552,7 @@ button {
 
 .mobile-menu {
   padding: 10px;
-  background-color: #fff
+  background-color: #fff;
 }
 
 .offcanvas.offcanvas-start {
@@ -638,7 +637,7 @@ button {
 .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span svg,
 .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span rect {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .header-bottom {
@@ -869,6 +868,10 @@ button {
   fill: #FFFFFF;
 }
 
+.list-text.shop-text {
+    color: var(--primary-color);
+}
+
 .header-vendor-btn .shop-btn {
   padding: 1.2rem 3.4rem;
   margin: 0px;
@@ -929,9 +932,50 @@ button {
   fill: #232532;
 }
 
-.show {display: block;}
+.nav-categories {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-categories {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+button.cat-dropdown {
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+button.cat-dropdown::before{
+  font-family: "bootstrap-icons";
+  content: "\f3c6";
+  color: #fff;
+  margin-right: 8px;
+  font-size: 25px;
+  background-color: var(--secondary-color);
+  padding: 10px;
+  border-radius: 150px;
+}
+.dropdown-categories a {
+  color: black;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 12px 25px;
+  text-decoration: none;
+  display: block;
+  font-family: "inter","serif";
+}
+
+.dropdown-categories a:hover {background-color: #ddd;}
+
+.show {display: block};
 
 /* End of header */
+
 
 .top-selling-section .product-wrapper {
   width: 100%;

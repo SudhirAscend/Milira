@@ -181,7 +181,7 @@ button {
   gap: 1rem;
 }
 .price .new-price {
-  color: #AE1C9A;
+  color: var(--primary-color);
 }
 
 .modal-wrapper {

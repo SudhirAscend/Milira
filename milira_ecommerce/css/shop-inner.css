@@ -458,7 +458,7 @@ button {
   z-index: 2;
   left: -15rem;
   top: 5rem;
-  border-top: 3px solid #AE1C9A;
+  border-top: 3px solid var(--primary-color);
   border-radius: 0.5rem;
   opacity: 0;
   visibility: hidden;
@@ -550,7 +550,7 @@ button {
   display: none;
 }
 .header-center .header-cart-items .header-cart .cart-submenu .cart-wrapper-section .cart-btn .checkout-btn {
-  background: #AE1C9A;
+  background: var(--primary-color);
   color: #FFFFFF;
 }
 .header-center .header-cart-items .header-cart:hover .cart-submenu {
@@ -1451,7 +1451,10 @@ hr {
   
   .dropdown-categories a:hover {background-color: #ddd;}
   
-  .show {display: block;}
+  .show {
+display: block;
+z-index: 2;
+}
 
   /* Footer */
 

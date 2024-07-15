@@ -458,7 +458,7 @@ img.about-img {
   text-decoration: line-through;
 }
 .price .new-price {
-  color: #AE1C9A;
+  color: var(--primary-color);
 }
 .price span {
   font-size: 1.6rem;
@@ -627,7 +627,7 @@ img.about-img {
   z-index: 2;
   left: -15rem;
   top: 5rem;
-  border-top: 3px solid #AE1C9A;
+  border-top: 3px solid var(--primary-color);
   border-radius: 0.5rem;
   opacity: 0;
   visibility: hidden;
@@ -719,7 +719,7 @@ img.about-img {
   display: none;
 }
 .header-center .header-cart-items .header-cart .cart-submenu .cart-wrapper-section .cart-btn .checkout-btn {
-  background: #AE1C9A;
+  background: var(--primary-color);
   color: #FFFFFF;
 }
 .header-center .header-cart-items .header-cart:hover .cart-submenu {
@@ -1238,33 +1238,29 @@ hr {
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
 }
 button.cat-dropdown {
   color: #fff;
   font-size: 14px;
   font-weight: bold;
 }
-button.cat-dropdown::before{
-  font-family: "bootstrap-icons";
-  content: "\f3c6";
-  color: #fff;
-  margin-right: 8px;
-  font-size: 25px;
-  background-color: var(--secondary-color);
-  padding: 10px;
-  border-radius: 150px;
-}
+
 .dropdown-categories a {
   color: black;
-  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 12px 25px;
   text-decoration: none;
   display: block;
-}
+  font-family: "inter","serif";
+} 
 
 .dropdown-categories a:hover {background-color: #ddd;}
 
-.show {display: block;}
+.show {
+display: block;
+z-index: 2;
+}
 
 /* Essential */
 
@@ -1382,14 +1378,15 @@ button.cart-btn:hover {
   background: var(--primary-color);
   color: #fff;
   transition: 0.5s;
-  .bi-cart-check-fill{
+  .bi-bag-heart-fill{
     color: #fff;
+  }
+  .bi-bag-fill {
+    color: white;
   }
 }
 
-
-.bi-cart-check-fill {
-  font-size: 25px;
+.bi-bag-heart-fill {
   margin-left: 20px;
 }
 
@@ -1635,3 +1632,52 @@ footer {
     margin-top: 20px;
   }
 }
+
+
+/* Card hover icons */
+
+a .bi-arrows-fullscreen {
+
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+
+}
+a .bi-heart {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+a .bi-arrow-repeat {
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.card.product:hover {
+  border: 1px solid;
+  transition: 0.5s ease-in-out;
+  .card-hover {
+    position: absolute;
+    text-align: center;
+    top: 150px;
+    left: 150px;
+    display: block;
+  }
+  img.pdt-img {
+    filter: brightness(50%);
+  }
+}
+
+.card-hover {
+  position: absolute;
+  text-align: center;
+  top: 150px;
+  left: 150px;
+  display: none;
+}
+
