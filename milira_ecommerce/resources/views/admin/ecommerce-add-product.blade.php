@@ -38,9 +38,13 @@
                         <textarea class="form-control" name="description" cols="4" rows="6" placeholder="Write a description here..."></textarea>
                     </div>
                     <div class="mb-4">
-        <h5 class="mb-3">Display Images</h5>
-        <input type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
-    </div>
+                        <h5 class="mb-3">Display Images</h5>
+                        <div id="image-upload-wrapper">
+                            <input type="file" name="images[]" accept=".jpg, .png, image/jpeg, image/png" multiple>
+                        </div>
+                        <button type="button" id="add-more-images" class="btn btn-secondary mt-2">Add More Images</button>
+                    </div>
+                    
             </div>
         </div>
     </div>
@@ -108,11 +112,10 @@
     <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
     <script>
-        $('#fancy-file-upload').FancyFileUpload({
-            params: {
-                action: 'fileuploader'
-            },
-            maxfilesize: 1000000
+        $(document).ready(function() {
+            $('#add-more-images').click(function() {
+                $('#image-upload-wrapper').append('<input type="file" name="images[]" accept=".jpg, .png, image/jpeg, image/png" multiple class="mt-2">');
+            });
         });
     </script>
     <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>

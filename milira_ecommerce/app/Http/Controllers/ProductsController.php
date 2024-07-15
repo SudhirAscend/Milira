@@ -20,7 +20,7 @@ class ProductsController extends Controller
             'title' => 'required|string|max:255',
             'small_description' => 'nullable|string',
             'description' => 'nullable|string',
-            'images' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
+            'images.*' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
             'category' => 'nullable|string',
             'collection' => 'nullable|string',
             'tags' => 'nullable|string',
@@ -34,15 +34,17 @@ class ProductsController extends Controller
         $product->small_description = $request->small_description;
         $product->description = $request->description;
     
+        $images = [];
         if ($request->hasFile('images')) {
-            $file = $request->file('images');
-            $extension = $file->getClientOriginalExtension();
-            $filename = $request->title . '.' . $extension;
-            $path = 'uploads/' . $filename;
-            $file->move(public_path('uploads'), $filename);
-            $product->images = $path;
+            foreach ($request->file('images') as $index => $file) {
+                $extension = $file->getClientOriginalExtension();
+                $filename = $request->title . '_' . $index . '.' . $extension;
+                $path = $file->storeAs('uploads', $filename, 'public');
+                $images[] = $path;
+            }
         }
     
+        $product->images = $images;
         $product->category = $request->category;
         $product->collection = $request->collection;
         $product->tags = $request->tags;
