@@ -17,7 +17,7 @@
                 <th>S No</th> <!-- Added S No column -->
                 <th>Name</th>
                 <th>Description</th>
-                <th>Actions</th>
+               
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,7 @@
                         <td>{{ $loop->iteration }}</td> <!-- Serial number -->
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
-                        <td>
-                            <!-- You can add actions like edit and delete here -->
-                        </td>
+                       
                     </tr>
                 @endforeach
             @else
