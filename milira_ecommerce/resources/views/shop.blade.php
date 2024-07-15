@@ -8,29 +8,28 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="./assets/images/logos/favicon.png">
+    <link rel="icon" href="{{ asset('assets/images/logos/favicon.png') }}">
 
-    <!--title  -->
-    <title>Milira-Shop</title>
+<!--title  -->
+<title>Milira-Shop</title>
 
+<!--------------- swiper-css ---------------->
+<link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
 
-    <!--------------- swiper-css ---------------->
-    <link rel="stylesheet" href="./css/swiper10-bundle.min.css">
+<!--------------- bootstrap-css ---------------->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!--------------- bootstrap-css ---------------->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!---------------------- Range Slider ------------------->
+<link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
 
-    <!---------------------- Range Slider ------------------->
-    <link rel="stylesheet" href="css/nouislider.min.css">
+<!---------------------- Scroll ------------------->
+<link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
 
-    <!---------------------- Scroll ------------------->
-    <link rel="stylesheet" href="css/aos-3.0.0.css">
-
-    <!--------------- additional-css ---------------->
-    <link rel="stylesheet" href="./css/shop.css">
-
+<!--------------- additional-css ---------------->
+<link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -758,37 +757,19 @@
                 <div class="col-lg-3">
                     <div class="sidebar" data-aos="fade-right">
                         <div class="sidebar-section">
-                            <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Product Categories</h5>
-                                <div class="sidebar-item">
-                                    <ul class="sidebar-list">
-                                        <li>
-                                            <input type="checkbox" id="pendentSet" name="pendentSet">
-                                            <label for="pendentSet">Pendent Set</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="Chain" name="Chain">
-                                            <label for="Chain">Chain</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="Stud" name="Stud">
-                                            <label for="Stud">Stud</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="Earrings" name="Earrings">
-                                            <label for="Earrings">Earrings</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="" name="">
-                                            <label for="">Bracelet</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="Necklace" name="Necklace">
-                                            <label for="Necklace">Necklace</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="sidebar-wrapper">
+    <h5 class="wrapper-heading">Product Categories</h5>
+    <div class="sidebar-item">
+        <ul class="sidebar-list">
+            @foreach ($categories as $category)
+                <li>
+                    <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
+                    <label for="{{ $category->category }}">{{ $category->category }}</label>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
                             <hr>
                             <div class="sidebar-wrapper sidebar-range">
                                 <h5 class="wrapper-heading">Price Range</h5>
@@ -835,50 +816,54 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="product-sidebar-section" data-aos="fade-up">
-                        <div class="row g-5">
-                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4">
-                                <div class="card product">
-                                    <div class="card-body">
-                                        <img src="./assets/images/product/product_1.png" alt="" class="pdt-img">
-                                        <div class="card-hover">
-                                            <div class="hover-icons text-center">
-                                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                                <a href="#"><i class="bi bi-heart"></i></a>
-                                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="pdt-title">
-                                                <h6>Embellished Diamond and White Gold Necklace Set</h6>
-                                            </div>
-                                            <div class="pdt-price">
-                                                <h6>₹20,000</h6>
-                                            </div>
-                                            <div class="pdt-rating mt-4">
-                                                <p>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-half"></i>
-                                                    <span>(4.5 reviews)</span>
-                                                </p>
-                                            </div>
-                                            <div class="pdt-shop text-center mt-5">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>    
+                    <div class="row g-5" id="product-list">
+        @foreach ($products as $product)
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="{{ $product->category }}">
+            <div class="card product">
+                <div class="card-body">
+                    <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
+                    <div class="card-hover">
+                        <div class="hover-icons text-center">
+                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                            <a href="#"><i class="bi bi-heart"></i></a>
+                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="pdt-title">
+                            <h6>{{ $product->title }}</h6>
+                        </div>
+                        <div class="pdt-price">
+                            <h6>{{ $product->collection }}</h6>
+                        </div>
+                        <div class="pdt-rating mt-4">
+                            <p>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>({{ $product->reviews }} reviews)</span>
+                            </p>
+                        </div>
+                        <div class="pdt-shop text-center mt-5">
+                            <div class="row">
+                                <div class="col-9">
+                                    <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                </div>
+                                <div class="col-3">
+                                    <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                </div>
                             </div>
-                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
                             
                             <div class="col-lg-12">
                                 <div class="product-deal-section" data-aos="fade-up">
@@ -1046,23 +1031,81 @@
 
 
     <!--------------- jQuery ---------------->
-    <script src="assets/js/jquery_3.7.1.min.js"></script>
+    <script>
+$(document).ready(function() {
+    $('.category-checkbox').change(function() {
+        let selectedCategories = [];
+        $('.category-checkbox:checked').each(function() {
+            selectedCategories.push($(this).val());
+        });
 
-    <!--------------- bootstrap-js ---------------->
+        $.ajax({
+            url: '{{ route('shop.filterByCategory') }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                categories: selectedCategories
+            },
+            success: function(response) {
+                $('#product-list').empty();
+                response.forEach(product => {
+                    $('#product-list').append(`
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
+                            <div class="card product">
+                                <div class="card-body">
+                                    <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
+                                    <div class="card-hover">
+                                        <div class="hover-icons text-center">
+                                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                            <a href="#"><i class="bi bi-heart"></i></a>
+                                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="pdt-title">
+                                            <h6>${product.title}</h6>
+                                        </div>
+                                        <div class="pdt-price">
+                                            <h6>${product.collection}</h6>
+                                        </div>
+                                        <div class="pdt-rating mt-4">
+                                            <p>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                                <span>(${product.reviews} reviews)</span>
+                                            </p>
+                                        </div>
+                                        <div class="pdt-shop text-center mt-5">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                                </div>
+                                                <div class="col-3">
+                                                    <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            }
+        });
+    });
+});
+</script>
+    <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/shopus.js') }}"></script>
 
-    <!--------------- Range-Slider-js ---------------->
-    <script src="assets/js/nouislider.min.js"></script>
-
-    <!--------------- scroll-Animation-js ---------------->
-    <script src="assets/js/aos-3.0.0.js"></script>
-
-    <!--------------- swiper-js ---------------->
-    <script src="assets/js/swiper10-bundle.min.js"></script>
-
-    <!--------------- additional-js ---------------->
-    <script src="assets/js/shopus.js"></script>
 
 
 </body>
