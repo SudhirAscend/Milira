@@ -17,16 +17,26 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Serial No</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($categories as $category)
                 <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->description }}</td>
+                    <td>
+                        @if($category->image)
+                            <img src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="{{ $category->name }}" width="50">
+                        @else
+                            No Image
+                        @endif
+                    </td>
                     <td>
                         <form action="{{ route('admin.product_categories.destroy', $category->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this category?');">
                             @csrf

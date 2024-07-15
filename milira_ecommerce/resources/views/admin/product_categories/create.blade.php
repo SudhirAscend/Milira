@@ -1,3 +1,4 @@
+// resources/views/admin/product_categories/create.blade.php
 @extends('layouts.app')
 
 @section('title')
@@ -14,7 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.product_categories.store') }}" method="POST">
+    <form action="{{ route('admin.product_categories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Category Name</label>
@@ -29,6 +30,15 @@
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
             @error('description')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+            @error('image')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
