@@ -862,16 +862,6 @@ button.cat-dropdown {
   font-size: 14px;
   font-weight: bold;
 }
-button.cat-dropdown::before{
-  font-family: "bootstrap-icons";
-  content: "\f3c6";
-  color: #fff;
-  margin-right: 8px;
-  font-size: 25px;
-  background-color: var(--secondary-color);
-  padding: 10px;
-  border-radius: 150px;
-}
 .dropdown-categories a {
   color: black;
   font-size: 16px;
