@@ -164,11 +164,11 @@ button {
 
 /* .product {
 } */
-@media (max-width:1023px) {
+/* @media (max-width:1023px) {
   .product {
     padding: 3rem 0;
   }
-}
+} */
 
 .product-wrapper {
   width: 100%;
@@ -1334,12 +1334,45 @@ a .bi-arrow-repeat {
   .card-hover {
     position: absolute;
     text-align: center;
-    top: 150px;
-    left: 150px;
+    top: 100px;
+    left: 90px;
     display: block;
   }
   img.pdt-img {
     filter: brightness(50%);
+  }
+}
+
+@media (max-width: 1199px) {
+  .card.product:hover {
+    border: 1px solid;
+    transition: 0.5s ease-in-out;
+    .card-hover {
+      position: absolute;
+      text-align: center;
+      top: 25%;
+      left: 35%;
+      display: block;
+    }
+    img.pdt-img {
+      filter: brightness(50%);
+    }
+  }
+}
+@media (max-width: 390px) {
+  .card.product:hover {
+    border: 1px solid;
+    transition: 0.5s ease-in-out;
+    .card-hover {
+      position: absolute;
+      text-align: center;
+      top: 23%;
+      left: 30%;
+      display: block;
+    }
+    img.pdt-img {
+      filter: brightness(50%);
+    }
   }
 }
 
