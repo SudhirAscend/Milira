@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Add Product
+    Edit Product
 @endsection
 
 @push('css')
@@ -23,24 +23,29 @@
     <div class="col-12 col-lg-8">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="mb-4">
                         <h5 class="mb-3">Product Title</h5>
-                        <input type="text" class="form-control" name="title" placeholder="Write title here..." required>
+                        <input type="text" class="form-control" name="title" value="{{ $product->title }}" required>
                     </div>
                     <div class="mb-4">
                         <h5 class="mb-3">Small Description</h5>
-                        <textarea class="form-control" name="small_description" cols="4" rows="6" placeholder="Write a small description here..."></textarea>
+                        <textarea class="form-control" name="small_description" cols="4" rows="6">{{ $product->small_description }}</textarea>
                     </div>
                     <div class="mb-4">
                         <h5 class="mb-3">Description</h5>
-                        <textarea class="form-control" name="description" cols="4" rows="6" placeholder="Write a description here..."></textarea>
+                        <textarea class="form-control" name="description" cols="4" rows="6">{{ $product->description }}</textarea>
                     </div>
                     <div class="mb-4">
-        <h5 class="mb-3">Display Images</h5>
-        <input type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
-    </div>
+                        <h5 class="mb-3">Display Images</h5>
+                        <div id="image-upload-wrapper">
+                            <input type="file" name="images[]" accept=".jpg, .png, image/jpeg, image/png" multiple>
+                        </div>
+                        <button type="button" id="add-more-images" class="btn btn-secondary mt-2">Add More Images</button>
+                    </div>
+                    
             </div>
         </div>
     </div>
@@ -53,17 +58,17 @@
                         <label for="AddCategory" class="form-label">Category</label>
                         <select class="form-select" id="AddCategory" name="category">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                <option value="{{ $category->name }}" {{ $product->category == $category->name ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12">
                         <label for="Collection" class="form-label">Collection</label>
-                        <input type="text" class="form-control" id="Collection" name="collection" placeholder="Collection">
+                        <input type="text" class="form-control" id="Collection" name="collection" value="{{ $product->collection }}">
                     </div>
                     <div class="col-12">
                         <label for="Tags" class="form-label">Tags</label>
-                        <input type="text" class="form-control" id="Tags" name="tags" placeholder="Tags">
+                        <input type="text" class="form-control" id="Tags" name="tags" value="{{ $product->tags }}">
                     </div>
                 </div><!--end row-->
             </div>
@@ -74,18 +79,18 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label for="SKU" class="form-label">SKU</label>
-                        <input type="text" class="form-control" id="SKU" name="sku" placeholder="SKU">
+                        <input type="text" class="form-control" id="SKU" name="sku" value="{{ $product->sku }}">
                     </div>
                     <div class="col-12">
                         <label for="Color" class="form-label">Color</label>
-                        <input type="text" class="form-control" id="Color" name="color" placeholder="Color">
+                        <input type="text" class="form-control" id="Color" name="color" value="{{ $product->color }}">
                     </div>
                     <div class="col-12">
                         <label for="Size" class="form-label">Size</label>
-                        <input type="text" class="form-control" id="Size" name="size" placeholder="Size">
+                        <input type="text" class="form-control" id="Size" name="size" value="{{ $product->size }}">
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Add Product</button>
+                        <button type="submit" class="btn btn-primary">Update Product</button>
                     </div>
                     </form>
                 </div>
@@ -108,11 +113,10 @@
     <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.iframe-transport.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/fancy-file-uploader/jquery.fancy-fileupload.js') }}"></script>
     <script>
-        $('#fancy-file-upload').FancyFileUpload({
-            params: {
-                action: 'fileuploader'
-            },
-            maxfilesize: 1000000
+        $(document).ready(function() {
+            $('#add-more-images').click(function() {
+                $('#image-upload-wrapper').append('<input type="file" name="images[]" accept=".jpg, .png, image/jpeg, image/png" multiple class="mt-2">');
+            });
         });
     </script>
     <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>

@@ -12,16 +12,14 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->text('small_description')->nullable();
             $table->text('description')->nullable();
-            $table->string('images')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->json('images')->nullable();
+            $table->string('category')->nullable();
             $table->string('collection')->nullable();
             $table->string('tags')->nullable();
             $table->string('sku')->nullable();
             $table->string('color')->nullable();
             $table->string('size')->nullable();
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('product_categories')->onDelete('set null');
         });
     }
 
