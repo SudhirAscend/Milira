@@ -22,7 +22,6 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-Route::get('/shop', [ShopController::class, 'index'])->name('shop');
-Route::post('/filter-products-by-category', [ShopController::class, 'filterProductsByCategory'])->name('filter.products.by.category');
 
+Route::post('/shop/filter', [ShopController::class, 'filterByCategory'])->name('shop.filterByCategory');
 
