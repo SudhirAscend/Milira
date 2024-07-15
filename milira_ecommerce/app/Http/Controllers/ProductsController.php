@@ -1,17 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
 class ProductsController extends Controller
 {
     public function create()
     {
-        return view('ecommerce-add-product');
+        $categories = ProductCategory::all();
+        return view('admin.ecommerce-add-product', compact('categories'));
     }
 
     public function store(Request $request)
@@ -21,7 +21,7 @@ class ProductsController extends Controller
             'small_description' => 'nullable|string',
             'description' => 'nullable|string',
             'images' => 'nullable|file|mimes:jpeg,png,jpg|max:2048',
-            'category' => 'nullable|string',
+            'category_id' => 'required|exists:product_categories,id',
             'collection' => 'nullable|string',
             'tags' => 'nullable|string',
             'sku' => 'nullable|string',
@@ -29,10 +29,14 @@ class ProductsController extends Controller
             'size' => 'nullable|string',
         ]);
 
+        // Fetch the category name based on the selected category_id
+        $category = ProductCategory::findOrFail($request->category_id);
+
         $product = new Product();
         $product->title = $request->title;
         $product->small_description = $request->small_description;
         $product->description = $request->description;
+        $product->category = $category->name; // Save the category name directly
 
         if ($request->hasFile('images')) {
             $file = $request->file('images');
@@ -49,7 +53,6 @@ class ProductsController extends Controller
             Log::warning('No file was uploaded.');
         }
 
-        $product->category = $request->category;
         $product->collection = $request->collection;
         $product->tags = $request->tags;
         $product->sku = $request->sku;

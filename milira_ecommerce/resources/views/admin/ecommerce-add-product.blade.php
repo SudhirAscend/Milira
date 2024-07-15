@@ -41,7 +41,6 @@
                         <h5 class="mb-3">Display Images</h5>
                         <input id="fancy-file-upload" type="file" name="images" accept=".jpg, .png, image/jpeg, image/png">
                     </div>
-                    
                 
             </div>
         </div>
@@ -53,11 +52,10 @@
                 <div class="row g-3">
                     <div class="col-12">
                         <label for="AddCategory" class="form-label">Category</label>
-                        <select class="form-select" id="AddCategory" name="category">
-                            <option value="Topwear">Topwear</option>
-                            <option value="Bottomwear">Bottomwear</option>
-                            <option value="Casual Tshirt">Casual Tshirt</option>
-                            <option value="Electronic">Electronic</option>
+                        <select class="form-select" id="AddCategory" name="category_id">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-12">

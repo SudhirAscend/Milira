@@ -1,3 +1,4 @@
+// resources/views/admin/product_categories/index.blade.php
 @extends('layouts.app')
 
 @section('content')
@@ -13,7 +14,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>S No</th> <!-- Added S No column -->
                 <th>Name</th>
                 <th>Description</th>
                 <th>Actions</th>
@@ -23,7 +24,7 @@
             @if(isset($categories) && $categories->count() > 0)
                 @foreach ($categories as $category)
                     <tr>
-                        <td>{{ $category->id }}</td>
+                        <td>{{ $loop->iteration }}</td> <!-- Serial number -->
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
