@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductCategoryController extends Controller
 {
@@ -32,7 +32,7 @@ class ProductCategoryController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
+            $filename = $this->sanitizeFileName($request->name) . '.' . $file->getClientOriginalExtension();
             $path = $file->storeAs('uploads/categories', $filename, 'public');
             $category->image = $filename;
         }
@@ -54,5 +54,10 @@ class ProductCategoryController extends Controller
         $category->delete();
 
         return redirect()->route('admin.product_categories.index')->with('success', 'Category and associated products deleted successfully.');
+    }
+
+    private function sanitizeFileName($name)
+    {
+        return preg_replace('/[^A-Za-z0-9\-]/', '_', $name);
     }
 }
