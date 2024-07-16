@@ -787,24 +787,18 @@
                             <hr>
                             <hr>
                             <div class="sidebar-wrapper">
-                                <h5 class="wrapper-heading">Color</h5>
-                                <div class="sidebar-item">
-                                    <ul class="sidebar-list">
-                                        <li>
-                                            <input type="checkbox" id="gold" name="gold">
-                                            <label for="gold">Gold</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="silver" name="silver">
-                                            <label for="silver">Silver</label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="rosegold" name="rosegold">
-                                            <label for="rosegold">Rose Gold</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+    <h5 class="wrapper-heading">Color</h5>
+    <div class="sidebar-item">
+        <ul class="sidebar-list">
+            @foreach($colors as $color)
+                <li>
+                    <input type="checkbox" id="{{ $color }}" name="color" value="{{ $color }}">
+                    <label for="{{ $color }}">{{ ucfirst($color) }}</label>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
                             <hr>
                         </div>
                         <div class="sidebar-shop-section">
@@ -834,7 +828,7 @@
                             <h6>{{ $product->title }}</h6>
                         </div>
                         <div class="pdt-price">
-                            <h6>{{ $product->collection }}</h6>
+                            <h6>{{ $product->price }}</h6>
                         </div>
                         <div class="pdt-rating mt-4">
                             <p>
@@ -1033,10 +1027,15 @@
     <!--------------- jQuery ---------------->
     <script>
 $(document).ready(function() {
-    $('.category-checkbox').change(function() {
+    function filterProducts() {
         let selectedCategories = [];
         $('.category-checkbox:checked').each(function() {
             selectedCategories.push($(this).val());
+        });
+
+        let selectedColors = [];
+        $('input[name="color"]:checked').each(function() {
+            selectedColors.push($(this).val());
         });
 
         $.ajax({
@@ -1044,7 +1043,8 @@ $(document).ready(function() {
             method: 'POST',
             data: {
                 _token: '{{ csrf_token() }}',
-                categories: selectedCategories
+                categories: selectedCategories,
+                colors: selectedColors
             },
             success: function(response) {
                 $('#product-list').empty();
@@ -1066,7 +1066,7 @@ $(document).ready(function() {
                                             <h6>${product.title}</h6>
                                         </div>
                                         <div class="pdt-price">
-                                            <h6>${product.collection}</h6>
+                                            <h6>${product.price}</h6>
                                         </div>
                                         <div class="pdt-rating mt-4">
                                             <p>
@@ -1096,8 +1096,12 @@ $(document).ready(function() {
                 });
             }
         });
-    });
+    }
+
+    $('.category-checkbox').change(filterProducts);
+    $('input[name="color"]').change(filterProducts);
 });
+
 </script>
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

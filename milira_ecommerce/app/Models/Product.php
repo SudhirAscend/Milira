@@ -13,13 +13,15 @@ class Product extends Model
         'small_description', 
         'description', 
         'images', 
-        'category',  // Ensure category is fillable
+        'category',  
         'collection', 
         'tags', 
         'sku', 
         'color', 
-        'size'
+        'size',
+        'price', // Add price here
     ];
+    
     
     protected $casts = [
         'images' => 'array',

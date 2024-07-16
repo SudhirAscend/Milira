@@ -29,6 +29,7 @@
                 <th>SKU</th>
                 <th>Color</th>
                 <th>Size</th>
+                <th>Price</th> <!-- Add Price Column -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -54,6 +55,7 @@
                     <td>{{ $product->sku }}</td>
                     <td>{{ $product->color }}</td>
                     <td>{{ $product->size }}</td>
+                    <td>{{ $product->price }}</td> <!-- Display Price -->
                     <td>
                         <!-- You can add actions like edit and delete here -->
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>

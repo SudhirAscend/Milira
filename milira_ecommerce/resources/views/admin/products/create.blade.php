@@ -1,5 +1,3 @@
-// resources/views/admin/products/create.blade.php
-
 @extends('layouts.app')
 
 @section('title')
@@ -39,6 +37,10 @@
                         <h5 class="mb-3">Description</h5>
                         <textarea class="form-control" name="description" cols="4" rows="6" placeholder="Write a description here..."></textarea>
                     </div>
+                    <div class="mb-4">
+    <h5 class="mb-3">Price</h5>
+    <input type="text" class="form-control" name="price" placeholder="Enter price here..." required>
+</div>
                     <div class="mb-4">
                         <h5 class="mb-3">Display Images</h5>
                         <div id="image-upload-wrapper">
@@ -84,7 +86,11 @@
                     </div>
                     <div class="col-12">
                         <label for="Color" class="form-label">Color</label>
-                        <input type="text" class="form-control" id="Color" name="color" placeholder="Color">
+                        <select class="form-select" id="Color" name="color">
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                            <option value="RoseGold">RoseGold</option>
+                        </select>
                     </div>
                     <div class="col-12">
                         <label for="Size" class="form-label">Size</label>
