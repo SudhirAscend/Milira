@@ -41,6 +41,10 @@
     <h5 class="mb-3">Price</h5>
     <input type="text" class="form-control" name="price" placeholder="Enter price here..." required>
 </div>
+<div class="mb-4">
+    <h5 class="mb-3">Stocks</h5>
+    <input type="number" class="form-control" name="stocks" placeholder="Enter stock quantity..." required>
+</div>
                     <div class="mb-4">
                         <h5 class="mb-3">Display Images</h5>
                         <div id="image-upload-wrapper">

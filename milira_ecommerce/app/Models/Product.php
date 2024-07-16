@@ -20,6 +20,7 @@ class Product extends Model
         'color', 
         'size',
         'price', // Add price here
+        'stocks', // Add stocks here
     ];
     
     

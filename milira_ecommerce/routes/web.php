@@ -1,7 +1,5 @@
 <?php
 
-// routes/web.php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
@@ -19,10 +17,13 @@ Route::prefix('admin')->group(function () {
     Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
     Route::put('products/{id}', [ProductsController::class, 'update'])->name('products.update');
     Route::delete('products/{id}', [ProductsController::class, 'destroy'])->name('products.destroy');
-    
+   
+
 });
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-
 Route::post('/shop/filter', [ShopController::class, 'filterByCategory'])->name('shop.filterByCategory');
 
+
+// In routes/web.php
+Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('products.show');

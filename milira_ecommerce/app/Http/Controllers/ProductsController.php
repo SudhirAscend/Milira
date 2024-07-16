@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory; // Ensure you import the ProductCategory model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
@@ -31,9 +32,10 @@ class ProductsController extends Controller
         'collection' => 'nullable|string',
         'tags' => 'nullable|string',
         'sku' => 'nullable|string',
-        'color' => 'required|string|in:Gold,Silver,RoseGold', // Validate color
+        'color' => 'required|string|in:Gold,Silver,RoseGold',
         'size' => 'nullable|string',
-        'price' => 'required|numeric', // Validate price
+        'price' => 'required|numeric',
+        'stocks' => 'required|integer',
     ]);
 
     $product = new Product();
@@ -57,11 +59,45 @@ class ProductsController extends Controller
     $product->sku = $request->sku;
     $product->color = $request->color;
     $product->size = $request->size;
-    $product->price = $request->price; // Save price
+    $product->price = $request->price;
+    $product->stocks = $request->stocks; // Save stocks
     $product->save();
+
+    // Generate product detail page
+    $this->generateProductDetailPage($product);
 
     return redirect()->route('products.index')->with('success', 'Product added successfully.');
 }
+
+private function generateProductDetailPage($product)
+{
+    $templatePath = resource_path('views/template.blade.php');
+    $targetPath = resource_path('views/shop/' . $product->title . '.blade.php');
+
+    $templateContent = File::get($templatePath);
+
+    $replacements = [
+        '<--title-->' => $product->title,
+        '<--price-->' => $product->price,
+        '<--Small description-->' => $product->small_description,
+        '<--stocks-->' => $product->stocks,
+        '<--category-->' => $product->category,
+        '<--tags-->' => $product->tags,
+        '<--sku-->' => $product->sku,
+    ];
+
+    $newContent = str_replace(array_keys($replacements), array_values($replacements), $templateContent);
+
+    File::put($targetPath, $newContent);
+}
+
+public function show($title)
+{
+    $product = Product::where('title', $title)->firstOrFail();
+    return view('shop.product', compact('product'));
+}
+
+
     public function edit($id)
     {
         $product = Product::findOrFail($id);
@@ -84,6 +120,7 @@ class ProductsController extends Controller
         'color' => 'required|string|in:Gold,Silver,RoseGold', // Validate color
         'size' => 'nullable|string',
         'price' => 'required|numeric', // Validate price
+        'stocks' => 'required|integer',
     ]);
 
     $product = Product::findOrFail($id);
@@ -108,6 +145,7 @@ class ProductsController extends Controller
     $product->color = $request->color;
     $product->size = $request->size;
     $product->price = $request->price; // Save price
+    $product->stocks = $request->stocks;
     $product->save();
 
     return redirect()->route('products.index')->with('success', 'Product updated successfully.');

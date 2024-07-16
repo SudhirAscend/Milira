@@ -42,6 +42,11 @@
     <h5 class="mb-3">Price</h5>
     <input type="text" class="form-control" name="price" value="{{ $product->price }}" required>
 </div>
+<div class="mb-4">
+    <h5 class="mb-3">Stocks</h5>
+    <input type="number" class="form-control" name="stocks" value="{{ $product->stocks }}" required>
+</div>
+
                     <div class="mb-4">
                         <h5 class="mb-3">Display Images</h5>
                         <div id="image-upload-wrapper">
