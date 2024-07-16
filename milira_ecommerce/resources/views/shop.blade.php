@@ -842,9 +842,9 @@
                         </div>
                         <div class="pdt-shop text-center mt-5">
                             <div class="row">
-                                <div class="col-9">
-                                    <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                </div>
+                            <div class="col-9">
+                                                        <a href="{{ url('shop/' . Str::slug($product->title, '-')) }}"> <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button></a>
+                                                    </div>
                                 <div class="col-3">
                                     <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
                                 </div>

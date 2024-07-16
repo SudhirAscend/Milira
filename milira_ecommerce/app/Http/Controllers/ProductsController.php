@@ -5,7 +5,7 @@ use App\Models\Product;
 use App\Models\ProductCategory; // Ensure you import the ProductCategory model
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Str;
 class ProductsController extends Controller
 {
     public function index()
@@ -72,7 +72,7 @@ class ProductsController extends Controller
 private function generateProductDetailPage($product)
 {
     $templatePath = resource_path('views/template.blade.php');
-    $targetPath = resource_path('views/shop/' . $product->title . '.blade.php');
+    $targetPath = resource_path('views/shop/' . str_replace(' ', '-', $product->title) . '.blade.php');
 
     $templateContent = File::get($templatePath);
 
@@ -91,8 +91,11 @@ private function generateProductDetailPage($product)
     File::put($targetPath, $newContent);
 }
 
-public function show($title)
+
+public function show($slug)
 {
+    // Convert the slug back to the original title format for searching
+    $title = Str::slug($slug, ' '); 
     $product = Product::where('title', $title)->firstOrFail();
     return view('shop.product', compact('product'));
 }

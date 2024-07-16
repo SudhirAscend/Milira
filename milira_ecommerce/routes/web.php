@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function () {
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::post('/shop/filter', [ShopController::class, 'filterByCategory'])->name('shop.filterByCategory');
 
-
+Route::get('/shop/{title}', [ProductController::class, 'show'])->name('shop.product');
 // In routes/web.php
 Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('products.show');
+Route::get('shop/{slug}', [ProductsController::class, 'show'])->name('shop.product');
