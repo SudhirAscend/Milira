@@ -39,6 +39,15 @@
                         <textarea class="form-control" name="description" cols="4" rows="6">{{ $product->description }}</textarea>
                     </div>
                     <div class="mb-4">
+    <h5 class="mb-3">Price</h5>
+    <input type="text" class="form-control" name="price" value="{{ $product->price }}" required>
+</div>
+<div class="mb-4">
+    <h5 class="mb-3">Stocks</h5>
+    <input type="number" class="form-control" name="stocks" value="{{ $product->stocks }}" required>
+</div>
+
+                    <div class="mb-4">
                         <h5 class="mb-3">Display Images</h5>
                         <div id="image-upload-wrapper">
                             <input type="file" name="images[]" accept=".jpg, .png, image/jpeg, image/png" multiple>
@@ -83,7 +92,11 @@
                     </div>
                     <div class="col-12">
                         <label for="Color" class="form-label">Color</label>
-                        <input type="text" class="form-control" id="Color" name="color" value="{{ $product->color }}">
+                        <select class="form-select" id="Color" name="color">
+                            <option value="Gold" {{ $product->color == 'Gold' ? 'selected' : '' }}>Gold</option>
+                            <option value="Silver" {{ $product->color == 'Silver' ? 'selected' : '' }}>Silver</option>
+                            <option value="RoseGold" {{ $product->color == 'RoseGold' ? 'selected' : '' }}>RoseGold</option>
+                        </select>
                     </div>
                     <div class="col-12">
                         <label for="Size" class="form-label">Size</label>
