@@ -819,16 +819,14 @@
                                         </span>
                                     </div>
                                 </div>
-                                <a href="#" class="shop-btn">
-                                    <span>
-                                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.25357 3.32575C8.25357 4.00929 8.25193 4.69283 8.25467 5.37583C8.25576 5.68424 8.31536 5.74439 8.62431 5.74439C9.964 5.74603 11.3031 5.74275 12.6428 5.74603C13.2728 5.74767 13.7397 6.05663 13.9246 6.58104C14.2209 7.42098 13.614 8.24232 12.6762 8.25052C11.5919 8.25982 10.5075 8.25271 9.4232 8.25271C9.17714 8.25271 8.93107 8.25216 8.68501 8.25271C8.2913 8.2538 8.25412 8.29154 8.25412 8.69838C8.25357 10.0195 8.25686 11.3412 8.25248 12.6624C8.25029 13.2836 7.92603 13.7544 7.39891 13.9305C6.56448 14.2088 5.75848 13.6062 5.74863 12.6821C5.73824 11.7251 5.74645 10.7687 5.7459 9.81173C5.7459 9.41965 5.74754 9.02812 5.74535 8.63604C5.74371 8.30849 5.69012 8.2538 5.36204 8.25326C4.02235 8.25162 2.68321 8.25545 1.34352 8.25107C0.719613 8.24943 0.249902 7.93008 0.0710952 7.40348C-0.212153 6.57065 0.388245 5.75916 1.31017 5.74658C2.14843 5.73564 2.98669 5.74384 3.82495 5.74384C4.30779 5.74384 4.79062 5.74384 5.274 5.74384C5.72184 5.7433 5.7459 5.71869 5.7459 5.25716C5.7459 3.95406 5.74317 2.65096 5.74699 1.34786C5.74863 0.720643 6.0625 0.253102 6.58799 0.0704598C7.40875 -0.213893 8.21803 0.370671 8.25248 1.27349C8.25303 1.29154 8.25303 1.31013 8.25303 1.32817C8.25357 1.99531 8.25357 2.66026 8.25357 3.32575Z"
-                                                fill="white" />
-                                        </svg>
-                                    </span>
-                                    <span>Add to Cart</span>
+                                
+                            </div>
+                            <div>
+                                <a href="">
+                                    <button class="product-buy-btn">Buy Now <i class="bi bi-bag-fill px-3 fs-3"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
                                 </a>
                             </div>
                             <hr>
@@ -840,17 +838,7 @@
                             </div>
                             <hr>
                             <div class="product-report">
-                                <a href="#" class="report" onclick="modalAction('.action')">
-                                    <span>
-                                        <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M0 0C0.30478 0 0.585152 0 0.897442 0C0.908707 0.197137 0.919972 0.389267 0.932488 0.607056C1.30235 0.482516 1.64781 0.347336 2.00391 0.250332C3.83134 -0.247829 5.5555 0.0450599 7.19017 0.959399C7.97121 1.39686 8.7898 1.71165 9.68599 1.81178C10.9308 1.95072 12.0873 1.6716 13.1813 1.08832C13.4566 0.941876 13.7257 0.783541 14.0443 0.604553C14.0505 0.745991 14.0599 0.853634 14.0599 0.960651C14.0605 3.92396 14.058 6.88665 14.0662 9.84996C14.0668 10.079 13.9961 10.2042 13.7964 10.3143C11.4702 11.5973 9.14277 11.6123 6.82531 10.3106C4.99976 9.28546 3.14292 9.1484 1.22162 10.0164C0.990065 10.1209 0.908081 10.2524 0.909958 10.5096C0.921849 12.21 0.916217 13.911 0.916217 15.6114C0.916217 15.7353 0.916217 15.8586 0.916217 16C0.600172 16 0.312916 16 0 16C0 10.6779 0 5.35336 0 0Z"
-                                                fill="#000" />
-                                        </svg>
-                                    </span>
-                                    <span>Report This Item</span>
-                                </a>
+                                
                                 <div class="modal-wrapper action">
                                     <div onclick="modalAction('.action')" class="anywhere-away"></div>
                                     <div class="login-section account-section modal-main">
@@ -922,131 +910,151 @@
         </div>
     </section>
     <div class="container">
-        <div class="review-title">
-            <h1>Reviews</h1>
+            <div class="review-title">
+                <h1>Reviews</h1>
+            </div>
+            <div class="post-review">
+                <form action="">
+                    <div class="give-rate">
+                        <h6>Rate the Product</h6>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <div class="product-desc">
+                        <h6>Review Our Product</h6>
+                        <textarea name="pdtDescription" id="pdtDescription" placeholder="Description"></textarea>
+                    </div>
+                    <div class="pdt-image">
+                        <div class="mb-3">
+                            <h6>Upload your Product images</h6>
+                            <input type="file" class="pdt-file mt-4" name="inputFile" id="inputFile">
+                          </div>
+                    </div>
+                    <div class="submit-review text-end mt-4">
+                        <span>
+                            <a href="" class="review-1"> Submit Feedback </a>
+                        </span>
+                        <span class="px-3">
+                            <a href="" class="review-2"> Cancel </a>
+                        </span>
+
+                    </div>
+                </div>
+                </form>
+                
+            <div class="review-sections mt-5">
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Rahman</h4>
+                                <div class="user-designation">
+                                    <p>Customer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Sudhir M.G</h4>
+                                <div class="user-designation">
+                                    <p>Founder & CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Vignesh T</h4>
+                                <div class="user-designation">
+                                    <p>Web Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Karthikesan</h4>
+                                <div class="user-designation">
+                                    <p>Multimedia Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="shop-btn text-center">See More Reviews</button>
+                </div>
+            </div>
         </div>
-        <div class="review-sections">
-            <div class="row mt-4 py-4 border-bottom">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                    <div class="user-profile d-flex mt-4">
-                        <img src="../assets/images/icon/user-icon.svg" alt="Review-Users">
-                        <div class="user-name mx-4">
-                            <h4>Rahman</h4>
-                            <div class="user-designation">
-                                <p>Customer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                    <div class="pdt-rating">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                        <span>(4.5 Reviews)</span>
-                    </div>
-                    <div class="review-description mt-3">
-                        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality
-                            and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement
-                            of individuality and elegance. At Milira, we believe that jewelry is not just an accessory,
-                            but a statement of individuality and elegance.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 py-4 border-bottom">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                    <div class="user-profile d-flex mt-4">
-                        <img src="../assets/images/icon/user-icon.svg" alt="Review-Users">
-                        <div class="user-name mx-4">
-                            <h4>Sudhir M.G</h4>
-                            <div class="user-designation">
-                                <p>Founder & CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                    <div class="pdt-rating">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                        <span>(4.5 Reviews)</span>
-                    </div>
-                    <div class="review-description mt-3">
-                        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality
-                            and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement
-                            of individuality and elegance. At Milira, we believe that jewelry is not just an accessory,
-                            but a statement of individuality and elegance.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 py-4 border-bottom">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                    <div class="user-profile d-flex mt-4">
-                        <img src="../assets/images/icon/user-icon.svg" alt="Review-Users">
-                        <div class="user-name mx-4">
-                            <h4>Vignesh T</h4>
-                            <div class="user-designation">
-                                <p>Web Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                    <div class="pdt-rating">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                        <span>(4.5 Reviews)</span>
-                    </div>
-                    <div class="review-description mt-3">
-                        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality
-                            and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement
-                            of individuality and elegance. At Milira, we believe that jewelry is not just an accessory,
-                            but a statement of individuality and elegance.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-4 py-4 border-bottom">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                    <div class="user-profile d-flex mt-4">
-                        <img src="../assets/images/icon/user-icon.svg" alt="Review-Users">
-                        <div class="user-name mx-4">
-                            <h4>Karthikesan</h4>
-                            <div class="user-designation">
-                                <p>Multimedia Designer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                    <div class="pdt-rating">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-half"></i>
-                        <span>(4.5 Reviews)</span>
-                    </div>
-                    <div class="review-description mt-3">
-                        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality
-                            and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement
-                            of individuality and elegance. At Milira, we believe that jewelry is not just an accessory,
-                            but a statement of individuality and elegance.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center">
-                <button class="shop-btn text-center">See More Reviews</button>
-            </div>
-        </div>
-    </div>
     <!--------------- products-Review-end--------------->
 
     <!--------------- weekly-section--------------->
