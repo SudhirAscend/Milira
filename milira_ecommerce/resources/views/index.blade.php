@@ -791,79 +791,35 @@
       <!-- categories section -->
     
       <div class="container">
-        <div class="cat-title mt-5">
-            <h1>Brightning Silver</h1>
+    <div class="cat-title mt-5">
+        <h1>Brightning Silver</h1>
+    </div>
+    <div class="cat-sub-para mt-3">
+        <p>Giving you a new silver</p>
+    </div>
+</div>
+<div class="categories mt-5 mb-5">
+    <div class="swiper catSlider">
+        <div class="swiper-wrapper">
+            @foreach ($categories as $category)
+                <div class="swiper-slide">
+                    <div class="pendent-set">
+                        @if($category->image)
+                            <img src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="{{ $category->name }}" loading="lazy">
+                        @else
+                            <img src="path/to/default-image.png" alt="{{ $category->name }}" loading="lazy">
+                        @endif
+                        <div class="cat-btn pt-4">
+                            <a href="#">
+                                <button class="cat-button">{{ $category->name }}</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <div class="cat-sub-para mt-3">
-            <p>Giving you a new silver</p>
-        </div>
-      </div>
-      <div class="categories mt-5 mb-5">
-        <div class="swiper catSlider">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Pendent Set.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Pendemt Set</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Chain.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Chain</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Earring.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Stud</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Bracelet.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Earrings</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Necklace.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Bracelet</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="pendent-set">
-                    <img src="./assets/images/categories/Stud.png" alt="" loading="lazy">
-                    <div class="cat-btn pt-4">
-                        <a href="#">
-                            <button class="cat-button">Necklace</button>
-                        </a>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
+    </div>
+</div>
 
       <!-- End of categories section -->
 
