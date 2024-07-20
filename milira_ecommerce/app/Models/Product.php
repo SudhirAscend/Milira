@@ -21,10 +21,15 @@ class Product extends Model
         'size',
         'price', // Add price here
         'stocks', // Add stocks here
+        'featured',
     ];
     
     
     protected $casts = [
         'images' => 'array',
     ];
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class, 'category_id');
+    }
 }
