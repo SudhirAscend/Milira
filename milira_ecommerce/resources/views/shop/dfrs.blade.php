@@ -3,26 +3,20 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
+    <meta name="keywords"
+        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="images/png" href="{{ asset('assets/images/logos/favicon.png') }}">
-    <title>Milira</title>
+    <link rel="icon" href="{{ URL::asset('build/images/favicon-32x32.png') }}" type="image/png">
+    <title>Milira-Product</title>
     <link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/shop-inner.css') }}">
+
 </head>
 
-<body >
-
-
-
-      
-    <!--------------- header-section --------------->
+<body>
     <header id="header" class="header">
         <div class="header-top-section">
             <div class="container">
@@ -57,7 +51,7 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
-                                            fill="#fff" />
+                                            fill="#000" />
                                     </svg>
                                 </span>
                             </button>
@@ -96,7 +90,7 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M22 16.0094C21.997 22.0881 17.0653 27.007 10.9802 27C4.90444 26.9931 -0.00941233 22.0569 1.3538e-05 15.9688C0.00943941 9.89602 4.95157 4.98663 11.0422 5.00003C17.0961 5.01342 22.003 9.94315 22 16.0094ZM6.16553 15.7812C6.40365 12.6236 8.72192 11.2861 10.5868 11.1993C12.3305 11.1179 14.4529 12.3353 14.7465 13.6143C14.2425 13.6143 13.7459 13.6143 13.2429 13.6143C13.2429 14.0241 13.2429 14.3986 13.2429 14.7975C14.308 14.7975 15.3374 14.8064 16.3668 14.793C16.7805 14.7876 17.0102 14.5291 17.0147 14.1005C17.0221 13.3414 17.0172 12.5824 17.0172 11.8234C17.0172 11.558 17.0172 11.2925 17.0172 11.0311C16.5836 11.0311 16.2165 11.0311 15.7908 11.0311C15.7908 11.6046 15.7908 12.1572 15.7908 12.7937C13.9379 10.0444 10.8447 9.4545 8.48578 10.4824C6.21811 11.4706 4.90792 13.847 5.04682 15.7817C5.40997 15.7812 5.77609 15.7812 6.16553 15.7812ZM15.8191 16.2178C15.7581 17.4576 15.3498 18.547 14.4742 19.4286C13.5976 20.3111 12.5265 20.772 11.2858 20.8008C9.57472 20.8405 7.568 19.6424 7.2495 18.3892C7.75403 18.3892 8.25013 18.3892 8.76012 18.3892C8.76012 17.9809 8.76012 17.6064 8.76012 17.2041C7.68458 17.2041 6.64178 17.1921 5.59997 17.21C5.19962 17.2169 5.00069 17.4839 4.99771 17.9442C4.99176 18.803 4.99573 19.6612 4.99573 20.52C4.99573 20.6698 4.99573 20.8196 4.99573 20.964C5.4318 20.964 5.79692 20.964 6.20224 20.964C6.20224 20.3895 6.20224 19.8418 6.20224 19.1686C7.07984 20.4912 8.16976 21.3465 9.58216 21.7617C11.0184 22.1839 12.4114 22.0494 13.7548 21.4035C15.8191 20.4113 17.0946 18.1466 16.9507 16.2178C16.5861 16.2178 16.2209 16.2178 15.8191 16.2178Z"
-                                            fill="#6E6D79" />
+                                            fill="#000" />
                                         <path
                                             d="M6.16568 15.7814C5.77624 15.7814 5.41062 15.7814 5.04648 15.7814C4.90757 13.8471 6.21777 11.4703 8.48543 10.482C10.8444 9.45411 13.9376 10.044 15.7905 12.7934C15.7905 12.1569 15.7905 11.6042 15.7905 11.0307C16.2161 11.0307 16.5833 11.0307 17.0168 11.0307C17.0168 11.2917 17.0168 11.5571 17.0168 11.823C17.0168 12.582 17.0218 13.341 17.0144 14.1001C17.0104 14.5287 16.7802 14.7877 16.3665 14.7926C15.3371 14.8055 14.3076 14.7971 13.2425 14.7971C13.2425 14.3982 13.2425 14.0237 13.2425 13.6139C13.7451 13.6139 14.2417 13.6139 14.7462 13.6139C14.4525 12.3355 12.3302 11.118 10.5864 11.1989C8.72207 11.2862 6.4038 12.6237 6.16568 15.7814Z"
                                             fill="white" />
@@ -122,7 +116,7 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M11.4047 8.54989C11.6187 8.30247 11.8069 8.07783 12.0027 7.86001C15.0697 4.45162 20.3879 5.51717 22.1581 9.60443C23.4189 12.5161 22.8485 15.213 20.9965 17.6962C19.6524 19.498 17.95 20.9437 16.2722 22.4108C15.0307 23.4964 13.774 24.5642 12.5246 25.6408C11.6986 26.3523 11.1108 26.3607 10.2924 25.6397C8.05177 23.6657 5.79225 21.7125 3.59029 19.6964C2.35865 18.5686 1.33266 17.2553 0.638823 15.7086C-0.626904 12.8872 0.0324709 9.41204 2.22306 7.41034C4.84011 5.01855 8.81757 5.36918 11.1059 8.19281C11.1968 8.30475 11.2907 8.41404 11.4047 8.54989Z"
-                                            fill="#6E6D79" />
+                                            fill="#000" />
                                         <circle cx="26.7662" cy="8" r="8" fill="#000" />
                                         <path
                                             d="M26.846 13.1392C26.1632 13.1392 25.5534 13.0215 25.0164 12.7862C24.4828 12.5509 24.0602 12.2244 23.7487 11.8068C23.4404 11.3859 23.2747 10.8987 23.2515 10.3452H24.8126C24.8325 10.6468 24.9336 10.9086 25.1159 11.1307C25.3015 11.3494 25.5434 11.5185 25.8417 11.6378C26.14 11.7571 26.4715 11.8168 26.836 11.8168C27.2371 11.8168 27.5917 11.7472 27.9 11.608C28.2115 11.4687 28.4551 11.2749 28.6308 11.0263C28.8065 10.7744 28.8943 10.4844 28.8943 10.1562C28.8943 9.81487 28.8065 9.51491 28.6308 9.25639C28.4584 8.99455 28.2049 8.78906 27.8701 8.63991C27.5387 8.49077 27.1377 8.41619 26.667 8.41619H25.8069V7.16335H26.667C27.0448 7.16335 27.3763 7.09541 27.6613 6.95952C27.9497 6.82363 28.1751 6.63471 28.3375 6.39276C28.4999 6.14749 28.5811 5.8608 28.5811 5.53267C28.5811 5.2178 28.5098 4.94437 28.3673 4.71236C28.2281 4.47704 28.0292 4.29309 27.7707 4.16051C27.5155 4.02794 27.2139 3.96165 26.8659 3.96165C26.5344 3.96165 26.2245 4.02296 25.9362 4.1456C25.6511 4.26491 25.4191 4.43726 25.2402 4.66264C25.0612 4.88471 24.9651 5.15151 24.9518 5.46307H23.4653C23.4819 4.91288 23.6443 4.42898 23.9525 4.01136C24.2641 3.59375 24.6751 3.26728 25.1855 3.03196C25.6959 2.79664 26.2627 2.67898 26.8858 2.67898C27.5387 2.67898 28.1021 2.80658 28.5761 3.06179C29.0534 3.31368 29.4213 3.65009 29.6798 4.07102C29.9416 4.49195 30.0709 4.95265 30.0676 5.45312C30.0709 6.0232 29.9118 6.5071 29.5903 6.90483C29.2721 7.30256 28.8479 7.56937 28.3176 7.70526V7.7848C28.9937 7.88755 29.5174 8.15601 29.8886 8.5902C30.2631 9.02438 30.4487 9.56297 30.4454 10.206C30.4487 10.7661 30.293 11.2682 29.9781 11.7124C29.6665 12.1565 29.2406 12.5062 28.7004 12.7614C28.1601 13.0133 27.542 13.1392 26.846 13.1392Z"
@@ -141,13 +135,13 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M16.4444 21.897C14.8444 21.897 13.2441 21.8999 11.6441 21.8963C9.79233 21.892 8.65086 21.0273 8.12595 19.2489C7.04294 15.5794 5.95756 11.9107 4.87166 8.24203C4.6362 7.4468 4.37783 7.25412 3.55241 7.25175C2.7786 7.24964 2.00507 7.25754 1.23127 7.24911C0.512247 7.24148 0.0157813 6.79109 0.000242059 6.15064C-0.0160873 5.48281 0.475637 5.01689 1.23232 5.00873C2.11121 4.99952 2.99089 4.99214 3.86951 5.01268C5.36154 5.04769 6.52014 5.93215 6.96393 7.35415C7.14171 7.92378 7.34055 8.49026 7.46382 9.07201C7.54968 9.47713 7.77881 9.49661 8.10566 9.49582C11.8335 9.48897 15.5611 9.49134 19.2889 9.49134C21.0825 9.49134 22.8761 9.48108 24.6694 9.49503C26.0848 9.50608 27.0907 10.4906 27.0156 11.7778C27.0006 12.0363 26.925 12.2958 26.8473 12.5457C26.1317 14.8411 25.4124 17.1351 24.6879 19.4279C24.1851 21.0186 23.0223 21.8826 21.3504 21.8944C19.7151 21.906 18.0797 21.897 16.4444 21.897Z"
-                                            fill="#6E6D79" />
+                                            fill="#000" />
                                         <path
                                             d="M12.4012 27.5161C11.167 27.5227 10.1488 26.524 10.1345 25.2928C10.1201 24.0419 11.1528 22.9982 12.3967 23.0066C13.6209 23.0151 14.6422 24.0404 14.6436 25.2623C14.6451 26.4855 13.6261 27.5095 12.4012 27.5161Z"
-                                            fill="#6E6D79" />
+                                            fill="#000" />
                                         <path
                                             d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z"
-                                            fill="#6E6D79" />
+                                            fill="#000" />
                                         <circle cx="26.9523" cy="8" r="8" fill="#000" />
                                         <path
                                             d="M23.7061 13V11.8864L27.1514 8.31676C27.5193 7.92898 27.8226 7.58925 28.0612 7.29759C28.3032 7.0026 28.4838 6.72254 28.6031 6.45739C28.7225 6.19223 28.7821 5.91051 28.7821 5.61222C28.7821 5.27415 28.7026 4.98248 28.5435 4.73722C28.3844 4.48864 28.1673 4.29806 27.8922 4.16548C27.6171 4.02959 27.3072 3.96165 26.9625 3.96165C26.5979 3.96165 26.2797 4.03622 26.008 4.18537C25.7362 4.33452 25.5274 4.54498 25.3815 4.81676C25.2357 5.08854 25.1628 5.40672 25.1628 5.77131H23.6962C23.6962 5.15151 23.8387 4.60961 24.1237 4.1456C24.4088 3.68158 24.7999 3.32197 25.297 3.06676C25.7942 2.80824 26.3593 2.67898 26.9923 2.67898C27.632 2.67898 28.1955 2.80658 28.6827 3.06179C29.1732 3.31368 29.556 3.65838 29.8311 4.09588C30.1062 4.53007 30.2438 5.0206 30.2438 5.56747C30.2438 5.94531 30.1725 6.31487 30.03 6.67614C29.8908 7.0374 29.6472 7.4401 29.2992 7.88423C28.9511 8.32505 28.4672 8.86032 27.8475 9.49006L25.824 11.608V11.6825H30.4078V13H23.7061Z"
@@ -288,39 +282,37 @@
                     aria-controls="offcanvasWithBothOptions">
                     <span>
                         <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="14" height="1" fill="#1D1D1D" />
-                            <rect y="8" width="14" height="1" fill="#1D1D1D" />
-                            <rect y="4" width="10" height="1" fill="#1D1D1D" />
+                            <rect width="14" height="1" fill="#000" />
+                            <rect y="8" width="14" height="1" fill="#000" />
+                            <rect y="4" width="10" height="1" fill="#000" />
                         </svg>
                     </span>
                 </button>
                 <a href="index.html" class="mobile-header-logo text-center">
                     <img src="../assets/images/logos/milira-logo.svg" width="50%" alt="logo">
-                </a>
-                <a href="cart.html" class="header-cart cart-item">
-                    <span>
-                        <svg width="35" height="28" viewBox="0 0 35 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16.4444 21.897C14.8444 21.897 13.2441 21.8999 11.6441 21.8963C9.79233 21.892 8.65086 21.0273 8.12595 19.2489C7.04294 15.5794 5.95756 11.9107 4.87166 8.24203C4.6362 7.4468 4.37783 7.25412 3.55241 7.25175C2.7786 7.24964 2.00507 7.25754 1.23127 7.24911C0.512247 7.24148 0.0157813 6.79109 0.000242059 6.15064C-0.0160873 5.48281 0.475637 5.01689 1.23232 5.00873C2.11121 4.99952 2.99089 4.99214 3.86951 5.01268C5.36154 5.04769 6.52014 5.93215 6.96393 7.35415C7.14171 7.92378 7.34055 8.49026 7.46382 9.07201C7.54968 9.47713 7.77881 9.49661 8.10566 9.49582C11.8335 9.48897 15.5611 9.49134 19.2889 9.49134C21.0825 9.49134 22.8761 9.48108 24.6694 9.49503C26.0848 9.50608 27.0907 10.4906 27.0156 11.7778C27.0006 12.0363 26.925 12.2958 26.8473 12.5457C26.1317 14.8411 25.4124 17.1351 24.6879 19.4279C24.1851 21.0186 23.0223 21.8826 21.3504 21.8944C19.7151 21.906 18.0797 21.897 16.4444 21.897Z"
-                                fill="#6E6D79" />
-                            <path
-                                d="M12.4012 27.5161C11.167 27.5227 10.1488 26.524 10.1345 25.2928C10.1201 24.0419 11.1528 22.9982 12.3967 23.0066C13.6209 23.0151 14.6422 24.0404 14.6436 25.2623C14.6451 26.4855 13.6261 27.5095 12.4012 27.5161Z"
-                                fill="#6E6D79" />
-                            <path
-                                d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z"
-                                fill="#6E6D79" />
-                            <circle cx="26.9523" cy="8" r="8" fill="#000" />
-                            <path
-                                d="M23.7061 13V11.8864L27.1514 8.31676C27.5193 7.92898 27.8226 7.58925 28.0612 7.29759C28.3032 7.0026 28.4838 6.72254 28.6031 6.45739C28.7225 6.19223 28.7821 5.91051 28.7821 5.61222C28.7821 5.27415 28.7026 4.98248 28.5435 4.73722C28.3844 4.48864 28.1673 4.29806 27.8922 4.16548C27.6171 4.02959 27.3072 3.96165 26.9625 3.96165C26.5979 3.96165 26.2797 4.03622 26.008 4.18537C25.7362 4.33452 25.5274 4.54498 25.3815 4.81676C25.2357 5.08854 25.1628 5.40672 25.1628 5.77131H23.6962C23.6962 5.15151 23.8387 4.60961 24.1237 4.1456C24.4088 3.68158 24.7999 3.32197 25.297 3.06676C25.7942 2.80824 26.3593 2.67898 26.9923 2.67898C27.632 2.67898 28.1955 2.80658 28.6827 3.06179C29.1732 3.31368 29.556 3.65838 29.8311 4.09588C30.1062 4.53007 30.2438 5.0206 30.2438 5.56747C30.2438 5.94531 30.1725 6.31487 30.03 6.67614C29.8908 7.0374 29.6472 7.4401 29.2992 7.88423C28.9511 8.32505 28.4672 8.86032 27.8475 9.49006L25.824 11.608V11.6825H30.4078V13H23.7061Z"
-                                fill="#F9FFFB" />
-                        </svg>
+                    <a href="cart.html" class="header-cart cart-item">
+                        <span>
+                            <svg width="35" height="28" viewBox="0 0 35 28" fill="#000"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16.4444 21.897C14.8444 21.897 13.2441 21.8999 11.6441 21.8963C9.79233 21.892 8.65086 21.0273 8.12595 19.2489C7.04294 15.5794 5.95756 11.9107 4.87166 8.24203C4.6362 7.4468 4.37783 7.25412 3.55241 7.25175C2.7786 7.24964 2.00507 7.25754 1.23127 7.24911C0.512247 7.24148 0.0157813 6.79109 0.000242059 6.15064C-0.0160873 5.48281 0.475637 5.01689 1.23232 5.00873C2.11121 4.99952 2.99089 4.99214 3.86951 5.01268C5.36154 5.04769 6.52014 5.93215 6.96393 7.35415C7.14171 7.92378 7.34055 8.49026 7.46382 9.07201C7.54968 9.47713 7.77881 9.49661 8.10566 9.49582C11.8335 9.48897 15.5611 9.49134 19.2889 9.49134C21.0825 9.49134 22.8761 9.48108 24.6694 9.49503C26.0848 9.50608 27.0907 10.4906 27.0156 11.7778C27.0006 12.0363 26.925 12.2958 26.8473 12.5457C26.1317 14.8411 25.4124 17.1351 24.6879 19.4279C24.1851 21.0186 23.0223 21.8826 21.3504 21.8944C19.7151 21.906 18.0797 21.897 16.4444 21.897Z"
+                                    fill="#000" />
+                                <path
+                                    d="M12.4012 27.5161C11.167 27.5227 10.1488 26.524 10.1345 25.2928C10.1201 24.0419 11.1528 22.9982 12.3967 23.0066C13.6209 23.0151 14.6422 24.0404 14.6436 25.2623C14.6451 26.4855 13.6261 27.5095 12.4012 27.5161Z"
+                                    fill="#000" />
+                                <path
+                                    d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z"
+                                    fill="#000" />
+                                <circle cx="26.9523" cy="8" r="8" fill="#000" />
+                                <path
+                                    d="M23.7061 13V11.8864L27.1514 8.31676C27.5193 7.92898 27.8226 7.58925 28.0612 7.29759C28.3032 7.0026 28.4838 6.72254 28.6031 6.45739C28.7225 6.19223 28.7821 5.91051 28.7821 5.61222C28.7821 5.27415 28.7026 4.98248 28.5435 4.73722C28.3844 4.48864 28.1673 4.29806 27.8922 4.16548C27.6171 4.02959 27.3072 3.96165 26.9625 3.96165C26.5979 3.96165 26.2797 4.03622 26.008 4.18537C25.7362 4.33452 25.5274 4.54498 25.3815 4.81676C25.2357 5.08854 25.1628 5.40672 25.1628 5.77131H23.6962C23.6962 5.15151 23.8387 4.60961 24.1237 4.1456C24.4088 3.68158 24.7999 3.32197 25.297 3.06676C25.7942 2.80824 26.3593 2.67898 26.9923 2.67898C27.632 2.67898 28.1955 2.80658 28.6827 3.06179C29.1732 3.31368 29.556 3.65838 29.8311 4.09588C30.1062 4.53007 30.2438 5.0206 30.2438 5.56747C30.2438 5.94531 30.1725 6.31487 30.03 6.67614C29.8908 7.0374 29.6472 7.4401 29.2992 7.88423C28.9511 8.32505 28.4672 8.86032 27.8475 9.49006L25.824 11.608V11.6825H30.4078V13H23.7061Z"
+                                    fill="#F9FFFB" />
+                            </svg>
 
-                    </span>
-                </a>
+                        </span>
+                    </a>
             </div>
-
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions">
-
                 <div class="offcanvas-body">
                     <div class="header-top">
                         <div class="header-cart ">
@@ -331,7 +323,7 @@
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M22 16.0094C21.997 22.0881 17.0653 27.007 10.9802 27C4.90444 26.9931 -0.00941233 22.0569 1.3538e-05 15.9688C0.00943941 9.89602 4.95157 4.98663 11.0422 5.00003C17.0961 5.01342 22.003 9.94315 22 16.0094ZM6.16553 15.7812C6.40365 12.6236 8.72192 11.2861 10.5868 11.1993C12.3305 11.1179 14.4529 12.3353 14.7465 13.6143C14.2425 13.6143 13.7459 13.6143 13.2429 13.6143C13.2429 14.0241 13.2429 14.3986 13.2429 14.7975C14.308 14.7975 15.3374 14.8064 16.3668 14.793C16.7805 14.7876 17.0102 14.5291 17.0147 14.1005C17.0221 13.3414 17.0172 12.5824 17.0172 11.8234C17.0172 11.558 17.0172 11.2925 17.0172 11.0311C16.5836 11.0311 16.2165 11.0311 15.7908 11.0311C15.7908 11.6046 15.7908 12.1572 15.7908 12.7937C13.9379 10.0444 10.8447 9.4545 8.48578 10.4824C6.21811 11.4706 4.90792 13.847 5.04682 15.7817C5.40997 15.7812 5.77609 15.7812 6.16553 15.7812ZM15.8191 16.2178C15.7581 17.4576 15.3498 18.547 14.4742 19.4286C13.5976 20.3111 12.5265 20.772 11.2858 20.8008C9.57472 20.8405 7.568 19.6424 7.2495 18.3892C7.75403 18.3892 8.25013 18.3892 8.76012 18.3892C8.76012 17.9809 8.76012 17.6064 8.76012 17.2041C7.68458 17.2041 6.64178 17.1921 5.59997 17.21C5.19962 17.2169 5.00069 17.4839 4.99771 17.9442C4.99176 18.803 4.99573 19.6612 4.99573 20.52C4.99573 20.6698 4.99573 20.8196 4.99573 20.964C5.4318 20.964 5.79692 20.964 6.20224 20.964C6.20224 20.3895 6.20224 19.8418 6.20224 19.1686C7.07984 20.4912 8.16976 21.3465 9.58216 21.7617C11.0184 22.1839 12.4114 22.0494 13.7548 21.4035C15.8191 20.4113 17.0946 18.1466 16.9507 16.2178C16.5861 16.2178 16.2209 16.2178 15.8191 16.2178Z"
-                                                fill="#6E6D79" />
+                                                fill="#000" />
                                             <path
                                                 d="M6.16568 15.7814C5.77624 15.7814 5.41062 15.7814 5.04648 15.7814C4.90757 13.8471 6.21777 11.4703 8.48543 10.482C10.8444 9.45411 13.9376 10.044 15.7905 12.7934C15.7905 12.1569 15.7905 11.6042 15.7905 11.0307C16.2161 11.0307 16.5833 11.0307 17.0168 11.0307C17.0168 11.2917 17.0168 11.5571 17.0168 11.823C17.0168 12.582 17.0218 13.341 17.0144 14.1001C17.0104 14.5287 16.7802 14.7877 16.3665 14.7926C15.3371 14.8055 14.3076 14.7971 13.2425 14.7971C13.2425 14.3982 13.2425 14.0237 13.2425 13.6139C13.7451 13.6139 14.2417 13.6139 14.7462 13.6139C14.4525 12.3355 12.3302 11.118 10.5864 11.1989C8.72207 11.2862 6.4038 12.6237 6.16568 15.7814Z"
                                                 fill="white" />
@@ -354,7 +346,7 @@
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M11.4047 8.54989C11.6187 8.30247 11.8069 8.07783 12.0027 7.86001C15.0697 4.45162 20.3879 5.51717 22.1581 9.60443C23.4189 12.5161 22.8485 15.213 20.9965 17.6962C19.6524 19.498 17.95 20.9437 16.2722 22.4108C15.0307 23.4964 13.774 24.5642 12.5246 25.6408C11.6986 26.3523 11.1108 26.3607 10.2924 25.6397C8.05177 23.6657 5.79225 21.7125 3.59029 19.6964C2.35865 18.5686 1.33266 17.2553 0.638823 15.7086C-0.626904 12.8872 0.0324709 9.41204 2.22306 7.41034C4.84011 5.01855 8.81757 5.36918 11.1059 8.19281C11.1968 8.30475 11.2907 8.41404 11.4047 8.54989Z"
-                                                fill="#6E6D79" />
+                                                fill="#000" />
                                             <circle cx="26.7662" cy="8" r="8" fill="#000" />
                                             <path
                                                 d="M26.846 13.1392C26.1632 13.1392 25.5534 13.0215 25.0164 12.7862C24.4828 12.5509 24.0602 12.2244 23.7487 11.8068C23.4404 11.3859 23.2747 10.8987 23.2515 10.3452H24.8126C24.8325 10.6468 24.9336 10.9086 25.1159 11.1307C25.3015 11.3494 25.5434 11.5185 25.8417 11.6378C26.14 11.7571 26.4715 11.8168 26.836 11.8168C27.2371 11.8168 27.5917 11.7472 27.9 11.608C28.2115 11.4687 28.4551 11.2749 28.6308 11.0263C28.8065 10.7744 28.8943 10.4844 28.8943 10.1562C28.8943 9.81487 28.8065 9.51491 28.6308 9.25639C28.4584 8.99455 28.2049 8.78906 27.8701 8.63991C27.5387 8.49077 27.1377 8.41619 26.667 8.41619H25.8069V7.16335H26.667C27.0448 7.16335 27.3763 7.09541 27.6613 6.95952C27.9497 6.82363 28.1751 6.63471 28.3375 6.39276C28.4999 6.14749 28.5811 5.8608 28.5811 5.53267C28.5811 5.2178 28.5098 4.94437 28.3673 4.71236C28.2281 4.47704 28.0292 4.29309 27.7707 4.16051C27.5155 4.02794 27.2139 3.96165 26.8659 3.96165C26.5344 3.96165 26.2245 4.02296 25.9362 4.1456C25.6511 4.26491 25.4191 4.43726 25.2402 4.66264C25.0612 4.88471 24.9651 5.15151 24.9518 5.46307H23.4653C23.4819 4.91288 23.6443 4.42898 23.9525 4.01136C24.2641 3.59375 24.6751 3.26728 25.1855 3.03196C25.6959 2.79664 26.2627 2.67898 26.8858 2.67898C27.5387 2.67898 28.1021 2.80658 28.5761 3.06179C29.0534 3.31368 29.4213 3.65009 29.6798 4.07102C29.9416 4.49195 30.0709 4.95265 30.0676 5.45312C30.0709 6.0232 29.9118 6.5071 29.5903 6.90483C29.2721 7.30256 28.8479 7.56937 28.3176 7.70526V7.7848C28.9937 7.88755 29.5174 8.15601 29.8886 8.5902C30.2631 9.02438 30.4487 9.56297 30.4454 10.206C30.4487 10.7661 30.293 11.2682 29.9781 11.7124C29.6665 12.1565 29.2406 12.5062 28.7004 12.7614C28.1601 13.0133 27.542 13.1392 26.846 13.1392Z"
@@ -597,7 +589,8 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/cap.webp" alt="cap">
+                                                <img src="../assets/images/homepage-one/category-img/cap.webp"
+                                                    alt="cap">
                                             </span>
                                             <span class="dropdown-text">
                                                 Cap
@@ -735,691 +728,675 @@
             </div>
         </div>
     </header>
-    <!--------------- header-section-end --------------->
-
-    <!--------------- Hero-Section-Start --------------->
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="./assets/images/hero/Hero1.jpg" width="100px" height="100%" alt="">
-            <div class="hero-slider-content">
-                <div class="hero-title text-center">
-                    <h2>MAKE EVERYDAY SPARKEL WITH SILVER ESSENTIAL</h2>
-                </div>
-                <div class="hero-sub-title py-5 text-center">
-                    <button class="btn-hero">WEDDING JEWELLERY</button>
-                </div>
+    <section class="product product-info">
+        <div class="container">
+            <div class="blog-bradcrum">
+                <span><a href="{{ url('/') }}">Home</a></span>
+                <span class="devider">/</span>
+                <span><a href="{{ url('/product-sidebar') }}">Shop</a></span>
+                <span class="devider">/</span>
+                <span><a href="#">Product Details</a></span>
             </div>
-          </div>
-          <div class="swiper-slide">
-            <img src="./assets/images/hero/Hero2.jpg" width="100px" height="100%" alt="">
-            <div class="hero-slider-content">
-                <div class="hero-title text-center">
-                    <h2>MAKE EVERYDAY SPARKEL WITH SILVER ESSENTIAL</h2>
-                </div>
-                <div class="hero-sub-title py-5 text-center">
-                    <button class="btn-hero">WEDDING JEWELLERY</button>
-                </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <img src="./assets/images/hero/Hero3.jpg" width="100px" height="100%" alt="">
-            <div class="hero-slider-content">
-                <div class="hero-title text-center">
-                    <h2>MAKE EVERYDAY SPARKEL WITH SILVER ESSENTIAL</h2>
-                </div>
-                <div class="hero-sub-title py-5 text-center">
-                    <button class="btn-hero">WEDDING JEWELLERY</button>
-                </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <img src="./assets/images/hero/Hero4.jpg" width="100px" height="100%" alt="">
-            <div class="hero-slider-content">
-                <div class="hero-title text-center">
-                    <h2>MAKE EVERYDAY SPARKEL WITH SILVER ESSENTIAL</h2>
-                </div>
-                <div class="hero-sub-title py-5 text-center">
-                    <button class="btn-hero">WEDDING JEWELLERY</button>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-
-      <!-- categories section -->
-      <div class="container">
-        <div class="cat-title mt-5">
-            <h1>Brightning Silver</h1>
-        </div>
-        <div class="cat-sub-para mt-3">
-            <p>Giving you a new silver</p>
-        </div>
-    </div>
-    <div class="categories mt-5 mb-5">
-        <div class="swiper catSlider">
-            <div class="swiper-wrapper">
-                @foreach ($categories as $category)
-                    <div class="swiper-slide">
-                        <div class="pendent-set">
-                            @if($category->image)
-                                <img src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="{{ $category->name }}" loading="lazy">
-                            @else
-                                <img src="path/to/default-image.png" alt="{{ $category->name }}" loading="lazy">
-                            @endif
-                            <div class="cat-btn pt-4">
-                                <a href="#">
-                                    <button class="cat-button">{{ $category->name }}</button>
-                                </a>
+            <div class="product-info-section">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="product-info-img" data-aos="fade-right">
+                            <div class="swiper product-top">
+                                <div class="product-discount-content">
+                                    <h4>-50%</h4>
+                                </div>
+                                <div class="swiper-wrapper">
+                                    @foreach($product->images as $image)
+                                    <div class="swiper-slide slider-top-img">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="img">
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="swiper product-bottom">
+                                <div class="swiper-wrapper">
+                                    @foreach($product->images as $image)
+                                    <div class="swiper-slide slider-bottom-img">
+                                        <img src="{{ asset('storage/' . $image) }}" alt="img" loading="lazy">
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-      <!-- End of categories section -->
-
-      <!-- About Section -->
-
-      <div class="container abt">
-        <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <img src="./assets/images/About/abt-1.png" class="about-img" alt="Milira-About-Image" loading="lazy">
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="about">
-                    <div class="small-title">
-                        <p>About Our Story</p>
-                    </div>
-                    <div class="abt-title py-4">
-                        <h2>Crafting Timeless Elegance in Silver</h2>
-                    </div>
-                    <div class="abt-content py-3">
-                        <p>At Milira, we believe that every piece of jewelry tells a story. Founded with a passion for craftsmanship and an eye for detail, Milira has been dedicated to creating exquisite silver jewelry that embodies timeless elegance and sophistication. Our journey began with a simple vision: to bring the beauty and charm of silver to the forefront of fashion, blending traditional artistry with contemporary designs.</p>
-                    </div>
-                    <div class="abt-btn py-3">
-                        <button>About Us</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-
-      
-    <!-- End of about section -->
-
-    <!-- Essential Section -->
-
-   <div class="container essential">
-        <div class="main-title pt-5">
-            <h1>Essential</h1>
-        </div>
-        <div class="sub-para py-4">
-            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-        </div>
-   </div>
-   <div class="essential-images">
-    <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-            <img class="esse-img" src="./assets/images/home/essential1.png" alt="Essential Images" loading="lazy">
-            <div class="esse-btn">
-                <a href="product-sidebar.html">
-                    <button class="essential-shop">Shop Now</button>
-                </a>
-            </div>    
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-            <img class="esse-img" src="./assets/images/home/essential2.png" alt="Essential Images" loading="lazy">
-            <div class="esse-btn">
-                <a href="product-sidebar.html">
-                    <button class="essential-shop">Shop Now</button>
-                </a>
-            </div>
-        </div>
-    </div>
-   </div>
-
-
-    <!-- End of Essential Section -->
-
-    <!-- product Categories -->
-
-    <div class="container">
-    <div class="main-title pt-5">
-        <h1>Top Selling Products</h1>
-    </div>
-    <div class="sub-para py-3">
-        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-    </div>
-    <div class="product-categories">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            @foreach ($categories as $category)
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link @if ($loop->first) active @endif" id="{{ Str::slug($category->name) }}-tab" data-bs-toggle="pill" data-bs-target="#{{ Str::slug($category->name) }}" type="button" role="tab" aria-controls="{{ Str::slug($category->name) }}" aria-selected="true">{{ $category->name }}</button>
-                </li>
-            @endforeach
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            @foreach ($categories as $category)
-                <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ Str::slug($category->name) }}" role="tabpanel" aria-labelledby="{{ Str::slug($category->name) }}-tab" tabindex="0">
-                    <div class="row">
-                        @foreach ($products->where('category', $category->name) as $product)
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4">
-                                <div class="card product">
-                                    <div class="card-body">
-                                        @if(!empty($product->images))
-                                            <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" class="pdt-img">
-                                        @endif
-                                        <div class="card-hover">
-                                            <div class="hover-icons text-center">
-                                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                                <a href="#"><i class="bi bi-heart"></i></a>
-                                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="pdt-title">
-                                                <h6>{{ $product->title }}</h6>
-                                            </div>
-                                            <div class="pdt-price">
-                                                <h6>₹{{ number_format($product->price, 2) }}</h6>
-                                            </div>
-                                            <div class="pdt-rating mt-4">
-                                                <p>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-half"></i>
-                                                    <span>(4.5 reviews)</span>
-                                                </p>
-                                            </div>
-                                            <div class="pdt-shop text-center mt-5">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
-                                                    </div>
+                    <div class="col-md-6">
+                        <div class="product-info-content" data-aos="fade-left">
+                            <h5>{{ $product->title }}</h5>
+                            <div class="ratings">
+                                <span>
+                                    <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7.5 0L9.18386 5.18237H14.6329L10.2245 8.38525L11.9084 13.5676L7.5 10.3647L3.09161 13.5676L4.77547 8.38525L0.367076 5.18237H5.81614L7.5 0Z"
+                                            fill="#FFA800" />
+                                        <path
+                                            d="M22.5 0L24.1839 5.18237H29.6329L25.2245 8.38525L26.9084 13.5676L22.5 10.3647L18.0916 13.5676L19.7755 8.38525L15.3671 5.18237H20.8161L22.5 0Z"
+                                            fill="#FFA800" />
+                                        <path
+                                            d="M37.5 0L39.1839 5.18237H44.6329L40.2245 8.38525L41.9084 13.5676L37.5 10.3647L33.0916 13.5676L34.7755 8.38525L30.3671 5.18237H35.8161L37.5 0Z"
+                                            fill="#FFA800" />
+                                        <path
+                                            d="M52.5 0L54.1839 5.18237H59.6329L55.2245 8.38525L56.9084 13.5676L52.5 10.3647L48.0916 13.5676L49.7755 8.38525L45.3671 5.18237H50.8161L52.5 0Z"
+                                            fill="#FFA800" />
+                                        <path
+                                            d="M67.5 0L69.1839 5.18237H74.6329L70.2245 8.38525L71.9084 13.5676L67.5 10.3647L63.0916 13.5676L64.7755 8.38525L60.3671 5.18237H65.8161L67.5 0Z"
+                                            fill="#FFA800" />
+                                    </svg>
+                                </span>
+                                <span class="text">6 Reviews</span>
+                            </div>
+                            <div class="price">
+    <span class="price-cut">₹{{ $product->price + 200 }}</span>
+    <span class="new-price">₹{{ $product->price }}</span>
+</div>
+                            <p class="content-paragraph">{{ $product->small_description }}</p>
+                            <hr>
+                            <div class="product-availability">
+                                <span>Availability : </span>
+                                <span class="inner-text">{{ $product->stocks }}</span>
+                            </div>
+                            <div class="product-quantity">
+                                <div class="quantity-wrapper">
+                                    <div class="quantity">
+                                        <span class="minus">-</span>
+                                        <span class="number">1</span>
+                                        <span class="plus">+</span>
+                                    </div>
+                                    <div class="wishlist">
+                                        <span>
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z"
+                                                    stroke="#797979" stroke-width="2" stroke-miterlimit="10"
+                                                    stroke-linecap="square" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div>
+                                <a href="">
+                                    <button class="product-buy-btn">Buy Now <i class="bi bi-bag-fill px-3 fs-3"></i></button>
+                                </a>
+                                <a href="">
+                                    <button class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
+                                </a>
+                            </div>
+                            <hr>
+                            <div class="product-details">
+                                <p class="category">Category : <span class="inner-text">{{ $product->category }}</span>
+                                </p>
+                                <p class="tags">Tags : <span class="inner-text">{{ $product->tags }}</span></p>
+                                <p class="sku">SKU : <span class="inner-text">{{ $product->sku }}</span></p>
+                            </div>
+                            <hr>
+                            <div class="product-report">
+                                
+                                <div class="modal-wrapper action">
+                                    <div onclick="modalAction('.action')" class="anywhere-away"></div>
+                                    <div class="login-section account-section modal-main">
+                                        <div class="review-form">
+                                            <div class="review-content">
+                                                <h5 class="comment-title">Report Products</h5>
+                                                <div class="close-btn">
+                                                    <img src="../assets/images/homepage-one/close-btn.png"
+                                                        onclick="modalAction('.action')" alt="close-btn">
                                                 </div>
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="reporttitle" class="form-label">Enter Report Title*</label>
+                                                <input type="text" id="reporttitle" class="form-control"
+                                                    placeholder="Reports Headline here">
+                                            </div>
+                                            <div class="review-form-name address-form">
+                                                <label for="reportnote" class="form-label">Enter Report Note*</label>
+                                                <textarea name="ticketmassage" id="reportnote" cols="40" rows="3"
+                                                    class="form-control" placeholder="Type Here"></textarea>
+                                            </div>
+                                            <div class="login-btn text-center">
+                                                <a href="#" onclick="modalAction('.action')" class="shop-btn">Submit
+                                                    Report</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
-                        @endforeach
-                    </div>
-                    <div class="shop-more text-center mt-5">
-                        <a href="product-sidebar.html">
-                            <button>Shop More</button>
-                        </a>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-
-<!-- End of product Categories -->
-
-<!-- Custom jewellery -->
-
-<div class="custom" style="background-image: url(./assets/images/hero/demo.jpg); background-position: center; object-fit: cover; background-repeat: no-repeat; height: 100%; margin-top: 100px;">
-    <div class="container cust">
-        <div class="main-title">
-            <h1 class="text-white">CUSTOM YOUR JEWELRY NOW</h1>
-        </div>
-        <div class="sub-para mt-5">
-            <p class="text-white">At Milira, we believe that jewelry is not just an accessory; it's an expression of your unique style and personality. That's why we offer our exclusive "Cousto Your Jewelry" service, designed to help you create one-of-a-kind silver pieces that reflect your individuality and tell your personal story.</p>
-        </div>
-    </div>
-</div>
-    <div class="container collections p-5">
-        <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men">
-                <div class="women text-center">
-                    <h1>women</h1>
-                </div>
-                <img src="./assets/images/home/women.png" height="90%" alt="" class="collection-img">
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men">
-                <div class="women text-center">
-                    <h1>kids</h1>
-                </div>
-                <img src="./assets/images/home/kids.png" height="90%" alt="" class="collection-img">
-            </div>
-        </div>
-    </div>
-
-<!--End of Custom jewellery -->
-
-<!-- Featured Products -->
-
-<div class="container feature">
-        <div class="main-title">
-            <h1>Featured Products</h1>
-        </div>
-        <div class="sub-para py-4">
-            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-        </div>
-        <div class="featureSlider">
-            @foreach ($featuredProducts as $product)
-                <div class="feature-img">
-                    <div class="card mx-3">
-                        <div class="card-body">
-                            @if($product->images && count($product->images) > 0)
-                                <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" loading="lazy">
-                            @else
-                                <img src="path/to/default-product-image.png" alt="{{ $product->title }}" loading="lazy">
-                            @endif
-                            <div class="container">
-                                <div class="f-title">
-                                    <h6>{{ $product->title }}</h6>
-                                </div>
-                                <div class="f-price">
-                                    <h6>₹{{ $product->price }}</h6>
-                                </div>
-                                <div class="f-button">
-                                    <button>Add to Cart <i class="bi bi-cart-check-fill"></i></button>
+                            <div class="product-share">
+                                <p>Share This:</p>
+                                <div class="social-icons">
+                                    <a href="#">
+                                        <span class="facebook">
+                                            <svg width="10" height="16" viewBox="0 0 10 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M3 16V9H0V6H3V4C3 1.3 4.7 0 7.1 0C8.3 0 9.2 0.1 9.5 0.1V2.9H7.8C6.5 2.9 6.2 3.5 6.2 4.4V6H10L9 9H6.3V16H3Z"
+                                                    fill="#3E75B2" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="pinterest">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M8 0C3.6 0 0 3.6 0 8C0 11.4 2.1 14.3 5.1 15.4C5 14.8 5 13.8 5.1 13.1C5.2 12.5 6 9.1 6 9.1C6 9.1 5.8 8.7 5.8 8C5.8 6.9 6.5 6 7.3 6C8 6 8.3 6.5 8.3 7.1C8.3 7.8 7.9 8.8 7.6 9.8C7.4 10.6 8 11.2 8.8 11.2C10.2 11.2 11.3 9.7 11.3 7.5C11.3 5.6 9.9 4.2 8 4.2C5.7 4.2 4.4 5.9 4.4 7.7C4.4 8.4 4.7 9.1 5 9.5C5 9.7 5 9.8 5 9.9C4.9 10.2 4.8 10.7 4.8 10.8C4.8 10.9 4.7 11 4.5 10.9C3.5 10.4 2.9 9 2.9 7.8C2.9 5.3 4.7 3 8.2 3C11 3 13.1 5 13.1 7.6C13.1 10.4 11.4 12.6 8.9 12.6C8.1 12.6 7.3 12.2 7.1 11.7C7.1 11.7 6.7 13.2 6.6 13.6C6.4 14.3 5.9 15.2 5.6 15.7C6.4 15.9 7.2 16 8 16C12.4 16 16 12.4 16 8C16 3.6 12.4 0 8 0Z"
+                                                    fill="#E12828" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="twitter">
+                                            <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M17.0722 1.60052C16.432 1.88505 15.7562 2.06289 15.0448 2.16959C15.7562 1.74278 16.3253 1.06701 16.5742 0.248969C15.8985 0.640206 15.1515 0.924742 14.3335 1.10258C13.6933 0.426804 12.7686 0 11.7727 0C9.85206 0 8.28711 1.56495 8.28711 3.48557C8.28711 3.7701 8.32268 4.01907 8.39382 4.26804C5.51289 4.12577 2.9165 2.73866 1.17371 0.604639C0.889175 1.13814 0.71134 1.70722 0.71134 2.34742C0.71134 3.5567 1.31598 4.62371 2.27629 5.26392C1.70722 5.22835 1.17371 5.08608 0.675773 4.83711V4.87268C0.675773 6.5799 1.88505 8.00258 3.48557 8.32268C3.20103 8.39382 2.88093 8.42938 2.56082 8.42938C2.34742 8.42938 2.09845 8.39382 1.88505 8.35825C2.34742 9.74536 3.62784 10.7768 5.15722 10.7768C3.94794 11.7015 2.45412 12.2706 0.818041 12.2706C0.533505 12.2706 0.248969 12.2706 0 12.2351C1.56495 13.2309 3.37887 13.8 5.37062 13.8C11.8082 13.8 15.3294 8.46495 15.3294 3.84124C15.3294 3.69897 15.3294 3.52113 15.3294 3.37887C16.0052 2.9165 16.6098 2.31186 17.0722 1.60052Z"
+                                                    fill="#3FD1FF" />
+                                            </svg>
+                                        </span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
-    </div>
+    </section>
+    <div class="container">
+            <div class="review-title">
+                <h1>Reviews</h1>
+            </div>
+            <div class="post-review">
+                <form action="">
+                    <div class="give-rate">
+                        <h6>Rate the Product</h6>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <div class="product-desc">
+                        <h6>Review Our Product</h6>
+                        <textarea name="pdtDescription" id="pdtDescription" placeholder="Description"></textarea>
+                    </div>
+                    <div class="pdt-image">
+                        <div class="mb-3">
+                            <h6>Upload your Product images</h6>
+                            <input type="file" class="pdt-file mt-4" name="inputFile" id="inputFile">
+                          </div>
+                    </div>
+                    <div class="submit-review text-end mt-4">
+                        <span>
+                            <a href="" class="review-1"> Submit Feedback </a>
+                        </span>
+                        <span class="px-3">
+                            <a href="" class="review-2"> Cancel </a>
+                        </span>
 
-<!-- End of Featured Products -->
- <div class="container testimonial">
-    <div class="main-title">
-        <h1>Testimonial</h1>
-    </div>
-    <div class="sub-para py-3">
-        <p>Here is What Our Client Says</p>
-    </div>
-    <div class="row mt-5">
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-            <div class="testimonial-card">
-                <div class="testimonial-content mt-3">
-                    <p><i class="bi bi-quote"></i></p>
-                    <p class="client-says py-3">At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                    <p class="client-name py-3">
-                        Vignesh Thiruppathi
-                    </p>
-                    <p class="client-description">
-                        Web Developer
-                    </p>
+                    </div>
                 </div>
-                <div class="testimonial-content mt-3">
-                    <p><i class="bi bi-quote"></i></p>
-                    <p class="client-says py-3">At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                    <p class="client-name py-3">
-                        Karthikesan
-                    </p>
-                    <p class="client-description">
-                        Multimedia Designer
-                    </p>
+                </form>
+                
+            <div class="review-sections mt-5">
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Rahman</h4>
+                                <div class="user-designation">
+                                    <p>Customer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="testimonial-content mt-3">
-                    <p><i class="bi bi-quote"></i></p>
-                    <p class="client-says py-3">At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                    <p class="client-name py-3">
-                        Sudhir M.G
-                    </p>
-                    <p class="client-description">
-                        Founder & CEO
-                    </p>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Sudhir M.G</h4>
+                                <div class="user-designation">
+                                    <p>Founder & CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Vignesh T</h4>
+                                <div class="user-designation">
+                                    <p>Web Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4 py-4 border-bottom">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                        <div class="user-profile d-flex mt-4">
+                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
+                            <div class="user-name mx-4">
+                                <h4>Karthikesan</h4>
+                                <div class="user-designation">
+                                    <p>Multimedia Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                        <div class="pdt-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span>(4.5 Reviews)</span>
+                        </div>
+                        <div class="review-description mt-3">
+                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="shop-btn text-center">See More Reviews</button>
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                <div class="testi-img">
-                    <img src="./assets/images/home/testimonial.png" alt="testimonial-images" width="100%">
-                </div>
+    <!--------------- products-Review-end--------------->
 
-        </div>
-    </div>
- </div>
-
-<!---------------------- End of Testimonial ---------------------->
-
-<!---------------------- Newsletter ---------------------->
-<div class="container newsletter">
-    <div class="news-content">
-        <div class="row">
-            <div class="col-xl-6 col-lg-8 col-md-12 col-sm-12">
-                <div class="news-title">
-                    <h1 class="text-white">Get in Signup With Our newsletter</h1>
-                </div>
-                <div class="news-para py-5">
-                    <p class="text-white">Stay Tuned for more updates and more discounts with our Milira</p>
-                </div>
-                <div class="news-form">
-                    <form action="">
-                        <input class="news-mail" type="email" name="email" id="email" placeholder="Email Address">
-                        <div class="sub-btn text-end">
-                            <button type="submit"><i class="bi bi-send"></i></button>
+    <!--------------- weekly-section--------------->
+    <section class="product weekly-sale product-weekly footer-padding">
+        <div class="container">
+            <div class="section-title">
+                <h5>Best Sell in this Week</h5>
+                <a href="#" class="view">View All</a>
+            </div>
+            <div class="weekly-sale-section">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                        <div class="card product">
+                            <div class="card-body">
+                                <img src="../assets/images/product/product_1.png" alt="" class="pdt-img">
+                                <div class="card-hover">
+                                    <div class="hover-icons text-center">
+                                        <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                        <a href="#"><i class="bi bi-heart"></i></a>
+                                        <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pdt-title">
+                                        <h6>Embellished Diamond and White Gold Necklace Set</h6>
+                                    </div>
+                                    <div class="pdt-price">
+                                        <h6>₹20,000</h6>
+                                    </div>
+                                    <div class="pdt-rating mt-4">
+                                        <p>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-half"></i>
+                                            <span>(4.5 reviews)</span>
+                                        </p>
+                                    </div>
+                                    <div class="pdt-shop text-center mt-5">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <button class="cart-btn">Buy Now <i
+                                                        class="bi bi-bag-heart-fill"></i></button>
+                                            </div>
+                                            <div class="col-3">
+                                                <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                        <div class="card product">
+                            <div class="card-body">
+                                <img src="../assets/images/product/product_1.png" alt="" class="pdt-img">
+                                <div class="card-hover">
+                                    <div class="hover-icons text-center">
+                                        <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                        <a href="#"><i class="bi bi-heart"></i></a>
+                                        <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pdt-title">
+                                        <h6>Embellished Diamond and White Gold Necklace Set</h6>
+                                    </div>
+                                    <div class="pdt-price">
+                                        <h6>₹20,000</h6>
+                                    </div>
+                                    <div class="pdt-rating mt-4">
+                                        <p>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-half"></i>
+                                            <span>(4.5 reviews)</span>
+                                        </p>
+                                    </div>
+                                    <div class="pdt-shop text-center mt-5">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <button class="cart-btn">Buy Now <i
+                                                        class="bi bi-bag-heart-fill"></i></button>
+                                            </div>
+                                            <div class="col-3">
+                                                <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                        <div class="card product">
+                            <div class="card-body">
+                                <img src="../assets/images/product/product_1.png" alt="" class="pdt-img">
+                                <div class="card-hover">
+                                    <div class="hover-icons text-center">
+                                        <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                        <a href="#"><i class="bi bi-heart"></i></a>
+                                        <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pdt-title">
+                                        <h6>Embellished Diamond and White Gold Necklace Set</h6>
+                                    </div>
+                                    <div class="pdt-price">
+                                        <h6>₹20,000</h6>
+                                    </div>
+                                    <div class="pdt-rating mt-4">
+                                        <p>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-half"></i>
+                                            <span>(4.5 reviews)</span>
+                                        </p>
+                                    </div>
+                                    <div class="pdt-shop text-center mt-5">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <button class="cart-btn">Buy Now <i
+                                                        class="bi bi-bag-heart-fill"></i></button>
+                                            </div>
+                                            <div class="col-3">
+                                                <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                        <div class="card product">
+                            <div class="card-body">
+                                <img src="../assets/images/product/product_1.png" alt="" class="pdt-img">
+                                <div class="card-hover">
+                                    <div class="hover-icons text-center">
+                                        <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                        <a href="#"><i class="bi bi-heart"></i></a>
+                                        <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="pdt-title">
+                                        <h6>Embellished Diamond and White Gold Necklace Set</h6>
+                                    </div>
+                                    <div class="pdt-price">
+                                        <h6>₹20,000</h6>
+                                    </div>
+                                    <div class="pdt-rating mt-4">
+                                        <p>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-fill"></i>
+                                            <i class="bi bi-star-half"></i>
+                                            <span>(4.5 reviews)</span>
+                                        </p>
+                                    </div>
+                                    <div class="pdt-shop text-center mt-5">
+                                        <div class="row">
+                                            <div class="col-9">
+                                                <button class="cart-btn">Buy Now <i
+                                                        class="bi bi-bag-heart-fill"></i></button>
+                                            </div>
+                                            <div class="col-3">
+                                                <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
+        </div>
+    </section>
+    <!--------------- weekly-section-end--------------->
 
+    <!--------------- footer-section--------------->
+    <footer id="footer">
+        <div class="footer-details">
+            <div class="foot-logo py-5">
+                <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
             </div>
-        </div>
-    </div>
-</div>
-
-<!---------------------- End of Newsletter ---------------------->
-
-<!-----------------------Footer --------------------------------->
-<footer id="footer">
-    <div class="footer-details">
-        <div class="foot-logo py-5">
-            <img src="./assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
-        </div>
-        <div class="footer-content">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Navigation</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="about.html">About</a>
-                                </li>
-                                <li>
-                                    <a href="shop.html">Shop</a>
-                                </li>
-                                <li>
-                                    <a href="#">Categories</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Navigation</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="about.html">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="shop.html">Shop</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Categories</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="#">Pendemt Set</a>
-                                </li>
-                                <li>
-                                    <a href="#">Chain</a>
-                                </li>
-                                <li>
-                                    <a href="#">Stud</a>
-                                </li>
-                                <li>
-                                    <a href="#">Earrings</a>
-                                </li>
-                                <li>
-                                    <a href="#">Bracelet</a>
-                                </li>
-                                <li>
-                                    <a href="#">Necklace</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Account</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="#">My Account</a>
-                                </li>
-                                <li>
-                                    <a href="#">Account Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#">Payments</a>
-                                </li>
-                                <li>
-                                    <a href="#">Subscription</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dashboard</a>
-                                </li>
-                            </ul>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Categories</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">Pendemt Set</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Chain</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Stud</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Earrings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Bracelet</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Necklace</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Legal</h4>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Account</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Account Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Payments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Subscription</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Dashboard</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="terms.html">Terms & Conditions</a>
-                                </li>
-                                <li>
-                                    <a href="privacy.html">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Shipping Policy</a>
-                                </li>
-                                <li>
-                                    <a href="">Payment Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Refund Policy</a>
-                                </li>
-                            </ul>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Legal</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">Terms & Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Shipping Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Payment Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Refund Policy</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="copyrights mt-4">
-            <div class="row pt-4">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div class="copy">
-                        <p>©<span id="demo"></span> by milira, All rights reserved</p>
+            <div class="copyrights mt-4">
+                <div class="row pt-4">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="copy">
+                            <p>©<span id="demo"></span> by milira, All rights reserved</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div class="social">
-                        <p>
-                            <span>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-youtube"></i></a>
-                            </span>
-                        </p>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="social">
+                            <p>
+                                <span>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-youtube"></i></a>
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
-
+    </footer>
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-            centeredSlides: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    </script>
-    <script>
-        var swiper = new Swiper(".catSlider", {
-            centeredSlides: false,
-            slidesPerView: 5,
-            spaceBetween:10,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            breakpoints: {
-                320: {
-                    slidesPerView: 1,
-                },
-                550: {
-                    slidesPerView: 2,
-                },
-                992: {
-                    slidesPerView: 3,
-                },
-                1200: {
-                    slidesPerView: 4,
-                },
-                1399: {
-                    slidesPerView: 5,
-                },
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.4.1/jquery-migrate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.featureSlider').slick({});
-        });
-    </script>
-    <script>
-        $('.featureSlider').slick({
-            dots: true,
-            infinite: false,
-            autoplay: false,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1199,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: true
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    </script>
-    <script>
-        $('.testimonial-card').slick({
-            dots: false,
-            infinite: false,
-            autoplay: true,
-            speed: 300,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            responsive: [
-                {
-                    breakpoint: 1199,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: false
-                    }
-                },
-                {
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        infinite: true,
-                        dots: false
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
-        });
-    </script>
-      
+
 </body>
 
 </html>
