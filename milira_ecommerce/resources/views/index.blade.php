@@ -74,11 +74,11 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="../assets/images/logos/Milira-Logo.png" width="20%" alt="logo">
+                            <img src="./assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
                         </a>
                     </div>
                     <div class="header-cart-items">
-                    <div class="header-search">
+                        <div class="header-search">
                             <input type="search" name="search" class="input-search" placeholder="Search Here">
                             <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
                         </div>
@@ -258,34 +258,18 @@
                             </div>
                         </div>
                         <div class="header-user">
-    @guest
-        <span>
-            <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
-        </span>
-    @endguest
-
-    @auth
-        <div class="dropdown">
-            <span style="display: flex; align-items: center;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current" style="fill: black; margin-right: 5px;">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
-                </svg>
-                <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
-            </span>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
-                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-            </ul>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-    @endauth
-</div>
-
-
-
+                            <a href="user-profile.html">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                                        class="fill-current">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path
+                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
+                                        </path>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,7 +288,7 @@
                     </span>
                 </button>
                 <a href="index.html" class="mobile-header-logo text-center">
-                    <img src="../assets/images/logos/milira-logo.svg" width="50%" alt="logo">
+                    <img src="./assets/images/logos/milira-logo.svg" width="50%" alt="logo">
                 </a>
                 <a href="cart.html" class="header-cart cart-item">
                     <span>
@@ -398,7 +382,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/dresses.webp"
+                                                <img src="./assets/images/homepage-one/category-img/dresses.webp"
                                                     alt="dress">
                                             </span>
                                             <span class="dropdown-text">
@@ -424,7 +408,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/bags.webp"
+                                                <img src="./assets/images/homepage-one/category-img/bags.webp"
                                                     alt="Bags">
                                             </span>
                                             <span class="dropdown-text">
@@ -450,7 +434,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/sweaters.webp"
+                                                <img src="./assets/images/homepage-one/category-img/sweaters.webp"
                                                     alt="sweaters">
                                             </span>
                                             <span class="dropdown-text">
@@ -476,7 +460,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/shoes.webp"
+                                                <img src="./assets/images/homepage-one/category-img/shoes.webp"
                                                     alt="sweaters">
                                             </span>
                                             <span class="dropdown-text">
@@ -502,7 +486,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/gift.webp"
+                                                <img src="./assets/images/homepage-one/category-img/gift.webp"
                                                     alt="gift">
                                             </span>
                                             <span class="dropdown-text">
@@ -528,7 +512,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/Necklace.webp"
+                                                <img src="./assets/images/homepage-one/category-img/Necklace.webp"
                                                     alt="Necklace">
                                             </span>
                                             <span class="dropdown-text">
@@ -554,7 +538,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/watch.webp"
+                                                <img src="./assets/images/homepage-one/category-img/watch.webp"
                                                     alt="watch">
                                             </span>
                                             <span class="dropdown-text">
@@ -580,7 +564,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/ring.webp"
+                                                <img src="./assets/images/homepage-one/category-img/ring.webp"
                                                     alt="ring">
                                             </span>
                                             <span class="dropdown-text">
@@ -606,7 +590,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/cap.webp" alt="cap">
+                                                <img src="./assets/images/homepage-one/category-img/cap.webp" alt="cap">
                                             </span>
                                             <span class="dropdown-text">
                                                 Cap
@@ -631,7 +615,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/glass.webp"
+                                                <img src="./assets/images/homepage-one/category-img/glass.webp"
                                                     alt="glass">
                                             </span>
                                             <span class="dropdown-text">
@@ -657,7 +641,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/baby.webp"
+                                                <img src="./assets/images/homepage-one/category-img/baby.webp"
                                                     alt="baby">
                                             </span>
                                             <span class="dropdown-text">
@@ -711,6 +695,7 @@
                                     <span class="list-text">Shop</span>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="about.html">
                                     <span class="list-text">About</span>
@@ -742,6 +727,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mobile-search d-flex px-3 py-3 d-block d-xl-none d-lg-none">
+            <input type="search" class="mob-search" class="input-search" name="mobileSearch" id="mobileSearch" placeholder="Search Here">
+            <button type="submit" class="mob-submit"><i class="bi bi-search"></i></button>
         </div>
     </header>
     <!--------------- header-section-end --------------->
