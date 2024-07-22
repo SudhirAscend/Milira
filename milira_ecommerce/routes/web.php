@@ -35,5 +35,6 @@ Route::get('/verify-otp', function () {
 
 Route::get('/login', function () {
     return view('login');
-})->name('login'); // Add this route if it doesn't exist
-
+})->name('login');
+Route::post('/login', [AuthController::class, 'sendOtp']);
+Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp']);

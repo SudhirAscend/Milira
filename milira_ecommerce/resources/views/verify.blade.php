@@ -15,17 +15,10 @@
                     <h5 class="comment-title">Verify OTP</h5>
                     <form id="verifyForm" action="/verify-otp" method="POST">
                         @csrf
-                        <input type="hidden" name="full_name" value="{{ session('full_name') }}">
-                        <input type="hidden" name="email" value="{{ session('email') }}">
-                        <input type="hidden" name="password" value="{{ session('password') }}">
-                        <input type="hidden" name="phone_number" value="{{ session('phone_number') }}">
-                        <input type="hidden" name="dob" value="{{ session('dob') }}">
-                        <input type="hidden" name="gender" value="{{ session('gender') }}">
-                        <input type="hidden" name="address" value="{{ session('address') }}">
-                        <input type="hidden" name="city" value="{{ session('city') }}">
-                        <input type="hidden" name="state" value="{{ session('state') }}">
-                        <input type="hidden" name="pin_code" value="{{ session('pin_code') }}">
-                        <input type="hidden" name="country" value="{{ session('country') }}">
+                        <div class="review-form-name">
+                            <label for="email" class="form-label">Email*</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="user@gmail.com" required>
+                        </div>
                         <div class="review-form-name">
                             <label for="otp" class="form-label">OTP*</label>
                             <input type="text" id="otp" name="otp" class="form-control" placeholder="Enter OTP" required>
