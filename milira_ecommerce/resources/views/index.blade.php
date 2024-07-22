@@ -998,43 +998,44 @@
 <!--End of Custom jewellery -->
 
 <!-- Featured Products -->
-
+<!-- Featured Products -->
 <div class="container feature">
-        <div class="main-title">
-            <h1>Featured Products</h1>
-        </div>
-        <div class="sub-para py-4">
-            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-        </div>
-        <div class="featureSlider">
-            @foreach ($featuredProducts as $product)
-                <div class="feature-img">
-                    <div class="card mx-3">
-                        <div class="card-body">
-                            @if($product->images && count($product->images) > 0)
-                                <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" loading="lazy">
-                            @else
-                                <img src="path/to/default-product-image.png" alt="{{ $product->title }}" loading="lazy">
-                            @endif
-                            <div class="container">
-                                <div class="f-title">
-                                    <h6>{{ $product->title }}</h6>
-                                </div>
-                                <div class="f-price">
-                                    <h6>₹{{ $product->price }}</h6>
-                                </div>
-                                <div class="f-button">
-                                    <button>Add to Cart <i class="bi bi-cart-check-fill"></i></button>
-                                </div>
+    <div class="main-title">
+        <h1>Featured Products</h1>
+    </div>
+    <div class="sub-para py-4">
+        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+    </div>
+    <div class="featureSlider">
+        @foreach ($featuredProducts as $product)
+            <div class="feature-img">
+                <div class="card mx-3">
+                    <div class="card-body">
+                        @if($product->images && count($product->images) > 0)
+                            <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" loading="lazy">
+                        @else
+                            <img src="path/to/default-product-image.png" alt="{{ $product->title }}" loading="lazy">
+                        @endif
+                        <div class="container">
+                            <div class="f-title">
+                                <h6>{{ $product->title }}</h6>
+                            </div>
+                            <div class="f-price">
+                                <h6>₹{{ $product->price }}</h6>
+                            </div>
+                            <div class="f-button">
+                                <button>Add to Cart <i class="bi bi-cart-check-fill"></i></button>
                             </div>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </div>
-
+</div>
 <!-- End of Featured Products -->
+
+
  <div class="container testimonial">
     <div class="main-title">
         <h1>Testimonial</h1>

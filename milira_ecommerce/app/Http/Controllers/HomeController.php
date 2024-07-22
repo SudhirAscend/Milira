@@ -14,15 +14,15 @@ class HomeController extends Controller
         $categories = ProductCategory::all();
         $products = Product::all();
         $featuredProducts = Product::where('collection', 'women')
-        ->orWhere('collection', 'Women')
-        ->get();
+            ->orWhere('collection', 'Women')
+            ->latest()
+            ->take(3)
+            ->get();
 
         // Pass data to the view
         return view('index', compact('categories', 'products', 'featuredProducts'));
     }
 
-    
-    
     public function root(Request $request)
     {
         if (view()->exists($request->path())) {
