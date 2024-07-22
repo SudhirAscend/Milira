@@ -41,3 +41,5 @@ Route::get('/login', function () {
 Route::post('/login', [AuthController::class, 'sendOtp']);
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// web.php (routes file)
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');

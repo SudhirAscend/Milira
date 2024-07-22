@@ -19,7 +19,27 @@
         .loginclr{
          color:#808080 !important;
         }
-        
+        .header-user .dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.header-user .dropdown span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-user .dropdown p {
+    margin: 0;
+    padding-left: 5px;
+}
+
+.header-user .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
         </style>
         
 
@@ -286,9 +306,10 @@
                     <path fill="none" d="M0 0h24v24H0z"></path>
                     <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
                 </svg>
-                <p style="margin: 0;width: 100px;;">Hi, {{ Auth::user()->full_name }}</p>
+                <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
             </span>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                 <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
             </ul>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
