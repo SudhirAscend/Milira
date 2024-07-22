@@ -240,18 +240,31 @@
                             </div>
                         </div>
                         <div class="header-user">
-                            <a href="user-profile.html">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                        class="fill-current">
-                                        <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                        </path>
-                                    </svg>
-                                </span>
-                            </a>
-                        </div>
+    @guest
+        <span>
+            <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
+        </span>
+    @endguest
+
+    @auth
+        <div class="dropdown">
+            <span style="display: flex; align-items: center;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current" style="fill: black; margin-right: 5px;">
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                    <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
+                </svg>
+                <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
+            </span>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+            </ul>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </div>
+    @endauth
+</div>
                     </div>
                 </div>
             </div>
