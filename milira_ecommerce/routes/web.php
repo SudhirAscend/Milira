@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -22,9 +23,17 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::post('/shop/filter', [ShopController::class, 'filterByCategory'])->name('shop.filterByCategory');
-
-// Define route for showing a product by title
 Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('shop.product');
 
-// Define root route to serve the index view
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+Route::get('/signup', [HomeController::class, 'showSignupForm']);
+Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+Route::get('/verify-otp', function () {
+    return view('verify');
+})->name('verify-otp');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login'); // Add this route if it doesn't exist
+

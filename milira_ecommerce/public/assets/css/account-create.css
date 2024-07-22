@@ -4,12 +4,13 @@
 /* Colors */
 
 :root {
-    --primary-color: #000000;
-    --secondary-color: #7B7B7B;
+  --primary-color: #000000;
+  --secondary-color: #7B7B7B;
 
-    --default-text: "inter";
+  --default-text: "inter";
 
 }
+
 /* google-font */
 * {
   margin: 0;
@@ -54,10 +55,12 @@ a {
   text-decoration: none;
   font-family: "Inter", sans-serif;
 }
+
 a .list-text {
   color: #FFFFFF;
   font-size: 1.6rem;
 }
+
 a span {
   font-size: 14px;
   font-weight: 500;
@@ -87,6 +90,7 @@ img {
 .container {
   max-width: 132.1rem;
 }
+
 @media (max-width:767px) {
   .container {
     padding: 0 2rem;
@@ -123,6 +127,7 @@ button {
   overflow: hidden;
   z-index: 1;
 }
+
 .shop-btn::after {
   content: " ";
   width: 0%;
@@ -134,10 +139,12 @@ button {
   top: 0;
   z-index: -3;
 }
+
 .shop-btn svg {
   fill: #FFFFFF;
   transition: all 0.5s;
 }
+
 .shop-btn span {
   margin-left: 8px;
   font-size: 1.5rem;
@@ -145,21 +152,25 @@ button {
   z-index: 1;
   transition: all 0.4s ease-in-out;
 }
+
 .shop-btn:hover {
   color: var(--primary-color);
   background-color: transparent;
   border: 1px solid var(--primary-color);
 }
+
 .shop-btn:hover::after {
   right: auto;
   left: 0;
   width: 100%;
 }
+
 .shop-btn:hover svg {
   fill: currentColor;
   fill: #FFFFFF;
   transform: translate(5px);
 }
+
 .shop-btn:hover span {
   color: #FFFFFF;
 }
@@ -167,6 +178,7 @@ button {
 .product {
   padding: 6rem 0;
 }
+
 @media (max-width:1023px) {
   .product {
     padding: 3rem 0;
@@ -180,6 +192,7 @@ button {
   justify-content: flex-start;
   gap: 1rem;
 }
+
 .price .new-price {
   color: var(--primary-color);
 }
@@ -214,6 +227,7 @@ button {
   justify-content: center;
   gap: 0px;
 }
+
 .modal-main .wrapper-close-btn {
   position: absolute;
   right: 3rem;
@@ -222,11 +236,13 @@ button {
   height: 3rem;
   cursor: pointer;
 }
+
 .modal-main .wrapper-close-btn svg {
   fill: currentColor;
   fill: red;
   stroke: red;
 }
+
 .modal-main .wrapper-main .divider {
   height: 3rem;
   width: 1px;
@@ -240,6 +256,7 @@ button {
 hr {
   color: #f3b4ea;
 }
+
 .product-description .tab-item .product-feature ul li::marker {
   font-size: 1.5rem;
 }
@@ -248,29 +265,35 @@ hr {
   margin-top: 10rem;
   margin-bottom: 10rem;
 }
+
 .review-form .comment-title {
   margin-bottom: 3rem;
 }
+
 .review-form .form-control,
 .review-form .form-select {
   border: 1px solid rgba(174, 28, 154, 0.08);
   box-shadow: none;
   color: #232532;
 }
+
 .review-form label {
   font-family: "Jost", sans-serif;
   font-size: 1.5rem;
   color: #797979;
   margin-bottom: 0.5rem;
 }
+
 .review-form input {
   height: 5rem;
 }
+
 .review-form input,
 .review-form select {
   padding: 1rem 2rem;
   font-size: 1.4rem;
 }
+
 @media (max-width:767px) {
   .review-form .comment-title {
     font-size: 2rem;
@@ -283,15 +306,16 @@ hr {
   fill: currentColor;
   fill: #797979;
 }
+
 .close-btn svg:hover {
   fill: red;
 }
 
 .login {
-    background-image: url(../assets/images/hero/Hero2.jpg);
-    object-fit: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  background-image: url(../assets/images/hero/Hero2.jpg);
+  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .login-section {
@@ -301,6 +325,7 @@ hr {
   justify-content: center;
   gap: 0px;
 }
+
 .login-section .review-form {
   width: 51.2rem;
   height: 63rem;
@@ -308,26 +333,32 @@ hr {
   padding: 4rem;
   border-radius: 0.5rem;
 }
+
 .login-section .review-form .comment-title {
   text-align: center;
   margin-top: 5rem;
 }
+
 .login-section .review-form .shop-btn {
   width: 100%;
   margin: 0 0 2rem 0;
 }
+
 .login-section .review-form .shop-btn::after {
   display: none;
 }
+
 .login-section .review-form .shop-account {
   color: #797979;
   font-size: 1.3rem;
 }
+
 .login-section .review-form .shop-account a {
   font-size: 1.3rem;
   margin-left: 0.5rem;
   font-weight: 400;
 }
+
 @media (max-width:767px) {
   .login-section .review-form {
     padding: 2rem;
@@ -350,18 +381,21 @@ hr {
   justify-content: flex-start;
   gap: 1rem;
 }
+
 .checkbox-item p {
   margin-bottom: 0;
   color: #797979;
 }
+
 .checkbox-item p .inner-text {
   color: #232532;
 }
 
 .account-section .review-form {
   width: 57.2rem;
-  height: 79.1rem;
+  height: auto;
 }
+
 .account-section .account-inner-form {
   display: flex;
   flex-direction: row;
@@ -370,27 +404,34 @@ hr {
   gap: 2rem;
   margin-bottom: 2rem;
 }
+
 .account-section .account-inner-form .review-form-name {
   width: 100%;
 }
+
 .account-section .city-inner-form {
   margin-bottom: 0;
 }
+
 .account-section .address-form {
   margin: 2rem 0;
 }
+
 @media (max-width:767px) {
   .account-section .review-form {
     padding: 2rem;
     height: auto;
   }
+
   .account-section .account-inner-form {
     flex-direction: column;
   }
+
   .account-section .checkbox-item {
     margin: 1rem;
   }
 }
+
 .privacy-section .policy .policy-features ul li::marker {
   font-size: 2rem;
 }
@@ -401,4 +442,6 @@ hr {
   height: 1px;
   border-radius: 50%;
   margin: 2rem 0;
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
