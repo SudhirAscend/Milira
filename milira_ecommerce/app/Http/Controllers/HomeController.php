@@ -34,4 +34,9 @@ class HomeController extends Controller
             return abort(404);
         }
     }
+
+    public function profile()
+{
+    return view('profile'); // Assuming you have a profile.blade.php view file
+}
 }
