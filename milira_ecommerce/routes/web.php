@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -38,3 +40,4 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/login', [AuthController::class, 'sendOtp']);
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
