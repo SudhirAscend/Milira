@@ -1059,10 +1059,10 @@ button.cat-dropdown::before {
 }
 
 .show {
-  display: block
+  display: block;
 }
 
-;
+
 
 /* End of header */
 

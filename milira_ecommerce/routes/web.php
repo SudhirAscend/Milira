@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CartController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -57,3 +58,4 @@ Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkou
 
 // Route to handle storing a new address
 Route::post('/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
