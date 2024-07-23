@@ -818,7 +818,7 @@
                             </div>
                             <div class="price">
     <span class="price-cut">₹{{ $product->price + 200 }}</span>
-    <span class="new-price">₹{{ $product->price }}</span>
+    <span class="new-price" id="productPrice">₹{{ $product->price }}</span>
 </div>
                             <p class="content-paragraph">{{ $product->small_description }}</p>
                             <hr>
@@ -827,34 +827,27 @@
                                 <span class="inner-text">{{ $product->stocks }}</span>
                             </div>
                             <div class="product-quantity">
-                                <div class="quantity-wrapper">
-                                    <div class="quantity">
-                                        <span class="minus">-</span>
-                                        <span class="number">1</span>
-                                        <span class="plus">+</span>
-                                    </div>
-                                    <div class="wishlist">
-                                        <span>
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z"
-                                                    stroke="#797979" stroke-width="2" stroke-miterlimit="10"
-                                                    stroke-linecap="square" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div style="
-    display: flex;
-    gap: 10px;
-">
+    <div class="quantity-wrapper">
+        <div class="quantity">
+            <span class="minus">-</span>
+            <span class="number">1</span>
+            <span class="plus">+</span>
+        </div>
+        <div class="wishlist">
+            <span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17 1C14.9 1 13.1 2.1 12 3.7C10.9 2.1 9.1 1 7 1C3.7 1 1 3.7 1 7C1 13 12 22 12 22C12 22 23 13 23 7C23 3.7 20.3 1 17 1Z" stroke="#797979" stroke-width="2" stroke-miterlimit="10" stroke-linecap="square" />
+                </svg>
+            </span>
+        </div>
+    </div>
+</div>
+<div style="display: flex; gap: 10px;">
     @auth
         <form id="buyNowForm" action="{{ route('checkout') }}" method="POST">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="quantity" id="productQuantity" value="1">
             <button type="submit" class="product-buy-btn">Buy Now <i class="bi bi-bag-fill px-3 fs-3"></i></button>
         </form>
     @else
@@ -1434,7 +1427,35 @@
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let quantity = 1;
+        const quantityElement = document.querySelector('.quantity .number');
+        const minusButton = document.querySelector('.quantity .minus');
+        const plusButton = document.querySelector('.quantity .plus');
+        const productQuantityInput = document.getElementById('productQuantity');
+        const productPriceElement = document.querySelector('.price');
+        const productPrice = {{ $product->price }};
+        
+        minusButton.addEventListener('click', function () {
+            if (quantity > 1) {
+                quantity--;
+                updateQuantity();
+            }
+        });
 
+        plusButton.addEventListener('click', function () {
+            quantity++;
+            updateQuantity();
+        });
+
+        function updateQuantity() {
+            quantityElement.textContent = quantity;
+            productQuantityInput.value = quantity;
+            productPriceElement.textContent = '$' + (quantity * productPrice).toFixed(2);
+        }
+    });
+</script>
 </body>
 
 </html>

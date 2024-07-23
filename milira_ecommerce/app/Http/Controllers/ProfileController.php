@@ -80,4 +80,6 @@ class ProfileController extends Controller
 
         return back()->withErrors(['otp' => 'Invalid OTP.']);
     }
+
+    
 }
