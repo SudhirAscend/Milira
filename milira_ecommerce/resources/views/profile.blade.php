@@ -1743,14 +1743,14 @@
                                                     <p>Email:</p>
                                                     <p>Phone:</p>
                                                     <p>City:</p>
-                                                    <p>Zip:</p>
+                                                    <p>Pincode:</p>
                                                 </div>
                                                 <div class="info-details">
-                                                    <p>Sajjad</p>
-                                                    <p>demoemail@gmail.com</p>
-                                                    <p>023 434 54354</p>
-                                                    <p>Haydarabad, Rord 34</p>
-                                                    <p>3454</p>
+                                                <p>{{ $user->full_name }}</p>
+                                                        <p>{{ $user->email }}</p>
+                                                        <p>{{ $user->phone_number }}</p>
+                                                        <p>{{ $user->city }}</p>
+                                                        <p>{{ $user->pin_code }}</p>
                                                 </div>
                                             </div>
                                         </div>
