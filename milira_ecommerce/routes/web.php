@@ -48,3 +48,5 @@ Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::post('/profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verifyOtp');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');

@@ -30,6 +30,32 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+        .loginclr{
+         color:#808080 !important;
+        }
+        .header-user .dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.header-user .dropdown span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-user .dropdown p {
+    margin: 0;
+    padding-left: 5px;
+}
+
+.header-user .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+        </style>
 </head>
 
 <body>
@@ -59,48 +85,13 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="../assets/images/logos/Milira-Logo.png" width="20%" alt="logo">
+                            <img src="../assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
                         </a>
                     </div>
                     <div class="header-cart-items">
                         <div class="header-search">
-                            <button class="header-search-btn" onclick="modalAction('.search')">
-                                <span>
-                                    <svg width="22" height="22" viewBox="0 0 22 22" fill="#fff"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M13.9708 16.4151C12.5227 17.4021 10.9758 17.9723 9.27353 18.0062C5.58462 18.0802 2.75802 16.483 1.05056 13.1945C-1.76315 7.77253 1.33485 1.37571 7.25086 0.167548C12.2281 -0.848249 17.2053 2.87895 17.7198 7.98579C17.9182 9.95558 17.5566 11.7939 16.5852 13.5061C16.4512 13.742 16.483 13.8725 16.6651 14.0553C18.2412 15.6386 19.8112 17.2272 21.3735 18.8244C22.1826 19.6513 22.2058 20.7559 21.456 21.4932C20.7697 22.1678 19.7047 22.1747 18.9764 21.4793C18.3623 20.8917 17.7774 20.2737 17.1796 19.6688C16.118 18.5929 15.0564 17.5153 13.9708 16.4151ZM2.89545 9.0364C2.91692 12.4172 5.59664 15.1164 8.91967 15.1042C12.2384 15.092 14.9138 12.3493 14.8889 8.98505C14.864 5.63213 12.1826 2.92508 8.89047 2.92857C5.58204 2.93118 2.87397 5.68958 2.89545 9.0364Z"
-                                            fill="#fff" />
-                                    </svg>
-                                </span>
-                            </button>
-                            <div class="modal-wrapper search">
-                                <div onclick="modalAction('.search')" class="anywhere-away"></div>
-
-                                <!-- change this -->
-                                <div class="modal-main">
-                                    <div class="wrapper-close-btn" onclick="modalAction('.search')">
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="red" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M6 18L18 6M6 6l12 12"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div class="wrapper-main">
-                                        <div class="search-section">
-                                            <input type="text" placeholder="Search Products.........">
-                                            <div class="divider"></div>
-                                            <button type="button">All Categories</button>
-                                            <a href="#" class="shop-btn">Search</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- change this -->
-
-                            </div>
+                            <input type="search" name="search" class="input-search" placeholder="Search Here">
+                            <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
                         </div>
                         <div class="header-compaire">
                             <a href="compaire.html" class="cart-item">
@@ -278,17 +269,30 @@
                             </div>
                         </div>
                         <div class="header-user">
-                            <a href="user-profile.html">
-                                <span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
-                                        class="fill-current">
+                        @guest
+                            <span>
+                                <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
+                            </span>
+                        @endguest
+
+                        @auth
+                            <div class="dropdown">
+                                <span style="display: flex; align-items: center;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current" style="fill: black; margin-right: 5px;">
                                         <path fill="none" d="M0 0h24v24H0z"></path>
-                                        <path
-                                            d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z">
-                                        </path>
+                                        <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
                                     </svg>
+                                    <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
                                 </span>
-                            </a>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        @endauth
                         </div>
                     </div>
                 </div>
@@ -308,7 +312,7 @@
                     </span>
                 </button>
                 <a href="index.html" class="mobile-header-logo text-center">
-                    <img src="../assets/images/logos/milira-logo.svg" width="50%" alt="logo">
+                    <img src="./assets/images/logos/milira-logo.svg" width="50%" alt="logo">
                 </a>
                 <a href="cart.html" class="header-cart cart-item">
                     <span>
@@ -402,7 +406,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/dresses.webp"
+                                                <img src="./assets/images/homepage-one/category-img/dresses.webp"
                                                     alt="dress">
                                             </span>
                                             <span class="dropdown-text">
@@ -428,7 +432,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/bags.webp"
+                                                <img src="./assets/images/homepage-one/category-img/bags.webp"
                                                     alt="Bags">
                                             </span>
                                             <span class="dropdown-text">
@@ -454,7 +458,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/sweaters.webp"
+                                                <img src="./assets/images/homepage-one/category-img/sweaters.webp"
                                                     alt="sweaters">
                                             </span>
                                             <span class="dropdown-text">
@@ -480,7 +484,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/shoes.webp"
+                                                <img src="./assets/images/homepage-one/category-img/shoes.webp"
                                                     alt="sweaters">
                                             </span>
                                             <span class="dropdown-text">
@@ -506,7 +510,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/gift.webp"
+                                                <img src="./assets/images/homepage-one/category-img/gift.webp"
                                                     alt="gift">
                                             </span>
                                             <span class="dropdown-text">
@@ -532,7 +536,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/Necklace.webp"
+                                                <img src="./assets/images/homepage-one/category-img/Necklace.webp"
                                                     alt="Necklace">
                                             </span>
                                             <span class="dropdown-text">
@@ -558,7 +562,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/watch.webp"
+                                                <img src="./assets/images/homepage-one/category-img/watch.webp"
                                                     alt="watch">
                                             </span>
                                             <span class="dropdown-text">
@@ -584,7 +588,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/ring.webp"
+                                                <img src="./assets/images/homepage-one/category-img/ring.webp"
                                                     alt="ring">
                                             </span>
                                             <span class="dropdown-text">
@@ -610,7 +614,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/cap.webp" alt="cap">
+                                                <img src="./assets/images/homepage-one/category-img/cap.webp" alt="cap">
                                             </span>
                                             <span class="dropdown-text">
                                                 Cap
@@ -635,7 +639,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/glass.webp"
+                                                <img src="./assets/images/homepage-one/category-img/glass.webp"
                                                     alt="glass">
                                             </span>
                                             <span class="dropdown-text">
@@ -661,7 +665,7 @@
                                     <div class="dropdown-item d-flex justify-content-between align-items-center">
                                         <div class="dropdown-list-item d-flex">
                                             <span class="dropdown-img">
-                                                <img src="../assets/images/homepage-one/category-img/baby.webp"
+                                                <img src="./assets/images/homepage-one/category-img/baby.webp"
                                                     alt="baby">
                                             </span>
                                             <span class="dropdown-text">
@@ -715,6 +719,7 @@
                                     <span class="list-text">Shop</span>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="about.html">
                                     <span class="list-text">About</span>
@@ -746,6 +751,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mobile-search d-flex px-3 py-3 d-block d-xl-none d-lg-none">
+            <input type="search" class="mob-search" class="input-search" name="mobileSearch" id="mobileSearch" placeholder="Search Here">
+            <button type="submit" class="mob-submit"><i class="bi bi-search"></i></button>
         </div>
     </header>
     <!--------------- header-section-end --------------->

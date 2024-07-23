@@ -244,31 +244,31 @@
                             </div>
                         </div>
                         <div class="header-user">
-    @guest
-        <span>
-            <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
-        </span>
-    @endguest
+                        @guest
+                            <span>
+                                <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
+                            </span>
+                        @endguest
 
-    @auth
-        <div class="dropdown">
-            <span style="display: flex; align-items: center;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current" style="fill: black; margin-right: 5px;">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
-                </svg>
-                <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
-            </span>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
-                <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
-            </ul>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-    @endauth
-</div>
+                        @auth
+                            <div class="dropdown">
+                                <span style="display: flex; align-items: center;" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="fill-current" style="fill: black; margin-right: 5px;">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <path d="M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2zm-8-9a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"></path>
+                                    </svg>
+                                    <p style="margin: 0; width: 100px;">Hi, {{ Auth::user()->full_name }}</p>
+                                </span>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        @endauth
+                        </div>
                     </div>
                 </div>
             </div>
@@ -833,101 +833,81 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="checkout-wrapper">
-                            <a href="#" class="shop-btn">Enter Coupon Code</a>
-                            <div class="account-section billing-section">
-                                <h5 class="wrapper-heading">Order Summary</h5>
-                                <div class="order-summery">
-                                    <div class="subtotal product-total">
-                                        <h5 class="wrapper-heading">PRODUCT</h5>
-                                        <h5 class="wrapper-heading">TOTAL</h5>
-                                    </div>
-                                    <hr>
-                                    <div class="subtotal product-total">
-                                        <ul class="product-list">
-                                            <li>
-                                                <div class="product-info">
-                                                    <h5 class="wrapper-heading">Apple Watch X1</h5>
-                                                    <p class="paragraph">64GB, Black, 44mm, Chain Belt</p>
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">$38</h5>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="product-info">
-                                                    <h5 class="wrapper-heading">Beats Wireless x1</h5>
-                                                    <p class="paragraph">64GB, Black, 44mm, Chain Belt</p>
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">$48</h5>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="product-info">
-                                                    <h5 class="wrapper-heading">Samsung Galaxy S10 x2</h5>
-                                                    <p class="paragraph">12GB RAM, 512GB, Dark Blue</p>
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">$279</h5>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <hr>
-                                    <div class="subtotal product-total">
-                                        <h5 class="wrapper-heading">SUBTOTAL</h5>
-                                        <h5 class="wrapper-heading">$365</h5>
-                                    </div>
-                                    <div class="subtotal product-total">
-                                        <ul class="product-list">
-                                            <li>
-                                                <div class="product-info">
-                                                    <p class="paragraph">SHIPPING</p>
-                                                    <h5 class="wrapper-heading">Free Shipping</h5>
-
-                                                </div>
-                                                <div class="price">
-                                                    <h5 class="wrapper-heading">+$0</h5>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <hr>
-                                    <div class="subtotal total">
-                                        <h5 class="wrapper-heading">TOTAL</h5>
-                                        <h5 class="wrapper-heading price">$365</h5>
-                                    </div>
-                                    <div class="subtotal payment-type">
-                                        <div class="checkbox-item">
-                                            <input type="radio" id="bank" name="bank">
-                                            <div class="bank">
-                                                <h5 class="wrapper-heading">Direct Bank Transfer</h5>
-                                                <p class="paragraph">Make your payment directly into our bank account.
-                                                    Please use
-                                                    <span class="inner-text">
-                                                        your Order ID as the payment reference.
-                                                    </span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="radio" id="cash" name="bank">
-                                            <div class="cash">
-                                                <h5 class="wrapper-heading">Cash on Delivery</h5>
-                                            </div>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="radio" id="credit" name="bank">
-                                            <div class="credit">
-                                                <h5 class="wrapper-heading">Credit/Debit Cards or Paypal</h5>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="shop-btn">Place Order Now</a>
+                    <div class="checkout-wrapper">
+        <a href="#" class="shop-btn">Enter Coupon Code</a>
+        <div class="account-section billing-section">
+            <h5 class="wrapper-heading">Order Summary</h5>
+            <div class="order-summery">
+                <div class="subtotal product-total">
+                    <h5 class="wrapper-heading">PRODUCT</h5>
+                    <h5 class="wrapper-heading">TOTAL</h5>
+                </div>
+                <hr>
+                <div class="subtotal product-total">
+                    <ul class="product-list">
+                        @foreach ($cartItems as $item)
+                            <li>
+                                <div class="product-info">
+                                    <h5 class="wrapper-heading">{{ $item->product->title }}</h5>
+                                    <p class="paragraph">{{ $item->product->small_description }}, {{ $item->product->size }}</p>
                                 </div>
+                                <div class="price">
+                                    <h5 class="wrapper-heading">${{ $item->product->price }}</h5>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <hr>
+                <div class="subtotal product-total">
+                    <h5 class="wrapper-heading">SUBTOTAL</h5>
+                    <h5 class="wrapper-heading">${{ $cartItems->sum('product.price') }}</h5>
+                </div>
+                <div class="subtotal product-total">
+                    <ul class="product-list">
+                        <li>
+                            <div class="product-info">
+                                <p class="paragraph">SHIPPING</p>
+                                <h5 class="wrapper-heading">Free Shipping</h5>
                             </div>
+                            <div class="price">
+                                <h5 class="wrapper-heading">+$0</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="subtotal total">
+                    <h5 class="wrapper-heading">TOTAL</h5>
+                    <h5 class="wrapper-heading price">${{ $cartItems->sum('product.price') }}</h5>
+                </div>
+                <div class="subtotal payment-type">
+                    <div class="checkbox-item">
+                        <input type="radio" id="bank" name="bank">
+                        <div class="bank">
+                            <h5 class="wrapper-heading">Direct Bank Transfer</h5>
+                            <p class="paragraph">Make your payment directly into our bank account. Please use
+                                <span class="inner-text">your Order ID as the payment reference.</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="cash" name="bank">
+                        <div class="cash">
+                            <h5 class="wrapper-heading">Cash on Delivery</h5>
+                        </div>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="radio" id="credit" name="bank">
+                        <div class="credit">
+                            <h5 class="wrapper-heading">Credit/Debit Cards or Paypal</h5>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="shop-btn">Place Order Now</a>
+            </div>
+        </div>
+    </div>
                         </div>
                     </div>
                 </div>
