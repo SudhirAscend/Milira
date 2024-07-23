@@ -50,3 +50,10 @@ Route::post('/profile/verify-otp', [ProfileController::class, 'verifyOtp'])->nam
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('auth');
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show');
+
+// Route to handle adding a product to the cart and redirecting to the checkout page
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
+// Route to handle storing a new address
+Route::post('/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
