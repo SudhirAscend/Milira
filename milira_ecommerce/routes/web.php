@@ -56,6 +56,6 @@ Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('
 // Route to handle adding a product to the cart and redirecting to the checkout page
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
-// Route to handle storing a new address
-Route::post('/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');

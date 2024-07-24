@@ -854,9 +854,9 @@
                             <div class="col-9">
                                                         <a href="{{ url('shop/' . Str::slug($product->title, '-')) }}"> <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button></a>
                                                     </div>
-                                <div class="col-3">
-                                    <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
-                                </div>
+                                                    <div class="col-3">
+                                                    <button class="cart-btn" data-id="{{ $product->id }}"><i class="bi bi-cart-check-fill"></i></button>
+</div>
                             </div>
                         </div>
                     </div>
@@ -1120,7 +1120,29 @@ $(document).ready(function() {
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.cart-btn').on('click', function() {
+        var productId = $(this).data('id');
+        
+        $.ajax({
+            url: '{{ route("cart.add") }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                product_id: productId
+            },
+            success: function(response) {
+                alert(response.message);
+            },
+            error: function(response) {
+                alert('Failed to add product to cart.');
+            }
+        });
+    });
+});
+</script>
 
 </body>
 
