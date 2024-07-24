@@ -59,3 +59,4 @@ Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkou
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
 Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear')->middleware('auth');
+Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');

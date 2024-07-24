@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/CartController.php
 
 namespace App\Http\Controllers;
 
@@ -33,7 +32,7 @@ class CartController extends Controller
             $cart[$product->id]['quantity']++;
         } else {
             $cart[$product->id] = [
-                "name" => $product->title, // Updated to use 'title'
+                "name" => $product->title,
                 "quantity" => 1,
                 "price" => $product->price,
             ];
@@ -45,7 +44,16 @@ class CartController extends Controller
         // Save to database
         $this->saveCartToDatabase($cart);
 
-        return response()->json(['message' => 'Product added to cart successfully!'], 200);
+        // Calculate the subtotal
+        $subtotal = array_reduce($cart, function($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cart' => $cart,
+            'subtotal' => $subtotal
+        ], 200);
     }
 
     public function index()
