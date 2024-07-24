@@ -5,11 +5,6 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\CartController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -60,3 +55,7 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index')->middl
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
 Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear')->middleware('auth');
 Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
+
+//Payment Gateway
+Route::get('/payment', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
