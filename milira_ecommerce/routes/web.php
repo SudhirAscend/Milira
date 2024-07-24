@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -28,3 +29,7 @@ Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('shop.pro
 
 // Define root route to serve the index view
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+//Payment Gateway
+Route::get('/payment', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
