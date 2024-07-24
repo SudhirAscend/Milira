@@ -1137,7 +1137,12 @@ $(document).ready(function() {
                 alert(response.message);
             },
             error: function(response) {
-                alert('Failed to add product to cart.');
+                if(response.status === 401) {
+                    alert('Please login to add products to cart');
+                    window.location.href = '{{ route("login") }}';
+                } else {
+                    alert('Failed to add product to cart.');
+                }
             }
         });
     });

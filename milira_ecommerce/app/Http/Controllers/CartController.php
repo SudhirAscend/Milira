@@ -6,11 +6,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\CartDetail;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('addToCart', 'index', 'clearCart');
+    }
+
     public function addToCart(Request $request)
     {
+        if (!Auth::check()) {
+            return response()->json(['message' => 'Please login to add products to cart'], 401);
+        }
+
         $product = Product::find($request->product_id);
         
         if (!$product) {
