@@ -22,7 +22,10 @@ class HomeController extends Controller
         // Pass data to the view
         return view('index', compact('categories', 'products', 'featuredProducts'));
     }
-
+    public function showSignupForm()
+    {
+        return view('signup');
+    }
     public function root(Request $request)
     {
         if (view()->exists($request->path())) {
@@ -31,4 +34,9 @@ class HomeController extends Controller
             return abort(404);
         }
     }
+
+    public function profile()
+{
+    return view('profile'); // Assuming you have a profile.blade.php view file
+}
 }

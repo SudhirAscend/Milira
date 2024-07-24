@@ -8,58 +8,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="{{ asset('assets/images/logos/favicon.png') }}">
-
-<!--title  -->
-<title>Milira-Shop</title>
-
-<!--------------- swiper-css ---------------->
-<link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
-
-<!--------------- bootstrap-css ---------------->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!---------------------- Range Slider ------------------->
-<link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
-
-<!---------------------- Scroll ------------------->
-<link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
-
-<!--------------- additional-css ---------------->
-<link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+    <link rel="icon" href="./assets/images/homepage-one/icon.png">
+    <title>Milira - Cart</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-        .loginclr{
-         color:#808080 !important;
-        }
-        .header-user .dropdown {
-    display: flex;
-    align-items: center;
-}
 
-.header-user .dropdown span {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.header-user .dropdown p {
-    margin: 0;
-    padding-left: 5px;
-}
-
-.header-user .dropdown-menu {
-    left: auto;
-    right: 0;
-}
-
-        </style>
 </head>
 
 <body>
-
 
     <!--------------- header-section --------------->
     <header id="header" class="header">
@@ -85,7 +46,7 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="../assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
+                            <img src="./assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
                         </a>
                     </div>
                     <div class="header-cart-items">
@@ -759,136 +720,115 @@
     </header>
     <!--------------- header-section-end --------------->
 
-    <!--------------- products-sidebar-section--------------->
-    <section class="product product-sidebar footer-padding">
+    <!--------------- blog-tittle-section---------------->
+    <section class="blog about-blog">
         <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-3">
-                    <div class="sidebar" data-aos="fade-right">
-                        <div class="sidebar-section">
-                        <div class="sidebar-wrapper">
-    <h5 class="wrapper-heading">Product Categories</h5>
-    <div class="sidebar-item">
-        <ul class="sidebar-list">
-            @foreach ($categories as $category)
-                <li>
-                    <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
-                    <label for="{{ $category->category }}">{{ $category->category }}</label>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-</div>
-                            <hr>
-                            <div class="sidebar-wrapper sidebar-range">
-                                <h5 class="wrapper-heading">Price Range</h5>
-                                <div class="price-slide range-slider">
-                                    <div class="price">
-                                        <div class="range-slider style-1">
-                                            <div id="slider-tooltips" class="slider-range mb-3"></div>
-                                            <span class="example-val" id="slider-margin-value-min"></span>
-                                            <span>-</span>
-                                            <span class="example-val" id="slider-margin-value-max"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <hr>
-                            <div class="sidebar-wrapper">
-    <h5 class="wrapper-heading">Color</h5>
-    <div class="sidebar-item">
-        <ul class="sidebar-list">
-            @foreach($colors as $color)
-                <li>
-                    <input type="checkbox" id="{{ $color }}" name="color" value="{{ $color }}">
-                    <label for="{{ $color }}">{{ ucfirst($color) }}</label>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-</div>
-                            <hr>
-                        </div>
-                        <div class="sidebar-shop-section">
-                            <span class="wrapper-subtitle">TRENDY</span>
-                            <h5 class="wrapper-heading">Best wireless Shoes</h5>
-                            <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="product-sidebar-section" data-aos="fade-up">
-                    <div class="row g-5" id="product-list">
-        @foreach ($products as $product)
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="{{ $product->category }}">
-            <div class="card product">
-                <div class="card-body">
-                    <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
-                    <div class="card-hover">
-                        <div class="hover-icons text-center">
-                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                            <a href="#"><i class="bi bi-heart"></i></a>
-                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="pdt-title">
-                            <h6>{{ $product->title }}</h6>
-                        </div>
-                        <div class="pdt-price">
-                            <h6>{{ $product->price }}</h6>
-                        </div>
-                        <div class="pdt-rating mt-4">
-                            <p>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <span>({{ $product->reviews }} reviews)</span>
-                            </p>
-                        </div>
-                        <div class="pdt-shop text-center mt-5">
-                            <div class="row">
-                            <div class="col-9">
-                                                        <a href="{{ url('shop/' . Str::slug($product->title, '-')) }}"> <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button></a>
-                                                    </div>
-                                                    <div class="col-3">
-                                                    <button class="cart-btn" data-id="{{ $product->id }}"><i class="bi bi-cart-check-fill"></i></button>
-</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="blog-bradcrum">
+                <span><a href="index.html">Home</a></span>
+                <span class="devider">/</span>
+                <span><a href="#">Cart</a></span>
             </div>
-        </div>
-        @endforeach
-    </div>
-</div>
-
-
-                            
-                            <div class="col-lg-12 mt-5">
-                                <div class="product-deal-section" data-aos="fade-up">
-                                    <h5 class="wrapper-heading">Get the best deal for Headphones</h5>
-                                    <a href="seller-sidebar.html" class="shop-btn">Shop Now</a>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+            <div class="blog-heading about-heading">
+                <h1 class="heading">Cart</h1>
             </div>
         </div>
     </section>
-    <!--------------- products-sidebar-section-end--------------->
+    <!--------------- blog-tittle-section-end---------------->
+
+    <!--------------- cart-section---------------->
+    <section class="product-cart product footer-padding">
+        <div class="container">
+            <div class="cart-section">
+        
+<table>
+    <tbody>
+        <tr class="table-row table-top-row">
+            <td class="table-wrapper wrapper-product">
+                <h5 class="table-heading">PRODUCT</h5>
+            </td>
+            <td class="table-wrapper">
+                <div class="table-wrapper-center">
+                    <h5 class="table-heading">PRICE</h5>
+                </div>
+            </td>
+            <td class="table-wrapper">
+                <div class="table-wrapper-center">
+                    <h5 class="table-heading">QUANTITY</h5>
+                </div>
+            </td>
+            <td class="table-wrapper wrapper-total">
+                <div class="table-wrapper-center">
+                    <h5 class="table-heading">TOTAL</h5>
+                </div>
+            </td>
+            <td class="table-wrapper">
+                <div class="table-wrapper-center">
+                    <h5 class="table-heading">ACTION</h5>
+                </div>
+            </td>
+        </tr>
+        @if(session('cart'))
+            @foreach(session('cart') as $id => $details)
+                <tr class="table-row ticket-row">
+                    <td class="table-wrapper wrapper-product">
+                        <div class="wrapper">
+                            <div class="wrapper-content">
+                                <h5 class="heading">{{ $details['name'] }}</h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="table-wrapper">
+                        <div class="table-wrapper-center">
+                            <h5 class="heading">{{ $details['price'] }}</h5>
+                        </div>
+                    </td>
+                    <td class="table-wrapper">
+                        <div class="table-wrapper-center">
+                            <div class="quantity">
+                                <span class="minus">-</span>
+                                <span class="number">{{ $details['quantity'] }}</span>
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="table-wrapper wrapper-total">
+                        <div class="table-wrapper-center">
+                            <h5 class="heading">{{ $details['price'] * $details['quantity'] }}</h5>
+                        </div>
+                    </td>
+                    <td class="table-wrapper">
+                        <div class="table-wrapper-center">
+                            <span>
+                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"
+                                        fill="#AAAAAA"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        @endif
+    </tbody>
+</table>
+</div>
+<div class="wishlist-btn cart-btn">
+    <a href="{{ route('cart.clear') }}" class="clean-btn">Clear Cart</a>
+    <a href="#" class="shop-btn update-btn">Update Cart</a>
+    <a href="checkout.html" class="shop-btn">Proceed to Checkout</a>
+</div>
+
+        </div>
+    </section>
+    <!--------------- cart-section-end---------------->
 
     <!--------------- footer-section--------------->
     <footer id="footer">
         <div class="footer-details">
             <div class="foot-logo py-5">
-                <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
+                <img src="./assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
             </div>
             <div class="footer-content">
                 <div class="row">
@@ -1034,120 +974,17 @@
 
 
 
+
+
+
     <!--------------- jQuery ---------------->
-    <script>
-$(document).ready(function() {
-    function filterProducts() {
-        let selectedCategories = [];
-        $('.category-checkbox:checked').each(function() {
-            selectedCategories.push($(this).val());
-        });
-
-        let selectedColors = [];
-        $('input[name="color"]:checked').each(function() {
-            selectedColors.push($(this).val());
-        });
-
-        $.ajax({
-            url: '{{ route('shop.filterByCategory') }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                categories: selectedCategories,
-                colors: selectedColors
-            },
-            success: function(response) {
-                $('#product-list').empty();
-                response.forEach(product => {
-                    $('#product-list').append(`
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
-                            <div class="card product">
-                                <div class="card-body">
-                                    <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
-                                    <div class="card-hover">
-                                        <div class="hover-icons text-center">
-                                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                            <a href="#"><i class="bi bi-heart"></i></a>
-                                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="container">
-                                        <div class="pdt-title">
-                                            <h6>${product.title}</h6>
-                                        </div>
-                                        <div class="pdt-price">
-                                            <h6>${product.price}</h6>
-                                        </div>
-                                        <div class="pdt-rating mt-4">
-                                            <p>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i>
-                                                <span>({{ $product->reviews }} reviews)</span>
-                                            </p>
-                                        </div>
-                                        <div class="pdt-shop text-center mt-5">
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                </div>
-                                                <div class="col-3">
-                                                    <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                });
-            }
-        });
-    }
-
-    $('.category-checkbox').change(filterProducts);
-    $('input[name="color"]').change(filterProducts);
-});
-
-</script>
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.cart-btn').on('click', function() {
-        var productId = $(this).data('id');
-        
-        $.ajax({
-            url: '{{ route("cart.add") }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                product_id: productId
-            },
-            success: function(response) {
-                alert(response.message);
-            },
-            error: function(response) {
-                if(response.status === 401) {
-                    alert('Please login to add products to cart');
-                    window.location.href = '{{ route("login") }}';
-                } else {
-                    alert('Failed to add product to cart.');
-                }
-            }
-        });
-    });
-});
-</script>
 
 </body>
 

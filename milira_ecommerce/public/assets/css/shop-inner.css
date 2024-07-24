@@ -1800,7 +1800,7 @@ hr {
 
 .account-section .review-form {
   width: 57.2rem;
-  height: 79.1rem;
+  height: auto;
 }
 
 .account-section .address-form {
