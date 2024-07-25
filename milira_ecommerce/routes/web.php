@@ -5,6 +5,11 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -37,25 +42,20 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/login', [AuthController::class, 'sendOtp']);
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-// web.php (routes file)
-Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 Route::post('/profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verifyOtp');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('auth');
-Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');
-Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show');
 
-// Route to handle adding a product to the cart and redirecting to the checkout page
-Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');
+Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
 Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear')->middleware('auth');
-Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
 
-//Payment Gateway
+// Payment Gateway
 Route::get('/payment', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
 Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
