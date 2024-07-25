@@ -15,47 +15,51 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {
-        if (!Auth::check()) {
-            return response()->json(['message' => 'Please login to add products to cart'], 401);
-        }
-    
-        $product = Product::find($request->product_id);
-        
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
-    
-        $cart = session()->get('cart', []);
-    
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity']++;
-        } else {
-            $cart[$product->id] = [
-                "name" => $product->title,
-                "quantity" => 1,
-                "price" => $product->price,
-            ];
-        }
-    
-        // Save to session
-        session()->put('cart', $cart);
-    
-        // Save to database
-        $this->saveCartToDatabase($cart);
-    
-        // Calculate the subtotal
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
-    
-        return response()->json([
-            'message' => 'Product added to cart successfully!',
-            'cart' => $cart,
-            'subtotal' => $subtotal,
-            'cartCount' => count($cart)
-        ], 200);
+{
+    if (!Auth::check()) {
+        return response()->json(['message' => 'Please login to add products to cart'], 401);
     }
+
+    $product = Product::find($request->product_id);
+    
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$product->id])) {
+        $cart[$product->id]['quantity']++;
+    } else {
+        $cart[$product->id] = [
+            "name" => $product->title,
+            "quantity" => 1,
+            "price" => $product->price,
+            "image" => asset('storage/uploads/' . $product->title . '_0.jpg') // Ensure correct image path
+        ];
+    }
+
+    // Save to session
+    session()->put('cart', $cart);
+
+    // Save to database
+    $this->saveCartToDatabase($cart);
+
+    // Calculate the subtotal
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    return response()->json([
+        'message' => 'Product added to cart successfully!',
+        'cart' => $cart,
+        'subtotal' => $subtotal,
+        'cartCount' => count($cart)
+    ], 200);
+}
+
+
+
     public function index()
     {
         $cart = session()->get('cart');

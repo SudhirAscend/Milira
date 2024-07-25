@@ -201,7 +201,7 @@
                 <div class="wrapper">
                     <div class="wrapper-item">
                         <div class="wrapper-img">
-                            <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
+                        <img src="{{ asset('storage/uploads/' . $product['name'] . '_0.jpg') }}" alt="img">
                         </div>
                         <div class="wrapper-content">
                             <h5 class="wrapper-title">{{ $product['name'] }}</h5>
@@ -1123,7 +1123,7 @@ $(document).ready(function() {
                 <div class="wrapper">
                     <div class="wrapper-item">
                         <div class="wrapper-img">
-                            <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
+                            <img src="${product.image}" alt="img">
                         </div>
                         <div class="wrapper-content">
                             <h5 class="wrapper-title">${product.name}</h5>
@@ -1137,16 +1137,13 @@ $(document).ready(function() {
                             </svg>
                         </span>
                     </div>
-                    </div>
+                </div>
                 `;
             });
             $('#cart-wrapper-item').html(cartItemsHtml);
         }
     });
 </script>
-
-   
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.wishlist-button').forEach(button => {
