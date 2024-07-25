@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,8 +21,17 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+            $user_id = Auth::id();
+            $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+            $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+        
+            $cart = session()->get('cart', []);
+            $cartCount = count($cart);
+            $subtotal = array_reduce($cart, function($sum, $item) {
+                return $sum + ($item['price'] * $item['quantity']);
+            }, 0);
         // Pass data to the view
-        return view('index', compact('categories', 'products', 'featuredProducts'));
+        return view('index', compact('categories', 'products', 'featuredProducts','wishlistCount', 'cartCount', 'subtotal'));
     }
     public function showSignupForm()
     {
