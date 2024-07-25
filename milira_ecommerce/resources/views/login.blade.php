@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
 </head>
 <body>
-    <section class="login account footer-padding">
+    <section class="login">
         <div class="container">
             <div class="login-section account-section">
                 <div class="review-form">
@@ -44,7 +44,6 @@
             </div>
         </div>
     </section>
-
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
