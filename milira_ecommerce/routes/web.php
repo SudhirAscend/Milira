@@ -10,6 +10,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\WishlistController;
+
+
+
 
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -59,3 +63,13 @@ Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clea
 // Payment Gateway
 Route::get('/payment', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
 Route::post('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+
+
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add')->middleware('auth');
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index')->middleware('auth');
+
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/add-to-wishlist', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
+Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
+
+Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -13,7 +15,11 @@ class ShopController extends Controller
         $colors = Product::select('color')->distinct()->pluck('color');
         $products = Product::all();
 
-        return view('shop', compact('categories', 'colors', 'products'));
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        return view('shop', compact('categories', 'colors', 'products', 'wishlistProductIds', 'wishlistCount'));
     }
 
     public function filterByCategory(Request $request)
