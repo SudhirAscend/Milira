@@ -77,3 +77,9 @@ Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWish
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
 
+Route::middleware('auth')->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+});
