@@ -1593,7 +1593,7 @@ p.client-name {
 /* Newsletter */
 
 .newsletter {
-  background-image: url(../assets/images/home/news-banner.png);
+  background-image: url(../../assets/images/home/news-banner.png);
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
