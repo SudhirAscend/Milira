@@ -55,10 +55,12 @@ Route::post('/profile/verify-otp', [ProfileController::class, 'verifyOtp'])->nam
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout')->middleware('auth');
 Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('store.address');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index')->middleware('auth');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add')->middleware('auth');
 Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear')->middleware('auth');
+Route::get('/checkout/show', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.show')->middleware('auth');
 
 // Payment Gateway
 Route::get('/payment', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
@@ -74,4 +76,4 @@ Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWish
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+

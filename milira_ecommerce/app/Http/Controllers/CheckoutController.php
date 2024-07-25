@@ -1,8 +1,5 @@
 <?php
 
-
-// app/Http/Controllers/CheckoutController.php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,6 +10,11 @@ use App\Models\Address;
 
 class CheckoutController extends Controller
 {
+    public function index()
+    {
+        return redirect()->route('checkout.show');
+    }
+
     public function checkout(Request $request)
     {
         $product_id = $request->input('product_id');
@@ -80,5 +82,3 @@ class CheckoutController extends Controller
         return redirect()->back()->with('success', 'Address saved successfully.');
     }
 }
-
-
