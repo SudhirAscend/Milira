@@ -167,70 +167,70 @@
                             </a>
                         </div>
                         <div class="header-favourite">
-    <a href="wishlist.html" class="cart-item">
-    <span class="wishlist-count"  id="wishlist-item-count">{{ $wishlistCount }}</span>
-        <span>
-        
-            <svg width="35" height="27" viewBox="0 0 35 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.4047 8.54989C11.6187 8.30247 11.8069 8.07783 12.0027 7.86001C15.0697 4.45162 20.3879 5.51717 22.1581 9.60443C23.4189 12.5161 22.8485 15.213 20.9965 17.6962C19.6524 19.498 17.95 20.9437 16.2722 22.4108C15.0307 23.4964 13.774 24.5642 12.5246 25.6408C11.6986 26.3523 11.1108 26.3607 10.2924 25.6397C8.05177 23.6657 5.79225 21.7125 3.59029 19.6964C2.35865 18.5686 1.33266 17.2553 0.638823 15.7086C-0.626904 12.8872 0.0324709 9.41204 2.22306 7.41034C4.84011 5.01855 8.81757 5.36918 11.1059 8.19281C11.1968 8.30475 11.2907 8.41404 11.4047 8.54989Z" fill="#6E6D79" />
-                
-        
-                <path d="M26.846 13.1392C26.1632 13.1392 25.5534 13.0215 25.0164 12.7862C24.4828 12.5509 24.0602 12.2244 23.7487 11.8068C23.4404 11.3859 23.2747 10.8987 23.2515 10.3452H24.8126C24.8325 10.6468 24.9336 10.9086 25.1159 11.1307C25.3015 11.3494 25.5434 11.5185 25.8417 11.6378C26.14 11.7571 26.4715 11.8168 26.836 11.8168C27.2371 11.8168 27.5917 11.7472 27.9 11.608C28.2115 11.4687 28.4551 11.2749 28.6308 11.0263C28.8065 10.7744 28.8943 10.4844 28.8943 10.1562C28.8943 9.81487 28.8065 9.51491 28.6308 9.25639C28.4584 8.99455 28.2049 8.78906 27.8701 8.63991C27.5387 8.49077 27.1377 8.41619 26.667 8.41619H25.8069V7.16335H" fill="#F9FFFB" />
-            </svg>
-            </span>
-        <span class="cart-text">Wishlist</span>
-    </a>
-</div>
-<div class="header-cart">
-    <a href="{{ route('cart.index') }}" class="cart-item">
-    <span class="cartcount" id="cart-item-count">{{ $cartCount }}</span>
-        <span>
-            <svg width="35" height="28" viewBox="0 0 35 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16.4444 21.897C14.8444 21.897 13.2441 21.8999 11.6441 21.8963C9.79233 21.892 8.65086 21.0273 8.12595 19.2489C7.04294 15.5794 5.95756 11.9107 4.87166 8.24203C4.6362 7.4468 4.37783 7.25412 3.55241 7.25175C2.7786 7.24964 2.00507 7.25754 1.23127 7.24911C0.512247 7.24148 0.0157813 6.79109 0.000242059 6.15064C-0.0160873 5.48281 0.475637 5.01689 1.23232 5.00873C2.11121 4.99952 2.99089 4.99214 3.86951 5.01268C5.36154 5.04769 6.52014 5.93215 6.96393 7.35415C7.14171 7.92378 7.34055 8.49026 7.46382 9.07201C7.54968 9.47713 7.77881 9.49661 8.10566 9.49582C11.8335 9.48897 15.5611 9.49134 19.2889 9.49134C21.0825 9.49134 22.8761 9.48108 24.6694 9.49503C26.0848 9.50608 27.0907 10.4906 27.0156 11.7778C27.0006 12.0363 26.925 12.2958 26.8473 12.5457C26.1317 14.8411 25.4124 17.1351 24.6879 19.4279C24.1851 21.0186 23.0223 21.8826 21.3504 21.8944C19.7151 21.906 18.0797 21.897 16.4444 21.897Z" fill="#6E6D79"/>
-                <path d="M12.4012 27.5161C11.167 27.5227 10.1488 26.524 10.1345 25.2928C10.1201 24.0419 11.1528 22.9982 12.3967 23.0066C13.6209 23.0151 14.6422 24.0404 14.6436 25.2623C14.6451 26.4855 13.6261 27.5095 12.4012 27.5161Z" fill="#6E6D79"/>
-                <path d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z" fill="#6E6D79"/>
-                                     
-            </svg>
-            
-        </span>
-        <span class="cart-text">Cart</span>
-    </a>
-    <div class="cart-submenu">
-        <div class="cart-wrapper-item" id="cart-wrapper-item">
-            @foreach (session('cart', []) as $product)
-                <div class="wrapper">
-                    <div class="wrapper-item">
-                        <div class="wrapper-img">
-                            <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
-                        </div>
-                        <div class="wrapper-content">
-                            <h5 class="wrapper-title">{{ $product['name'] }}</h5>
-                            <div class="price">
-                                <p class="new-price">₹{{ $product['price'] }}</p>
+                        <a href="wishlist.html" class="cart-item">
+                        <span class="wishlist-count"  id="wishlist-item-count">{{ $wishlistCount }}</span>
+                            <span>
+                            
+                                <svg width="35" height="27" viewBox="0 0 35 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.4047 8.54989C11.6187 8.30247 11.8069 8.07783 12.0027 7.86001C15.0697 4.45162 20.3879 5.51717 22.1581 9.60443C23.4189 12.5161 22.8485 15.213 20.9965 17.6962C19.6524 19.498 17.95 20.9437 16.2722 22.4108C15.0307 23.4964 13.774 24.5642 12.5246 25.6408C11.6986 26.3523 11.1108 26.3607 10.2924 25.6397C8.05177 23.6657 5.79225 21.7125 3.59029 19.6964C2.35865 18.5686 1.33266 17.2553 0.638823 15.7086C-0.626904 12.8872 0.0324709 9.41204 2.22306 7.41034C4.84011 5.01855 8.81757 5.36918 11.1059 8.19281C11.1968 8.30475 11.2907 8.41404 11.4047 8.54989Z" fill="#6E6D79" />
+                                    
+                            
+                                    <path d="M26.846 13.1392C26.1632 13.1392 25.5534 13.0215 25.0164 12.7862C24.4828 12.5509 24.0602 12.2244 23.7487 11.8068C23.4404 11.3859 23.2747 10.8987 23.2515 10.3452H24.8126C24.8325 10.6468 24.9336 10.9086 25.1159 11.1307C25.3015 11.3494 25.5434 11.5185 25.8417 11.6378C26.14 11.7571 26.4715 11.8168 26.836 11.8168C27.2371 11.8168 27.5917 11.7472 27.9 11.608C28.2115 11.4687 28.4551 11.2749 28.6308 11.0263C28.8065 10.7744 28.8943 10.4844 28.8943 10.1562C28.8943 9.81487 28.8065 9.51491 28.6308 9.25639C28.4584 8.99455 28.2049 8.78906 27.8701 8.63991C27.5387 8.49077 27.1377 8.41619 26.667 8.41619H25.8069V7.16335H" fill="#F9FFFB" />
+                                </svg>
+                                </span>
+                            <span class="cart-text">Wishlist</span>
+                        </a>
+                    </div>
+                    <div class="header-cart">
+                        <a href="{{ route('cart.index') }}" class="cart-item">
+                        <span class="cartcount" id="cart-item-count">{{ $cartCount }}</span>
+                            <span>
+                                <svg width="35" height="28" viewBox="0 0 35 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.4444 21.897C14.8444 21.897 13.2441 21.8999 11.6441 21.8963C9.79233 21.892 8.65086 21.0273 8.12595 19.2489C7.04294 15.5794 5.95756 11.9107 4.87166 8.24203C4.6362 7.4468 4.37783 7.25412 3.55241 7.25175C2.7786 7.24964 2.00507 7.25754 1.23127 7.24911C0.512247 7.24148 0.0157813 6.79109 0.000242059 6.15064C-0.0160873 5.48281 0.475637 5.01689 1.23232 5.00873C2.11121 4.99952 2.99089 4.99214 3.86951 5.01268C5.36154 5.04769 6.52014 5.93215 6.96393 7.35415C7.14171 7.92378 7.34055 8.49026 7.46382 9.07201C7.54968 9.47713 7.77881 9.49661 8.10566 9.49582C11.8335 9.48897 15.5611 9.49134 19.2889 9.49134C21.0825 9.49134 22.8761 9.48108 24.6694 9.49503C26.0848 9.50608 27.0907 10.4906 27.0156 11.7778C27.0006 12.0363 26.925 12.2958 26.8473 12.5457C26.1317 14.8411 25.4124 17.1351 24.6879 19.4279C24.1851 21.0186 23.0223 21.8826 21.3504 21.8944C19.7151 21.906 18.0797 21.897 16.4444 21.897Z" fill="#6E6D79"/>
+                                    <path d="M12.4012 27.5161C11.167 27.5227 10.1488 26.524 10.1345 25.2928C10.1201 24.0419 11.1528 22.9982 12.3967 23.0066C13.6209 23.0151 14.6422 24.0404 14.6436 25.2623C14.6451 26.4855 13.6261 27.5095 12.4012 27.5161Z" fill="#6E6D79"/>
+                                    <path d="M22.509 25.2393C22.5193 26.4842 21.5393 27.4971 20.3064 27.5155C19.048 27.5342 18.0272 26.525 18.0277 25.2622C18.0279 24.0208 19.0214 23.0161 20.2572 23.0074C21.4877 22.9984 22.4988 24.0006 22.509 25.2393Z" fill="#6E6D79"/>
+                                                        
+                                </svg>
+                                
+                            </span>
+                            <span class="cart-text">Cart</span>
+                        </a>
+                        <div class="cart-submenu">
+                            <div class="cart-wrapper-item" id="cart-wrapper-item">
+                                @foreach (session('cart', []) as $product)
+                                    <div class="wrapper">
+                                        <div class="wrapper-item">
+                                            <div class="wrapper-img">
+                                            <img src="{{ asset('storage/uploads/' . $product['name'] . '_0.jpg') }}" alt="img">
+                                            </div>
+                                            <div class="wrapper-content">
+                                                <h5 class="wrapper-title">{{ $product['name'] }}</h5>
+                                                <div class="price">
+                                                    <p class="new-price">₹{{ $product['price'] }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="close-btn">
+                                            <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="cart-wrapper-section">
+                                <div class="wrapper-line"></div>
+                                <div class="wrapper-subtotal">
+                                    <h5 class="wrapper-title">Subtotal</h5>
+                                    <h5 class="wrapper-title" id="cart-subtotal">₹{{ $subtotal }}</h5>
+                                </div>
+                                <div class="cart-btn">
+                                    <a href="{{ route('cart.index') }}" class="shop-btn view-btn">View Cart</a>
+                                    <a href="{{ route('checkout.index') }}" class="shop-btn checkout-btn">Checkout Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <span class="close-btn">
-                        <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
-                        </svg>
-                    </span>
-                </div>
-            @endforeach
-        </div>
-        <div class="cart-wrapper-section">
-            <div class="wrapper-line"></div>
-            <div class="wrapper-subtotal">
-                <h5 class="wrapper-title">Subtotal</h5>
-                <h5 class="wrapper-title" id="cart-subtotal">₹{{ $subtotal }}</h5>
-            </div>
-            <div class="cart-btn">
-                <a href="{{ route('cart.index') }}" class="shop-btn view-btn">View Cart</a>
-                <a href="{{ route('checkout.index') }}" class="shop-btn checkout-btn">Checkout Now</a>
-            </div>
-        </div>
-    </div>
-</div>
+                        </div>
 
                         <div class="header-user">
                         @guest
@@ -1123,7 +1123,7 @@ $(document).ready(function() {
                 <div class="wrapper">
                     <div class="wrapper-item">
                         <div class="wrapper-img">
-                            <img src="assets/images/homepage-one/product-img/product-img-1.webp" alt="img">
+                            <img src="${product.image}" alt="img">
                         </div>
                         <div class="wrapper-content">
                             <h5 class="wrapper-title">${product.name}</h5>
@@ -1137,16 +1137,13 @@ $(document).ready(function() {
                             </svg>
                         </span>
                     </div>
-                    </div>
+                </div>
                 `;
             });
             $('#cart-wrapper-item').html(cartItemsHtml);
         }
     });
 </script>
-
-   
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.wishlist-button').forEach(button => {
