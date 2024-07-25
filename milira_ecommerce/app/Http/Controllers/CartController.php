@@ -19,15 +19,15 @@ class CartController extends Controller
         if (!Auth::check()) {
             return response()->json(['message' => 'Please login to add products to cart'], 401);
         }
-
+    
         $product = Product::find($request->product_id);
         
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
-
+    
         $cart = session()->get('cart', []);
-
+    
         if (isset($cart[$product->id])) {
             $cart[$product->id]['quantity']++;
         } else {
@@ -37,25 +37,25 @@ class CartController extends Controller
                 "price" => $product->price,
             ];
         }
-
+    
         // Save to session
         session()->put('cart', $cart);
-
+    
         // Save to database
         $this->saveCartToDatabase($cart);
-
+    
         // Calculate the subtotal
         $subtotal = array_reduce($cart, function($sum, $item) {
             return $sum + ($item['price'] * $item['quantity']);
         }, 0);
-
+    
         return response()->json([
             'message' => 'Product added to cart successfully!',
             'cart' => $cart,
-            'subtotal' => $subtotal
+            'subtotal' => $subtotal,
+            'cartCount' => count($cart)
         ], 200);
     }
-
     public function index()
     {
         $cart = session()->get('cart');

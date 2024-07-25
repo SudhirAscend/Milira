@@ -10,17 +10,24 @@ use Illuminate\Support\Facades\Auth;
 class ShopController extends Controller
 {
     public function index()
-    {
-        $categories = Product::select('category')->distinct()->get();
-        $colors = Product::select('color')->distinct()->pluck('color');
-        $products = Product::all();
+{
+    $categories = Product::select('category')->distinct()->get();
+    $colors = Product::select('color')->distinct()->pluck('color');
+    $products = Product::all();
 
-        $user_id = Auth::id();
-        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        return view('shop', compact('categories', 'colors', 'products', 'wishlistProductIds', 'wishlistCount'));
-    }
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    return view('shop', compact('categories', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal'));
+}
+
 
     public function filterByCategory(Request $request)
     {

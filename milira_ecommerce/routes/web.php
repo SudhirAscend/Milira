@@ -73,3 +73,5 @@ Route::post('/add-to-wishlist', [WishlistController::class, 'addToWishlist'])->n
 Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
