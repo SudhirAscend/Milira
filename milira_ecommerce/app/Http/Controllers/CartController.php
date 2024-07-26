@@ -11,7 +11,7 @@ class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('addToCart', 'index', 'clearCart');
+        $this->middleware('auth')->only('addToCart', 'index', 'clearCart', 'removeFromCart');
     }
 
     public function addToCart(Request $request)
@@ -60,12 +60,16 @@ class CartController extends Controller
 
 
 
-    public function index()
-    {
-        $cart = session()->get('cart');
-        return view('cart', compact('cart'));
-    }
+public function index()
+{
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
 
+    return view('cart', compact('cart', 'cartCount', 'subtotal'));
+}
     public function clearCart()
     {
         session()->forget('cart');
@@ -90,5 +94,38 @@ class CartController extends Controller
                 'price' => $details['price'],
             ]);
         }
+    }
+    public function removeFromCart(Request $request)
+    {
+        if (!Auth::check()) {
+            return response()->json(['message' => 'Please login to remove products from cart'], 401);
+        }
+
+        $productId = $request->product_id;
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]);
+
+            // Save to session
+            session()->put('cart', $cart);
+
+            // Remove from database
+            CartDetail::where('product_id', $productId)->delete();
+
+            // Calculate the subtotal
+            $subtotal = array_reduce($cart, function ($sum, $item) {
+                return $sum + ($item['price'] * $item['quantity']);
+            }, 0);
+
+            return response()->json([
+                'message' => 'Product removed from cart successfully!',
+                'cart' => $cart,
+                'subtotal' => $subtotal,
+                'cartCount' => count($cart)
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Product not found in cart'], 404);
     }
 }
