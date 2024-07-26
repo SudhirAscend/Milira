@@ -278,14 +278,23 @@ hr {
 }
 
 .review-form label {
-  font-family: "Jost", sans-serif;
-  font-size: 1.5rem;
-  color: #797979;
+  font-family: var(--default-text);
+  font-size: 1.7rem;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
+}
+
+.a-signup a {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .review-form input {
   height: 5rem;
+  font-family: var(--default-text);
+  font-size: 16px;
+  color: var(--secondary-color);
 }
 
 .review-form input,
@@ -359,6 +368,7 @@ hr {
   font-size: 1.3rem;
   margin-left: 0.5rem;
   font-weight: 400;
+  color: #000;
 }
 
 @media (max-width:767px) {
