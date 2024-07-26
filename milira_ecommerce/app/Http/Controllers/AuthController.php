@@ -153,4 +153,5 @@ class AuthController extends Controller
     {
         return view('forget-password');
     }
+   
 }

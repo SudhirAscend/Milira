@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <link rel="icon" href="{{asset('assets/images/logos/favicon.jpg')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
 </head>
@@ -683,16 +684,12 @@
         <div class="container">
             <div class="login-section account-section">
                 <div class="review-form">
-                    <h5 class="comment-title">Login</h5>
+                    <h5 class="comment-title">Forget Password</h5>
                     <form id="loginForm" action="/login" method="POST">
                         @csrf
                         <div class="review-form-name mt-5">
                             <label for="email" class="form-label">Email*</label>
                             <input type="email" id="email" name="email" class="form-control" placeholder="user@gmail.com" required>
-                        </div>
-                        <div class="review-form-name mt-5">
-                            <label for="password" class="form-label">Password*</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
                         </div>
                         <div class="login-btn text-center mt-5">
                             <button type="submit" class="shop-btn">Send OTP</button>
@@ -715,151 +712,7 @@
             </div>
         </div>
     </section>
-    <footer id="footer">
-    <div class="footer-details">
-        <div class="foot-logo py-5">
-            <img src="./assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
-        </div>
-        <div class="footer-content">
-            <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Navigation</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="about.html">About</a>
-                                </li>
-                                <li>
-                                    <a href="shop.html">Shop</a>
-                                </li>
-                                <li>
-                                    <a href="#">Categories</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Categories</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="#">Pendemt Set</a>
-                                </li>
-                                <li>
-                                    <a href="#">Chain</a>
-                                </li>
-                                <li>
-                                    <a href="#">Stud</a>
-                                </li>
-                                <li>
-                                    <a href="#">Earrings</a>
-                                </li>
-                                <li>
-                                    <a href="#">Bracelet</a>
-                                </li>
-                                <li>
-                                    <a href="#">Necklace</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Account</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="#">My Account</a>
-                                </li>
-                                <li>
-                                    <a href="#">Account Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#">Payments</a>
-                                </li>
-                                <li>
-                                    <a href="#">Subscription</a>
-                                </li>
-                                <li>
-                                    <a href="#">Dashboard</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                    <div class="foot-navigation">
-                        <div class="foot-title">
-                            <h4>Legal</h4>
-                        </div>
-                        <div class="foot-items">
-                            <ul>
-                                <li>
-                                    <a href="terms.html">Terms & Conditions</a>
-                                </li>
-                                <li>
-                                    <a href="privacy.html">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Shipping Policy</a>
-                                </li>
-                                <li>
-                                    <a href="">Payment Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#">Refund Policy</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyrights mt-4">
-            <div class="row pt-4">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div class="copy">
-                        <p>©<span id="demo"></span> by milira, All rights reserved</p>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div class="social">
-                        <p>
-                            <span>
-                                <a href=""><i class="bi bi-facebook"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-instagram"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-linkedin"></i></a>
-                            </span>
-                            <span>
-                                <a href=""><i class="bi bi-youtube"></i></a>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+    @include('footer')
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
