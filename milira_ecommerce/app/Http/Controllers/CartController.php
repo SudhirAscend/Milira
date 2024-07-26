@@ -95,37 +95,38 @@ public function index()
             ]);
         }
     }
-    public function removeFromCart(Request $request)
-    {
-        if (!Auth::check()) {
-            return response()->json(['message' => 'Please login to remove products from cart'], 401);
-        }
-
-        $productId = $request->product_id;
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            unset($cart[$productId]);
-
-            // Save to session
-            session()->put('cart', $cart);
-
-            // Remove from database
-            CartDetail::where('product_id', $productId)->delete();
-
-            // Calculate the subtotal
-            $subtotal = array_reduce($cart, function ($sum, $item) {
-                return $sum + ($item['price'] * $item['quantity']);
-            }, 0);
-
-            return response()->json([
-                'message' => 'Product removed from cart successfully!',
-                'cart' => $cart,
-                'subtotal' => $subtotal,
-                'cartCount' => count($cart)
-            ], 200);
-        }
-
-        return response()->json(['message' => 'Product not found in cart'], 404);
+    public function remove(Request $request)
+{
+    if (!Auth::check()) {
+        return response()->json(['message' => 'Please login to remove products from cart'], 401);
     }
+
+    $productId = $request->product_id;
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$productId])) {
+        unset($cart[$productId]);
+
+        // Save to session
+        session()->put('cart', $cart);
+
+        // Remove from database
+        CartDetail::where('product_id', $productId)->delete();
+
+        // Calculate the subtotal
+        $subtotal = array_reduce($cart, function ($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
+        return response()->json([
+            'message' => 'Product removed from cart successfully!',
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+            'cartCount' => count($cart)
+        ], 200);
+    }
+
+    return response()->json(['message' => 'Product not found in cart'], 404);
+}
+
 }

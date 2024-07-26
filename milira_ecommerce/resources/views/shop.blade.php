@@ -232,6 +232,7 @@
     </div>
 </div>
 
+
                         <div class="header-user">
                         @guest
                             <span>
@@ -1001,16 +1002,25 @@
 
 
     <!--------------- jQuery ---------------->
-    <script>
-$(document).ready(function() {
+    
+    <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
+    <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/js/shopus.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   $(document).ready(function () {
     function filterProducts() {
         let selectedCategories = [];
-        $('.category-checkbox:checked').each(function() {
+        $('.category-checkbox:checked').each(function () {
             selectedCategories.push($(this).val());
         });
 
         let selectedColors = [];
-        $('input[name="color"]:checked').each(function() {
+        $('input[name="color"]:checked').each(function () {
             selectedColors.push($(this).val());
         });
 
@@ -1022,7 +1032,7 @@ $(document).ready(function() {
                 categories: selectedCategories,
                 colors: selectedColors
             },
-            success: function(response) {
+            success: function (response) {
                 $('#product-list').empty();
                 response.forEach(product => {
                     $('#product-list').append(`
@@ -1033,7 +1043,9 @@ $(document).ready(function() {
                                     <div class="card-hover">
                                         <div class="hover-icons text-center">
                                             <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                            <a href="#"><i class="bi bi-heart"></i></a>
+                                            <button class="wishlist-button ${product.in_wishlist ? 'wishlisted' : ''}" data-product-id="${product.id}">
+                                                <i class="bi bi-heart${product.in_wishlist ? '-fill' : ''}"></i>
+                                            </button>
                                             <a href="#"><i class="bi bi-arrow-repeat"></i></a>
                                         </div>
                                     </div>
@@ -1051,7 +1063,7 @@ $(document).ready(function() {
                                                 <i class="bi bi-star-fill"></i>
                                                 <i class="bi bi-star-fill"></i>
                                                 <i class="bi bi-star-half"></i>
-                                                <span>({{ $product->reviews }} reviews)</span>
+                                                <span>(${product.reviews} reviews)</span>
                                             </p>
                                         </div>
                                         <div class="pdt-shop text-center mt-5">
@@ -1060,7 +1072,7 @@ $(document).ready(function() {
                                                     <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
                                                 </div>
                                                 <div class="col-3">
-                                                    <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                                    <button class="cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1070,28 +1082,16 @@ $(document).ready(function() {
                         </div>
                     `);
                 });
+
+                rebindEventHandlers();
             }
         });
     }
 
-    $('.category-checkbox').change(filterProducts);
-    $('input[name="color"]').change(filterProducts);
-});
-
-</script>
-    <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
-    <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
-    <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/shopus.js') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.cart-btn').on('click', function() {
+    function rebindEventHandlers() {
+        $('.cart-btn').off('click').on('click', function () {
             var productId = $(this).data('id');
-            
+
             $.ajax({
                 url: '{{ route("cart.add") }}',
                 method: 'POST',
@@ -1099,14 +1099,12 @@ $(document).ready(function() {
                     _token: '{{ csrf_token() }}',
                     product_id: productId
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response.message);
-                    $('#cart-item-count').text(response.cartCount);
-                    updateCartProducts(response.cart);
-                    $('#cart-subtotal').text('₹' + response.subtotal);
+                    updateCart(response.cartCount, response.cart, response.subtotal);
                 },
-                error: function(response) {
-                    if(response.status === 401) {
+                error: function (response) {
+                    if (response.status === 401) {
                         alert('Please login to add products to cart');
                         window.location.href = '{{ route("login") }}';
                     } else {
@@ -1116,36 +1114,37 @@ $(document).ready(function() {
             });
         });
 
-        function updateCartProducts(cart) {
-            var cartItemsHtml = '';
-            $.each(cart, function(productId, product) {
-                cartItemsHtml += `
-                <div class="wrapper">
-                    <div class="wrapper-item">
-                        <div class="wrapper-img">
-                            <img src="${product.image}" alt="img">
-                        </div>
-                        <div class="wrapper-content">
-                            <h5 class="wrapper-title">${product.name}</h5>
-                            <div class="price">
-                                <p class="new-price">₹${product.price * product.quantity}</p>
-                            </div>
-                        </div>
-                        <span class="close-btn" data-id="${productId}">
-                            <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
-                            </svg>
-                        </span>
-                    </div>
-                    </div>
-                `;
-            });
-            $('#cart-wrapper-item').html(cartItemsHtml);
-        }
+        $('.wishlist-button').off('click').on('click', function () {
+            const productId = $(this).data('product-id');
+            const isWishlisted = $(this).hasClass('wishlisted');
 
-        $(document).on('click', '.close-btn', function() {
+            fetch(`/wishlist/toggle/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ productId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (isWishlisted) {
+                            $(this).removeClass('wishlisted');
+                            $(this).find('i').removeClass('bi-heart-fill').addClass('bi-heart');
+                        } else {
+                            $(this).addClass('wishlisted');
+                            $(this).find('i').removeClass('bi-heart').addClass('bi-heart-fill');
+                        }
+                        $('#wishlist-item-count').text(data.wishlistCount);
+                        $('#wishlist-circle').css('fill', data.wishlistCount > 0 ? 'red' : '#000');
+                    }
+                });
+        });
+
+        $('.close-btn').off('click').on('click', function () {
             var productId = $(this).data('id');
-            
+
             $.ajax({
                 url: '{{ route("cart.remove") }}',
                 method: 'POST',
@@ -1153,14 +1152,12 @@ $(document).ready(function() {
                     _token: '{{ csrf_token() }}',
                     product_id: productId
                 },
-                success: function(response) {
+                success: function (response) {
                     alert(response.message);
-                    $('#cart-item-count').text(response.cartCount);
-                    updateCartProducts(response.cart);
-                    $('#cart-subtotal').text('₹' + response.subtotal);
+                    updateCart(response.cartCount, response.cart, response.subtotal);
                 },
-                error: function(response) {
-                    if(response.status === 401) {
+                error: function (response) {
+                    if (response.status === 401) {
                         alert('Please login to remove products from cart');
                         window.location.href = '{{ route("login") }}';
                     } else {
@@ -1169,45 +1166,73 @@ $(document).ready(function() {
                 }
             });
         });
-    });
-</script>
+    }
 
+    function updateCart(cartCount, cart, subtotal) {
+        $('#cart-item-count').text(cartCount);
+        $('#cart-subtotal').text('₹' + subtotal);
+        var cartHtml = '';
+        cart.forEach(item => {
+            cartHtml += `
+                <div class="wrapper-item">
+                    <div class="wrapper-img">
+                        <img src="/storage/uploads/${item.name}_0.jpg" alt="img">
+                    </div>
+                    <div class="wrapper-content">
+                        <h5 class="wrapper-title">${item.name}</h5>
+                        <div class="price">
+                            <p class="new-price">₹${item.price}</p>
+                        </div>
+                    </div>
+                    
+                    <span class="close-btn" data-id="${item.product_id}">
+                        <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
+                        </svg>
+                    </span>
+                </div>
+            `;
+        });
+        $('#cart-wrapper-item').html(cartHtml);
+        rebindCloseButtons();
+    }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.wishlist-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.dataset.productId;
-                const isWishlisted = this.classList.contains('wishlisted');
+    function rebindCloseButtons() {
+        $('.close-btn').off('click').on('click', function () {
+            var productId = $(this).data('id');
 
-                fetch(`/wishlist/toggle/${productId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ productId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        if (isWishlisted) {
-                            this.classList.remove('wishlisted');
-                            this.querySelector('i').classList.remove('bi-heart-fill');
-                            this.querySelector('i').classList.add('bi-heart');
-                        } else {
-                            this.classList.add('wishlisted');
-                            this.querySelector('i').classList.remove('bi-heart');
-                            this.querySelector('i').classList.add('bi-heart-fill');
-                        }
-                        document.getElementById('wishlist-item-count').innerText = data.wishlistCount;
-                        document.getElementById('wishlist-circle').style.fill = data.wishlistCount > 0 ? 'red' : '#000';
+            $.ajax({
+                url: '{{ route("cart.remove") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_id: productId
+                },
+                success: function (response) {
+                    alert(response.message);
+                    updateCart(response.cartCount, response.cart, response.subtotal);
+                },
+                error: function (response) {
+                    if (response.status === 401) {
+                        alert('Please login to remove products from cart');
+                        window.location.href = '{{ route("login") }}';
+                    } else {
+                        alert('Failed to remove product from cart.');
                     }
-                });
+                }
             });
         });
-    });
+    }
+
+    $('.category-checkbox').change(filterProducts);
+    $('input[name="color"]').change(filterProducts);
+
+    rebindCloseButtons();
+    rebindEventHandlers();
+});
+
 </script>
+
 
 
 

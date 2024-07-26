@@ -29,23 +29,33 @@ class ShopController extends Controller
 }
 
 
-    public function filterByCategory(Request $request)
-    {
-        $categories = $request->categories;
-        $colors = $request->colors;
+public function filterByCategory(Request $request)
+{
+    $categories = $request->categories;
+    $colors = $request->colors;
 
-        $query = Product::query();
+    $query = Product::query();
 
-        if (!empty($categories)) {
-            $query->whereIn('category', $categories);
-        }
-
-        if (!empty($colors)) {
-            $query->whereIn('color', $colors);
-        }
-
-        $products = $query->get();
-
-        return response()->json($products);
+    if (!empty($categories)) {
+        $query->whereIn('category', $categories);
     }
+
+    if (!empty($colors)) {
+        $query->whereIn('color', $colors);
+    }
+
+    $products = $query->get();
+
+    // Get the wishlist status
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+
+    $products = $products->map(function ($product) use ($wishlistProductIds) {
+        $product->in_wishlist = in_array($product->id, $wishlistProductIds);
+        return $product;
+    });
+
+    return response()->json($products);
+}
+
 }
