@@ -8,18 +8,17 @@ class AddUserIdToCartDetailsTable extends Migration
 {
     public function up()
     {
-        Schema::table('cart_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id');
-
-            // Adding foreign key constraint
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        // Check if the column doesn't exist before adding it
+        if (!Schema::hasColumn('cart_details', 'user_id')) {
+            Schema::table('cart_details', function (Blueprint $table) {
+                $table->unsignedBigInteger('user_id')->after('id');
+            });
+        }
     }
 
     public function down()
     {
         Schema::table('cart_details', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
     }
