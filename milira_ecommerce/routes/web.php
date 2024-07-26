@@ -76,6 +76,7 @@ Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWish
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
+
 Route::get('/forget-password', [AuthController::class, 'showForgetPasswordForm'])->name('forget-password.form');
 
 Route::middleware('auth')->group(function () {
@@ -84,3 +85,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 });
+
