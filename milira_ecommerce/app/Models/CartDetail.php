@@ -12,4 +12,9 @@ class CartDetail extends Model
     protected $fillable = [
         'user_id', 'product_id', 'name', 'quantity', 'price'
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

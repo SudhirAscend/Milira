@@ -844,7 +844,7 @@
 </div>
 <div style="display: flex; gap: 10px;">
     @auth
-        <form id="buyNowForm" action="{{ route('checkout') }}" method="POST">
+        <form id="buyNowForm" action="{{ route('cart.buyNow') }}" method="POST">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="quantity" id="productQuantity" value="1">
@@ -856,9 +856,12 @@
         </a>
     @endauth
 
-    <a href="">
-        <button class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
-    </a>
+    <form action="{{ route('cart.add') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
+    </form>
 </div>
                             <hr>
                             <div class="product-details">

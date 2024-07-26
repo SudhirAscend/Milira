@@ -5,42 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
-use App\Models\Cart;
+use App\Models\CartDetail;
 use App\Models\Address;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
-        return redirect()->route('checkout.show');
-    }
-
-    public function checkout(Request $request)
-    {
-        $product_id = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
         $user = Auth::user();
+        $cartItems = CartDetail::where('user_id', $user->id)->with('product')->get();
+        $addresses = Address::where('user_id', $user->id)->get();
 
-        $cartItem = Cart::where('user_id', $user->id)->where('product_id', $product_id)->first();
-
-        if ($cartItem) {
-            $cartItem->quantity += $quantity;
-            $cartItem->save();
-        } else {
-            $cart = new Cart();
-            $cart->user_id = $user->id;
-            $cart->product_id = $product_id;
-            $cart->quantity = $quantity;
-            $cart->save();
-        }
-
-        return redirect()->route('checkout.show');
+        return view('checkout', compact('cartItems', 'addresses'));
     }
 
     public function showCheckoutPage()
     {
         $user = Auth::user();
-        $cartItems = Cart::where('user_id', $user->id)->with('product')->get();
+        $cartItems = CartDetail::where('user_id', $user->id)->with('product')->get();
         $addresses = Address::where('user_id', $user->id)->get();
 
         return view('checkout', compact('cartItems', 'addresses'));
