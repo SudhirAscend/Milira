@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
+    <link rel="icon"  href="{{ asset('assets/images/logos/favicon.jpg')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
+    
 </head>
 <body>
 <header id="header" class="header">
@@ -696,6 +698,9 @@
                         </div>
                         <div class="login-btn text-center mt-5">
                             <button type="submit" class="shop-btn">Send OTP</button>
+                        </div>
+                        <div class="a-signup text-center">
+                            <p>New to Milira ? <a href="/signup">Create an Account</a></p>
                         </div>
                     </form>
 

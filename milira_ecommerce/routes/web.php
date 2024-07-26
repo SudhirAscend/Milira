@@ -76,4 +76,3 @@ Route::post('/remove-from-wishlist', [WishlistController::class, 'removeFromWish
 
 Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
-

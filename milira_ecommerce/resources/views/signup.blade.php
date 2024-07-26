@@ -775,7 +775,9 @@
                         </div>
                         <div class="login-btn text-center">
                             <button type="submit" class="shop-btn">Create an Account</button>
-                            <span class="shop-account">Already have an account? <a href="login.html">Log In</a></span>
+                        </div>
+                        <div class="a-signup text-center">
+                            <p>If you already have an account ? <a href="/login">Login</a></p>
                         </div>
                     </form>
                 </div>
