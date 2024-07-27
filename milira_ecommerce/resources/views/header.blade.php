@@ -380,6 +380,9 @@
     <!--------------- header-section-end --------------->
 
     
+<<<<<<< HEAD
+   
+=======
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
@@ -631,3 +634,4 @@ $(document).ready(function () {
     rebindEventHandlers();
 });
 </script>
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
