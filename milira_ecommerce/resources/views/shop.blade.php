@@ -106,7 +106,7 @@
 
 
     <!--------------- header-section --------------->
-   
+   @include('header')
     <!--------------- header-section-end --------------->
 
     <!--------------- products-sidebar-section--------------->
