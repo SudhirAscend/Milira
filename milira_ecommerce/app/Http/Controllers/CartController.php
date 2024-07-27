@@ -15,45 +15,38 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-    {
-        if (!Auth::check()) {
-            return response()->json(['message' => 'Please login to add products to cart'], 401);
-        }
+{
+    $productId = $request->input('product_id');
+    $quantity = $request->input('quantity');
 
-        $product = Product::find($request->product_id);
-        
-        if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
-        }
+    $cart = session()->get('cart', []);
 
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity']++;
-        } else {
-            $cart[$product->id] = [
-                "name" => $product->title,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => asset('storage/uploads/' . $product->title . '_0.jpg') // Ensure correct image path
-            ];
-        }
-
-        // Save to session
-        session()->put('cart', $cart);
-
-        // Calculate the subtotal
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
-
-        return response()->json([
-            'message' => 'Product added to cart successfully!',
-            'cart' => $cart,
-            'subtotal' => $subtotal,
-            'cartCount' => count($cart)
-        ], 200);
+    if (isset($cart[$productId])) {
+        $cart[$productId]['quantity'] += $quantity;
+    } else {
+        $product = Product::find($productId);
+        $cart[$productId] = [
+            'name' => $product->title,
+            'price' => $product->price,
+            'quantity' => $quantity,
+            'image' => $product->image // assuming the product has an 'image' attribute
+        ];
     }
+
+    session()->put('cart', $cart);
+
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function ($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    return response()->json([
+        'message' => 'Product added to cart successfully!',
+        'cartCount' => $cartCount,
+        'cart' => $cart,
+        'subtotal' => $subtotal
+    ]);
+}
 
     public function index()
     {
@@ -185,5 +178,38 @@ class CartController extends Controller
                 ]);
             }
         }
+    }
+    public function add(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity', 1);
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$product_id])) {
+            $cart[$product_id]['quantity'] += $quantity;
+        } else {
+            // Assuming you have a Product model
+            $product = Product::find($product_id);
+            $cart[$product_id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $quantity,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        $cartCount = count($cart);
+        $subtotal = array_reduce($cart, function($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cartCount' => $cartCount,
+            'cart' => $cart,
+            'subtotal' => $subtotal,
+        ]);
     }
 }

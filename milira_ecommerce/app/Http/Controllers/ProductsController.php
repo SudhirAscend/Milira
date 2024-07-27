@@ -1,17 +1,50 @@
 <?php
 namespace App\Http\Controllers;
 
+
 use App\Models\Product;
-use App\Models\ProductCategory; // Ensure you import the ProductCategory model
+use App\Models\ProductCategory;
+use App\Models\Wishlist; // Ensure you import the Wishlist model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // Ensure you import the Auth facade
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+
 class ProductsController extends Controller
 {
     public function index()
     {
         $products = Product::all();
-        return view('admin.products.index', compact('products'));
+
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cart = session()->get('cart', []);
+        $cartCount = count($cart);
+        $subtotal = array_reduce($cart, function($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
+        return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
+    }
+
+    public function show($slug)
+    {
+        $title = Str::slug($slug, ' '); 
+        $product = Product::where('title', $title)->firstOrFail();
+
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cart = session()->get('cart', []);
+        $cartCount = count($cart);
+        $subtotal = array_reduce($cart, function($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
+        return view('shop.product', compact('product', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
     }
 
     public function create()
@@ -90,16 +123,6 @@ private function generateProductDetailPage($product)
 
     File::put($targetPath, $newContent);
 }
-
-
-public function show($slug)
-{
-    // Convert the slug back to the original title format for searching
-    $title = Str::slug($slug, ' '); 
-    $product = Product::where('title', $title)->firstOrFail();
-    return view('shop.product', compact('product'));
-}
-
 
     public function edit($id)
     {
