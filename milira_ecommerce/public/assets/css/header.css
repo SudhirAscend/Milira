@@ -12,6 +12,8 @@
     display: block;
   }
 }
+ 
+
 
 ul.sub-items li a {
   color: var(--primary-color);
@@ -108,4 +110,8 @@ h4.shop-collection-title {
 .header-user .dropdown-menu {
   left: auto;
   right: 0;
+}
+
+.offcanvas-backdrop {
+  background-color: transparent;
 }
