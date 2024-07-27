@@ -51,6 +51,7 @@
 
         <div class="col-12 col-lg-8 d-flex">
             <div class="card w-100">
+<<<<<<< HEAD
                 <div class="card-body">
                     <h5 class="mb-3">Send Notes to Customer</h5>
                     <textarea class="form-control" placeholder="write somthing" rows="6" cols="6"></textarea>
@@ -120,6 +121,9 @@
 
     <div class="card">
         <div class="card-body">
+=======
+            <div class="card-body">
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
             <h5 class="mb-3">Orders<span class="fw-light ms-2">(98)</span></h5>
             <div class="product-table">
                 <div class="table-responsive white-space-nowrap">
@@ -166,6 +170,7 @@
                                     </div>
                                 </td>
                             </tr>
+<<<<<<< HEAD
                             <tr>
                                 <td>#7845</td>
                                 <td>$427</td>
@@ -346,17 +351,33 @@
                                     </div>
                                 </td>
                             </tr>
+=======
+                            
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+            </div>
+        </div>
+    </div><!--end row-->
+
+    <div class="card">
+        
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
     </div>
 
     <div class="card mt-4">
         <div class="card-body">
+<<<<<<< HEAD
             <h5 class="mb-3 fw-bold">Wishlist<span class="fw-light ms-2">(46)</span></h5>
+=======
+        <h5 class="mb-3 fw-bold">Wishlist<span class="fw-light ms-2">({{ $wishlistItems->count() }})</span></h5>
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
             <div class="product-table">
                 <div class="table-responsive white-space-nowrap">
                     <table class="table align-middle">
@@ -365,6 +386,7 @@
 
                                 <th>Product Name</th>
                                 <th>Color</th>
+<<<<<<< HEAD
                                 <th>Size</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
@@ -486,6 +508,31 @@
                                 <td>$59</td>
                                 <td>189</td>
                             </tr>
+=======
+                                <th>Price</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($wishlistItems as $item)
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="product-box">
+                                    <img src="{{ asset('storage/' . $item->product->images[0]) }}" width="55" class="rounded-3" alt="">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="javascript:;" class="product-title">{{ $item->product->title }}</a>
+                                        <p class="mb-0 product-category">Category : {{ $item->product->category }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ $item->product->color }}</td>
+                            <td>${{ $item->product->price }}</td>
+                        </tr>
+                    @endforeach
+                            
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
                         </tbody>
                     </table>
                 </div>
@@ -493,6 +540,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="card mt-4">
         <div class="card-body">
             <h5 class="mb-3 fw-bold">Ratings & Reviews<span class="fw-light ms-2">(86)</span></h5>
@@ -648,6 +696,43 @@
             </div>
         </div>
     </div>
+=======
+       <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="mb-3 fw-bold">Ratings & Reviews<span class="fw-light ms-2">({{ $reviews->count() }})</span></h5>
+                <div class="product-table">
+                    <div class="table-responsive white-space-nowrap">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Rating</th>
+                                    <th>Review</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($reviews as $review)
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:;" class="product-title">{{ $review->product->title }}</a>
+                                        </td>
+                                        <td>
+                                    @for ($i = 0; $i < $review->rating; $i++)
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    @endfor
+                                </td>
+                                        <td class="review-desc">{{ $review->description }}</td>
+                                        <td>{{ $review->created_at->format('Y-m-d') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+         </div>
+>>>>>>> 21e7cf62a499e0d387aa5c245b3fd98fd13efac3
 
 @endsection
 @push('script')
