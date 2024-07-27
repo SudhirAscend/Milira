@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/shop-inner.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     
 </head>
 
