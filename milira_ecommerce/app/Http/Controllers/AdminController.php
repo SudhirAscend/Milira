@@ -7,6 +7,9 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Wishlist;
+use App\Models\Review;
+
+
 class AdminController extends Controller
 {
     public function dashboard()
@@ -34,6 +37,9 @@ class AdminController extends Controller
         // Fetch wishlist items for the customer
         $wishlistItems = Wishlist::where('user_id', $id)->with('product')->get();
 
-        return view('admin.customer-details', compact('customer', 'wishlistItems'));
+        // Fetch reviews for the customer
+        $reviews = Review::where('user_id', $id)->with('product')->get();
+
+        return view('admin.customer-details', compact('customer', 'wishlistItems', 'reviews'));
     }
 }

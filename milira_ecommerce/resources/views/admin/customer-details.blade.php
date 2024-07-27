@@ -115,7 +115,7 @@
 
     <div class="card mt-4">
         <div class="card-body">
-            <h5 class="mb-3 fw-bold">Wishlist<span class="fw-light ms-2">(46)</span></h5>
+        <h5 class="mb-3 fw-bold">Wishlist<span class="fw-light ms-2">({{ $wishlistItems->count() }})</span></h5>
             <div class="product-table">
                 <div class="table-responsive white-space-nowrap">
                     <table class="table align-middle">
@@ -154,161 +154,41 @@
         </div>
     </div>
 
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="mb-3 fw-bold">Ratings & Reviews<span class="fw-light ms-2">(86)</span></h5>
-            <div class="product-table">
-                <div class="table-responsive white-space-nowrap">
-                    <table class="table align-middle">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Rating</th>
-                                <th>Review</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
+       <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="mb-3 fw-bold">Ratings & Reviews<span class="fw-light ms-2">({{ $reviews->count() }})</span></h5>
+                <div class="product-table">
+                    <div class="table-responsive white-space-nowrap">
+                        <table class="table align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Rating</th>
+                                    <th>Review</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($reviews as $review)
+                                    <tr>
+                                        <td>
+                                            <a href="javascript:;" class="product-title">{{ $review->product->title }}</a>
+                                        </td>
+                                        <td>
+                                    @for ($i = 0; $i < $review->rating; $i++)
+                                        <i class="bi bi-star-fill text-warning"></i>
+                                    @endfor
                                 </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Completed<i
-                                            class="bi bi-check2 ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
-                                </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-danger-subtle text-danger rounded border border-danger-subtle font-text2 fw-bold">Failed<i
-                                            class="bi bi-x-lg ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
-                                </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Completed<i
-                                            class="bi bi-check2-all ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
-                                </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-success-subtle text-success rounded border border-success-subtle font-text2 fw-bold">Completed<i
-                                            class="bi bi-check2 ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
-                                </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-danger-subtle text-danger rounded border border-danger-subtle font-text2 fw-bold">Failed<i
-                                            class="bi bi-x-lg ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" class="product-title">Women Pink Floral Printed Panelled Pure
-                                        Cotton</a>
-                                </td>
-                                <td>
-                                    <div class="product-rating text-warning">
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-half"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </div>
-                                </td>
-                                <td class="review-desc">This is very awesome product. It has good quality. I suggest
-                                    everyone to use this
-                                    product. It is available at very low amount.</td>
-                                <td><span
-                                        class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Pending<i
-                                            class="bi bi-info-circle ms-2"></i></span></td>
-                                <td>Jun 12, 12:56 PM</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                                        <td class="review-desc">{{ $review->description }}</td>
+                                        <td>{{ $review->created_at->format('Y-m-d') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+         </div>
 
 @endsection
 @push('script')
