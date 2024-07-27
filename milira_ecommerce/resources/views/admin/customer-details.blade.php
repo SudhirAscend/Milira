@@ -712,21 +712,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($reviews as $review)
-                                    <tr>
-                                        <td>
-                                            <a href="javascript:;" class="product-title">{{ $review->product->title }}</a>
-                                        </td>
-                                        <td>
+                        @forelse ($reviews as $review)
+                            <tr>
+                                <td>
+                                    <a href="javascript:;" class="product-title">{{ $review->product->title }}</a>
+                                </td>
+                                <td>
                                     @for ($i = 0; $i < $review->rating; $i++)
                                         <i class="bi bi-star-fill text-warning"></i>
                                     @endfor
                                 </td>
-                                        <td class="review-desc">{{ $review->description }}</td>
-                                        <td>{{ $review->created_at->format('Y-m-d') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                                <td class="review-desc">{{ $review->description }}</td>
+                                <td>{{ $review->created_at->format('Y-m-d') }}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">No reviews posted.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
                         </table>
                     </div>
                 </div>
