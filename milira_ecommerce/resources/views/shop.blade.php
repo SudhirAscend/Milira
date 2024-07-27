@@ -31,6 +31,7 @@
 
 <!--------------- additional-css ---------------->
 <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

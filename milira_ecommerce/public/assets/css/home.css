@@ -567,7 +567,7 @@ img.about-img {
 }
 
 .header-top-section {
-  border-bottom: 1px solid #AE1C9A;
+  border-bottom: 1px solid var(--primary-color);
   background: var(--primary-color);
 }
 
@@ -935,6 +935,10 @@ input.mob-search::placeholder {
 .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span rect {
   fill: currentColor;
   fill: #000000;
+}
+
+.offcanvas-backdrop {
+  background-color: transparent;
 }
 
 .header-bottom {
@@ -1323,11 +1327,12 @@ button.cat-dropdown::before{
   font-weight: 400;
   padding: 12px 25px;
   text-decoration: none;
+  font-weight: 500;
   display: block;
   font-family: "inter","serif";
 } 
 
-.dropdown-categories a:hover {background-color: #ddd;}
+.dropdown-categories a:hover {background-color: #fff;}
 
 .show {
 display: block;
@@ -1752,4 +1757,5 @@ a .bi-arrow-repeat {
   left: 150px;
   display: none;
 }
+
 
