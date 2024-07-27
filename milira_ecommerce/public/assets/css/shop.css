@@ -1664,3 +1664,52 @@ button.cart-btn:hover {
 .bi-bag-heart-fill {
   margin-left: 20px;
 }
+
+
+.shop-collection-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  z-index: 999;
+  width: 700px;
+  padding: 10px;
+}
+
+.shop-collection:hover {
+  .shop-collection-menu {
+    display: block;
+  }
+}
+
+ul.sub-items li a {
+  color: var(--primary-color);
+  font-size: 16px;
+  font-family: 'inter','serif';
+  font-weight: 500;
+}
+
+ul.sub-items li {
+  padding: 10px 0px;
+}
+
+.shop-collection-menu .shop-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 25px;
+}
+
+h4.shop-collection-title {
+  font-size: 20px;
+  font-family: 'inter','serif';
+  font-weight: bold;
+  text-align: left;
+}
+
+.bi-caret-down-fill {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.noUi-horizontal .noUi-handle {
+  top: -12px;
+}
