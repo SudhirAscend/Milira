@@ -115,3 +115,90 @@ h4.shop-collection-title {
 .offcanvas-backdrop {
   background-color: transparent;
 }
+
+li.mob-litems a {
+  color: var(--primary-color);
+  font-family: 'inter','serif';
+  font-weight: 500;
+}
+
+li.mob-litems {
+  padding: 15px 0px;
+  border-bottom: 1px solid #00000030;
+}
+.mob-collection-content{
+  margin-top: 20px;
+}
+.mob-collection-content h4 {
+  font-size: 20px;
+  font-family: 'inter','serif';
+  font-weight: bold;
+  padding-left: 8px;
+}
+
+.mob-collection-content ul li {
+  padding: 8px 0px 0px 8px;
+}
+
+.offcanvas-backdrop.show {
+  z-index: -1;
+}
+.offcanvas-body {
+  overflow-y: auto; /* Enables vertical scrolling */
+  height: calc(100vh - 56px); /* Adjust based on the height of the offcanvas header */
+}
+
+.mobile-navigation {
+  overflow-y: auto; /* Ensure nested navigation also scrolls */
+}
+
+.dropdown-menu {
+  max-height: 50vh; /* Prevent dropdown menu from exceeding half the viewport height */
+  overflow-y: auto; /* Add scrollbar to dropdown menu */
+}
+
+.bi-chevron-down {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+.mobile-navitems .dropdown-menu h6 {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'inter','serif';
+  padding: 4px 25px;
+}
+.mobile-navitems .dropdown-menu ul li {
+  padding: 5px 20px;
+}
+
+.mobile-navitems .dropdown-menu ul li a {
+  font-size: 16px;
+  font-family: 'inter','serif';
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.request button {
+  background-color: var(--primary-color);
+  padding: 12px 45px;
+  border-radius: 155px;
+  color: #fff;
+  font-family: 'inter','serif';
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.bi-arrow-right {
+  color: #fff;
+  margin-left: 10px;
+}
+
+.btn-close {
+  height: 3rem;
+  width: 3rem;
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: bold;
+}

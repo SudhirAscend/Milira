@@ -885,8 +885,8 @@ input.mob-search::placeholder {
   margin: 0;
 }
 .offcanvas-body .header-top .shop-btn .btn-close {
-  --bs-btn-close-bg: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%23FFF" width="24px" height="24px"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>');
-  font-size: 2rem;
+  --bs-btn-close-bg: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="%23FFF" width="24px" height="24px"><path stroke-linecap="round" stroke-linejoin="round"  d="M6 18L18 6M6 6l12 12" /></svg>');
+  font-size: 5rem;
 }
 .offcanvas-body .header-input {
   display: flex;
