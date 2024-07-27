@@ -75,13 +75,10 @@
     font-size: 10px;
 }
     
-
-    
-
-        .loginclr{
+.loginclr{
          color:#808080 !important;
         }
-        .header-user .dropdown {
+.header-user .dropdown {
     display: flex;
     align-items: center;
 }
@@ -109,8 +106,7 @@
 
 
     <!--------------- header-section --------------->
-    
-    
+   @include('header')
     <!--------------- header-section-end --------------->
 
     <!--------------- products-sidebar-section--------------->
@@ -402,7 +398,6 @@
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
    $(document).ready(function () {
@@ -622,6 +617,7 @@
     rebindEventHandlers();
 });
 </script>
+    
 
 
 
