@@ -844,7 +844,7 @@
 </div>
 <div style="display: flex; gap: 10px;">
     @auth
-        <form id="buyNowForm" action="{{ route('checkout') }}" method="POST">
+        <form id="buyNowForm" action="{{ route('cart.buyNow') }}" method="POST">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="hidden" name="quantity" id="productQuantity" value="1">
@@ -856,9 +856,12 @@
         </a>
     @endauth
 
-    <a href="">
-        <button class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
-    </a>
+    <form action="{{ route('cart.add') }}" method="POST">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="product-buy-btn">Add to Cart <i class="bi bi-cart-plus-fill px-3 fs-3"></i></button>
+    </form>
 </div>
                             <hr>
                             <div class="product-details">
@@ -941,151 +944,82 @@
         </div>
     </section>
     <div class="container">
-            <div class="review-title">
-                <h1>Reviews</h1>
+    <div class="review-title">
+        <h1>Reviews</h1>
+    </div>
+    <div class="post-review">
+        <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <div class="give-rate">
+                <h6>Rate the Product</h6>
+                <i class="bi bi-star" data-rating="1"></i>
+                <i class="bi bi-star" data-rating="2"></i>
+                <i class="bi bi-star" data-rating="3"></i>
+                <i class="bi bi-star" data-rating="4"></i>
+                <i class="bi bi-star" data-rating="5"></i>
+                <input type="hidden" name="rating" id="rating">
             </div>
-            <div class="post-review">
-                <form action="">
-                    <div class="give-rate">
-                        <h6>Rate the Product</h6>
+            <div class="product-desc">
+                <h6>Review Our Product</h6>
+                <textarea name="description" id="pdtDescription" placeholder="Description"></textarea>
+            </div>
+            <div class="pdt-image">
+                <div class="mb-3">
+                    <h6>Upload your Product images</h6>
+                    <input type="file" class="pdt-file mt-4" name="image" id="inputFile">
+                </div>
+            </div>
+            <div class="submit-review text-end mt-4">
+                <span>
+                    <button type="submit" class="review-1"> Submit Feedback </button>
+                </span>
+                <span class="px-3">
+                    <a href="" class="review-2"> Cancel </a>
+                </span>
+            </div>
+        </form>
+    </div>
+    
+    <div class="review-sections mt-5">
+        @foreach($product->reviews as $review)
+        <div class="row mt-4 py-4 border-bottom">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                <div class="user-profile d-flex mt-4">
+                    <div class="user-name mx-4">
+                        <h4>{{ $review->user->name }}</h4>
+                        <div class="user-designation">
+                            <p>Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+                <div class="pdt-rating">
+                    @for ($i = 0; $i < $review->rating; $i++)
+                        <i class="bi bi-star-fill"></i>
+                    @endfor
+                    @for ($i = $review->rating; $i < 5; $i++)
                         <i class="bi bi-star"></i>
-                        <i class="bi bi-star"></i>
-                        <i class="bi bi-star"></i>
-                        <i class="bi bi-star"></i>
-                        <i class="bi bi-star"></i>
-                    </div>
-                    <div class="product-desc">
-                        <h6>Review Our Product</h6>
-                        <textarea name="pdtDescription" id="pdtDescription" placeholder="Description"></textarea>
-                    </div>
-                    <div class="pdt-image">
-                        <div class="mb-3">
-                            <h6>Upload your Product images</h6>
-                            <input type="file" class="pdt-file mt-4" name="inputFile" id="inputFile">
-                          </div>
-                    </div>
-                    <div class="submit-review text-end mt-4">
-                        <span>
-                            <a href="" class="review-1"> Submit Feedback </a>
-                        </span>
-                        <span class="px-3">
-                            <a href="" class="review-2"> Cancel </a>
-                        </span>
-
-                    </div>
+                    @endfor
                 </div>
-                </form>
-                
-            <div class="review-sections mt-5">
-                <div class="row mt-4 py-4 border-bottom">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                        <div class="user-profile d-flex mt-4">
-                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
-                            <div class="user-name mx-4">
-                                <h4>Rahman</h4>
-                                <div class="user-designation">
-                                    <p>Customer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                        <div class="pdt-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span>(4.5 Reviews)</span>
-                        </div>
-                        <div class="review-description mt-3">
-                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                        </div>
-                    </div>
+                <div class="review-description mt-3">
+                    <p>{{ $review->description }}</p>
                 </div>
-                <div class="row mt-4 py-4 border-bottom">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                        <div class="user-profile d-flex mt-4">
-                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
-                            <div class="user-name mx-4">
-                                <h4>Sudhir M.G</h4>
-                                <div class="user-designation">
-                                    <p>Founder & CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                        <div class="pdt-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span>(4.5 Reviews)</span>
-                        </div>
-                        <div class="review-description mt-3">
-                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4 py-4 border-bottom">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                        <div class="user-profile d-flex mt-4">
-                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
-                            <div class="user-name mx-4">
-                                <h4>Vignesh T</h4>
-                                <div class="user-designation">
-                                    <p>Web Developer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                        <div class="pdt-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span>(4.5 Reviews)</span>
-                        </div>
-                        <div class="review-description mt-3">
-                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4 py-4 border-bottom">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-                        <div class="user-profile d-flex mt-4">
-                            <img src="./assets/images/icon/user-icon.svg" alt="Review-Users">
-                            <div class="user-name mx-4">
-                                <h4>Karthikesan</h4>
-                                <div class="user-designation">
-                                    <p>Multimedia Designer</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-                        <div class="pdt-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-half"></i>
-                            <span>(4.5 Reviews)</span>
-                        </div>
-                        <div class="review-description mt-3">
-                            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance. At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button class="shop-btn text-center">See More Reviews</button>
-                </div>
+                @if ($review->image)
+                <img src="{{ asset('storage/' . $review->image) }}" alt="Review Image" style="width: 100px; height: 100px;">
+                @endif
             </div>
         </div>
+        @endforeach
+
+        <div class="text-center">
+            <button class="shop-btn text-center">See More Reviews</button>
+        </div>
+    </div>
+</div>
+
+
     <!--------------- products-Review-end--------------->
 
     <!--------------- weekly-section--------------->
@@ -1456,6 +1390,30 @@
         }
     });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('.give-rate .bi-star');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+        star.addEventListener('click', function () {
+            const rating = this.getAttribute('data-rating');
+            ratingInput.value = rating;
+
+            stars.forEach(star => {
+                if (star.getAttribute('data-rating') <= rating) {
+                    star.classList.remove('bi-star');
+                    star.classList.add('bi-star-fill');
+                } else {
+                    star.classList.remove('bi-star-fill');
+                    star.classList.add('bi-star');
+                }
+            });
+        });
+    });
+});
+</script>
+
 </body>
 
 </html>

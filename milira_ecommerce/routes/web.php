@@ -11,7 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishlistController;
-
+use App\Http\Controllers\ReviewController;
 
 
 
@@ -88,3 +88,34 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');  // Point to CartController
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/buy-now', [CartController::class, 'buyNow'])->name('cart.buyNow'); // New route for buy now
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+});

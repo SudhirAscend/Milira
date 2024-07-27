@@ -32,4 +32,12 @@ class Product extends Model
     {
         return $this->belongsTo(ProductCategory::class, 'category_id');
     }
+    public function cartDetails()
+    {
+        return $this->hasMany(CartDetail::class);
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

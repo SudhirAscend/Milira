@@ -168,57 +168,61 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <div class="product-sidebar-section" data-aos="fade-up">
-                    <div class="row g-5" id="product-list">
-        @foreach ($products as $product)
-        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="{{ $product->category }}">
-            <div class="card product">
-                <div class="card-body">
-                    <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
-                    <div class="card-hover">
-                    <div class="hover-icons text-center">
-                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                <button class="wishlist-button {{ in_array($product->id, $wishlistProductIds) ? 'wishlisted' : '' }}" data-product-id="{{ $product->id }}">
-                                    <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
-                                </button>
-                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+    <div class="product-sidebar-section" data-aos="fade-up">
+        <div class="row g-5" id="product-list">
+            @foreach ($products as $product)
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="{{ $product->category }}">
+                    <div class="card product">
+                        <div class="card-body">
+                            <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
+                            <div class="card-hover">
+                                <div class="hover-icons text-center">
+                                    <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                    <button class="wishlist-button {{ in_array($product->id, $wishlistProductIds) ? 'wishlisted' : '' }}" data-product-id="{{ $product->id }}">
+                                        <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
+                                    </button>
+                                    <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                </div>
                             </div>
-                    </div>
-                    <div class="container">
-                        <div class="pdt-title">
-                            <h6>{{ $product->title }}</h6>
-                        </div>
-                        <div class="pdt-price">
-                            <h6>{{ $product->price }}</h6>
-                        </div>
-                        <div class="pdt-rating mt-4">
-                            <p>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <span>({{ $product->reviews }} reviews)</span>
-                            </p>
-                        </div>
-                        <div class="pdt-shop text-center mt-5">
-                            <div class="row">
-                            <div class="col-9">
-                                                        <a href="{{ url('shop/' . Str::slug($product->title, '-')) }}"> <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button></a>
-                                                    </div>
-                                                    <div class="col-3">
-                                                    <button class="cart-btn" data-id="{{ $product->id }}"><i class="bi bi-cart-check-fill"></i></button>
-</div>
+                            <div class="container">
+                                <div class="pdt-title">
+                                    <h6>{{ $product->title }}</h6>
+                                </div>
+                                <div class="pdt-price">
+                                    <h6>{{ $product->price }}</h6>
+                                </div>
+                                <div class="pdt-rating mt-4">
+                                    <p>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                        <span>({{ $product->reviews }} reviews)</span>
+                                    </p>
+                                </div>
+                                <div class="pdt-shop text-center mt-5">
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <a href="{{ url('shop/' . Str::slug($product->title, '-')) }}">
+                                                <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <button class="cart-btn" data-id="{{ $product->id }}">
+                                                <i class="bi bi-cart-check-fill"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </div>
-
 
                             
                             <div class="col-lg-12 mt-5">
@@ -491,9 +495,7 @@
                     if (response.status === 401) {
                         alert('Please login to add products to cart');
                         window.location.href = '{{ route("login") }}';
-                    } else {
-                        alert('Failed to add product to cart.');
-                    }
+                    } 
                 }
             });
         });
@@ -614,10 +616,8 @@
     rebindCloseButtons();
     rebindEventHandlers();
 });
-
 </script>
     
-
 
 
 
