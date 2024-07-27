@@ -937,9 +937,6 @@ input.mob-search::placeholder {
   fill: #000000;
 }
 
-.offcanvas-backdrop {
-  background-color: transparent;
-}
 
 .header-bottom {
   background: var(--primary-color);

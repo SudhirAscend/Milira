@@ -42,3 +42,6 @@
     font-size: 12px;
     margin-left: 4px;
   }
+  .offcanvas-backdrop {
+    background-color: transparent;
+  }
