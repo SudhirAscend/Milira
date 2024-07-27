@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\Wishlist;
 class AdminController extends Controller
 {
     public function dashboard()
@@ -21,14 +23,17 @@ class AdminController extends Controller
 
     public function customerDetails($id)
     {
-        
+        // Fetch customer details by ID
         $customer = User::find($id);
 
-       
+        // Handle case where customer is not found
         if (!$customer) {
             abort(404, 'Customer not found');
         }
 
-        return view('admin.customer-details', compact('customer'));
+        // Fetch wishlist items for the customer
+        $wishlistItems = Wishlist::where('user_id', $id)->with('product')->get();
+
+        return view('admin.customer-details', compact('customer', 'wishlistItems'));
     }
 }
