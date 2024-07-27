@@ -72,9 +72,9 @@
               <div class="menu-title">Customers</div>
             </a>
             <ul>
-            <li><a href="{{ url('/ecommerce-customers') }}"><i class="material-icons-outlined">arrow_right</i>Customers</a>
+            <li><a href="{{ url('/admin/customers') }}"><i class="material-icons-outlined">arrow_right</i>Customers</a>
               </li>
-              <li><a href="{{ url('/ecommerce-customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Customer Details</a>
+              <li><a href="{{ url('/admin/customer-details') }}"><i class="material-icons-outlined">arrow_right</i>Customer Details</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Reviews</a>
               </li>

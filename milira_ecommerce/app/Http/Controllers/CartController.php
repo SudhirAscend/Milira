@@ -179,37 +179,46 @@ class CartController extends Controller
             }
         }
     }
-    public function add(Request $request)
-    {
-        $product_id = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
+   // CartController.php
 
-        $cart = session()->get('cart', []);
+public function add(Request $request)
+{
+    $productId = $request->input('product_id');
+    $quantity = $request->input('quantity', 1); // Default quantity to 1 if not provided
 
-        if (isset($cart[$product_id])) {
-            $cart[$product_id]['quantity'] += $quantity;
-        } else {
-            // Assuming you have a Product model
-            $product = Product::find($product_id);
-            $cart[$product_id] = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => $quantity,
-            ];
-        }
+    $cart = session()->get('cart', []);
 
-        session()->put('cart', $cart);
-
-        $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
-
-        return response()->json([
-            'message' => 'Product added to cart successfully!',
-            'cartCount' => $cartCount,
-            'cart' => $cart,
-            'subtotal' => $subtotal,
-        ]);
+    // Check if the product is already in the cart
+    if (isset($cart[$productId])) {
+        // If it is, update the quantity
+        $cart[$productId]['quantity'] += $quantity;
+    } else {
+        // If not, add it with the given quantity
+        $product = Product::find($productId);
+        $cart[$productId] = [
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => $quantity,
+        ];
     }
+
+    session()->put('cart', $cart);
+
+    return response()->json([
+        'message' => 'Product added to cart successfully!',
+        'cartCount' => count($cart),
+        'cart' => $cart,
+        'subtotal' => $this->calculateSubtotal($cart),
+    ]);
+}
+
+private function calculateSubtotal($cart)
+{
+    $subtotal = 0;
+    foreach ($cart as $item) {
+        $subtotal += $item['price'] * $item['quantity'];
+    }
+    return $subtotal;
+}
+
 }

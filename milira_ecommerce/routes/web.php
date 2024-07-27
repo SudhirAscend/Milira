@@ -12,7 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\AdminController;
 
 
 Route::prefix('admin')->group(function () {
@@ -119,3 +119,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 });
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
+Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
