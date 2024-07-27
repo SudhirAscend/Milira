@@ -7,73 +7,47 @@
     <x-page-title title="Ecommerce" subtitle="Customer Details" />
 
     <div class="row">
-        <div class="col-12 col-lg-4 d-flex">
-            <div class="card w-100">
-                <div class="card-body">
-                    <div class="position-relative">
-                        <img src="https://placehold.co/800x500/png" class="img-fluid rounded" alt="">
-                        <div class="position-absolute top-100 start-50 translate-middle">
-                            <img src="https://placehold.co/110x110/png" width="100" height="100"
-                                class="rounded-circle raised p-1 bg-white" alt="">
-                        </div>
-                    </div>
-                    <div class="text-center mt-5 pt-4">
-                        <h4 class="mb-1">Julinee Moree</h4>
-                        <p class="mb-0">Marketing Excutive</p>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center gap-3 my-5">
-                        <a href="javascript:;"
-                            class="wh-48 bg-linkedin text-white rounded-circle d-flex align-items-center justify-content-center"><i
-                                class="bi bi-linkedin fs-5"></i></a>
-                        <a href="javascript:;"
-                            class="wh-48 bg-dark text-white rounded-circle d-flex align-items-center justify-content-center"><i
-                                class="bi bi-twitter-x fs-5"></i></a>
-                        <a href="javascript:;"
-                            class="wh-48 bg-facebook text-white rounded-circle d-flex align-items-center justify-content-center"><i
-                                class="bi bi-facebook fs-5"></i></a>
-                        <a href="javascript:;"
-                            class="wh-48 bg-pinterest text-white rounded-circle d-flex align-items-center justify-content-center"><i
-                                class="bi bi-youtube fs-5"></i></a>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-around">
-                        <div class="d-flex flex-column gap-2">
-                            <h4 class="mb-0">798</h4>
-                            <p class="mb-0">Posts</p>
-                        </div>
-                        <div class="d-flex flex-column gap-2">
-                            <h4 class="mb-0">48K</h4>
-                            <p class="mb-0">Following</p>
-                        </div>
-                        <div class="d-flex flex-column gap-2">
-                            <h4 class="mb-0">24.3M</h4>
-                            <p class="mb-0">Followers</p>
-                        </div>
-                    </div>
-
+    <div class="col-12 col-lg-4 d-flex">
+    <div class="card w-100">
+        <div class="card-body">
+            <div class="text-center mt-5 pt-4">
+                <h4 class="mb-1">{{ $customer->full_name }}</h4>
+            </div>
+            <div class="d-flex align-items-center justify-content-around mt-5">
+                <div class="d-flex flex-column gap-2">
+                    <h4 class="mb-0">798</h4>
+                    <p class="mb-0">Posts</p>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item border-top">
-                        <b>Address</b>
-                        <br>
-                        123 Street Name, City, Australia
-                    </li>
-                    <li class="list-group-item">
-                        <b>Email</b>
-                        <br>
-                        mail.com
-                    </li>
-                    <li class="list-group-item">
-                        <b>Phone</b>
-                        <br>
-                        Toll Free (123) 472-796
-                        <br>
-                        Mobile : +91-9910XXXX
-                    </li>
-                </ul>
-
-
+                <div class="d-flex flex-column gap-2">
+                    <h4 class="mb-0">48K</h4>
+                    <p class="mb-0">Following</p>
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <h4 class="mb-0">24.3M</h4>
+                    <p class="mb-0">Followers</p>
+                </div>
             </div>
         </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item border-top">
+                <b>Address</b>
+                <br>
+                {{ $customer->address }}
+            </li>
+            <li class="list-group-item">
+                <b>Email</b>
+                <br>
+                {{ $customer->email }}
+            </li>
+            <li class="list-group-item">
+                <b>Phone</b>
+                <br>
+                {{ $customer->phone_number }}
+                <br>
+            </li>
+        </ul>
+    </div>
+</div>
 
         <div class="col-12 col-lg-8 d-flex">
             <div class="card w-100">
