@@ -29,33 +29,58 @@ class ShopController extends Controller
 }
 
 
-public function filterByCategory(Request $request)
+
+    public function filterByCategory(Request $request)
+    {
+        $categories = $request->categories;
+        $colors = $request->colors;
+
+        $query = Product::query();
+
+        if (!empty($categories)) {
+            $query->whereIn('category', $categories);
+        }
+
+        if (!empty($colors)) {
+            $query->whereIn('color', $colors);
+        }
+
+        $products = $query->get();
+
+        // Get the wishlist status
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cart = session()->get('cart', []);
+        $cartCount = count($cart);
+
+        $products = $products->map(function ($product) use ($wishlistProductIds) {
+            $product->in_wishlist = in_array($product->id, $wishlistProductIds);
+            return $product;
+        });
+
+        return response()->json(compact('products', 'wishlistCount', 'cartCount'));
+    }
+
+    public function showProduct($title)
 {
-    $categories = $request->categories;
-    $colors = $request->colors;
+    $product = Product::where('title', $title)->first();
 
-    $query = Product::query();
-
-    if (!empty($categories)) {
-        $query->whereIn('category', $categories);
+    if (!$product) {
+        return redirect()->route('shop.index')->with('error', 'Product not found');
     }
 
-    if (!empty($colors)) {
-        $query->whereIn('color', $colors);
-    }
-
-    $products = $query->get();
-
-    // Get the wishlist status
     $user_id = Auth::id();
     $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-    $products = $products->map(function ($product) use ($wishlistProductIds) {
-        $product->in_wishlist = in_array($product->id, $wishlistProductIds);
-        return $product;
-    });
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
 
-    return response()->json($products);
+    return view('shop.product', compact('product', 'wishlistCount', 'cartCount', 'subtotal'));
 }
-
 }

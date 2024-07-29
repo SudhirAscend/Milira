@@ -17,7 +17,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
+        $quantity = $request->input('quantity', 1); // Default quantity to 1 if not provided
 
         $cart = session()->get('cart', []);
 
@@ -37,6 +37,9 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
+        // Save cart to database
+        $this->saveCartToDatabase($cart);
+
         $cartCount = count($cart);
         $subtotal = $this->calculateSubtotal($cart);
 
@@ -46,7 +49,7 @@ class CartController extends Controller
             'cart' => $cart,
             'subtotal' => $subtotal
         ]);
-    }
+    } 
 
     public function index()
     {
@@ -98,7 +101,7 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Product not found in cart'], 404);
     }
-
+    
     public function checkout(Request $request)
     {
         $cart = session()->get('cart', []);
@@ -125,7 +128,7 @@ class CartController extends Controller
         $product = Product::find($request->product_id);
 
         if (!$product) {
-            return redirect()->route('shop.product', $request->product_id)->with('error', 'Product not found');
+            return redirect()->route('shop.product', ['title' => $request->product_id])->with('error', 'Product not found');
         }
 
         $cart = session()->get('cart', []);
