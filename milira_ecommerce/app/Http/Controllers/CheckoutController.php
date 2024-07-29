@@ -29,19 +29,34 @@ class CheckoutController extends Controller
 
     public function storeAddress(Request $request)
     {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:15',
+            'country' => 'required|string|max:255',
+            'address' => 'required|string|max:500',
+            'city' => 'required|string|max:255',
+            'postcode' => 'required|string|max:10',
+        ]);
+
         $user = Auth::user();
+
+        if ($request->is_default) {
+            Address::where('user_id', $user->id)->update(['is_default' => false]);
+        }
 
         $address = new Address();
         $address->user_id = $user->id;
         $address->first_name = $request->first_name;
         $address->last_name = $request->last_name;
-        $address->address_line1 = $request->address_line1;
-        $address->address_line2 = $request->address_line2;
-        $address->city = $request->city;
-        $address->state = $request->state;
-        $address->postal_code = $request->postal_code;
-        $address->country = $request->country;
+        $address->email = $request->email;
         $address->phone = $request->phone;
+        $address->country = $request->country;
+        $address->address = $request->address;
+        $address->city = $request->city;
+        $address->postcode = $request->postcode;
+        $address->is_default = $request->is_default ? true : false;
         $address->save();
 
         return redirect()->route('checkout.show')->with('success', 'Address saved successfully.');
@@ -118,7 +133,7 @@ class CheckoutController extends Controller
 
             return redirect()->route('thank-you');
         } else {
-            return redirect()->route('checkout.index')->with('error', 'Payment verification failed. Please try again.');
+            return redirect()->route('checkout.show')->with('error', 'Payment verification failed. Please try again.');
         }
     }
 }

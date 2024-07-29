@@ -15,46 +15,44 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request)
-{
-    $productId = $request->input('product_id');
-    $quantity = $request->input('quantity');
+    {
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity');
 
-    $cart = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-    if (isset($cart[$productId])) {
-        $cart[$productId]['quantity'] += $quantity;
-    } else {
-        $product = Product::find($productId);
-        $cart[$productId] = [
-            'name' => $product->title,
-            'price' => $product->price,
-            'quantity' => $quantity,
-            'image' => $product->image // assuming the product has an 'image' attribute
-        ];
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            $product = Product::find($productId);
+            if ($product) {
+                $cart[$productId] = [
+                    'name' => $product->title,
+                    'price' => $product->price,
+                    'quantity' => $quantity,
+                    'image' => $product->image // assuming the product has an 'image' attribute
+                ];
+            }
+        }
+
+        session()->put('cart', $cart);
+
+        $cartCount = count($cart);
+        $subtotal = $this->calculateSubtotal($cart);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cartCount' => $cartCount,
+            'cart' => $cart,
+            'subtotal' => $subtotal
+        ]);
     }
-
-    session()->put('cart', $cart);
-
-    $cartCount = count($cart);
-    $subtotal = array_reduce($cart, function ($sum, $item) {
-        return $sum + ($item['price'] * $item['quantity']);
-    }, 0);
-
-    return response()->json([
-        'message' => 'Product added to cart successfully!',
-        'cartCount' => $cartCount,
-        'cart' => $cart,
-        'subtotal' => $subtotal
-    ]);
-}
 
     public function index()
     {
         $cart = session()->get('cart', []);
         $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
+        $subtotal = $this->calculateSubtotal($cart);
 
         return view('cart', compact('cart', 'cartCount', 'subtotal'));
     }
@@ -88,9 +86,7 @@ class CartController extends Controller
             CartDetail::where('user_id', Auth::id())->where('product_id', $productId)->delete();
 
             // Calculate the subtotal
-            $subtotal = array_reduce($cart, function ($sum, $item) {
-                return $sum + ($item['price'] * $item['quantity']);
-            }, 0);
+            $subtotal = $this->calculateSubtotal($cart);
 
             return response()->json([
                 'message' => 'Product removed from cart successfully!',
@@ -117,7 +113,7 @@ class CartController extends Controller
         // Clear session cart
         session()->forget('cart');
 
-        return redirect()->route('checkout.index');
+        return redirect()->route('checkout.show');
     }
 
     public function buyNow(Request $request)
@@ -129,7 +125,7 @@ class CartController extends Controller
         $product = Product::find($request->product_id);
 
         if (!$product) {
-            return redirect()->route('product.show', $request->product_id)->with('error', 'Product not found');
+            return redirect()->route('shop.product', $request->product_id)->with('error', 'Product not found');
         }
 
         $cart = session()->get('cart', []);
@@ -155,7 +151,7 @@ class CartController extends Controller
         // Clear session cart
         session()->forget('cart');
 
-        return redirect()->route('checkout.index');
+        return redirect()->route('checkout.show');
     }
 
     private function saveCartToDatabase($cart)
@@ -179,46 +175,44 @@ class CartController extends Controller
             }
         }
     }
-   // CartController.php
 
-public function add(Request $request)
-{
-    $productId = $request->input('product_id');
-    $quantity = $request->input('quantity', 1); // Default quantity to 1 if not provided
-
-    $cart = session()->get('cart', []);
-
-    // Check if the product is already in the cart
-    if (isset($cart[$productId])) {
-        // If it is, update the quantity
-        $cart[$productId]['quantity'] += $quantity;
-    } else {
-        // If not, add it with the given quantity
-        $product = Product::find($productId);
-        $cart[$productId] = [
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => $quantity,
-        ];
+    private function calculateSubtotal($cart)
+    {
+        $subtotal = 0;
+        foreach ($cart as $item) {
+            $subtotal += $item['price'] * $item['quantity'];
+        }
+        return $subtotal;
     }
 
-    session()->put('cart', $cart);
+    public function add(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity', 1); // Default quantity to 1 if not provided
 
-    return response()->json([
-        'message' => 'Product added to cart successfully!',
-        'cartCount' => count($cart),
-        'cart' => $cart,
-        'subtotal' => $this->calculateSubtotal($cart),
-    ]);
-}
+        $cart = session()->get('cart', []);
 
-private function calculateSubtotal($cart)
-{
-    $subtotal = 0;
-    foreach ($cart as $item) {
-        $subtotal += $item['price'] * $item['quantity'];
+        // Check if the product is already in the cart
+        if (isset($cart[$productId])) {
+            // If it is, update the quantity
+            $cart[$productId]['quantity'] += $quantity;
+        } else {
+            // If not, add it with the given quantity
+            $product = Product::find($productId);
+            $cart[$productId] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => $quantity,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+            'cartCount' => count($cart),
+            'cart' => $cart,
+            'subtotal' => $this->calculateSubtotal($cart),
+        ]);
     }
-    return $subtotal;
-}
-
 }

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('assets/images/homepage-one/icon.png') }}">
     <style>
         #billingDetails.d-none {
@@ -29,7 +30,6 @@
                     <div class="col-lg-6">
                         <div class="checkout-wrapper">
                             @auth
-                                <a href="{{ route('login') }}" class="shop-btn">Log into Your Account</a>
                                 <div class="checkout-wrapper">
                                     <div class="account-section billing-section">
                                         <h5 class="wrapper-heading">Select a Billing Address</h5>
@@ -59,7 +59,7 @@
                                         <div class="account-section billing-section">
                                             <h5 class="wrapper-heading">Billing Details</h5>
                                             <div class="review-form">
-                                                <form action="{{ route('checkout.storeOrder') }}" method="POST" id="checkoutForm">
+                                                <form action="{{ route('checkout.storeAddress') }}" method="POST" id="checkoutForm">
                                                     @csrf
                                                     <div class="account-inner-form">
                                                         <div class="review-form-name">
@@ -205,11 +205,6 @@
         document.getElementById('addAddressBtn').addEventListener('click', function() {
             document.getElementById('billingDetails').classList.remove('d-none');
             document.getElementById('billingDetails').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        document.querySelector('.btn-primary').addEventListener('click', function(e) {
-            e.preventDefault(); // Prevent default action
-            document.getElementById('checkoutForm').submit(); // Submit the form
         });
 
         document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
