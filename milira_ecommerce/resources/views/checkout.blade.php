@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/checkout.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
     <!-- header -->
     <!-- Add your header code here -->
-
+    @include('header')
     <section class="checkout product footer-padding">
         <div class="container">
             <div class="checkout-section">

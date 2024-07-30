@@ -15,11 +15,12 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
 </head>
 
 <body>
     <!--------------- header-section --------------->
-  
+    @include('header')
     <!--------------- header-section-end --------------->
 
     <!--------------- blog-tittle-section---------------->

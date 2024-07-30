@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\Wishlist;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Order;
@@ -26,7 +27,18 @@ class CheckoutController extends Controller
             return $item->price * $item->quantity;
         });
 
-        return view('checkout', compact('cartItems', 'addresses', 'totalAmount'));
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        // Fetch cart items from the database for the logged-in user
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+        return view('checkout', compact('cartItems', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
     public function storeOrder(Request $request)

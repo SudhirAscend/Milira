@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cart;
+use App\Models\Wishlist;
 use App\Models\CartDetail;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,7 +54,18 @@ class CartController extends Controller
         $cartCount = $cart->count();
         $subtotal = $this->calculateSubtotal($userId);
 
-        return view('cart', compact('cart', 'cartCount', 'subtotal'));
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        // Fetch cart items from the database for the logged-in user
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+        return view('cart', compact('cart', 'cartCount', 'subtotal','wishlistCount', 'cartItems'));
     }
 
     public function clearCart()
