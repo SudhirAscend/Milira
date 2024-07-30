@@ -13,6 +13,7 @@ class ShopController extends Controller
     public function index()
     {
         $categories = Product::select('category')->distinct()->get();
+        $collections = Product::select('collection')->distinct()->get(); // Fetch distinct collections
         $colors = Product::select('color')->distinct()->pluck('color');
         $products = Product::all();
 
@@ -27,18 +28,23 @@ class ShopController extends Controller
             return $item->product->price * $item->quantity;
         });
 
-        return view('shop', compact('categories', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
+        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
     public function filterByCategory(Request $request)
     {
         $categories = $request->categories;
+        $collections = $request->collections; // Get collections from the request
         $colors = $request->colors;
 
         $query = Product::query();
 
         if (!empty($categories)) {
             $query->whereIn('category', $categories);
+        }
+
+        if (!empty($collections)) {
+            $query->whereIn('collection', $collections); // Filter by collections
         }
 
         if (!empty($colors)) {

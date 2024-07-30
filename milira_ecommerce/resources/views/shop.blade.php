@@ -113,6 +113,20 @@
                                 </div>
                             </div>
                             <hr>
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Collections</h5>
+                                <div class="sidebar-item">
+                                <ul class="sidebar-list">
+            @foreach ($collections as $collection)
+                <li>
+                    <input type="checkbox" class="collection-checkbox" id="{{ $collection->collection }}" name="collection" value="{{ $collection->collection }}">
+                    <label for="{{ $collection->collection }}">{{ $collection->collection }}</label>
+                </li>
+            @endforeach
+        </ul>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="sidebar-wrapper sidebar-range">
                                 <h5 class="wrapper-heading">Price Range</h5>
                                 <div class="price-slide range-slider">
@@ -375,250 +389,250 @@
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
-
-    <script>
-        $(document).ready(function () {
-            function updateCart(cartCount, cart, subtotal) {
-                $('#cart-item-count').text(cartCount);
-                $('#cart-subtotal').text('₹' + subtotal);
-                var cartHtml = '';
-                for (const [productId, item] of Object.entries(cart)) {
-                    cartHtml += `
-                        <div class="wrapper" data-id="${productId}">
-                            <div class="wrapper-item">
-                                <div class="wrapper-img">
-                                    <img src="/storage/uploads/${item.name}_0.jpg" alt="img">
-                                </div>
-                                <div class="wrapper-content">
-                                    <h5 class="wrapper-title">${item.name}</h5>
-                                    <div class="price">
-                                        <p class="new-price">₹${item.price}</p>
-                                    </div>
-                                    <div class="quantity">
-                                        Qty: ${item.quantity}
-                                    </div>
-                                </div>
-                                
-                                <span class="close-btn" data-id="${productId}">
-                                    <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
-                                    </svg>
-                                </span>
+<script>
+    $(document).ready(function () {
+    function updateCart(cartCount, cart, subtotal) {
+        $('#cart-item-count').text(cartCount);
+        $('#cart-subtotal').text('₹' + subtotal);
+        var cartHtml = '';
+        for (const [productId, item] of Object.entries(cart)) {
+            cartHtml += `
+                <div class="wrapper" data-id="${productId}">
+                    <div class="wrapper-item">
+                        <div class="wrapper-img">
+                            <img src="/storage/uploads/${item.name}_0.jpg" alt="img">
+                        </div>
+                        <div class="wrapper-content">
+                            <h5 class="wrapper-title">${item.name}</h5>
+                            <div class="price">
+                                <p class="new-price">₹${item.price}</p>
+                            </div>
+                            <div class="quantity">
+                                Qty: ${item.quantity}
                             </div>
                         </div>
-                    `;
-                }
-                $('#cart-wrapper-item').html(cartHtml);
-                rebindCloseButtons();
+                        
+                        <span class="close-btn" data-id="${productId}">
+                            <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+        $('#cart-wrapper-item').html(cartHtml);
+        rebindCloseButtons();
+    }
+
+    $('.add-to-cart-btn').off('click').on('click', function () {
+        var productId = $(this).data('id');
+        var quantity = parseInt($('#productQuantity').val(), 10) || 1;
+
+        $.ajax({
+            url: '{{ route("cart.add") }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                product_id: productId,
+                quantity: quantity
+            },
+            success: function (response) {
+                updateCart(response.cartCount, response.cart, response.subtotal);
+            },
+            error: function (response) {
+                if (response.status === 401) {
+                    window.location.href = '{{ route("login") }}';
+                } 
             }
+        });
+    });
 
-            $('.add-to-cart-btn').off('click').on('click', function () {
-                var productId = $(this).data('id');
-                var quantity = parseInt($('#productQuantity').val(), 10) || 1;
+    $('.buy-now-btn').on('click', function () {
+        var url = $(this).data('url');
+        window.location.href = url;
+    });
 
-                $.ajax({
-                    url: '{{ route("cart.add") }}',
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        product_id: productId,
-                        quantity: quantity
-                    },
-                    success: function (response) {
-                        updateCart(response.cartCount, response.cart, response.subtotal);
-                    },
-                    error: function (response) {
-                        if (response.status === 401) {
-                            window.location.href = '{{ route("login") }}';
-                        } 
+    function rebindCloseButtons() {
+        $('.close-btn').off('click').on('click', function () {
+            var productId = $(this).data('id');
+
+            $.ajax({
+                url: '{{ route("cart.remove") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_id: productId
+                },
+                success: function (response) {
+                    updateCart(response.cartCount, response.cart, response.subtotal);
+                },
+                error: function (response) {
+                    if (response.status === 401) {
+                        window.location.href = '{{ route("login") }}';
                     }
-                });
+                }
             });
+        });
+    }
 
-            $('.buy-now-btn').on('click', function () {
-                var url = $(this).data('url');
-                window.location.href = url;
-            });
+    function filterProducts() {
+        let selectedCategories = [];
+        $('.category-checkbox:checked').each(function () {
+            selectedCategories.push($(this).val());
+        });
 
-            function rebindCloseButtons() {
-                $('.close-btn').off('click').on('click', function () {
-                    var productId = $(this).data('id');
+        let selectedCollections = [];
+        $('.collection-checkbox:checked').each(function () {
+            selectedCollections.push($(this).val());
+        });
 
-                    $.ajax({
-                        url: '{{ route("cart.remove") }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            product_id: productId
-                        },
-                        success: function (response) {
-                            updateCart(response.cartCount, response.cart, response.subtotal);
-                        },
-                        error: function (response) {
-                            if (response.status === 401) {
-                                window.location.href = '{{ route("login") }}';
-                            }
-                        }
-                    });
-                });
-            }
-
-            function filterProducts() {
-                let selectedCategories = [];
-                $('.category-checkbox:checked').each(function () {
-                    selectedCategories.push($(this).val());
-                });
-
-                let selectedColors = [];
-                $('input[name="color"]:checked').each(function () {
-                    selectedColors.push($(this).val());
-                });
-
-                $.ajax({
-                    url: '{{ route('shop.filterByCategory') }}',
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        categories: selectedCategories,
-                        colors: selectedColors
-                    },
-                    success: function (response) {
-                        $('#product-list').empty();
-                        response.products.forEach(product => {
-                            $('#product-list').append(`
-                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
-                                    <div class="card product">
-                                        <div class="card-body">
-                                            <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
-                                            <div class="card-hover">
-                                                <div class="hover-icons text-center">
-                                                    <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                                    <button class="wishlist-button ${product.in_wishlist ? 'wishlisted' : ''}" data-product-id="${product.id}">
-                                                        <i class="bi bi-heart${product.in_wishlist ? '-fill' : ''}"></i>
-                                                    </button>
-                                                    <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+        $.ajax({
+            url: '{{ route('shop.filterByCategory') }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                categories: selectedCategories,
+                collections: selectedCollections // Send collections to the backend
+            },
+            success: function (response) {
+                $('#product-list').empty();
+                response.products.forEach(product => {
+                    $('#product-list').append(`
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
+                            <div class="card product">
+                                <div class="card-body">
+                                    <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
+                                    <div class="card-hover">
+                                        <div class="hover-icons text-center">
+                                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                            <button class="wishlist-button ${product.in_wishlist ? 'wishlisted' : ''}" data-product-id="${product.id}">
+                                                <i class="bi bi-heart${product.in_wishlist ? '-fill' : ''}"></i>
+                                            </button>
+                                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <div class="pdt-title">
+                                            <h6>${product.title}</h6>
+                                        </div>
+                                        <div class="pdt-price">
+                                            <h6>${product.price}</h6>
+                                        </div>
+                                        <div class="pdt-rating mt-4">
+                                            <p>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                                <span>(${product.reviews} reviews)</span>
+                                            </p>
+                                        </div>
+                                        <div class="pdt-shop text-center mt-5">
+                                            <div class="row">
+                                                <div class="col-9">
+                                                    <button class="buy-now-btn" data-url="/shop/${product.title.replace(/\s+/g, '-')}">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
                                                 </div>
-                                            </div>
-                                            <div class="container">
-                                                <div class="pdt-title">
-                                                    <h6>${product.title}</h6>
-                                                </div>
-                                                <div class="pdt-price">
-                                                    <h6>${product.price}</h6>
-                                                </div>
-                                                <div class="pdt-rating mt-4">
-                                                    <p>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-half"></i>
-                                                        <span>(${product.reviews} reviews)</span>
-                                                    </p>
-                                                </div>
-                                                <div class="pdt-shop text-center mt-5">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <button class="buy-now-btn" data-url="/shop/${product.title.replace(/\s+/g, '-')}">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <button class="add-to-cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-3">
+                                                    <button class="add-to-cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            `);
-                        });
+                            </div>
+                        </div>
+                    `);
+                });
 
-                        rebindEventHandlers();
+                rebindEventHandlers();
+            }
+        });
+    }
+
+    function rebindEventHandlers() {
+        $('.add-to-cart-btn').off('click').on('click', function () {
+            var productId = $(this).data('id');
+            var quantity = parseInt($('#productQuantity').val(), 10) || 1;
+
+            $.ajax({
+                url: '{{ route("cart.add") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_id: productId,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    updateCart(response.cartCount, response.cart, response.subtotal);
+                },
+                error: function (response) {
+                    if (response.status === 401) {
+                        window.location.href = '{{ route("login") }}';
+                    } 
+                }
+            });
+        });
+
+        $('.wishlist-button').off('click').on('click', function () {
+            const productId = $(this).data('product-id');
+            const isWishlisted = $(this).hasClass('wishlisted');
+
+            fetch(`/wishlist/toggle/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ productId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (isWishlisted) {
+                            $(this).removeClass('wishlisted');
+                            $(this).find('i').removeClass('bi-heart-fill').addClass('bi-heart');
+                        } else {
+                            $(this).addClass('wishlisted');
+                            $(this).find('i').removeClass('bi-heart').addClass('bi-heart-fill');
+                        }
+                        $('#wishlist-item-count').text(data.wishlistCount);
+                        $('#wishlist-circle').css('fill', data.wishlistCount > 0 ? 'red' : '#000');
                     }
                 });
-            }
-
-            function rebindEventHandlers() {
-                $('.add-to-cart-btn').off('click').on('click', function () {
-                    var productId = $(this).data('id');
-                    var quantity = parseInt($('#productQuantity').val(), 10) || 1;
-
-                    $.ajax({
-                        url: '{{ route("cart.add") }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            product_id: productId,
-                            quantity: quantity
-                        },
-                        success: function (response) {
-                            updateCart(response.cartCount, response.cart, response.subtotal);
-                        },
-                        error: function (response) {
-                            if (response.status === 401) {
-                                window.location.href = '{{ route("login") }}';
-                            } 
-                        }
-                    });
-                });
-
-                $('.wishlist-button').off('click').on('click', function () {
-                    const productId = $(this).data('product-id');
-                    const isWishlisted = $(this).hasClass('wishlisted');
-
-                    fetch(`/wishlist/toggle/${productId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({ productId })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                if (isWishlisted) {
-                                    $(this).removeClass('wishlisted');
-                                    $(this).find('i').removeClass('bi-heart-fill').addClass('bi-heart');
-                                } else {
-                                    $(this).addClass('wishlisted');
-                                    $(this).find('i').removeClass('bi-heart').addClass('bi-heart-fill');
-                                }
-                                $('#wishlist-item-count').text(data.wishlistCount);
-                                $('#wishlist-circle').css('fill', data.wishlistCount > 0 ? 'red' : '#000');
-                            }
-                        });
-                });
-
-                $('.close-btn').off('click').on('click', function () {
-                    var productId = $(this).data('id');
-
-                    $.ajax({
-                        url: '{{ route("cart.remove") }}',
-                        method: 'POST',
-                        data: {
-                            _token: '{{ csrf_token() }}',
-                            product_id: productId
-                        },
-                        success: function (response) {
-                            updateCart(response.cartCount, response.cart, response.subtotal);
-                        },
-                        error: function (response) {
-                            if (response.status === 401) {
-                                window.location.href = '{{ route("login") }}';
-                            }
-                        }
-                    });
-                });
-            }
-
-            $('.category-checkbox').change(filterProducts);
-            $('input[name="color"]').change(filterProducts);
-
-            rebindCloseButtons();
-            rebindEventHandlers();
         });
-    </script>
+
+        $('.close-btn').off('click').on('click', function () {
+            var productId = $(this).data('id');
+
+            $.ajax({
+                url: '{{ route("cart.remove") }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    product_id: productId
+                },
+                success: function (response) {
+                    updateCart(response.cartCount, response.cart, response.subtotal);
+                },
+                error: function (response) {
+                    if (response.status === 401) {
+                        window.location.href = '{{ route("login") }}';
+                    }
+                }
+            });
+        });
+    }
+
+    $('.category-checkbox').change(filterProducts);
+    $('.collection-checkbox').change(filterProducts);
+    
+    rebindCloseButtons();
+    rebindEventHandlers();
+});
+
+        </script>
 </body>
 
 </html>
