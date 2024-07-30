@@ -30,7 +30,6 @@ class ShopController extends Controller
         return view('shop', compact('categories', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
-
     public function filterByCategory(Request $request)
     {
         $categories = $request->categories;
