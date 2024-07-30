@@ -764,7 +764,6 @@ $(document).ready(function () {
 
     rebindCloseButtons();
 });
-
 </script>
 
 </body>

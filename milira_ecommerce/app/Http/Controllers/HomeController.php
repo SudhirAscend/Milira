@@ -21,17 +21,26 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-            $user_id = Auth::id();
-            $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-            $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
         
-            $cart = session()->get('cart', []);
-            $cartCount = count($cart);
-            $subtotal = array_reduce($cart, function($sum, $item) {
-                return $sum + ($item['price'] * $item['quantity']);
-            }, 0);
+        $cart = session()->get('cart', []);
+        $cartItems = [];
+        foreach ($cart as $productId => $details) {
+            $product = Product::find($productId);
+            if ($product) {
+                $details['product'] = $product;
+                $cartItems[] = $details;
+            }
+        }
+        $cartCount = count($cartItems);
+        $subtotal = array_reduce($cartItems, function($sum, $item) {
+            return $sum + ($item['price'] * $item['quantity']);
+        }, 0);
+
         // Pass data to the view
-        return view('index', compact('categories', 'products', 'featuredProducts','wishlistCount', 'cartCount', 'subtotal'));
+        return view('index', compact('categories', 'products', 'featuredProducts', 'wishlistCount', 'cartCount', 'subtotal', 'cartItems'));
     }
     public function showSignupForm()
     {

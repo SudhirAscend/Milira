@@ -76,9 +76,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::post('/cart/buy-now', [CartController::class, 'buyNow'])->name('cart.buyNow'); // New route for buy now
-    Route::post('/cart/checkout', [CartController::class, 'buyNow'])->name('cart.checkout');
+    Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.index');
 });
 
 // Payment routes
