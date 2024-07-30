@@ -71,7 +71,12 @@
                     </div>
                     <div class="col-12">
                         <label for="Collection" class="form-label">Collection</label>
-                        <input type="text" class="form-control" id="Collection" name="collection" placeholder="Collection">
+                
+                        <select class="form-select" id="Collection" name="collection">
+                            <option value="Women">Women</option>
+                            <option value="Men">Men</option>
+                            <option value="Kids">Kids</option>
+                        </select>
                     </div>
                     <div class="col-12">
                         <label for="Tags" class="form-label">Tags</label>
