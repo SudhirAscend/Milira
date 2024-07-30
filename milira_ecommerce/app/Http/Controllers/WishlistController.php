@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
@@ -12,9 +13,21 @@ class WishlistController extends Controller
     public function index()
     {
         $user_id = Auth::id();
+        $wishlist = Wishlist::where('user_id', Auth::id())->with('product')->get();
         $wishlistItems = Wishlist::where('user_id', $user_id)->with('product')->get();
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        return view('wishlist', compact('wishlistItems'));
+        // Fetch cart items from the database for the logged-in user
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+
+        return view('wishlist', compact('wishlist','wishlistItems','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
     public function addToWishlist(Request $request)
@@ -38,15 +51,22 @@ class WishlistController extends Controller
 
     public function removeFromWishlist(Request $request)
     {
-        $product_id = $request->product_id;
         $user_id = Auth::id();
-
-        Wishlist::where('user_id', $user_id)->where('product_id', $product_id)->delete();
-
-        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
-
-        return response()->json(['message' => 'Product removed from wishlist successfully!', 'wishlistCount' => $wishlistCount], 200);
+        $product_id = $request->input('product_id');
+    
+        // Find the product in the wishlist
+        $wishlistItem = Wishlist::where('user_id', $user_id)->where('product_id', $product_id)->first();
+    
+        if ($wishlistItem) {
+            // Remove the product from the wishlist
+            $wishlistItem->delete();
+    
+            return response()->json(['message' => 'Product removed from wishlist successfully!']);
+        } else {
+            return response()->json(['message' => 'Product not found in wishlist!'], 400);
+        }
     }
+
     public function toggle(Request $request, $productId)
     {
         $userId = Auth::id();
@@ -61,5 +81,21 @@ class WishlistController extends Controller
         $wishlistCount = Wishlist::where('user_id', $userId)->count();
 
         return response()->json(['success' => true, 'wishlistCount' => $wishlistCount]);
+    }
+
+    // New method to add item to cart from wishlist
+    public function addToCartFromWishlist(Request $request)
+    {
+        $userId = Auth::id();
+        $productId = $request->input('product_id');
+
+        // Add product to cart
+        $cart = new CartController();
+        $response = $cart->addToCart($request);
+
+        // Remove product from wishlist
+        Wishlist::where('user_id', $userId)->where('product_id', $productId)->delete();
+
+        return $response;
     }
 }

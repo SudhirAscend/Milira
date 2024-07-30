@@ -17,85 +17,69 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        $userId = Auth::id();
         $productId = $request->input('product_id');
         $quantity = $request->input('quantity', 1); // Default quantity to 1 if not provided
 
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$productId])) {
-            $cart[$productId]['quantity'] += $quantity;
-        } else {
-            $product = Product::find($productId);
-            if ($product) {
-                $cart[$productId] = [
-                    'name' => $product->title,
-                    'price' => $product->price,
-                    'quantity' => $quantity,
-                    'image' => $product->image // assuming the product has an 'image' attribute
-                ];
-            }
-        }
-
-        session()->put('cart', $cart);
+        $cart = Cart::firstOrNew(['user_id' => $userId, 'product_id' => $productId]);
+        $cart->quantity += $quantity;
+        $cart->save();
 
         // Calculate the subtotal
-        $subtotal = $this->calculateSubtotal($cart);
+        $subtotal = $this->calculateSubtotal($userId);
 
         return response()->json([
             'message' => 'Product added to cart successfully!',
-            'cartCount' => count($cart),
-            'cart' => $cart,
+            'cartCount' => Cart::where('user_id', $userId)->count(),
+            'cart' => Cart::where('user_id', $userId)->with('product')->get(),
             'subtotal' => $subtotal
         ]);
     }
 
-    private function calculateSubtotal($cart)
+    private function calculateSubtotal($userId)
     {
+        $cartItems = Cart::where('user_id', $userId)->get();
         $subtotal = 0;
-        foreach ($cart as $item) {
-            $subtotal += $item['price'] * $item['quantity'];
+        foreach ($cartItems as $item) {
+            $subtotal += $item->product->price * $item->quantity;
         }
         return $subtotal;
     }
 
     public function index()
     {
-        $cart = Cart::where('user_id', Auth::id())->get();
+        $userId = Auth::id();
+        $cart = Cart::where('user_id', $userId)->with('product')->get();
         $cartCount = $cart->count();
-        $subtotal = $this->calculateSubtotal($cart);
+        $subtotal = $this->calculateSubtotal($userId);
 
         return view('cart', compact('cart', 'cartCount', 'subtotal'));
     }
 
     public function clearCart()
     {
-        // Clear the cart details from the database
-        Cart::where('user_id', Auth::id())->delete();
-
+        $userId = Auth::id();
+        Cart::where('user_id', $userId)->delete();
         return redirect()->route('cart.index')->with('success', 'Cart cleared successfully!');
     }
 
     public function removeFromCart(Request $request)
     {
-        if (!Auth::check()) {
-            return response()->json(['message' => 'Please login to remove products from cart'], 401);
-        }
-
+        $userId = Auth::id();
         $productId = $request->product_id;
 
-        // Remove from database
-        Cart::where('user_id', Auth::id())->where('product_id', $productId)->delete();
+        Cart::where('user_id', $userId)->where('product_id', $productId)->delete();
 
         // Refresh the cart
-        $cart = Cart::where('user_id', Auth::id())->get();
-        $subtotal = $this->calculateSubtotal($cart);
+        $cart = Cart::where('user_id', $userId)->with('product')->get();
+        $subtotal = $this->calculateSubtotal($userId);
 
         return response()->json([
             'success' => true,
             'message' => 'Product removed from cart successfully!',
             'cartCount' => $cart->count(),
             'subtotal' => $subtotal
-        ], 200);
+        ]);
     }
 
     public function add(Request $request)
