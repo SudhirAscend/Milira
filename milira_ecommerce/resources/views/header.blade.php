@@ -276,18 +276,14 @@
         <div class="header-bottom d-lg-block d-none">
             <div class="container">
                 <div class="header-nav">
-                    <div class="nav-categories">
-                        <button class="cat-dropdown" onclick="shopCategories()">All Categories
-                        </button>
-                        <div id="shopCategories" class="dropdown-categories">
-                            <a class="drop-cat-items" href="#">Pendent Set</a>
-                            <a class="drop-cat-items" href="#">Chain</a>
-                            <a class="drop-cat-items" href="#">Stud</a>
-                            <a class="drop-cat-items" href="#">Earrings</a>
-                            <a class="drop-cat-items" href="#">Bracelet</a>
-                            <a class="drop-cat-items" href="#">Necklace</a>
-                        </div>
-                    </div>
+                <div class="nav-categories">
+    <button class="cat-dropdown" onclick="shopCategories()">All Categories</button>
+    <div id="shopCategories" class="dropdown-categories">
+        @foreach ($categories as $category)
+            <a class="drop-cat-items" href="#">{{ $category->name }}</a>
+        @endforeach
+    </div>
+</div>
                     <div class="header-nav-menu">
                         <ul class="menu-list">
                             <li>
@@ -399,6 +395,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+</script>
+<script>
+    function shopCategories() {
+        document.getElementById("shopCategories").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.cat-dropdown')) {
+            var dropdowns = document.getElementsByClassName("dropdown-categories");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 </script>
 
     
