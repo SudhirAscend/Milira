@@ -291,7 +291,49 @@
     <div class="card">
         
     </div>
-
+    <div class="card mt-4">
+    <div class="card-body">
+        <h5 class="mb-3 fw-bold">Cart <span class="fw-light ms-2">({{ $cartItems->count() }})</span></h5>
+        <div class="product-table">
+            <div class="table-responsive white-space-nowrap">
+                @if($cartItems->isEmpty())
+                    <p>No items in the cart</p>
+                @else
+                    <table class="table align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Color</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cartItems as $item)
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="product-box">
+                                                <img src="{{ asset('storage/' . $item->product->images[0]) }}" width="55" class="rounded-3" alt="{{ $item->product->name }}">
+                                            </div>
+                                            <div class="product-info">
+                                                <a href="{{ route('product.show', $item->product->title) }}" class="product-title">{{ $item->product->title }}</a>
+                                                <p class="mb-0 product-category">Category: {{ $item->product->category }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ $item->quantity }}</td>
+                                    <td>{{ $item->product->color }}</td>
+                                    <td>{{ $item->product->price }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
     <div class="card mt-4">
         <div class="card-body">
         <h5 class="mb-3 fw-bold">Wishlist<span class="fw-light ms-2">({{ $wishlistItems->count() }})</span></h5>
