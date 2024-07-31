@@ -89,6 +89,9 @@ h4.shop-collection-title {
 
 .loginclr {
   color: #808080 !important;
+  font-family: 'inter','serif';
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .header-user .dropdown {

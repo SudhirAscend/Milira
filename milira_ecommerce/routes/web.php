@@ -108,6 +108,12 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
 Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+
+// Request Product Form
+Route::get('/request-product', [AuthController::class, 'requestProduct'])->name('request-product');
+
+// contact Page
+Route::get('/contact', [AuthController::class, 'contactDetails'])->name('contact');
 Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.product');
 Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
 Route::resource('products', ProductsController::class);
