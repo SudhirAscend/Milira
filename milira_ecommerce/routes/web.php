@@ -119,3 +119,4 @@ Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('produc
 Route::resource('products', ProductsController::class);
 Route::get('/shop-category-{category}', [ShopController::class, 'index'])->name('shop.category');
 Route::get('/shop-collection-{collection}', [ShopController::class, 'filterByCollection'])->name('shop.collection');
+Route::get('/search', [ProductsController::class, 'search'])->name('products.search');

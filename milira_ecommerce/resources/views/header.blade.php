@@ -1,4 +1,43 @@
  <!--------------- header-section --------------->
+ <style>
+    .header-search {
+    position: relative; /* Make sure the search results are positioned relative to this container */
+}
+
+.search-results {
+    display: none;
+    margin-top: 250px;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%; /* Make it the same width as the search input */
+    max-height: 200px; /* Optional: Limit the height and add a scrollbar for long lists */
+    overflow-y: auto;  /* Scrollbar if the list is too long */
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+.search-results ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-results a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+}
+
+.search-results a:hover {
+    background-color: #f1f1f1;
+}
+    </style>
  <header id="header" class="header">
         <div class="header-top-section">
             <div class="container">
@@ -26,10 +65,11 @@
                         </a>
                     </div>
                     <div class="header-cart-items">
-                        <div class="header-search">
-                            <input type="search" name="search" class="input-search" placeholder="Search Here">
-                            <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
-                        </div>
+                    <div class="header-search">
+    <input type="search" name="search" id="search-input" class="input-search" placeholder="Search Here" autocomplete="off">
+    <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
+    <div id="search-results" class="search-results"></div>
+</div>
                         <div class="header-compaire">
                             <a href="compaire.html" class="cart-item">
                                 <span>
@@ -399,6 +439,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function shopCategories() {
         document.getElementById("shopCategories").classList.toggle("show");
@@ -418,6 +459,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 </script>
 
-    
+<script>
+$(document).ready(function() {
+    $('#search-input').on('keyup', function() {
+        let query = $(this).val();
+
+        if (query.length > 0) {
+            $.ajax({
+                url: '{{ route("products.search") }}',
+                type: 'GET',
+                data: {query: query},
+                success: function(data) {
+                    $('#search-results').html(data).fadeIn();
+                }
+            });
+        } else {
+            $('#search-results').fadeOut();
+        }
+    });
+
+    $(document).on('click', '#search-results a', function() {
+        $('#search-input').val($(this).text());
+        $('#search-results').fadeOut();
+    });
+
+    $(document).click(function(e) {
+        if (!$(e.target).closest('.header-search').length) {
+            $('#search-results').fadeOut();
+        }
+    });
+});
+</script>
    
    

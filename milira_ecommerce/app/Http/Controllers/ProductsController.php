@@ -188,4 +188,42 @@ private function generateProductDetailPage($product)
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
     
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    // Search products based on title, description, or other fields
+    $products = Product::where('title', 'like', '%' . $query . '%')
+                        ->orWhere('small_description', 'like', '%' . $query . '%')
+                        ->orWhere('description', 'like', '%' . $query . '%')
+                        ->get();
+
+    if ($request->ajax()) {
+        $output = '<ul>';
+        foreach ($products as $product) {
+            $output .= '<li><a href="' . route('shop.product', $product->title) . '">' . $product->title . '</a></li>';
+        }
+        $output .= '</ul>';
+
+        return $output;
+    }
+
+    // If it's a full search, return the regular view
+    $categories = Product::select('category')->distinct()->get();
+    $collections = Product::select('collection')->distinct()->get();
+    $colors = Product::select('color')->distinct()->pluck('color');
+
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+    $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+    $cartCount = $cartItems->count();
+    $subtotal = $cartItems->sum(function ($item) {
+        return $item->product->price * $item->quantity;
+    });
+
+    return view('shop', compact('products', 'categories', 'collections', 'colors', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'query'));
+}
 }
