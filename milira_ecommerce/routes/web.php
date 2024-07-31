@@ -118,3 +118,4 @@ Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.
 Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
 Route::resource('products', ProductsController::class);
 Route::get('/shop-category-{category}', [ShopController::class, 'index'])->name('shop.category');
+Route::get('/shop-collection-{collection}', [ShopController::class, 'filterByCollection'])->name('shop.collection');

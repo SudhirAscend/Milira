@@ -13,21 +13,25 @@ use Illuminate\Support\Str;
 class ProductsController extends Controller
 {
     public function index()
-    {
-        $products = Product::all();
+{
+    // Fetch distinct collections from the products table
+    $collections = Product::select('collection')->distinct()->get();
 
-        $user_id = Auth::id();
-        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+    // Fetch products and other data as before
+    $products = Product::all();
 
-        $cart = session()->get('cart', []);
-        $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
-    }
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections'));
+}
 
     public function show($slug)
     {

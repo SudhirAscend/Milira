@@ -200,7 +200,34 @@
         </div>
       </div>
 
-      
+      <div class="container">
+    <div class="cat-title mt-5">
+        <h1>Collection</h1>
+    </div>
+    <div class="cat-sub-para mt-3">
+        <p>Giving you a new silver</p>
+    </div>
+</div>
+<div class="categories mt-5 mb-5">
+    <div class="swiper catSlider">
+        <div class="swiper-wrapper">
+            @foreach ($collections as $collection)
+                <div class="swiper-slide">
+                    <div class="pendent-set">
+                        <!-- Display a default image if there's no specific image for the collection -->
+                        <img src="{{ asset('path/to/default-image.png') }}" alt="{{ $collection->collection }}" loading="lazy">
+                        
+                        <div class="cat-btn pt-4">
+                            <a href="{{ url('shop-collection-' . $collection->collection) }}">
+                                <button class="cat-button">{{ $collection->collection }}</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
     <!-- End of about section -->
 
     <!-- Essential Section -->
