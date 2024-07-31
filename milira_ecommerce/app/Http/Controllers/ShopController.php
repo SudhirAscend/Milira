@@ -10,26 +10,30 @@ use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
-    public function index()
-    {
-        $categories = Product::select('category')->distinct()->get();
-        $collections = Product::select('collection')->distinct()->get(); // Fetch distinct collections
-        $colors = Product::select('color')->distinct()->pluck('color');
-        $products = Product::all();
+    public function index($category = null)
+{
+    $categories = Product::select('category')->distinct()->get();
+    $collections = Product::select('collection')->distinct()->get(); // Fetch distinct collections
+    $colors = Product::select('color')->distinct()->pluck('color');
 
-        $user_id = Auth::id();
-        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+    // Fetch products based on the selected category
+    $products = Product::when($category, function ($query, $category) {
+        return $query->where('category', $category);
+    })->get();
 
-        // Fetch cart items from the database for the logged-in user
-        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
-        $cartCount = $cartItems->count();
-        $subtotal = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
-        });
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
-    }
+    // Fetch cart items from the database for the logged-in user
+    $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+    $cartCount = $cartItems->count();
+    $subtotal = $cartItems->sum(function ($item) {
+        return $item->product->price * $item->quantity;
+    });
+
+    return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'category'));
+}
 
     public function filterByCategory(Request $request)
     {

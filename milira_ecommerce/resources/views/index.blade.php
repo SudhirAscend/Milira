@@ -162,10 +162,10 @@
                                 <img src="path/to/default-image.png" alt="{{ $category->name }}" loading="lazy">
                             @endif
                             <div class="cat-btn pt-4">
-                                <a href="#">
-                                    <button class="cat-button">{{ $category->name }}</button>
-                                </a>
-                            </div>
+    <a href="{{ route('shop.category', ['category' => $category->name]) }}">
+        <button class="cat-button">{{ $category->name }}</button>
+    </a>
+</div>
                         </div>
                     </div>
                 @endforeach
@@ -173,8 +173,7 @@
         </div>
     </div>
 
-      <!-- End of categories section -->
-
+     
       <!-- About Section -->
 
       <div class="container abt">

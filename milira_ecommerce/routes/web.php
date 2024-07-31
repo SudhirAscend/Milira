@@ -117,3 +117,4 @@ Route::get('/contact', [AuthController::class, 'contactDetails'])->name('contact
 Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.product');
 Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
 Route::resource('products', ProductsController::class);
+Route::get('/shop-category-{category}', [ShopController::class, 'index'])->name('shop.category');

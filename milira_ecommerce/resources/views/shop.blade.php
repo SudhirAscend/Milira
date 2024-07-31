@@ -102,14 +102,18 @@
                             <div class="sidebar-wrapper">
                                 <h5 class="wrapper-heading">Product Categories</h5>
                                 <div class="sidebar-item">
-                                    <ul class="sidebar-list">
-                                        @foreach ($categories as $category)
-                                            <li>
-                                                <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
-                                                <label for="{{ $category->category }}">{{ $category->category }}</label>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <ul class="sidebar-list">
+            @foreach ($categories as $categoryItem)
+                <li>
+                    <input type="checkbox" class="category-checkbox" 
+                           id="{{ $categoryItem->category }}" 
+                           name="category" 
+                           value="{{ $categoryItem->category }}" 
+                           @if($categoryItem->category == $category) checked @endif>
+                    <label for="{{ $categoryItem->category }}">{{ $categoryItem->category }}</label>
+                </li>
+            @endforeach
+        </ul>
                                 </div>
                             </div>
                             <hr>
