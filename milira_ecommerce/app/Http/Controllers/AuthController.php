@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
+use App\Models\Cart;
 
 class AuthController extends Controller
 {
@@ -160,13 +161,13 @@ class AuthController extends Controller
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        $cart = session()->get('cart', []);
-        $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-        return $sum + ($item['price'] * $item['quantity']);
-    }, 0);
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
 
-        return view('request-product', compact('wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal'));
+        return view('request-product', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
 
     }
     public function contactDetails()
@@ -175,13 +176,13 @@ class AuthController extends Controller
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        $cart = session()->get('cart', []);
-        $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-        return $sum + ($item['price'] * $item['quantity']);
-    }, 0);
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
 
-        return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal'));
+        return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
 
     }
     
