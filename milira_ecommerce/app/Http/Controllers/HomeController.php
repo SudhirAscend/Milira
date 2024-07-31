@@ -12,19 +12,29 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Fetch categories and products from the database
+        // Fetch categories from the database
         $categories = ProductCategory::all();
-        $products = Product::all();
+    
+        // Fetch the latest 6 products for each category
+        $products = $categories->mapWithKeys(function ($category) {
+            return [
+                $category->name => Product::where('category', $category->name)
+                    ->latest()  // Order by latest
+                    ->take(6)   // Limit to 6 products
+                    ->get()
+            ];
+        });
+    
         $featuredProducts = Product::where('collection', 'women')
             ->orWhere('collection', 'Women')
             ->latest()
             ->take(3)
             ->get();
-
+    
         $user_id = Auth::id();
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
-        
+    
         $cart = session()->get('cart', []);
         $cartItems = [];
         foreach ($cart as $productId => $details) {
@@ -35,12 +45,12 @@ class HomeController extends Controller
             }
         }
         $cartCount = count($cartItems);
-        $subtotal = array_reduce($cartItems, function($sum, $item) {
+        $subtotal = array_reduce($cartItems, function ($sum, $item) {
             return $sum + ($item['price'] * $item['quantity']);
         }, 0);
-
+    
         // Pass data to the view
-        return view('index', compact('categories', 'products', 'featuredProducts', 'wishlistCount', 'cartCount', 'subtotal', 'cartItems'));
+        return view('index', compact('categories', 'products', 'featuredProducts', 'wishlistProductIds','wishlistCount', 'cartCount', 'subtotal', 'cartItems'));
     }
     public function showSignupForm()
     {
@@ -59,4 +69,6 @@ class HomeController extends Controller
 {
     return view('profile'); // Assuming you have a profile.blade.php view file
 }
+
+
 }

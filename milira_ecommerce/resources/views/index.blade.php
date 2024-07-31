@@ -17,75 +17,65 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+ 
     <style>
-    .cart-icon {
-        position: relative;
-    }
-
-    .wishlist-button i.wishlist-added {
-    color: red;
-}
-.wishlist-button {
-    font-size: 20px;
-    color: #fff;
-}
-
-.wishlist-button i {
-    color: #fff;
-}
-
-.wishlist-button.wishlisted i {
-    color: red;
-}
-.cartcount{
-    position: relative;
-    left: 40px;
-    top: -10px;
-    background-color: red;
-    color: white !important;
-    border-radius: 50%;
-    padding:1px 6px;
-    font-size: 10px;  
-}
-.wishlist-count {
-    position: relative;
-    left: 40px;
-    top: -10px;
-    background-color: red;
-    color: white !important;
-    border-radius: 50%;
-    padding:1px 6px;
-    font-size: 10px;
-}
-    
-
-    
-
-        .loginclr{
-         color:#808080 !important;
+        .cart-icon {
+            position: relative;
+        }
+        .wishlist-button i.wishlist-added {
+            color: red;
+        }
+        .wishlist-button {
+            font-size: 20px;
+            color: #fff;
+        }
+        .wishlist-button i {
+            color: #fff;
+        }
+        .wishlist-button.wishlisted i {
+            color: red;
+        }
+        .cartcount {
+            position: relative;
+            left: 40px;
+            top: -10px;
+            background-color: red;
+            color: white !important;
+            border-radius: 50%;
+            padding: 1px 6px;
+            font-size: 10px;
+        }
+        .wishlist-count {
+            position: relative;
+            left: 40px;
+            top: -10px;
+            background-color: red;
+            color: white !important;
+            border-radius: 50%;
+            padding: 1px 6px;
+            font-size: 10px;
+        }
+        .loginclr {
+            color: #808080 !important;
         }
         .header-user .dropdown {
-    display: flex;
-    align-items: center;
-}
-
-.header-user .dropdown span {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-.header-user .dropdown p {
-    margin: 0;
-    padding-left: 5px;
-}
-
-.header-user .dropdown-menu {
-    left: auto;
-    right: 0;
-}
-
-        </style>
+            display: flex;
+            align-items: center;
+        }
+        .header-user .dropdown span {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .header-user .dropdown p {
+            margin: 0;
+            padding-left: 5px;
+        }
+        .header-user .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+    </style>
         
 
 </head>
@@ -249,377 +239,116 @@
 
     <!-- product Categories -->
 
+    
+
     <div class="container">
-        <div class="main-title pt-5">
-            <h1>Top Selling Products</h1>
-        </div>
-        <div class="sub-para py-3">
-            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-        </div>
-        <div class="product-categories">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <div class="main-title pt-5">
+        <h1>Top Selling Products</h1>
+    </div>
+    <div class="sub-para py-3">
+        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+    </div>
+    <div class="tab-nav-bar">
+        <div class="tab-navigation">
+            <div class="left-btn" name="chevron-back-outline">
+                <i class="bi bi-chevron-left"></i>
+            </div>
+            <div class="right-btn" name="chevron-forward-outline">
+                <i class="bi bi-chevron-right"></i>
+            </div>
+
+            <ul class="tab-menu">
                 @foreach ($categories as $category)
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link @if ($loop->first) active @endif" id="{{ Str::slug($category->name) }}-tab" data-bs-toggle="pill" data-bs-target="#{{ Str::slug($category->name) }}" type="button" role="tab" aria-controls="{{ Str::slug($category->name) }}" aria-selected="true">{{ $category->name }}</button>
+                    <li class="tab-btn @if ($loop->first) active @endif" data-category="{{ Str::slug($category->name) }}">
+                        {{ $category->name }}
                     </li>
                 @endforeach
             </ul>
-            <div class="tab-content" id="pills-tabContent">
-                @foreach ($categories as $category)
-                    <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ Str::slug($category->name) }}" role="tabpanel" aria-labelledby="{{ Str::slug($category->name) }}-tab" tabindex="0">
-                        <div class="row">
-                            @foreach ($products->where('category', $category->name) as $product)
-                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4">
-                                    <div class="card product">
-                                        <div class="card-body">
-                                            @if(!empty($product->images))
-                                                <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" class="pdt-img">
-                                            @endif
-                                            <div class="card-hover">
-                                                <div class="hover-icons text-center">
-                                                    <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                                    <a href="#"><i class="bi bi-heart"></i></a>
-                                                    <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                                </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+        @foreach ($categories as $category)
+            @php
+                $filteredProducts = $products->get($category->name);
+            @endphp
+            
+            <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ Str::slug($category->name) }}" role="tabpanel" aria-labelledby="{{ Str::slug($category->name) }}-tab" tabindex="0">
+                <div class="row">
+                    @if($filteredProducts && $filteredProducts->isNotEmpty())
+                        @foreach ($filteredProducts as $product)
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4">
+                                <div class="card product">
+                                    <div class="card-body">
+                                        @if(!empty($product->images))
+                                            <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" class="pdt-img">
+                                        @endif
+                                        <div class="card-hover">
+                                            <div class="hover-icons text-center">
+                                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                                <button class="wishlist-button {{ in_array($product->id, $wishlistProductIds) ? 'wishlisted' : '' }}" data-product-id="{{ $product->id }}">
+                                                        <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
+                                                    </button>
+                                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
                                             </div>
-                                            <div class="container">
-                                                <div class="pdt-title">
-                                                    <h6>{{ $product->title }}</h6>
-                                                </div>
-                                                <div class="pdt-price">
-                                                    <h6>₹{{ number_format($product->price, 2) }}</h6>
-                                                </div>
-                                                <div class="pdt-rating mt-4">
-                                                    <p>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-fill"></i>
-                                                        <i class="bi bi-star-half"></i>
-                                                        <span>(4.5 reviews)</span>
-                                                    </p>
-                                                </div>
-                                                <div class="pdt-shop text-center mt-5">
-                                                    <div class="row">
-                                                        <div class="col-9">
-                                                            <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
-                                                        </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="pdt-title">
+                                                <h6>{{ $product->title }}</h6>
+                                            </div>
+                                            <div class="pdt-price">
+                                                <h6>₹{{ number_format($product->price, 2) }}</h6>
+                                            </div>
+                                            <div class="pdt-rating mt-4">
+                                                <p>
+                                                    @for ($i = 0; $i < 5; $i++)
+                                                        @if ($i < floor($product->averageRating()))
+                                                            <i class="bi bi-star-fill"></i>
+                                                        @elseif ($i < ceil($product->averageRating()))
+                                                            <i class="bi bi-star-half"></i>
+                                                        @else
+                                                            <i class="bi bi-star"></i>
+                                                        @endif
+                                                    @endfor
+                                                    <span>({{ $product->totalReviews() }} reviews)</span>
+                                                </p>
+                                            </div>
+                                            <div class="pdt-shop text-center mt-5">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>    
-                                </div>
-                            @endforeach
+                                    </div>
+                                </div>    
+                            </div>
+                        @endforeach
+                    @else
+                        <div class="col-12 text-center">
+                            <p>No products found in this category.</p>
                         </div>
-                        <div class="shop-more text-center mt-5">
-                            <a href="product-sidebar.html">
-                                <button>Shop More</button>
-                            </a>
-                        </div>
+                    @endif
+                </div>
+                @if($filteredProducts && $filteredProducts->isNotEmpty())
+                    <div class="shop-more text-center mt-5">
+                        <a href="product-sidebar.html">
+                            <button>Shop More</button>
+                        </a>
                     </div>
-                @endforeach
+                @endif
             </div>
-        </div>
+        @endforeach
     </div>
+</div>
 
-    <section class="main-container">
-		<div class="tab-nav-bar">
-			<div class="tab-navigation">
 
-				<div class="left-btn" name="chevron-back-outline">
-                    <i class="bi bi-chevron-left"></i>
-                </div>
-				<div class="right-btn" name="chevron-forward-outline">
-                    <i class="bi bi-chevron-right"></i>
-                </div>
 
-				<ul class="tab-menu">
-					<li class="tab-btn active">Pendent Set</li>
-					<li class="tab-btn">Chain</li>
-					<li class="tab-btn">Stud</li>
-					<li class="tab-btn">Earrings</li>
-					<li class="tab-btn">Bracelets</li>
-					<li class="tab-btn">Necklace</li>
-				</ul>
-			</div>
-		</div>
 
-		<div class="tab-content">
-
-			<div class="tab active">
-                <div class="row">
-                    <div class="col">
-                        <h1>Welcome</h1>
-                    </div>
-                </div>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/2.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Cairo</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Egypt</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/3.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Rome</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Italy</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/4.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Paris</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">France</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/5.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Mexico city</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Mexico</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/6.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Florence</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Italy</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/7.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">New York</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">USA</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/8.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Vinnitsa</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Ukrain</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/9.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Minsk</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Belarus</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/10.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Sydney</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Australia</h3>
-			</div>
-
-			<div class="tab">
-				<div class="row">
-					<div class="left-column">
-						<div class="img-card">
-							<img src="img/11.jpg" alt="">
-						</div>
-					</div>
-					<div class="right-column">
-						<div class="info">
-							<h2 class="city">Amsterdam</h2>
-							<div class="description">
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
-									repellat. Fuga, unde.
-								</p>
-								<p>
-									Lorem ipsum dolor sit amet consectetur adipisicing elit.
-									repellat. Fuga, unde.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<h3 class="country">Netherlands</h3>
-			</div>
-
-		</div>
-	</section>
 
 
 
@@ -992,350 +721,29 @@
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.cart-btn').on('click', function() {
-            var productId = $(this).data('id');
-            
-            $.ajax({
-                url: '{{ route("cart.add") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId
-                },
-                success: function(response) {
-                    alert(response.message);
-                    $('#cart-item-count').text(response.cartCount);
-                    updateCartProducts(response.cart);
-                    $('#cart-subtotal').text('₹' + response.subtotal);
-                },
-                error: function(response) {
-                    if(response.status === 401) {
-                        alert('Please login to add products to cart');
-                        window.location.href = '{{ route("login") }}';
-                    } else {
-                        alert('Failed to add product to cart.');
-                    }
-                }
-            });
-        });
 
-        function updateCartProducts(cart) {
-            var cartItemsHtml = '';
-            $.each(cart, function(productId, product) {
-                cartItemsHtml += `
-                <div class="wrapper">
-                    <div class="wrapper-item">
-                        <div class="wrapper-img">
-                            <img src="${product.image}" alt="img">
-                        </div>
-                        <div class="wrapper-content">
-                            <h5 class="wrapper-title">${product.name}</h5>
-                            <div class="price">
-                                <p class="new-price">₹${product.price * product.quantity}</p>
-                            </div>
-                        </div>
-                        <span class="close-btn">
-                            <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                `;
-            });
-            $('#cart-wrapper-item').html(cartItemsHtml);
-        }
-    });
-</script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.wishlist-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const productId = this.dataset.productId;
-                const isWishlisted = this.classList.contains('wishlisted');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all tab buttons and tab contents
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
 
-                fetch(`/wishlist/toggle/${productId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify({ productId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        if (isWishlisted) {
-                            this.classList.remove('wishlisted');
-                            this.querySelector('i').classList.remove('bi-heart-fill');
-                            this.querySelector('i').classList.add('bi-heart');
-                        } else {
-                            this.classList.add('wishlisted');
-                            this.querySelector('i').classList.remove('bi-heart');
-                            this.querySelector('i').classList.add('bi-heart-fill');
-                        }
-                        document.getElementById('wishlist-item-count').innerText = data.wishlistCount;
-                        document.getElementById('wishlist-circle').style.fill = data.wishlistCount > 0 ? 'red' : '#000';
-                    }
-                });
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Remove active class from all tab buttons and tab panes
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('show', 'active'));
+
+                // Add active class to the clicked button and its corresponding tab pane
+                const category = this.getAttribute('data-category');
+                this.classList.add('active');
+                document.getElementById(category).classList.add('show', 'active');
             });
         });
     });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function () {
-    function updateCart(cartCount, cart, subtotal) {
-        $('#cart-item-count').text(cartCount);
-        $('#cart-subtotal').text('₹' + subtotal);
-        var cartHtml = '';
-        for (const [productId, item] of Object.entries(cart)) {
-            cartHtml += `
-                <div class="wrapper" data-id="${productId}">
-                    <div class="wrapper-item">
-                        <div class="wrapper-img">
-                            <img src="/storage/uploads/${item.name}_0.jpg" alt="img">
-                        </div>
-                        <div class="wrapper-content">
-                            <h5 class="wrapper-title">${item.name}</h5>
-                            <div class="price">
-                                <p class="new-price">₹${item.price}</p>
-                            </div>
-                            <div class="quantity">
-                                Qty: ${item.quantity}
-                            </div>
-                        </div>
-                        
-                        <span class="close-btn" data-id="${productId}">
-                            <svg viewBox="0 0 10 10" fill="none" class="fill-current" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.7 0.3C9.3 -0.1 8.7 -0.1 8.3 0.3L5 3.6L1.7 0.3C1.3 -0.1 0.7 -0.1 0.3 0.3C-0.1 0.7 -0.1 1.3 0.3 1.7L3.6 5L0.3 8.3C-0.1 8.7 -0.1 9.3 0.3 9.7C0.7 10.1 1.3 10.1 1.7 9.7L5 6.4L8.3 9.7C8.7 10.1 9.3 10.1 9.7 9.7C10.1 9.3 10.1 8.7 9.7 8.3L6.4 5L9.7 1.7C10.1 1.3 10.1 0.7 9.7 0.3Z"></path>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            `;
-        }
-        $('#cart-wrapper-item').html(cartHtml);
-        rebindCloseButtons();
-    }
 
-    $('.cart-btn').off('click').on('click', function () {
-        var productId = $(this).data('id');
-        var quantity = parseInt($('#productQuantity').val(), 10) || 1;
-
-        $.ajax({
-            url: '{{ route("cart.add") }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                product_id: productId,
-                quantity: quantity
-            },
-            success: function (response) {
-                alert(response.message);
-                updateCart(response.cartCount, response.cart, response.subtotal);
-            },
-            error: function (response) {
-                if (response.status === 401) {
-                    alert('Please login to add products to cart');
-                    window.location.href = '{{ route("login") }}';
-                } 
-            }
-        });
-    });
-
-    function rebindCloseButtons() {
-        $('.close-btn').off('click').on('click', function () {
-            var productId = $(this).data('id');
-
-            $.ajax({
-                url: '{{ route("cart.remove") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId
-                },
-                success: function (response) {
-                    alert(response.message);
-                    updateCart(response.cartCount, response.cart, response.subtotal);
-                },
-                error: function (response) {
-                    if (response.status === 401) {
-                        alert('Please login to remove products from cart');
-                        window.location.href = '{{ route("login") }}';
-                    } else {
-                        alert('Failed to remove product from cart.');
-                    }
-                }
-            });
-        });
-    }
-
-    function filterProducts() {
-        let selectedCategories = [];
-        $('.category-checkbox:checked').each(function () {
-            selectedCategories.push($(this).val());
-        });
-
-        let selectedColors = [];
-        $('input[name="color"]:checked').each(function () {
-            selectedColors.push($(this).val());
-        });
-
-        $.ajax({
-            url: '{{ route('shop.filterByCategory') }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                categories: selectedCategories,
-                colors: selectedColors
-            },
-            success: function (response) {
-                $('#product-list').empty();
-                response.forEach(product => {
-                    $('#product-list').append(`
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
-                            <div class="card product">
-                                <div class="card-body">
-                                    <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
-                                    <div class="card-hover">
-                                        <div class="hover-icons text-center">
-                                            <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                            <button class="wishlist-button ${product.in_wishlist ? 'wishlisted' : ''}" data-product-id="${product.id}">
-                                                <i class="bi bi-heart${product.in_wishlist ? '-fill' : ''}"></i>
-                                            </button>
-                                            <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="container">
-                                        <div class="pdt-title">
-                                            <h6>${product.title}</h6>
-                                        </div>
-                                        <div class="pdt-price">
-                                            <h6>${product.price}</h6>
-                                        </div>
-                                        <div class="pdt-rating mt-4">
-                                            <p>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i>
-                                                <span>(${product.reviews} reviews)</span>
-                                            </p>
-                                        </div>
-                                        <div class="pdt-shop text-center mt-5">
-                                            <div class="row">
-                                                <div class="col-9">
-                                                    <button class="cart-btn" data-id="${product.id}">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                </div>
-                                                <div class="col-3">
-                                                    <button class="cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `);
-                });
-
-                rebindEventHandlers();
-            }
-        });
-    }
-
-    function rebindEventHandlers() {
-        $('.cart-btn').off('click').on('click', function () {
-            var productId = $(this).data('id');
-            var quantity = parseInt($('#productQuantity').val(), 10) || 1;
-
-            $.ajax({
-                url: '{{ route("cart.add") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId,
-                    quantity: quantity
-                },
-                success: function (response) {
-                    alert(response.message);
-                    updateCart(response.cartCount, response.cart, response.subtotal);
-                },
-                error: function (response) {
-                    if (response.status === 401) {
-                        alert('Please login to add products to cart');
-                        window.location.href = '{{ route("login") }}';
-                    } 
-                }
-            });
-        });
-
-        $('.wishlist-button').off('click').on('click', function () {
-            const productId = $(this).data('product-id');
-            const isWishlisted = $(this).hasClass('wishlisted');
-
-            fetch(`/wishlist/toggle/${productId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ productId })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        if (isWishlisted) {
-                            $(this).removeClass('wishlisted');
-                            $(this).find('i').removeClass('bi-heart-fill').addClass('bi-heart');
-                        } else {
-                            $(this).addClass('wishlisted');
-                            $(this).find('i').removeClass('bi-heart').addClass('bi-heart-fill');
-                        }
-                        $('#wishlist-item-count').text(data.wishlistCount);
-                        $('#wishlist-circle').css('fill', data.wishlistCount > 0 ? 'red' : '#000');
-                    }
-                });
-        });
-
-        $('.close-btn').off('click').on('click', function () {
-            var productId = $(this).data('id');
-
-            $.ajax({
-                url: '{{ route("cart.remove") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId
-                },
-                success: function (response) {
-                    alert(response.message);
-                    updateCart(response.cartCount, response.cart, response.subtotal);
-                },
-                error: function (response) {
-                    if (response.status === 401) {
-                        alert('Please login to remove products from cart');
-                        window.location.href = '{{ route("login") }}';
-                    } else {
-                        alert('Failed to remove product from cart.');
-                    }
-                }
-            });
-        });
-    }
-
-    $('.category-checkbox').change(filterProducts);
-    $('input[name="color"]').change(filterProducts);
-
-    rebindCloseButtons();
-    rebindEventHandlers();
-});
-</script>
 </body>
 
 </html>
