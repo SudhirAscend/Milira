@@ -76,9 +76,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/clear-cart', [CartController::class, 'clearCart'])->name('cart.clear');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::post('/cart/buy-now', [CartController::class, 'buyNow'])->name('cart.buyNow'); // New route for buy now
-    Route::post('/cart/checkout', [CartController::class, 'buyNow'])->name('cart.checkout');
+    Route::get('/checkout', [CheckoutController::class, 'showCheckoutPage'])->name('checkout.index');
 });
 
 // Payment routes
@@ -90,6 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
     Route::post('/wishlist/remove', [WishlistController::class, 'removeFromWishlist'])->name('wishlist.remove');
     Route::post('/wishlist/toggle/{productId}', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
+    Route::post('/wishlist/add-to-cart', [WishlistController::class, 'addToCartFromWishlist'])->name('wishlist.addToCartFromWishlist');
 });
 
 // Forget password route
@@ -104,9 +107,15 @@ Route::middleware('auth')->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
 Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
+<<<<<<< HEAD
 
 // Request Product Form
 Route::get('/request-product', [AuthController::class, 'requestProduct'])->name('request-product');
 
 // contact Page
 Route::get('/contact', [AuthController::class, 'contactDetails'])->name('contact');
+=======
+Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.product');
+Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
+Route::resource('products', ProductsController::class);
+>>>>>>> 9690753fa796265acc5592c4876742049df0445c

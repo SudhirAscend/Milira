@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\Wishlist;
+use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\DB;
 use Razorpay\Api\Api;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
@@ -21,45 +24,21 @@ class CheckoutController extends Controller
         $addresses = Address::where('user_id', $user->id)->get();
 
         $totalAmount = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        // Fetch cart items from the database for the logged-in user
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
 
-        return view('checkout', compact('cartItems', 'addresses', 'totalAmount'));
-    }
-
-    public function storeAddress(Request $request)
-    {
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:15',
-            'country' => 'required|string|max:255',
-            'address' => 'required|string|max:500',
-            'city' => 'required|string|max:255',
-            'postcode' => 'required|string|max:10',
-        ]);
-
-        $user = Auth::user();
-
-        if ($request->is_default) {
-            Address::where('user_id', $user->id)->update(['is_default' => false]);
-        }
-
-        $address = new Address();
-        $address->user_id = $user->id;
-        $address->first_name = $request->first_name;
-        $address->last_name = $request->last_name;
-        $address->email = $request->email;
-        $address->phone = $request->phone;
-        $address->country = $request->country;
-        $address->address = $request->address;
-        $address->city = $request->city;
-        $address->postcode = $request->postcode;
-        $address->is_default = $request->is_default ? true : false;
-        $address->save();
-
-        return redirect()->route('checkout.show')->with('success', 'Address saved successfully.');
+        return view('checkout', compact('cartItems', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
     public function storeOrder(Request $request)
@@ -67,7 +46,7 @@ class CheckoutController extends Controller
         $user = Auth::user();
         $cartItems = CartDetail::where('user_id', $user->id)->with('product')->get();
         $totalAmount = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
+            return $item->price * $item->quantity;
         });
 
         DB::beginTransaction();
@@ -76,7 +55,7 @@ class CheckoutController extends Controller
             // Create a new order
             $order = Order::create([
                 'user_id' => $user->id,
-                'order_id' => 'ORD_' . strtoupper(uniqid()), // Ensure unique order ID is generated
+                'order_id' => 'ORD_' . strtoupper(uniqid()),
                 'status' => 'pending',
                 'total_amount' => $totalAmount,
             ]);
@@ -86,18 +65,15 @@ class CheckoutController extends Controller
                     'order_id' => $order->id,
                     'product_id' => $item->product->id,
                     'quantity' => $item->quantity,
-                    'price' => $item->product->price,
+                    'price' => $item->price,
                 ]);
             }
-
-            // Clear the cart after creating the order
-            CartDetail::where('user_id', $user->id)->delete();
 
             // Initialize Razorpay payment
             $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
             $razorpayOrder = $api->order->create([
                 'receipt' => $order->order_id,
-                'amount' => $totalAmount * 100, // amount in paise
+                'amount' => $totalAmount * 100,
                 'currency' => 'INR'
             ]);
 
@@ -110,8 +86,15 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
 
+            Log::error('Order creation failed', [
+                'error' => $e->getMessage(),
+                'user_id' => $user->id,
+                'cartItems' => $cartItems,
+                'totalAmount' => $totalAmount,
+            ]);
+
             if (isset($order)) {
-                $order->status = 'failed'; // Update status to failed
+                $order->status = 'failed';
                 $order->save();
             }
 
@@ -130,6 +113,21 @@ class CheckoutController extends Controller
             $order->status = 'success';
             $order->payment_id = $razorpay_payment_id;
             $order->save();
+
+            // Move items from CartDetail to OrderItem and clear CartDetail
+            $cartItems = CartDetail::where('user_id', $order->user_id)->get();
+            foreach ($cartItems as $item) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                    'price' => $item->price,
+                ]);
+                $item->delete();
+            }
+
+            // Clear the session cart
+            session()->forget('cart');
 
             return redirect()->route('thank-you');
         } else {
