@@ -67,20 +67,31 @@ class WishlistController extends Controller
         }
     }
 
-    public function toggle(Request $request, $productId)
+    public function toggle($productId)
     {
-        $userId = Auth::id();
-        $wishlistItem = Wishlist::where('user_id', $userId)->where('product_id', $productId)->first();
-
-        if ($wishlistItem) {
-            $wishlistItem->delete();
+        $user = Auth::user();
+        $wishlist = Wishlist::where('user_id', $user->id)->where('product_id', $productId)->first();
+    
+        if ($wishlist) {
+            // Remove from wishlist
+            $wishlist->delete();
+            $inWishlist = false;
         } else {
-            Wishlist::create(['user_id' => $userId, 'product_id' => $productId]);
+            // Add to wishlist
+            Wishlist::create([
+                'user_id' => $user->id,
+                'product_id' => $productId,
+            ]);
+            $inWishlist = true;
         }
-
-        $wishlistCount = Wishlist::where('user_id', $userId)->count();
-
-        return response()->json(['success' => true, 'wishlistCount' => $wishlistCount]);
+    
+        $wishlistCount = Wishlist::where('user_id', $user->id)->count();
+    
+        return response()->json([
+            'success' => true,
+            'wishlistCount' => $wishlistCount,
+            'inWishlist' => $inWishlist,
+        ]);
     }
 
     // New method to add item to cart from wishlist

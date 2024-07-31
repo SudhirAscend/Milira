@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,10 +45,12 @@ class HomeController extends Controller
                 $cartItems[] = $details;
             }
         }
-        $cartCount = count($cartItems);
-        $subtotal = array_reduce($cartItems, function ($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
+       // Fetch cart items from the database for the logged-in user
+       $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+       $cartCount = $cartItems->count();
+       $subtotal = $cartItems->sum(function ($item) {
+           return $item->product->price * $item->quantity;
+       });
     
         // Pass data to the view
         return view('index', compact('categories', 'products', 'featuredProducts', 'wishlistProductIds','wishlistCount', 'cartCount', 'subtotal', 'cartItems'));

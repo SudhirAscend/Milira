@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="images/png" href="{{ asset('assets/images/logos/favicon.jpg') }}">
@@ -287,8 +288,8 @@
                                             <div class="hover-icons text-center">
                                                 <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
                                                 <button class="wishlist-button {{ in_array($product->id, $wishlistProductIds) ? 'wishlisted' : '' }}" data-product-id="{{ $product->id }}">
-                                                        <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
-                                                    </button>
+    <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
+</button>
                                                 <a href="#"><i class="bi bi-arrow-repeat"></i></a>
                                             </div>
                                         </div>
@@ -742,8 +743,42 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function () {
+        function rebindWishlistButtons() {
+            $('.wishlist-button').off('click').on('click', function () {
+                const productId = $(this).data('product-id');
+                const button = $(this); // Cache this button
 
+                fetch(`/wishlist/toggle/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ productId })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.inWishlist) {
+                            button.addClass('wishlisted');
+                            button.find('i').removeClass('bi-heart').addClass('bi-heart-fill');
+                        } else {
+                            button.removeClass('wishlisted');
+                            button.find('i').removeClass('bi-heart-fill').addClass('bi-heart');
+                        }
+                        $('#wishlist-item-count').text(data.wishlistCount);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        }
 
+        // Initial binding for wishlist buttons
+        rebindWishlistButtons();
+    });
+</script>
 </body>
 
 </html>
