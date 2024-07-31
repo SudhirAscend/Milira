@@ -35,9 +35,6 @@
                     <div class="col-md-6">
                         <div class="product-info-img" data-aos="fade-right">
                             <div class="swiper product-top">
-                                <div class="product-discount-content">
-                                    <h4>-50%</h4>
-                                </div>
                                 <div class="swiper-wrapper">
                                     @foreach($product->images as $image)
                                     <div class="swiper-slide slider-top-img">
@@ -87,7 +84,6 @@
     <span class="price-cut">₹{{ $product->price + 200 }}</span>
     <span class="new-price" id="productPrice">₹{{ $product->price }}</span>
 </div>
-                            <p class="content-paragraph">{{ $product->small_description }}</p>
                             <hr>
                             <div class="product-availability">
                                 <span>Availability : </span>
@@ -109,7 +105,7 @@
         </div>
     </div>
 </div>
-<div style="display: flex; gap: 10px;">
+<div class="shop-inner-btn">
     @auth
         <form id="buyNowForm" action="{{ route('cart.buyNow') }}" method="POST">
             @csrf
@@ -234,12 +230,12 @@
                     <input type="file" class="pdt-file mt-4" name="image" id="inputFile">
                 </div>
             </div>
-            <div class="submit-review text-end mt-4">
+            <div class="submit-review mt-4">
                 <span>
-                    <button type="submit" class="review-1"> Submit Feedback </button>
+                    <button type="submit" class="review-1">Submit</button>
                 </span>
                 <span class="px-3">
-                    <a href="" class="review-2"> Cancel </a>
+                    <button href="" class="review-2"> Cancel </button>
                 </span>
             </div>
         </form>
@@ -474,151 +470,9 @@
     <!--------------- weekly-section-end--------------->
 
     <!--------------- footer-section--------------->
-    <footer id="footer">
-        <div class="footer-details">
-            <div class="foot-logo py-5">
-                <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
-            </div>
-            <div class="footer-content">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="foot-navigation">
-                            <div class="foot-title">
-                                <h4>Navigation</h4>
-                            </div>
-                            <div class="foot-items">
-                                <ul>
-                                    <li>
-                                        <a href="index.html">Home</a>
-                                    </li>
-                                    <li>
-                                        <a href="about.html">About</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop.html">Shop</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Categories</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">Contact</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="foot-navigation">
-                            <div class="foot-title">
-                                <h4>Categories</h4>
-                            </div>
-                            <div class="foot-items">
-                                <ul>
-                                    <li>
-                                        <a href="#">Pendemt Set</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Chain</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Stud</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Earrings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bracelet</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Necklace</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="foot-navigation">
-                            <div class="foot-title">
-                                <h4>Account</h4>
-                            </div>
-                            <div class="foot-items">
-                                <ul>
-                                    <li>
-                                        <a href="#">My Account</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Account Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Payments</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Subscription</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dashboard</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                        <div class="foot-navigation">
-                            <div class="foot-title">
-                                <h4>Legal</h4>
-                            </div>
-                            <div class="foot-items">
-                                <ul>
-                                    <li>
-                                        <a href="#">Terms & Conditions</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Shipping Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Payment Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Refund Policy</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copyrights mt-4">
-                <div class="row pt-4">
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                        <div class="copy">
-                            <p>©<span id="demo"></span> by milira, All rights reserved</p>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                        <div class="social">
-                            <p>
-                                <span>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                </span>
-                                <span>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                </span>
-                                <span>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </span>
-                                <span>
-                                    <a href=""><i class="bi bi-youtube"></i></a>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+        @include('footer')
+    <!---------------End of footer-section--------------->
+
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>

@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 /* google-font */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 /* Colors */
@@ -115,10 +116,10 @@ button {
   display: inline-block;
   background: var(--primary-color);
   font-size: 1.4rem;
-  font-weight: 500;
+  font-weight: bold;
   position: relative;
   color: #FFFFFF;
-  font-family: "Inter", sans-serif;
+  font-family: 'Open Sans';
   transition: all 0.3s;
   overflow: hidden;
   z-index: 1;
@@ -312,11 +313,13 @@ button {
 
 .price .price-cut {
   text-decoration: line-through;
+  font-family: "Open Sans";
 }
 
 .price .new-price {
   color: var(--primary-color);
   font-weight: 500;
+  font-family: "Open Sans";
 }
 
 .price span {
@@ -1324,7 +1327,7 @@ button.cat-dropdown::before {
 }
 
 .product-info-img .product-top {
-  height: 60rem;
+  /* height: 60rem; */
   border: 1px solid rgba(174, 28, 154, 0.08);
   border-radius: 1rem;
 }
@@ -1341,7 +1344,7 @@ button.cat-dropdown::before {
 .product-info-img .product-top .slider-top-img img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .product-bottom {
@@ -1395,6 +1398,7 @@ button.cat-dropdown::before {
   line-height: 3rem;
   font-size: 1.6rem;
   margin-top: 1rem;
+  font-family: "Open Sans";
 }
 
 .product-info-content .content-paragraph .inner-text {
@@ -1414,6 +1418,7 @@ button.cat-dropdown::before {
   border-radius: 1.2rem;
   display: inline-block;
   margin: 1rem 0;
+  font-family: "Open Sans";
 }
 
 .product-info-content .product-availability .inner-text {
@@ -1538,6 +1543,7 @@ button.cat-dropdown::before {
 
 .product-info-content .product-details p {
   margin-bottom: 1rem;
+  font-family: 'Open Sans';
 }
 
 .product-info-content .product-details .inner-text {
@@ -1591,7 +1597,7 @@ button.cat-dropdown::before {
 
 @media (max-width:1200px) {
   .product-info-content .product-quantity {
-    flex-direction: column;
+    /* flex-direction: column; */
     margin-top: 2rem;
   }
 
@@ -1818,11 +1824,15 @@ hr {
   font-size: 2rem;
 }
 
+.blog-bradcrum {
+  padding-top: 5%;
+}
+
 .blog-bradcrum a {
   font-size: 1.6rem;
   color: #232532;
-  font-weight: 300;
-  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-family: 'Open Sans';
 }
 
 @media (max-width:767px) {
@@ -1987,7 +1997,7 @@ footer {
   font-weight: bold;
   font-size: 35px;
   padding: 15px 0px;
-  font-family: "inter", "serif";
+  font-family: "Ubuntu Sans";
 }
 
 .review-btn {
@@ -2000,6 +2010,7 @@ footer {
   font-size: 16px;
   font-weight: 500;
   margin-left: 10px;
+  font-family: "Open Sans";
 }
 
 /* Card hover icons */
@@ -2094,12 +2105,13 @@ a .bi-arrow-repeat {
   color: var(--primary-color);
   font-size: 20px;
   margin-top: 20px;
+  font-family: "Ubuntu Sans";
 }
 
 .pdt-price h6 {
   font-weight: bold;
   font-size: 20px;
-  font-family: "inter", "serif";
+  font-family: 'Open Sans';
   margin-top: 20px;
 }
 
@@ -2116,7 +2128,7 @@ button.cart-btn {
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   font-weight: bold;
-  font-family: "inter", "serif";
+  font-family: 'Open Sans';
   width: 100%;
   font-size: 18px;
   text-align: center;
@@ -2140,6 +2152,7 @@ button.cart-btn:hover {
 .give-rate h6 {
   font-weight: bold;
   font-size: 20px;
+  font-family: "Ubuntu Sans";
 }
 
 .give-rate .bi-star {
@@ -2152,6 +2165,7 @@ button.cart-btn:hover {
   font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
+  font-family: "Ubuntu Sans";
 }
 
 .product-desc textarea {
@@ -2173,12 +2187,14 @@ button.cart-btn:hover {
   font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
+  font-family: "Ubuntu Sans";
 }
 
 input.pdt-file {
   width: 100%;
   padding: 12px 0px;
   font-size: 16px;
+  font-family: "Open Sans";
 }
 
 span a.review-1 {
@@ -2188,8 +2204,17 @@ span a.review-1 {
   padding: 12px 25px;
   border: 1px solid var(--primary-color);
   border-radius: 150px;
+  font-family: "Open Sans";
 }
-
+button.review-1 {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 12px 25px;
+  border: 1px solid var(--primary-color);
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+}
 span a.review-2 {
   background-color: transparent;
   border: 1px solid var(--primary-color);
@@ -2197,6 +2222,7 @@ span a.review-2 {
   font-size: 16px;
   padding: 12px 25px;
   border-radius: 150px;
+  font-family: "Open Sans";
 }
 
 span a.review-2:hover {
@@ -2227,8 +2253,173 @@ span a.review-2:hover {
 button.product-buy-btn {
   background-color: var(--primary-color);
   color: #fff;
-  font-style: 16px;
+  font-size: 16px;
   padding: 12px 25px;
   border-radius: 150px;
   margin-top: 20px;
+  font-family: "Open Sans";
+  font-weight: bold;
+}
+
+.product-info-content.aos-init.aos-animate h5 {
+  font-size: 40px;
+  font-family: "Ubuntu Sans";
+}
+
+.user-designation p {
+  font-family: "Open Sans";
+  font-size: 16px;
+}
+
+.review-description p {
+  font-family: "Open Sans";
+  font-size: 16px;
+}
+
+.shop-inner-btn {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 944px) {
+  .shop-inner-btn {
+    display: block !important;
+    gap: 10px;
+  }
+  button.product-buy-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .product-info-img .product-top .slider-top-img {
+    height: 35rem;
+  }
+  .product-bottom .slider-bottom-img {
+    height: 6rem !important;
+  }
+}
+
+.submit-review {
+  text-align: end;
+}
+
+
+button.review-2 {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 25px;
+  border-radius: 25px;
+
+}
+
+
+@media (max-width: 425px) {
+  .submit-review {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  button.review-1 {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 8px 20px;
+    border: 1px solid var(--primary-color);
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  button.review-2 {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 25px;
+  
+  }
+  .post-review {
+    background-color: #fff;
+    padding: 20px;
+  }
+}
+
+/* Footer */
+
+footer {
+  background-color: var(--primary-color);
+  margin-top: 50px;
+}
+
+.foot-logo img {
+  height: 50px;
+}
+
+.foot-logo {
+  padding-top: 40px;
+  text-align: center;
+}
+
+.foot-title h4 {
+  color: #fff;
+  font-size: 23px;
+  font-weight: 600;
+  font-family: 'Ubuntu Sans';
+}
+
+.foot-items ul li a {
+  color: #e2e2e2;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'Open Sans';
+}
+
+.foot-items ul li {
+  padding-top: 20px;
+}
+
+.footer-details {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.foot-navigation {
+  padding-top: 20px;
+  padding-left: 50px;
+}
+
+.social p {
+  text-align: end;
+}
+
+.social p span a {
+  padding: 0px 10px;
+  color: var(--secondary-color);
+}
+
+.social p span a:hover {
+  color: #fff;
+}
+
+.copyrights {
+  border-top: 1px solid var(--secondary-color);
+}
+
+.footer-content {
+  border-top: 1px solid var(--secondary-color);
+}
+
+@media (max-width: 767px) {
+  .social p {
+    text-align: start;
+    margin-top: 20px;
+  }
 }

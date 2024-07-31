@@ -2084,6 +2084,7 @@ img.popup-img {
   font-size: 16px;
   color: var(--primary-color);
   font-weight:  bold;
+  text-align: center;
 }
 
 .coupon-form button {
