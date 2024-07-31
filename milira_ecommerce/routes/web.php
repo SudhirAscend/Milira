@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
 Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
+Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.product');
 Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
 Route::resource('products', ProductsController::class);
