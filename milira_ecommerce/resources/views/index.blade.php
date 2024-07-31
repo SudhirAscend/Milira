@@ -418,7 +418,8 @@
                                 <h6>₹{{ $product->price }}</h6>
                             </div>
                             <div class="f-button">
-                                <button>Add to Cart <i class="bi bi-cart-check-fill"></i></button>
+                                <button class="cart-btn add-to-cart-btn" data-id="{{ $product->id }}">Add to Cart <i class="bi bi-cart-check-fill"></i></button>
+                                
                             </div>
                         </div>
                     </div>
