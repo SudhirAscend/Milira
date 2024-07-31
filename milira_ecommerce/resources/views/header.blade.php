@@ -280,19 +280,22 @@
     <button class="cat-dropdown" onclick="shopCategories()">All Categories</button>
     <div id="shopCategories" class="dropdown-categories">
         @foreach ($categories as $category)
-            <a class="drop-cat-items" href="#">{{ $category->name }}</a>
+            <a class="drop-cat-items" href="{{ route('shop.category', ['category' => $category->name]) }}">{{ $category->name }}</a>
+            
+        
+    </a>
         @endforeach
     </div>
 </div>
                     <div class="header-nav-menu">
                         <ul class="menu-list">
                             <li>
-                              <a href="index.html">
+                              <a href="/">
                                     <span class="list-text">Home</span>
                                 </a>
                             </li>
                             <li class="mega-menu">
-                                <a href="shop.html">
+                                <a href="/shop">
                                     <span class="list-text">Shop</span>
                                 </a>
                             </li>
