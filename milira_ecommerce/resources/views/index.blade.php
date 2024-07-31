@@ -316,9 +316,9 @@
                                             </div>
                                             <div class="pdt-shop text-center mt-5">
                                                 <div class="row">
-                                                    <div class="col-9">
-                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                    </div>
+                                                <div class="col-9">
+                                                            <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
+                                                        </div>
                                                     <div class="col-3">
     <button class="cart-btn add-to-cart-btn" data-id="{{ $product->id }}">
         <i class="bi bi-cart-check-fill"></i>
