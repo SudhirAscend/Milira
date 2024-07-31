@@ -128,59 +128,34 @@
         <div class="account-section billing-section">
             <h5 class="wrapper-heading">Order Summary</h5>
             <div class="order-summery">
-                <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">PRODUCT</h5>
-                    <h5 class="wrapper-heading">TOTAL</h5>
-                </div>
-                <hr>
-                <div class="subtotal product-total">
-                    <ul class="product-list">
-                        @foreach($cartItems as $item)
-                            <li>
-                                <div class="product-info">
-                                    <h5 class="wrapper-heading">{{ $item->product->title }}</h5>
-                                    <p class="paragraph">{{ $item->product->small_description }}, Quantity: {{ $item->quantity }}</p>
-                                </div>
-                                <div class="price">
-                                    <h5 class="wrapper-heading">${{ number_format($item->price * $item->quantity, 2) }}</h5>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <hr>
-                <div class="subtotal product-total">
-                    <h5 class="wrapper-heading">SUBTOTAL</h5>
-                    <h5 class="wrapper-heading">${{ number_format($totalAmount, 2) }}</h5>
-                </div>
-                <div class="subtotal product-total">
-                    <ul class="product-list">
-                        <li>
-                            <div class="product-info">
-                                <p class="paragraph">SHIPPING</p>
-                                <h5 class="wrapper-heading">Free Shipping</h5>
-                            </div>
-                            <div class="price">
-                                <h5 class="wrapper-heading">+$0</h5>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <hr>
-                <div class="subtotal total">
-                    <h5 class="wrapper-heading">TOTAL</h5>
-                    <h5 class="wrapper-heading price">${{ number_format($totalAmount, 2) }}</h5>
-                </div>
-                <div class="subtotal payment-type">
-                    <div class="checkbox-item">
-                        <input type="radio" id="razorpay" name="payment_method" value="razorpay" checked>
-                        <div class="credit">
-                            <h5 class="wrapper-heading">Credit/Debit Cards or Razorpay</h5>
-                        </div>
+    <div class="subtotal product-total">
+        <h5 class="wrapper-heading">PRODUCT</h5>
+        <h5 class="wrapper-heading">TOTAL</h5>
+    </div>
+    <hr>
+    <div id="product-list" class="subtotal product-total">
+        <ul class="product-list">
+            @foreach($cartItemsa as $item)
+                <li id="product-{{ $item->product->id }}">
+                    <div class="product-info">
+                        <h5 class="wrapper-heading">{{ $item->product->title }}</h5>
+                        <p class="paragraph">{{ $item->product->small_description }}, Quantity: {{ $item->quantity }}</p>
                     </div>
-                </div>
-                <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
-            </div>
+                    <div class="price">
+                        <h5 class="wrapper-heading">₹{{ number_format($item->price * $item->quantity, 2) }}</h5>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+    <hr>
+    <div class="subtotal product-total">
+        <h5 class="wrapper-heading">SUBTOTAL</h5>
+        <h5 class="wrapper-heading" id="subtotal-amount">₹{{ number_format($totalAmount, 2) }}</h5>
+    </div>
+    <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
+</div>
+
         </div>
     </div>
 </div>
@@ -199,13 +174,11 @@
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
     <script>
-document.getElementById('addAddressBtn').addEventListener('click', function() {
-    document.getElementById('billingDetails').classList.remove('d-none');
-    document.getElementById('billingDetails').scrollIntoView({ behavior: 'smooth' });
-});
-
 document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
     e.preventDefault();
+
+    // Hide product details before processing the order
+    document.getElementById('product-list').style.display = 'none';
 
     const formData = new FormData(document.getElementById('checkoutForm'));
 
@@ -269,11 +242,13 @@ document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
             rzp1.open();
         } else {
             alert('Order failed. Please try again.');
+            document.getElementById('product-list').style.display = 'block'; // Show products again if the order fails
         }
     })
     .catch((error) => {
         console.error('Error:', error);
         alert('Order failed. Please try again.');
+        document.getElementById('product-list').style.display = 'block'; // Show products again if the order fails
     });
 });
 </script>

@@ -20,10 +20,10 @@ class CheckoutController extends Controller
     public function showCheckoutPage()
     {
         $user = Auth::user();
-        $cartItems = CartDetail::where('user_id', $user->id)->with('product')->get();
+        $cartItemsa = CartDetail::where('user_id', $user->id)->with('product')->get();
         $addresses = Address::where('user_id', $user->id)->get();
 
-        $totalAmount = $cartItems->sum(function ($item) {
+        $totalAmount = $cartItemsa->sum(function ($item) {
             return $item->price * $item->quantity;
         });
 
@@ -38,7 +38,7 @@ class CheckoutController extends Controller
             return $item->product->price * $item->quantity;
         });
 
-        return view('checkout', compact('cartItems', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
+        return view('checkout', compact('cartItemsa', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
 
     public function storeOrder(Request $request)
