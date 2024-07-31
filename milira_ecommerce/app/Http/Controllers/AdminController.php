@@ -51,5 +51,11 @@ class AdminController extends Controller
 
     return view('admin.customer-details', compact('customer', 'wishlistItems', 'reviews', 'cartItems', 'orders'));
 }
-    
+public function orders()
+{
+    // Fetch all orders with related user and order items
+    $orders = Order::with('user', 'orderItems.product')->get();
+
+    return view('admin.orders', compact('orders'));
+}
 }
