@@ -250,81 +250,381 @@
     <!-- product Categories -->
 
     <div class="container">
-    <div class="main-title pt-5">
-        <h1>Top Selling Products</h1>
-    </div>
-    <div class="sub-para py-3">
-        <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
-    </div>
-    <div class="product-categories">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            @foreach ($categories as $category)
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link @if ($loop->first) active @endif" id="{{ Str::slug($category->name) }}-tab" data-bs-toggle="pill" data-bs-target="#{{ Str::slug($category->name) }}" type="button" role="tab" aria-controls="{{ Str::slug($category->name) }}" aria-selected="true">{{ $category->name }}</button>
-                </li>
-            @endforeach
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-            @foreach ($categories as $category)
-                <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ Str::slug($category->name) }}" role="tabpanel" aria-labelledby="{{ Str::slug($category->name) }}-tab" tabindex="0">
-                    <div class="row">
-                        @foreach ($products->where('category', $category->name) as $product)
-                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4">
-                                <div class="card product">
-                                    <div class="card-body">
-                                        @if(!empty($product->images))
-                                            <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" class="pdt-img">
-                                        @endif
-                                        <div class="card-hover">
-                                            <div class="hover-icons text-center">
-                                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
-                                                <a href="#"><i class="bi bi-heart"></i></a>
-                                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+        <div class="main-title pt-5">
+            <h1>Top Selling Products</h1>
+        </div>
+        <div class="sub-para py-3">
+            <p>At Milira, we believe that jewelry is not just an accessory, but a statement of individuality and elegance.</p>
+        </div>
+        <div class="product-categories">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                @foreach ($categories as $category)
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link @if ($loop->first) active @endif" id="{{ Str::slug($category->name) }}-tab" data-bs-toggle="pill" data-bs-target="#{{ Str::slug($category->name) }}" type="button" role="tab" aria-controls="{{ Str::slug($category->name) }}" aria-selected="true">{{ $category->name }}</button>
+                    </li>
+                @endforeach
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                @foreach ($categories as $category)
+                    <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ Str::slug($category->name) }}" role="tabpanel" aria-labelledby="{{ Str::slug($category->name) }}-tab" tabindex="0">
+                        <div class="row">
+                            @foreach ($products->where('category', $category->name) as $product)
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mt-4">
+                                    <div class="card product">
+                                        <div class="card-body">
+                                            @if(!empty($product->images))
+                                                <img src="{{ asset('storage/' . $product->images[0]) }}" alt="{{ $product->title }}" class="pdt-img">
+                                            @endif
+                                            <div class="card-hover">
+                                                <div class="hover-icons text-center">
+                                                    <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                                    <a href="#"><i class="bi bi-heart"></i></a>
+                                                    <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="pdt-title">
-                                                <h6>{{ $product->title }}</h6>
-                                            </div>
-                                            <div class="pdt-price">
-                                                <h6>₹{{ number_format($product->price, 2) }}</h6>
-                                            </div>
-                                            <div class="pdt-rating mt-4">
-                                                <p>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-fill"></i>
-                                                    <i class="bi bi-star-half"></i>
-                                                    <span>(4.5 reviews)</span>
-                                                </p>
-                                            </div>
-                                            <div class="pdt-shop text-center mt-5">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                            <div class="container">
+                                                <div class="pdt-title">
+                                                    <h6>{{ $product->title }}</h6>
+                                                </div>
+                                                <div class="pdt-price">
+                                                    <h6>₹{{ number_format($product->price, 2) }}</h6>
+                                                </div>
+                                                <div class="pdt-rating mt-4">
+                                                    <p>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <i class="bi bi-star-half"></i>
+                                                        <span>(4.5 reviews)</span>
+                                                    </p>
+                                                </div>
+                                                <div class="pdt-shop text-center mt-5">
+                                                    <div class="row">
+                                                        <div class="col-9">
+                                                            <button class="cart-btn">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <button class="cart-btn"><i class="bi bi-cart-check-fill"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>    
-                            </div>
-                        @endforeach
+                                    </div>    
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="shop-more text-center mt-5">
+                            <a href="product-sidebar.html">
+                                <button>Shop More</button>
+                            </a>
+                        </div>
                     </div>
-                    <div class="shop-more text-center mt-5">
-                        <a href="product-sidebar.html">
-                            <button>Shop More</button>
-                        </a>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </div>
-</div>
+
+    <section class="main-container">
+		<div class="tab-nav-bar">
+			<div class="tab-navigation">
+
+				<div class="left-btn" name="chevron-back-outline">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+				<div class="right-btn" name="chevron-forward-outline">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+
+				<ul class="tab-menu">
+					<li class="tab-btn active">Pendent Set</li>
+					<li class="tab-btn">Chain</li>
+					<li class="tab-btn">Stud</li>
+					<li class="tab-btn">Earrings</li>
+					<li class="tab-btn">Bracelets</li>
+					<li class="tab-btn">Necklace</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="tab-content">
+
+			<div class="tab active">
+                <div class="row">
+                    <div class="col">
+                        <h1>Welcome</h1>
+                    </div>
+                </div>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/2.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Cairo</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Egypt</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/3.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Rome</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Italy</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/4.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Paris</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">France</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/5.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Mexico city</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Mexico</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/6.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Florence</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Italy</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/7.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">New York</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">USA</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/8.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Vinnitsa</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Ukrain</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/9.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Minsk</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Belarus</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/10.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Sydney</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Australia</h3>
+			</div>
+
+			<div class="tab">
+				<div class="row">
+					<div class="left-column">
+						<div class="img-card">
+							<img src="img/11.jpg" alt="">
+						</div>
+					</div>
+					<div class="right-column">
+						<div class="info">
+							<h2 class="city">Amsterdam</h2>
+							<div class="description">
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde veniam excepturi fugiat natus hic aspernatur, magnam molestiae! Aut sit enim labore qui, autem quos deleniti eaque eveniet
+									repellat. Fuga, unde.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									repellat. Fuga, unde.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h3 class="country">Netherlands</h3>
+			</div>
+
+		</div>
+	</section>
+
+
+
+
+
 
 <!-- End of product Categories -->
 
@@ -342,13 +642,13 @@
 </div>
     <div class="container collections p-5">
         <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men mt-5">
                 <div class="women text-center">
                     <h1>women</h1>
                 </div>
                 <img src="./assets/images/home/women.png" height="90%" alt="" class="collection-img">
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 wo-men mt-5">
                 <div class="women text-center">
                     <h1>kids</h1>
                 </div>
@@ -479,6 +779,39 @@
 </div>
 
 <!---------------------- End of Newsletter ---------------------->
+<div class="container mt-5">
+    <div class="coupon-popup">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <img class="popup-img" src="./assets/images/hero/pop2.jpg" alt="">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="popup-close text-end p-3">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+                <div class="c-content">
+                    <div class="pop-title">
+                        <h1>Milira</h1>
+                    </div>
+                    <div class="pop-content mt-2">
+                        <p>Join the Squad</p>
+                    </div>
+                    <div class="p-content text-center mt-3">
+                        <p>Copy the coupon code for the exclusive discounts</p>
+                    </div>
+                    <div class="coupon-form text-center mt-5">
+                        <form action="javascript:void(0);">
+                            <input type="text" id="cuponCode" name="cuponCode" class="cupon-input" value="DISCOUNT2024">
+                            <button type="copy"  onclick="copyCouponCode()">Copy</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-----------------------Footer --------------------------------->
 @include('footer')
@@ -553,7 +886,7 @@
     <script>
         $('.featureSlider').slick({
             dots: true,
-            infinite: false,
+            infinite: true,
             autoplay: false,
             speed: 300,
             slidesToShow: 3,

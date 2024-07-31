@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Wishlist;
 
 class AuthController extends Controller
 {
@@ -153,5 +154,35 @@ class AuthController extends Controller
     {
         return view('forget-password');
     }
-   
+    public function requestProduct()
+    {
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cart = session()->get('cart', []);
+        $cartCount = count($cart);
+        $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+        return view('request-product', compact('wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal'));
+
+    }
+    public function contactDetails()
+    {
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cart = session()->get('cart', []);
+        $cartCount = count($cart);
+        $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+        return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal'));
+
+    }
+    
 }

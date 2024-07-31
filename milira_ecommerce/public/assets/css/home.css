@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 /* google-font */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 /* Colors */
 
 :root {
     --primary-color: #000000;
-    --secondary-color: #7B7B7B;
-
+    --secondary-color: #414141;
     --default-text: "inter";
 
 }
@@ -28,7 +29,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Open Sans";
   background: #fff;
   overflow-x: hidden;
 }
@@ -37,12 +38,13 @@ h1,
 h4,
 h5 {
   color: #232532;
-  font-family: "Jost", sans-serif;
+  font-family: "Ubuntu Sans";
   font-weight: 700;
 }
 
 h1 {
   font-size: 7rem;
+  font-family: "Ubuntu Sans";
 }
 @media (max-width:767px) {
   h1 {
@@ -182,9 +184,10 @@ button {
 
 
 .hero-title h2 {
-    font-size: 48px;
+    font-size: 40px;
     color: #fff;
     text-align: center;
+    font-family: "Ubuntu Sans";
 }
 
 .hero-slider-content {
@@ -254,21 +257,25 @@ button {
 }
 
 .cat-title h1 {
-  font-family: "inter", "serif";
-  font-weight: 500;
+  font-family: "Ubuntu Sans";
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 50px;
-  letter-spacing: 8px;
+  font-size: 40px;
   text-align: center;
 }
 
 @media(max-width: 500px) {
   .cat-title h1 {
-    font-family: "inter", "serif";
-    font-weight: 500;
+    font-family: "Ubuntu Sans";
+    font-weight: 600;
     text-transform: uppercase;
-    font-size: 40px;
-    letter-spacing: 5px;
+    font-size: 25px;
+    text-align: center;
+  }
+  .cat-sub-para p {
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-size: 14px;
     text-align: center;
   }
 }
@@ -276,9 +283,8 @@ button {
 .cat-sub-para p {
   color: var(--secondary-color);
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
-
 }
 
 .pendent-set img {
@@ -307,6 +313,7 @@ button.cat-button {
   text-transform: uppercase;
   font-size: 16px;
   font-weight: 400;
+  font-family: 'Open Sans';
 }
 
 .abt-title h2 {
@@ -314,12 +321,28 @@ button.cat-button {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 40px;
-  letter-spacing: 5px;
+  font-family: 'Ubuntu Sans';
+}
+
+@media (max-width: 500px) {
+  .abt-title h2 {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 25px;
+  }
+  .small-title p {
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+  }
 
 }
 
 .abt-content p {
   color: var(--secondary-color);
+  font-family: 'Open Sans';
 }
 
 .abt-btn button {
@@ -1354,13 +1377,27 @@ z-index: 2;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 40px;
-  letter-spacing: 5px;
   text-align: center;
+  font-family: "Ubuntu Sans";
+}
+
+@media (max-width: 500px) {
+  .main-title h1{
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+    font-family: "Ubuntu Sans";
+  }
+  .sub-para p {
+    text-align: center;
+  }
 }
 
 .sub-para p {
   color: var(--secondary-color);
-  font-family: "inter","serif";
+  font-family: "Open Sans";
   text-align: center;
 }
 
@@ -1498,6 +1535,13 @@ button.cart-btn:hover {
   padding-bottom: 10%;
 }
 
+@media (max-width: 500px) {
+  .cust {
+    padding-top: 8%;
+    padding-bottom: 40%;
+  }
+}
+
 .collections {
   background-color: #fff;
   margin-top: -100px;
@@ -1510,6 +1554,8 @@ button.cart-btn:hover {
   font-size: 40px;
   text-transform: uppercase;
   -webkit-text-stroke: 1px var(--primary-color);
+  font-family: "Ubuntu Sans";
+  
 }
 
 .wo-men:hover{
@@ -1529,6 +1575,7 @@ img.f-images {
   font-size: 20px;
   text-align: left;
   margin-top: 30px;
+  font-family: "Ubuntu Sans";
 }
 
 .f-price h6 {
@@ -1536,6 +1583,7 @@ img.f-images {
   text-align: left;
   font-weight: bold;
   margin-top: 20px;
+  font-family: 'Open Sans';
 }
 
 .f-button button {
@@ -1546,6 +1594,7 @@ img.f-images {
   padding: 8px 25px;
   width: 100%;
   margin-top: 20px;
+  font-family: 'Open Sans';
 }
 
 .f-button button:hover {
@@ -1578,7 +1627,7 @@ img.f-images {
 /* Testimonial */
 
 .testimonial  {
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 .bi-quote {
@@ -1600,7 +1649,7 @@ p.client-name {
 
 .testimonial-card {
   background-color: #fff;
-  padding: 30px;
+  padding: 15px;
 }
 
 /* Newsletter */
@@ -1610,7 +1659,7 @@ p.client-name {
   object-fit: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .news-content {
@@ -1620,8 +1669,9 @@ p.client-name {
 .news-title h1 {
   font-size: 40px;
   text-transform: uppercase;
-  letter-spacing: 5px;
   padding-top: 55px;
+  font-family: "Ubuntu Sans";
+
 }
 
 input.news-mail {
@@ -1652,7 +1702,7 @@ input.news-mail {
 
 footer {
   background-color: var(--primary-color);
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .foot-logo img {
@@ -1668,12 +1718,14 @@ footer {
   color: #fff;
   font-size: 23px;
   font-weight: 600;
+  font-family: 'Ubuntu Sans';
 }
 
 .foot-items ul li a {
-  color: var(--secondary-color);
+  color: #e2e2e2;
   font-size: 16px;
   font-weight: normal;
+  font-family: 'Open Sans';
 }
 
 .foot-items ul li {
@@ -1767,3 +1819,346 @@ a .bi-arrow-repeat {
 }
 
 
+
+
+/* dragabble Slider */
+
+section {
+	position: relative;
+	margin: 0 80px;
+	transition: .5s ease;
+}
+
+.main-container {
+	position: relative;
+}
+
+/* ===== Tab navigation content ===== */
+.tab-nav-bar {
+	position: relative;
+	margin: 65px 10px 40px 10px;
+}
+
+.tab-navigation {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: fit-content;
+	margin: 0 auto;
+}
+
+.tab-menu {
+	color: var(--primary-color);
+	list-style: none;
+	background-color: #7b7b7b30;
+	max-width: 800px;
+	padding: 10px;
+	white-space: nowrap;
+  font-family: "Ubuntu Sans";
+  font-size: 16px;
+  font-weight: 500;
+	border-radius: 10px;
+	scroll-behavior: smooth;
+
+	user-select: none;
+	overflow-x: auto;
+}
+
+.tab-menu.dragging {
+	scroll-behavior: unset;
+	cursor: grab;
+}
+
+.tab-menu::-webkit-scrollbar {
+	display: none;
+}
+
+.tab-btn {
+	display: inline-block;
+	color: var(--text-color);
+	font-size: 1em;
+	font-weight: bold;
+  font-family: 'Ubuntu Sans';
+	margin: 0 2px;
+	padding: 10px 20px;
+	border-radius: 30px;
+	cursor: pointer;
+	user-select: none;
+	transition: background-color .3s ease;
+}
+
+.tab-menu.dragging .tab-btn {
+	pointer-events: none;
+}
+
+.tab-btn:hover {
+	background-color: var(--first-color);
+}
+
+.tab-btn.active {
+	background-color: var(--primary-color);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.left-btn,
+.right-btn {
+	position: absolute;
+	color: var(--text-color);
+	font-size: 1.8em;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.left-btn {
+	left: 0;
+	background: linear-gradient(to left, transparent, var(--primary-color) 80%);
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+	display: none;
+}
+
+.right-btn {
+	right: 0;
+	background: linear-gradient(to right, transparent, var(--first-color) 80%);
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+
+
+
+
+/* ===== Tab content ===== */
+.tab-content {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.tab {
+	position: absolute;
+	top: 0;
+	right: auto;
+	bottom: 0;
+	left: auto;
+	max-width: 1100px;
+	padding: 15px 50px;
+	opacity: 0;
+
+	transform: translateX(25px);
+	content-visibility: hidden;
+}
+
+.tab.active {
+	transform: translateX(0);
+	content-visibility: visible;
+	opacity: 1;
+	transition: opacity 1s ease, transform 1s ease;
+}
+
+.tab .row {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px 0;
+	gap: 30px;
+}
+
+.tab .img-card {
+	position: relative;
+	width: 450px;
+	max-width: 450px;
+	height: 300px;
+	max-height: 300px;
+	border-radius: 20px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: var(--box-shadow);
+}
+
+.tab .img-card img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.right-column {
+	max-width: 800px;
+}
+
+.info .city,
+.info .description p {
+	color: var(--text-color);
+	margin-bottom: 10px;
+}
+
+.info .city {
+	font-size: 2em;
+}
+
+.country {
+	color: var(--third-color);
+	font-size: 5em;
+	font-weight: 700;
+	text-align: center;
+	text-shadow: var(--text-shadow);
+}
+
+
+
+/* ===== Media queries (max-width: 1050px;) ===== */
+@media screen and (max-width: 1050px) {
+	section {
+		margin: 0 0;
+	}
+
+	.tab-nav-bar {
+		margin: 65px 20px 40px 25px;
+	}
+
+	.tab {
+		padding: 15px 25px;
+	}
+
+	.tab .row {
+		flex-direction: column;
+	}
+
+	.tab .img-card {
+		width: auto;
+		max-width: 600px;
+	}
+
+	.country {
+		font-size: 10vw;
+		padding-bottom: 50px;
+	}
+
+}
+
+
+/* Coupone Popup */
+
+.coupon-popup {
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #7b7b7b30;
+}
+
+img.popup-img {
+  height: 350px;
+  width: 580px;
+  object-fit: cover;
+}
+
+.pop-title h1 {
+  font-size: 40px;
+  font-family: "Open Sans";
+  text-align: center;
+  margin-top: 5%;
+}
+
+.pop-content p {
+  color: var(--primary-color);
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Open Sans";
+}
+
+.bi-x-circle {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.coupon-form input {
+  background: transparent;
+  border: 1px dashed var(--primary-color);
+  padding: 8px 0px;
+  outline: none;
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight:  bold;
+}
+
+.coupon-form button {
+  background: var(--primary-color);
+  color: #fff;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 20px;
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 767px) {
+  img.popup-img {
+    height: 170px;
+    width: 580px;
+    object-fit: cover;
+  }
+  .popup-close {
+    position: relative;
+    top: -165px;
+  }
+  .bi-x-circle {
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+  .c-content {
+    margin-top: -40px;
+  }
+  .coupon-form {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 426px) {
+  img.popup-img {
+    height: 170px;
+    width: 580px;
+    object-fit: cover;
+  }
+  .popup-close {
+    position: relative;
+    top: -165px;
+  }
+  .bi-x-circle {
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+  }
+  .c-content {
+    margin-top: -40px;
+  }
+  .coupon-form {
+    margin-bottom: 30px;
+  }
+  .pop-title h1 {
+    font-size: 35px;
+  }
+
+  .pop-content p {
+    font-size: 25px;
+  }
+
+  .coupon-popup {
+    margin-left: 0%;
+    margin-right: 0%;
+    background: #7b7b7b30;
+  }
+}
+
+@media (max-width: 330px) {
+  .coupon-form button {
+    width: 70%;
+    margin-top: 10px;
+  }
+}

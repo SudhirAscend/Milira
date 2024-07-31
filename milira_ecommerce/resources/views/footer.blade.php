@@ -1,7 +1,9 @@
 <footer id="footer">
         <div class="footer-details">
             <div class="foot-logo py-5">
-                <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
+                <a href="/">
+                    <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
+                </a>
             </div>
             <div class="footer-content">
                 <div class="row">

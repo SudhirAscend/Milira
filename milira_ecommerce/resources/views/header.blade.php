@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="header-center">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="../assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
                         </a>
                     </div>
