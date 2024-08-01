@@ -2038,7 +2038,7 @@
                         <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
                             aria-labelledby="v-pills-password-tab" tabindex="0">
                             <div class="row align-items-center">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="form-section">
                                         <form action="#">
                                             <div class="currentpass form-item">
@@ -2063,11 +2063,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="reset-img text-end">
-                                        <img src="./assets/images/homepage-one/reset.webp" alt="reset">
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
 
