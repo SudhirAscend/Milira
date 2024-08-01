@@ -294,14 +294,8 @@
                                                 </div>
                                                 <div class="pdt-shop text-center mt-5">
                                                     <div class="row">
-<<<<<<< HEAD
                                                         <div class="col-9 view-btn">
                                                             <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
-=======
-                                                        <div class="col-9">
-                                                        <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
-
->>>>>>> a6ed10da877c1fa6fc5d235ad9f6df250e627ea7
                                                         </div>
                                                         <div class="col-3 cart-btn">
                                                             <button class="add-to-cart-btn" data-id="{{ $product->id }}">
