@@ -70,7 +70,7 @@
     <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
     <div id="search-results" class="search-results"></div>
 </div>
-                        <div class="header-compaire">
+                       <!--  <div class="header-compaire">
                             <a href="compaire.html" class="cart-item">
                                 <span>
                                     <svg width="34" height="27" viewBox="0 0 34 27" fill="none"
@@ -95,7 +95,7 @@
                                     Compaire
                                 </span>
                             </a>
-                        </div>
+                        </div> -->
                         <div class="header-favourite">
                                 <a href="wishlist.html" class="cart-item">
                                 <span class="wishlist-count" id="wishlist-item-count">{{ $wishlistCount }}</span>
