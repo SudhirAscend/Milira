@@ -514,57 +514,6 @@
         rebindCloseButtons();
     }
 
-    $('.add-to-cart-btn').off('click').on('click', function () {
-        var productId = $(this).data('id');
-        var quantity = parseInt($('#productQuantity').val(), 10) || 1;
-
-        $.ajax({
-            url: '{{ route("cart.add") }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                product_id: productId,
-                quantity: quantity
-            },
-            success: function (response) {
-                updateCart(response.cartCount, response.cart, response.subtotal);
-            },
-            error: function (response) {
-                if (response.status === 401) {
-                    window.location.href = '{{ route("login") }}';
-                } 
-            }
-        });
-    });
-
-    $('.buy-now-btn').on('click', function () {
-        var url = $(this).data('url');
-        window.location.href = url;
-    });
-
-    function rebindCloseButtons() {
-        $('.close-btn').off('click').on('click', function () {
-            var productId = $(this).data('id');
-
-            $.ajax({
-                url: '{{ route("cart.remove") }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    product_id: productId
-                },
-                success: function (response) {
-                    updateCart(response.cartCount, response.cart, response.subtotal);
-                },
-                error: function (response) {
-                    if (response.status === 401) {
-                        window.location.href = '{{ route("login") }}';
-                    }
-                }
-            });
-        });
-    }
-
     function filterProducts() {
         let selectedCategories = [];
         $('.category-checkbox:checked').each(function () {
@@ -621,7 +570,7 @@
                                         <div class="pdt-shop text-center mt-5">
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <button class="buy-now-btn" data-url="/shop/${product.title.replace(/\s+/g, '-')}">Buy Now <i class="bi bi-bag-heart-fill"></i></button>
+                                                    <button class="buy-now-btn" data-url="/shop/${product.title.replace(/\s+/g, '-').replace(/'/g, '')}">View Product <i class="bi bi-bag-heart-fill"></i></button>
                                                 </div>
                                                 <div class="col-3">
                                                     <button class="add-to-cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
@@ -635,7 +584,7 @@
                     `);
                 });
 
-                rebindEventHandlers();
+                rebindEventHandlers(); // Reattach event handlers after the DOM update
             }
         });
     }
@@ -662,6 +611,11 @@
                     } 
                 }
             });
+        });
+
+        $('.buy-now-btn').off('click').on('click', function () {
+            var url = $(this).data('url');
+            window.location.href = url;
         });
 
         $('.wishlist-button').off('click').on('click', function () {
@@ -717,8 +671,7 @@
     $('.category-checkbox').change(filterProducts);
     $('.collection-checkbox').change(filterProducts);
     
-    rebindCloseButtons();
-    rebindEventHandlers();
+    rebindEventHandlers(); // Initial event handler binding
 });
 
         </script>
