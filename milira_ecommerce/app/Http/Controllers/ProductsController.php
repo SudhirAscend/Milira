@@ -9,25 +9,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Ensure you import the Auth facade
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Models\Collection;
 
 class ProductsController extends Controller
 {
     public function index()
-    {
-        $products = Product::all();
+{
+    // Fetch distinct collections from the products table
+    $collections = Product::select('collection')->distinct()->get();
 
-        $user_id = Auth::id();
-        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+    // Fetch products and other data as before
+    $products = Product::all();
 
-        $cart = session()->get('cart', []);
-        $cartCount = count($cart);
-        $subtotal = array_reduce($cart, function($sum, $item) {
-            return $sum + ($item['price'] * $item['quantity']);
-        }, 0);
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
-    }
+    $cart = session()->get('cart', []);
+    $cartCount = count($cart);
+    $subtotal = array_reduce($cart, function($sum, $item) {
+        return $sum + ($item['price'] * $item['quantity']);
+    }, 0);
+
+    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections'));
+}
 
     public function show($slug)
     {
@@ -47,12 +52,7 @@ class ProductsController extends Controller
         return view('shop.product', compact('product', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
     }
 
-    public function create()
-    {
-        $categories = ProductCategory::all(); // Fetch all categories
-        return view('admin.products.create', compact('categories')); // Pass categories to the view
-    }
-
+   
     public function store(Request $request)
 {
     $request->validate([
@@ -60,7 +60,7 @@ class ProductsController extends Controller
         'small_description' => 'nullable|string',
         'description' => 'nullable|string',
         'images' => 'nullable|array',
-        'images.*' => 'file|mimes:jpeg,png,jpg|max:2048',
+        'images.*' => 'file|mimes:jpeg,png,jpg|max:5000000',
         'category' => 'nullable|string',
         'collection' => 'nullable|string',
         'tags' => 'nullable|string',
@@ -184,4 +184,50 @@ private function generateProductDetailPage($product)
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
     
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    // Search products based on title, description, or other fields
+    $products = Product::where('title', 'like', '%' . $query . '%')
+                        ->orWhere('small_description', 'like', '%' . $query . '%')
+                        ->orWhere('description', 'like', '%' . $query . '%')
+                        ->get();
+
+    if ($request->ajax()) {
+        $output = '<ul>';
+        foreach ($products as $product) {
+            $output .= '<li><a href="' . route('shop.product', $product->title) . '">' . $product->title . '</a></li>';
+        }
+        $output .= '</ul>';
+
+        return $output;
+    }
+
+    // If it's a full search, return the regular view
+    $categories = Product::select('category')->distinct()->get();
+    $collections = Product::select('collection')->distinct()->get();
+    $colors = Product::select('color')->distinct()->pluck('color');
+
+    $user_id = Auth::id();
+    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+    $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+    $cartCount = $cartItems->count();
+    $subtotal = $cartItems->sum(function ($item) {
+        return $item->product->price * $item->quantity;
+    });
+
+    return view('shop', compact('products', 'categories', 'collections', 'colors', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'query'));
+}
+
+public function create()
+{
+    $categories = ProductCategory::all(); // Fetch all categories
+    $collections = Collection::all(); // Fetch all collections
+    return view('admin.products.create', compact('categories', 'collections')); // Pass categories and collections to the view
+}
+
 }

@@ -102,14 +102,19 @@
                             <div class="sidebar-wrapper">
                                 <h5 class="wrapper-heading">Product Categories</h5>
                                 <div class="sidebar-item">
-                                    <ul class="sidebar-list">
-                                        @foreach ($categories as $category)
-                                            <li>
-                                                <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
-                                                <label for="{{ $category->category }}">{{ $category->category }}</label>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <ul class="sidebar-list">
+    @foreach ($categories as $categoryItem)
+        <li>
+            <input type="checkbox" class="category-checkbox"
+                   id="{{ $categoryItem->id }}"
+                   name="category"
+                   value="{{ $categoryItem->name }}"
+                   @if(isset($category) && $categoryItem->name == $category) checked @endif>
+            <label for="{{ $categoryItem->id }}">{{ $categoryItem->name }}</label>
+        </li>
+    @endforeach
+</ul>
+
                                 </div>
                             </div>
                             <hr>
@@ -117,13 +122,19 @@
                                 <h5 class="wrapper-heading">Collections</h5>
                                 <div class="sidebar-item">
                                 <ul class="sidebar-list">
-            @foreach ($collections as $collection)
-                <li>
-                    <input type="checkbox" class="collection-checkbox" id="{{ $collection->collection }}" name="collection" value="{{ $collection->collection }}">
-                    <label for="{{ $collection->collection }}">{{ $collection->collection }}</label>
-                </li>
-            @endforeach
-        </ul>
+    @foreach ($collections as $collectionItem)
+        <li>
+            <input type="checkbox" 
+                   class="collection-checkbox" 
+                   id="{{ $collectionItem->id }}" 
+                   name="collection" 
+                   value="{{ $collectionItem->name }}"
+                   @if(isset($collection) && $collectionItem->name == $collection) checked @endif>
+            <label for="{{ $collectionItem->id }}">{{ $collectionItem->name }}</label>
+        </li>
+    @endforeach
+</ul>
+
                                 </div>
                             </div>
                             <hr>

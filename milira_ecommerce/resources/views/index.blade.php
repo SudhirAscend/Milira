@@ -162,10 +162,10 @@
                                 <img src="path/to/default-image.png" alt="{{ $category->name }}" loading="lazy">
                             @endif
                             <div class="cat-btn pt-4">
-                                <a href="#">
-                                    <button class="cat-button">{{ $category->name }}</button>
-                                </a>
-                            </div>
+    <a href="{{ route('shop.category', ['category' => $category->name]) }}">
+        <button class="cat-button">{{ $category->name }}</button>
+    </a>
+</div>
                         </div>
                     </div>
                 @endforeach
@@ -173,8 +173,7 @@
         </div>
     </div>
 
-      <!-- End of categories section -->
-
+     
       <!-- About Section -->
 
       <div class="container abt">
@@ -201,7 +200,36 @@
         </div>
       </div>
 
-      
+      <div class="container">
+    <div class="cat-title mt-5">
+        <h1>Collection</h1>
+    </div>
+    <div class="cat-sub-para mt-3">
+        <p>Giving you a new silver</p>
+    </div>
+</div>
+<div class="categories mt-5 mb-5">
+    <div class="swiper catSlider">
+        <div class="swiper-wrapper">
+            @foreach ($collections as $collection)
+                <div class="swiper-slide">
+                    <div class="pendent-set">
+                        @if ($collection->image)
+                            <img src="{{ asset('images/collections/' . $collection->image) }}" alt="{{ $collection->name }}" loading="lazy">
+                        @else
+                            <img src="{{ asset('path/to/default-image.png') }}" alt="{{ $collection->name }}" loading="lazy">
+                        @endif
+                        <div class="cat-btn pt-4">
+                            <a href="{{ url('shop-collection-' . $collection->name) }}">
+                                <button class="cat-button">{{ $collection->name }}</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
     <!-- End of about section -->
 
     <!-- Essential Section -->

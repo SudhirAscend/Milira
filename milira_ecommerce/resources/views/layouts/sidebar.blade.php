@@ -29,7 +29,7 @@
               <div class="menu-title">Sales</div>
             </a>
             <ul>
-              <li><a href="{{ url('/ecommerce-orders') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
+              <li><a href="{{ url('/admin/orders') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
               </li>
               <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Order Details</a>
               </li>
@@ -51,13 +51,13 @@
               <div class="menu-title">Catalog</div>
             </a>
             <ul>
-            <li><a href="{{ url('/ecommerce-add-product') }}"><i class="material-icons-outlined">arrow_right</i>Add Product</a>
+            <li><a href="{{ url('/admin/products/create') }}"><i class="material-icons-outlined">arrow_right</i>Add Product</a>
               </li>
-              <li><a href="{{ url('/ecommerce-products') }}"><i class="material-icons-outlined">arrow_right</i>Products</a>
+              <li><a href="{{ url('/admin/products/') }}"><i class="material-icons-outlined">arrow_right</i>Products</a>
               </li>
-              <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Categories</a>
+              <li><a href="{{ url('/admin/product_categories/create') }}"><i class="material-icons-outlined">arrow_right</i>Add Categories</a>
               </li>
-              <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Attributes</a>
+              <li><a href="{{ url('/admin/product_categories/') }}"><i class="material-icons-outlined">arrow_right</i>Categories</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Families</a>
               </li>

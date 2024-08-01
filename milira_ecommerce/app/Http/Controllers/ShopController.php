@@ -4,31 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Wishlist;
 use App\Models\Cart;
+use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
-    public function index()
+    public function index($category = null)
     {
-        $categories = Product::select('category')->distinct()->get();
-        $collections = Product::select('collection')->distinct()->get(); // Fetch distinct collections
+        $categories = ProductCategory::all();
+        $collections = Collection::all();
+
+        // Debugging - Log the categories and collections
+        Log::info('Categories:', $categories->toArray());
+        Log::info('Collections:', $collections->toArray());
+
         $colors = Product::select('color')->distinct()->pluck('color');
-        $products = Product::all();
+
+        $products = Product::when($category, function ($query, $category) {
+            return $query->where('category', $category);
+        })->get();
 
         $user_id = Auth::id();
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        // Fetch cart items from the database for the logged-in user
         $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
         $cartCount = $cartItems->count();
         $subtotal = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
 
-        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
+        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'category'));
     }
 
     public function filterByCategory(Request $request)
@@ -69,6 +79,27 @@ class ShopController extends Controller
         return response()->json(compact('products', 'wishlistCount', 'cartItems', 'cartCount'));
     }
 
+    public function filterByCollection($collectionName)
+    {
+        $categories = ProductCategory::all();
+        $collections = Collection::all();
+        $colors = Product::select('color')->distinct()->pluck('color');
+
+        // Fetch products based on the selected collection
+        $products = Product::where('collection', $collectionName)->get();
+
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'collectionName'));
+    }
     public function showProduct($title)
     {
         $product = Product::where('title', $title)->first();
@@ -89,4 +120,6 @@ class ShopController extends Controller
 
         return view('shop.product', compact('product', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
+
+    
 }
