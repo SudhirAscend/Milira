@@ -13,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CollectionController;
 
 // Admin routes
 Route::prefix('admin')->group(function () {
@@ -120,3 +121,9 @@ Route::resource('products', ProductsController::class);
 Route::get('/shop-category-{category}', [ShopController::class, 'index'])->name('shop.category');
 Route::get('/shop-collection-{collection}', [ShopController::class, 'filterByCollection'])->name('shop.collection');
 Route::get('/search', [ProductsController::class, 'search'])->name('products.search');
+Route::get('/admin/collections/create', [CollectionController::class, 'create'])->name('collections.create');
+Route::post('/admin/collections/store', [CollectionController::class, 'store'])->name('collections.store');
+
+Route::get('/admin/products/create', [ProductsController::class, 'create'])->name('products.create');
+Route::post('/admin/products/store', [ProductsController::class, 'store'])->name('products.store');
+

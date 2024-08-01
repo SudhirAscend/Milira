@@ -70,14 +70,13 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <label for="Collection" class="form-label">Collection</label>
-                
-                        <select class="form-select" id="Collection" name="collection">
-                            <option value="Women">Women</option>
-                            <option value="Men">Men</option>
-                            <option value="Kids">Kids</option>
-                        </select>
-                    </div>
+                <label for="Collection" class="form-label">Collection</label>
+                <select class="form-select" id="Collection" name="collection">
+                    @foreach ($collections as $collection)
+                        <option value="{{ $collection->name }}">{{ $collection->name }}</option>
+                    @endforeach
+                </select>
+            </div>
                     <div class="col-12">
                         <label for="Tags" class="form-label">Tags</label>
                         <input type="text" class="form-control" id="Tags" name="tags" placeholder="Tags">

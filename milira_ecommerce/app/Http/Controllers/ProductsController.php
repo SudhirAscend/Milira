@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; // Ensure you import the Auth facade
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Models\Collection;
 
 class ProductsController extends Controller
 {
@@ -51,12 +52,7 @@ class ProductsController extends Controller
         return view('shop.product', compact('product', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds'));
     }
 
-    public function create()
-    {
-        $categories = ProductCategory::all(); // Fetch all categories
-        return view('admin.products.create', compact('categories')); // Pass categories to the view
-    }
-
+   
     public function store(Request $request)
 {
     $request->validate([
@@ -226,4 +222,12 @@ private function generateProductDetailPage($product)
 
     return view('shop', compact('products', 'categories', 'collections', 'colors', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'query'));
 }
+
+public function create()
+{
+    $categories = ProductCategory::all(); // Fetch all categories
+    $collections = Collection::all(); // Fetch all collections
+    return view('admin.products.create', compact('categories', 'collections')); // Pass categories and collections to the view
+}
+
 }
