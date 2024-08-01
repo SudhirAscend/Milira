@@ -9,16 +9,21 @@ use App\Models\Wishlist;
 use App\Models\Cart;
 use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ShopController extends Controller
 {
     public function index($category = null)
     {
-        $categories = ProductCategory::all(); // Fetch categories from ProductCategory model
-        $collections = Collection::all(); // Fetch collections from Collection model
+        $categories = ProductCategory::all();
+        $collections = Collection::all();
+
+        // Debugging - Log the categories and collections
+        Log::info('Categories:', $categories->toArray());
+        Log::info('Collections:', $collections->toArray());
+
         $colors = Product::select('color')->distinct()->pluck('color');
 
-        // Fetch products based on the selected category
         $products = Product::when($category, function ($query, $category) {
             return $query->where('category', $category);
         })->get();

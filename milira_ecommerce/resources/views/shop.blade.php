@@ -106,11 +106,11 @@
     @foreach ($categories as $categoryItem)
         <li>
             <input type="checkbox" class="category-checkbox"
-                   id="{{ $categoryItem->category }}"
+                   id="{{ $categoryItem->id }}"
                    name="category"
-                   value="{{ $categoryItem->category }}"
-                   @if(isset($category) && $categoryItem->category == $category) checked @endif>
-            <label for="{{ $categoryItem->category }}">{{ $categoryItem->category }}</label>
+                   value="{{ $categoryItem->name }}"
+                   @if(isset($category) && $categoryItem->name == $category) checked @endif>
+            <label for="{{ $categoryItem->id }}">{{ $categoryItem->name }}</label>
         </li>
     @endforeach
 </ul>
@@ -126,11 +126,11 @@
         <li>
             <input type="checkbox" 
                    class="collection-checkbox" 
-                   id="{{ $collectionItem->collection }}" 
+                   id="{{ $collectionItem->id }}" 
                    name="collection" 
-                   value="{{ $collectionItem->collection }}"
-                   @if(isset($collection) && $collectionItem->collection == $collection) checked @endif>
-            <label for="{{ $collectionItem->collection }}">{{ $collectionItem->collection }}</label>
+                   value="{{ $collectionItem->name }}"
+                   @if(isset($collection) && $collectionItem->name == $collection) checked @endif>
+            <label for="{{ $collectionItem->id }}">{{ $collectionItem->name }}</label>
         </li>
     @endforeach
 </ul>
