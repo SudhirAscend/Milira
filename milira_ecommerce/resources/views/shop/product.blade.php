@@ -205,44 +205,87 @@
     </section>
     <div class="container">
     <div class="review-title">
-        <h1>Reviews</h1>
-    </div>
-    <div class="post-review">
-        <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <div class="give-rate">
-                <h6>Rate the Product</h6>
-                <i class="bi bi-star" data-rating="1"></i>
-                <i class="bi bi-star" data-rating="2"></i>
-                <i class="bi bi-star" data-rating="3"></i>
-                <i class="bi bi-star" data-rating="4"></i>
-                <i class="bi bi-star" data-rating="5"></i>
-                <input type="hidden" name="rating" id="rating">
+    <h1>Reviews</h1>
+</div>
+<div class="post-review">
+    <form action="{{ route('reviews.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <div class="give-rate">
+            <h6>Rate the Product</h6>
+            <i class="bi bi-star" data-rating="1"></i>
+            <i class="bi bi-star" data-rating="2"></i>
+            <i class="bi bi-star" data-rating="3"></i>
+            <i class="bi bi-star" data-rating="4"></i>
+            <i class="bi bi-star" data-rating="5"></i>
+            <input type="hidden" name="rating" id="rating">
+        </div>
+        <div class="product-desc">
+            <h6>Review Our Product</h6>
+            <textarea name="description" id="pdtDescription" placeholder="Description"></textarea>
+        </div>
+        <div class="pdt-image">
+            <div class="mb-3">
+                <h6>Upload your Product images</h6>
+                <input type="file" class="pdt-file mt-4" name="image" id="inputFile">
             </div>
-            <div class="product-desc">
-                <h6>Review Our Product</h6>
-                <textarea name="description" id="pdtDescription" placeholder="Description"></textarea>
-            </div>
-            <div class="pdt-image">
-                <div class="mb-3">
-                    <h6>Upload your Product images</h6>
-                    <input type="file" class="pdt-file mt-4" name="image" id="inputFile">
+        </div>
+        <div class="submit-review mt-4">
+            <span>
+                <button type="submit" class="review-1">Submit</button>
+            </span>
+            <span class="px-3">
+                <button type="button" class="review-2"> Cancel </button>
+            </span>
+        </div>
+    </form>
+</div>
+
+<div class="review-sections mt-5">
+    @php
+        $reviewCount = $product->reviews->count();
+        $reviewsToShow = $product->reviews->take(3); // Limit to the first 3 reviews
+    @endphp
+
+    @foreach($reviewsToShow as $review)
+    <div class="row mt-4 py-4 border-bottom">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <div class="user-profile d-flex mt-4">
+                <div class="user-name mx-4">
+                    <h4>{{ $review->user->name }}</h4>
+                    <div class="user-designation">
+                        <p>Customer</p>
+                    </div>
                 </div>
             </div>
-            <div class="submit-review mt-4">
-                <span>
-                    <button type="submit" class="review-1">Submit</button>
-                </span>
-                <span class="px-3">
-                    <button href="" class="review-2"> Cancel </button>
-                </span>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+            <div class="pdt-rating">
+                @for ($i = 0; $i < $review->rating; $i++)
+                    <i class="bi bi-star-fill"></i>
+                @endfor
+                @for ($i = $review->rating; $i < 5; $i++)
+                    <i class="bi bi-star"></i>
+                @endfor
             </div>
-        </form>
+            <div class="review-description mt-3">
+                <p>{{ $review->description }}</p>
+            </div>
+            @if ($review->image)
+            <img src="{{ asset('storage/' . $review->image) }}" alt="Review Image" style="width: 100px; height: 100px;">
+            @endif
+        </div>
     </div>
-    
-    <div class="review-sections mt-5">
-        @foreach($product->reviews as $review)
+    @endforeach
+
+    @if($reviewCount > 3)
+    <div class="text-center">
+        <button class="shop-btn text-center" id="seeMoreReviews">See More Reviews</button>
+    </div>
+    @endif
+
+    <div id="allReviews" style="display: none;">
+        @foreach($product->reviews->slice(3) as $review)
         <div class="row mt-4 py-4 border-bottom">
             <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
                 <div class="user-profile d-flex mt-4">
@@ -272,18 +315,13 @@
             </div>
         </div>
         @endforeach
-
-        <div class="text-center">
-            <button class="shop-btn text-center">See More Reviews</button>
-        </div>
     </div>
 </div>
-
 
     <!--------------- products-Review-end--------------->
 
     <!--------------- weekly-section--------------->
-    <section class="product weekly-sale product-weekly footer-padding">
+    <section class="product weekly-sale product-weekly footer-padding mt-5">
         <div class="container">
             <div class="section-title">
                 <h5>Best Sell in this Week</h5>
@@ -512,6 +550,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.give-rate .bi-star');
     const ratingInput = document.getElementById('rating');
+    const seeMoreBtn = document.getElementById('seeMoreReviews');
+    const allReviews = document.getElementById('allReviews');
 
     stars.forEach(star => {
         star.addEventListener('click', function () {
@@ -529,6 +569,13 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    if (seeMoreBtn) {
+        seeMoreBtn.addEventListener('click', function () {
+            allReviews.style.display = 'block';
+            this.style.display = 'none';
+        });
+    }
 });
 </script>
 

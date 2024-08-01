@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str; // Add this import for Str helper
 
 class ShopController extends Controller
 {
@@ -100,9 +101,14 @@ class ShopController extends Controller
 
         return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'collectionName'));
     }
-    public function showProduct($title)
+
+    public function showProduct($titleSlug)
     {
-        $product = Product::where('title', $title)->first();
+        // Normalize the slug by removing unwanted characters like apostrophes
+        $normalizedSlug = Str::slug(str_replace("'", '', $titleSlug), '-');
+
+        // Find the product using the normalized slug
+        $product = Product::whereRaw("REPLACE(LOWER(REPLACE(title, '''', '')), ' ', '-') = ?", [$normalizedSlug])->first();
 
         if (!$product) {
             return redirect()->route('shop.index')->with('error', 'Product not found');
@@ -120,6 +126,4 @@ class ShopController extends Controller
 
         return view('shop.product', compact('product', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
-
-    
 }
