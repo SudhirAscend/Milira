@@ -173,6 +173,83 @@
                             <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now</a>
                         </div>
                     </div>
+                    <div class="mobile-sidebar">
+    <button class="shop-side-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#shopSidebarMenu" aria-controls="shopSidebarMenu">
+        <i class="bi bi-funnel-fill"></i>
+    </button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="shopSidebarMenu" aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="sidebar" data-aos="fade-right">
+                <div class="sidebar-section">
+                    <div class="sidebar-wrapper">
+                        <h5 class="wrapper-heading">Product Categories</h5>
+                        <div class="sidebar-item">
+                            <ul class="sidebar-list">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
+                                        <label for="{{ $category->category }}">{{ $category->category }}</label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="sidebar-wrapper">
+                        <h5 class="wrapper-heading">Collections</h5>
+                        <div class="sidebar-item">
+                            <ul class="sidebar-list">
+                                @foreach ($collections as $collection)
+                                    <li>
+                                        <input type="checkbox" class="collection-checkbox" id="{{ $collection->collection }}" name="collection" value="{{ $collection->collection }}">
+                                        <label for="{{ $collection->collection }}">{{ $collection->collection }}</label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="sidebar-wrapper sidebar-range">
+                        <h5 class="wrapper-heading">Price Range</h5>
+                        <div class="price-slide range-slider">
+                            <div class="price">
+                                <input type="range" class="form-range" id="priceRange" min="0" max="1000" step="10">
+                                <span class="example-val" id="slider-margin-value-min">0</span>
+                                <span>-</span>
+                                <span class="example-val" id="slider-margin-value-max">1000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="sidebar-wrapper">
+                        <h5 class="wrapper-heading">Color</h5>
+                        <div class="sidebar-item">
+                            <ul class="sidebar-list">
+                                @foreach($colors as $color)
+                                    <li>
+                                        <input type="checkbox" id="{{ $color }}" name="color" value="{{ $color }}">
+                                        <label for="{{ $color }}">{{ ucfirst($color) }}</label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="sidebar-shop-section">
+                    <span class="wrapper-subtitle">TRENDY</span>
+                    <h5 class="wrapper-heading">Best wireless Shoes</h5>
+                    <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                 </div>
                 <div class="col-lg-9">
                     <div class="product-sidebar-section" data-aos="fade-up">
@@ -245,7 +322,7 @@
             </div>
         </div>
     </section>
-
+    
     <!--------------- footer-section --------------->
     <footer id="footer">
         <div class="footer-details">
