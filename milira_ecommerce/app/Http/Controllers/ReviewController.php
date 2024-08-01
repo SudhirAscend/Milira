@@ -15,7 +15,7 @@ class ReviewController extends Controller
             'product_id' => 'required|exists:products,id',
             'rating' => 'required|integer|min:1|max:5',
             'description' => 'required|string|max:1000',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:50000',
         ]);
 
         $review = new Review();
