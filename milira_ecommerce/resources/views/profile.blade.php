@@ -1120,16 +1120,7 @@
                                         <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}" required>
                                     </div>
                                 </div>
-                                <div class="account-inner-form">
-                                    <div class="review-form-name">
-                                        <label for="password" class="form-label">Password*</label>
-                                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                                    </div>
-                                    <div class="review-form-name">
-                                        <label for="password_confirmation" class="form-label">Confirm Password*</label>
-                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password">
-                                    </div>
-                                </div>
+                                
                                 <div class="account-inner-form">
                                     <div class="review-form-name">
                                         <label for="phone_number" class="form-label">Phone Number*</label>
