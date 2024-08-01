@@ -64,6 +64,31 @@ class ProfileController extends Controller
         return back()->with('success', 'Profile updated successfully.');
     }
 
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['errors' => ['current_password' => ['Current password is incorrect.']]], 422);
+        }
+
+        // Generate OTP and send it to the user's email
+        $otp = rand(100000, 999999);
+        $user->otp = $otp;
+        $user->save();
+
+        Mail::to($user->email)->send(new OtpMail($otp));
+
+        session(['new_password' => Hash::make($request->new_password)]);
+
+        return response()->json(['otp_sent' => true]);
+    }
+
     public function verifyOtp(Request $request)
     {
         $request->validate(['otp' => 'required|integer']);
@@ -71,15 +96,16 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         if ($user->otp == $request->otp) {
-            $user->email = $request->email;
+            $user->password = session('new_password');
             $user->otp = null;
             $user->save();
 
-            return back()->with('success', 'Email updated successfully.');
+            session()->forget('new_password');
+
+            return response()->json(['success' => true]);
         }
 
-        return back()->withErrors(['otp' => 'Invalid OTP.']);
+        return response()->json(['errors' => ['otp' => ['Invalid OTP.']]], 422);
     }
-
     
 }

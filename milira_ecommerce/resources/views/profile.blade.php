@@ -7,7 +7,18 @@
         content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+.is-invalid {
+    border-color: red !important;
+}
 
+.is-valid {
+    border-color: green !important;
+}
+</style>
+<!-- Bootstrap JS (if not included in your Laravel Mix setup) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" href="{{ asset('assets/images/homepage-one/icon.png') }}">
 
 <!--title  -->
@@ -2035,37 +2046,73 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
-                            aria-labelledby="v-pills-password-tab" tabindex="0">
-                            <div class="row align-items-center">
-                                <div class="col-lg-12">
-                                    <div class="form-section">
-                                        <form action="#">
-                                            <div class="currentpass form-item">
-                                                <label for="currentpass" class="form-label">Current Password*</label>
-                                                <input type="password" class="form-control" id="currentpass"
-                                                    placeholder="******">
-                                            </div>
-                                            <div class="password form-item">
-                                                <label for="pass" class="form-label">Password*</label>
-                                                <input type="password" class="form-control" id="pass"
-                                                    placeholder="******">
-                                            </div>
-                                            <div class="re-password form-item">
-                                                <label for="repass" class="form-label">Re-enter Password*</label>
-                                                <input type="password" class="form-control" id="repass"
-                                                    placeholder="******">
-                                            </div>
-                                        </form>
-                                        <div class="form-btn">
-                                            <a href="#" class="shop-btn">Upldate Password</a>
-                                            <a href="#" class="shop-btn cancel-btn">Cancel</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
+
+                        @if(session('otp_sent'))
+        <div class="alert alert-info">{{ session('otp_sent') }}</div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <!-- Password Update Form -->
+<div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab" tabindex="0">
+    <div class="row align-items-center">
+        <div class="col-lg-12">
+            <div class="form-section">
+                <form id="passwordUpdateForm" method="POST" action="{{ route('profile.changePassword') }}">
+                    @csrf
+                    <div class="currentpass form-item">
+                        <label for="currentpass" class="form-label">Current Password*</label>
+                        <input type="password" class="form-control" id="currentpass" name="current_password" placeholder="******" required>
+                    </div>
+                    <div class="password form-item">
+                        <label for="pass" class="form-label">New Password*</label>
+                        <input type="password" class="form-control" id="pass" name="new_password" placeholder="******" required>
+                    </div>
+                    <div class="re-password form-item">
+                        <label for="repass" class="form-label">Re-enter New Password*</label>
+                        <input type="password" class="form-control" id="repass" name="new_password_confirmation" placeholder="******" required>
+                    </div>
+                    <div class="form-btn">
+                        <button type="submit" class="shop-btn">Update Password</button>
+                        <a href="#" class="shop-btn cancel-btn">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="otpModalLabel">OTP Verification</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="otpVerificationForm" method="POST" action="{{ route('profile.verifyOtp') }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="otp" class="form-label">Enter OTP</label>
+                        <input type="text" class="form-control" id="otp" name="otp" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Verify OTP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
                         <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel"
                             aria-labelledby="v-pills-ticket-tab" tabindex="0">
@@ -2636,6 +2683,59 @@
 
 <!--------------- additional-js ---------------->
 <script src="{{ asset('assets/js/shopus.js') }}"></script>
+<script>
+$(document).ready(function() {
+    // Validate if the new passwords match
+    function validatePasswordMatch() {
+        const newPassword = $('#pass').val();
+        const confirmPassword = $('#repass').val();
+
+        if (newPassword === confirmPassword) {
+            $('#pass, #repass').removeClass('is-invalid').addClass('is-valid');
+        } else {
+            $('#pass, #repass').removeClass('is-valid').addClass('is-invalid');
+        }
+    }
+
+    // Trigger validation on password input change
+    $('#pass, #repass').on('input', function() {
+        validatePasswordMatch();
+    });
+
+    $('#passwordUpdateForm').on('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        $.ajax({
+            url: '{{ route("profile.changePassword") }}',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.otp_sent) {
+                    // Show the OTP modal (this is assuming you have implemented OTP verification)
+                    $('#otpModal').modal('show');
+                }
+            },
+            error: function(response) {
+                // Handle validation errors
+                if (response.status === 422) {
+                    let errors = response.responseJSON.errors;
+                    
+                    // Check for current password error
+                    if (errors.current_password) {
+                        $('#currentpass').addClass('is-invalid');
+                    } else {
+                        $('#currentpass').removeClass('is-invalid').addClass('is-valid');
+                    }
+
+                    // Check for new password match error
+                    validatePasswordMatch();
+                }
+            }
+        });
+    });
+});
+</script>
+
 
 
 </body>
