@@ -1617,9 +1617,6 @@ a .bi-arrow-repeat {
       display: block;
     }
 
-    img.pdt-img {
-      filter: brightness(50%);
-    }
   }
 }
 
@@ -1723,6 +1720,7 @@ button.add-to-cart-btn:hover {
   background-color: transparent;
   border: 1px solid var(--primary-color);
   padding: 5px 15px;
+  margin-top: 30px;
 }
 
 .bi-funnel-fill  {
@@ -1738,8 +1736,115 @@ button.add-to-cart-btn:hover {
   transition: 0.5s ease;
 }
 
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
   .sidebar {
     display: none;
   }
+} */
+
+.noUi-horizontal .noUi-tooltip {
+  bottom: -140%;
+}
+
+.noUi-tooltip {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  .product-sidebar-section.aos-init.aos-animate {
+    margin-top: 15px;
+  }
+  .sidebar-section {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card.product {
+    border: none;
+    height: 100%;
+  }
+  .product-card {
+    width: 50%;
+    padding: 3px;
+  }
+
+  .card-body {
+    padding: 0px;
+  }
+  img.pdt-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .pdt-rating {
+    display: none;
+  }
+  .cart-btn {
+      display: none;
+  }
+  .view-btn {
+    width: 100%;
+  }
+  .pdt-title h6 {
+    font-size: 18px;
+    font-family: "Ubuntu Sans";
+    font-weight: 500;
+  }
+  .container.pdt-content {
+    padding: 3px;
+  }
+  .pdt-price {
+    margin-top: -5px;
+  }
+  .pdt-price h6 {
+    font-size: 14;
+    font-weight: 600;
+    font-family: "Open Sans";
+  }
+  .view-btn {
+    padding-bottom: 10px;
+  }
+  button.buy-now-btn {
+    font-size: 12px;
+    margin-top: -10px;
+    padding: 10px 0px;
+    width: 80%;
+  }
+  .bi-bag-heart-fill {
+    margin-left: 10px;
+  }
+  .bi-arrows-fullscreen {
+    display: none;
+  }
+  .bi-arrow-repeat {
+    display: none;
+  }
+
+  .card.product:hover {
+    border: none;
+    img.pdt-img {
+      filter: none;
+    }
+    .card-hover {
+      position: absolute;
+      text-align: center;
+      top: 10px;
+      left: 130px;
+      display: block;
+    }
+  }
+  .card-hover {
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    left: 130px;
+    display: block;
+  }
+
 }
