@@ -60,7 +60,7 @@ class ProductsController extends Controller
         'small_description' => 'nullable|string',
         'description' => 'nullable|string',
         'images' => 'nullable|array',
-        'images.*' => 'file|mimes:jpeg,png,jpg|max:2048',
+        'images.*' => 'file|mimes:jpeg,png,jpg|max:5000000',
         'category' => 'nullable|string',
         'collection' => 'nullable|string',
         'tags' => 'nullable|string',

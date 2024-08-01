@@ -127,3 +127,9 @@ Route::post('/admin/collections/store', [CollectionController::class, 'store'])-
 Route::get('/admin/products/create', [ProductsController::class, 'create'])->name('products.create');
 Route::post('/admin/products/store', [ProductsController::class, 'store'])->name('products.store');
 
+Route::prefix('admin')->group(function () {
+    Route::get('collections', [CollectionController::class, 'index'])->name('collections.index');
+    Route::get('collections/create', [CollectionController::class, 'create'])->name('collections.create');
+    Route::post('collections', [CollectionController::class, 'store'])->name('collections.store');
+    Route::delete('collections/{id}', [CollectionController::class, 'destroy'])->name('collections.destroy');
+});

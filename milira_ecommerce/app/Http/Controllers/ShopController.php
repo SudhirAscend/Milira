@@ -7,14 +7,15 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Wishlist;
 use App\Models\Cart;
+use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
     public function index($category = null)
     {
-        $categories = Product::select('category')->distinct()->get();
-        $collections = Product::select('collection')->distinct()->get(); // Fetch distinct collections
+        $categories = ProductCategory::all(); // Fetch categories from ProductCategory model
+        $collections = Collection::all(); // Fetch collections from Collection model
         $colors = Product::select('color')->distinct()->pluck('color');
 
         // Fetch products based on the selected category
@@ -26,7 +27,6 @@ class ShopController extends Controller
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-        // Fetch cart items from the database for the logged-in user
         $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
         $cartCount = $cartItems->count();
         $subtotal = $cartItems->sum(function ($item) {
@@ -74,29 +74,27 @@ class ShopController extends Controller
         return response()->json(compact('products', 'wishlistCount', 'cartItems', 'cartCount'));
     }
 
-    public function filterByCollection($collection)
-{
-    $categories = Product::select('category')->distinct()->get();
-    $collections = Product::select('collection')->distinct()->get();
-    $colors = Product::select('color')->distinct()->pluck('color');
+    public function filterByCollection($collectionName)
+    {
+        $categories = ProductCategory::all();
+        $collections = Collection::all();
+        $colors = Product::select('color')->distinct()->pluck('color');
 
-    // Fetch products based on the selected collection
-    $products = Product::where('collection', $collection)->get();
+        // Fetch products based on the selected collection
+        $products = Product::where('collection', $collectionName)->get();
 
-    $user_id = Auth::id();
-    $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
-    $wishlistCount = Wishlist::where('user_id', $user_id)->count();
+        $user_id = Auth::id();
+        $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
+        $wishlistCount = Wishlist::where('user_id', $user_id)->count();
 
-    // Fetch cart items from the database for the logged-in user
-    $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
-    $cartCount = $cartItems->count();
-    $subtotal = $cartItems->sum(function ($item) {
-        return $item->product->price * $item->quantity;
-    });
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+        $cartCount = $cartItems->count();
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->product->price * $item->quantity;
+        });
 
-    return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'collection'));
-}
-
+        return view('shop', compact('categories', 'collections', 'colors', 'products', 'wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal', 'collectionName'));
+    }
     public function showProduct($title)
     {
         $product = Product::where('title', $title)->first();
@@ -117,4 +115,6 @@ class ShopController extends Controller
 
         return view('shop.product', compact('product', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
+
+    
 }

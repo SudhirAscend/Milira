@@ -214,12 +214,14 @@
             @foreach ($collections as $collection)
                 <div class="swiper-slide">
                     <div class="pendent-set">
-                        <!-- Display a default image if there's no specific image for the collection -->
-                        <img src="{{ asset('path/to/default-image.png') }}" alt="{{ $collection->collection }}" loading="lazy">
-                        
+                        @if ($collection->image)
+                            <img src="{{ asset('images/collections/' . $collection->image) }}" alt="{{ $collection->name }}" loading="lazy">
+                        @else
+                            <img src="{{ asset('path/to/default-image.png') }}" alt="{{ $collection->name }}" loading="lazy">
+                        @endif
                         <div class="cat-btn pt-4">
-                            <a href="{{ url('shop-collection-' . $collection->collection) }}">
-                                <button class="cat-button">{{ $collection->collection }}</button>
+                            <a href="{{ url('shop-collection-' . $collection->name) }}">
+                                <button class="cat-button">{{ $collection->name }}</button>
                             </a>
                         </div>
                     </div>
