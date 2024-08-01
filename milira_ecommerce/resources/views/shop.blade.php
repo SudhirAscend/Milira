@@ -21,6 +21,7 @@
 
     <!---------------------- Range Slider ------------------->
     <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css" rel="stylesheet">
 
     <!---------------------- Scroll ------------------->
     <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
@@ -97,7 +98,7 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-3">
-                    <div class="sidebar" data-aos="fade-right">
+                    <div class="sidebar d-none d-xl-block d-lg-block" data-aos="fade-right">
                         <div class="sidebar-section">
                             <div class="sidebar-wrapper">
                                 <h5 class="wrapper-heading">Product Categories</h5>
@@ -167,95 +168,93 @@
                             </div>
                             <hr>
                         </div>
-                        <div class="sidebar-shop-section">
-                            <span class="wrapper-subtitle">TRENDY</span>
-                            <h5 class="wrapper-heading">Best wireless Shoes</h5>
-                            <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now</a>
-                        </div>
                     </div>
-                    <div class="mobile-sidebar">
-    <button class="shop-side-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#shopSidebarMenu" aria-controls="shopSidebarMenu">
-        <i class="bi bi-funnel-fill"></i>
-    </button>
+                    <div class="mobile-sidebar d-lg-none d-md-block d-sm-block">
+                        <button class="shop-side-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#shopSidebarMenu" aria-controls="shopSidebarMenu">
+                            <i class="bi bi-funnel-fill"><span class="filter-btn mx-1">Filter</span></i>
+                        </button>
 
-    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="shopSidebarMenu" aria-labelledby="offcanvasWithBothOptionsLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="sidebar" data-aos="fade-right">
-                <div class="sidebar-section">
-                    <div class="sidebar-wrapper">
-                        <h5 class="wrapper-heading">Product Categories</h5>
-                        <div class="sidebar-item">
-                            <ul class="sidebar-list">
-                                @foreach ($categories as $category)
-                                    <li>
-                                        <input type="checkbox" class="category-checkbox" id="{{ $category->category }}" name="category" value="{{ $category->category }}">
-                                        <label for="{{ $category->category }}">{{ $category->category }}</label>
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="shopSidebarMenu" aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="sidebar-wrapper">
-                        <h5 class="wrapper-heading">Collections</h5>
-                        <div class="sidebar-item">
-                            <ul class="sidebar-list">
-                                @foreach ($collections as $collection)
-                                    <li>
-                                        <input type="checkbox" class="collection-checkbox" id="{{ $collection->collection }}" name="collection" value="{{ $collection->collection }}">
-                                        <label for="{{ $collection->collection }}">{{ $collection->collection }}</label>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="sidebar-wrapper sidebar-range">
-                        <h5 class="wrapper-heading">Price Range</h5>
-                        <div class="price-slide range-slider">
-                            <div class="price">
-                                <input type="range" class="form-range" id="priceRange" min="0" max="1000" step="10">
-                                <span class="example-val" id="slider-margin-value-min">0</span>
-                                <span>-</span>
-                                <span class="example-val" id="slider-margin-value-max">1000</span>
+                        <div class="offcanvas-body">
+                        <div class="sidebar-section">
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Product Categories</h5>
+                                <div class="sidebar-item">
+                                <ul class="sidebar-list">
+                                    @foreach ($categories as $categoryItem)
+                                        <li>
+                                            <input type="checkbox" class="category-checkbox"
+                                                id="{{ $categoryItem->id }}"
+                                                name="category"
+                                                value="{{ $categoryItem->name }}"
+                                                @if(isset($category) && $categoryItem->name == $category) checked @endif>
+                                            <label for="{{ $categoryItem->id }}">{{ $categoryItem->name }}</label>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                </div>
                             </div>
+                            <hr>
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Collections</h5>
+                                <div class="sidebar-item">
+                                <ul class="sidebar-list">
+                                    @foreach ($collections as $collectionItem)
+                                        <li>
+                                            <input type="checkbox" 
+                                                class="collection-checkbox" 
+                                                id="{{ $collectionItem->id }}" 
+                                                name="collection" 
+                                                value="{{ $collectionItem->name }}"
+                                                @if(isset($collection) && $collectionItem->name == $collection) checked @endif>
+                                            <label for="{{ $collectionItem->id }}">{{ $collectionItem->name }}</label>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="sidebar-wrapper sidebar-range">
+                                <h5 class="wrapper-heading">Price Range</h5>
+                                <div class="price-slide range-slider">
+                                    <div class="price">
+                                        <div class="range-slider style-1">
+                                            <div id="priceRangeSlider" class="slider-range mb-3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="sidebar-wrapper">
+                                <h5 class="wrapper-heading">Color</h5>
+                                <div class="sidebar-item">
+                                    <ul class="sidebar-list">
+                                        @foreach($colors as $color)
+                                            <li>
+                                                <input type="checkbox" id="{{ $color }}" name="color" value="{{ $color }}">
+                                                <label for="{{ $color }}">{{ ucfirst($color) }}</label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="sidebar-wrapper">
-                        <h5 class="wrapper-heading">Color</h5>
-                        <div class="sidebar-item">
-                            <ul class="sidebar-list">
-                                @foreach($colors as $color)
-                                    <li>
-                                        <input type="checkbox" id="{{ $color }}" name="color" value="{{ $color }}">
-                                        <label for="{{ $color }}">{{ ucfirst($color) }}</label>
-                                    </li>
-                                @endforeach
-                            </ul>
                         </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="sidebar-shop-section">
-                    <span class="wrapper-subtitle">TRENDY</span>
-                    <h5 class="wrapper-heading">Best wireless Shoes</h5>
-                    <a href="seller-sidebar.html" class="shop-btn deal-btn">Shop Now</a>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+                    </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="product-sidebar-section" data-aos="fade-up">
                         <div class="row g-5" id="product-list">
                             @foreach ($products as $product)
-                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="{{ $product->category }}">
+                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 mt-4 product-card" data-category="{{ $product->category }}">
                                     <div class="card product">
                                         <div class="card-body">
                                             <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
@@ -266,9 +265,9 @@
                                                         <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
                                                     </button>
                                                     <a href="#"><i class="bi bi-arrow-repeat"></i></a>
-                                                </div>
+                                             </div>
                                             </div>
-                                            <div class="container">
+                                            <div class="container pdt-content">
                                                 <div class="pdt-title">
                                                     <h6>{{ $product->title }}</h6>
                                                 </div>
@@ -295,11 +294,10 @@
                                                 </div>
                                                 <div class="pdt-shop text-center mt-5">
                                                     <div class="row">
-                                                        <div class="col-9">
-                                                        <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
-
+                                                        <div class="col-9 view-btn">
+                                                            <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
                                                         </div>
-                                                        <div class="col-3">
+                                                        <div class="col-3 cart-btn">
                                                             <button class="add-to-cart-btn" data-id="{{ $product->id }}">
                                                                 <i class="bi bi-cart-check-fill"></i>
                                                             </button>
@@ -319,7 +317,7 @@
                             <a href="seller-sidebar.html" class="shop-btn">Shop Now</a>
                         </div>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </section>
@@ -474,10 +472,46 @@
 
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
     <script src="{{ asset('assets/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos-3.0.0.js') }}"></script>
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
+
+    <script>
+    $(document).ready(function() {
+        var slider = document.getElementById('priceRangeSlider');
+
+        noUiSlider.create(slider, {
+            start: [0, 1000],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 1000
+            },
+            tooltips: [true, true],
+            format: {
+                to: function (value) {
+                    return Math.round(value);
+                },
+                from: function (value) {
+                    return Number(value);
+                }
+            }
+        });
+
+        var minValueSpan = document.getElementById('slider-margin-value-min');
+        var maxValueSpan = document.getElementById('slider-margin-value-max');
+
+        slider.noUiSlider.on('update', function (values, handle) {
+            if (handle === 0) {
+                minValueSpan.innerHTML = values[handle];
+            } else {
+                maxValueSpan.innerHTML = values[handle];
+            }
+        });
+    });
+</script>
 <script>
     $(document).ready(function () {
     function updateCart(cartCount, cart, subtotal) {
