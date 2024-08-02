@@ -1769,12 +1769,14 @@
                 <p>No addresses found.</p>
             @endif
 
-            <div class="col-lg-6">
-                <button type="button" class="shop-btn" data-bs-toggle="modal" data-bs-target="#addAddressModal">Add New Address</button>
-            </div>
+           
         </div>
     </div>
 </div>
+
+<div class="col-lg-6">
+                <button type="button" class="shop-btn" data-bs-toggle="modal" data-bs-target="#addAddressModal">Add New Address</button>
+            </div>
     
                         <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
                             aria-labelledby="v-pills-review-tab" tabindex="0">
