@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     
 Route::post('profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verifyOtp');
+Route::post('/profile/add-address', [ProfileController::class, 'addAddress'])->name('profile.addAddress');
 });
 
 // Checkout routes
@@ -69,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/store-address', [CheckoutController::class, 'storeAddress'])->name('checkout.storeAddress');
     Route::post('/payment-success', [CheckoutController::class, 'paymentSuccess'])->name('payment.success');
 });
+
 
 // Thank you route
 Route::get('/thank-you', function () {

@@ -1012,8 +1012,12 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <p class="paragraph">New Orders</p>
-                                                    <h3 class="heading">656</h3>
+                                                    <p class="paragraph">Orders</p>
+                                                    @if($orderCount > 0)
+                                                        <h3 class="heading">{{ $orderCount }}</h3>
+                                                    @else
+                                                        <h3 class="heading">No items</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -1732,131 +1736,48 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
-                            aria-labelledby="v-pills-address-tab" tabindex="0">
-                            <div class="profile-section address-section addresses ">
-                                <div class="row gy-md-0 g-5">
-                                    <div class="col-md-6">
-                                        <div class="seller-info">
-                                            <h5 class="heading">Address-01</h5>
-                                            <div class="info-list">
-                                                <div class="info-title">
-                                                    <p>Name:</p>
-                                                    <p>Email:</p>
-                                                    <p>Phone:</p>
-                                                    <p>City:</p>
-                                                    <p>Pincode:</p>
-                                                </div>
-                                                <div class="info-details">
-                                                <p>{{ $user->full_name }}</p>
-                                                        <p>{{ $user->email }}</p>
-                                                        <p>{{ $user->phone_number }}</p>
-                                                        <p>{{ $user->city }}</p>
-                                                        <p>{{ $user->pin_code }}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="seller-info">
-                                            <h5 class="heading">Address-02</h5>
-                                            <div class="info-list">
-                                                <div class="info-title">
-                                                    <p>Name:</p>
-                                                    <p>Email:</p>
-                                                    <p>Phone:</p>
-                                                    <p>City:</p>
-                                                    <p>Zip:</p>
-                                                </div>
-                                                <div class="info-details">
-                                                    <p>Sajjad</p>
-                                                    <p>demoemail@gmail.com</p>
-                                                    <p>023 434 54354</p>
-                                                    <p>Haydarabad, Rord 34</p>
-                                                    <p>3454</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <a href="#" class="shop-btn" onclick="modalAction('.submit')">Add New
-                                            Address</a>
-                                        <!-- modal -->
-                                        <div class="modal-wrapper submit">
-                                            <div onclick="modalAction('.submit')" class="anywhere-away"></div>
-
-                                            <!-- change this -->
-                                            <div class="login-section account-section modal-main">
-                                                <div class="review-form">
-                                                    <div class="review-content">
-                                                        <h5 class="comment-title">Add Your Address</h5>
-                                                        <div class="close-btn">
-                                                            <img src="./assets/images/homepage-one/close-btn.png"
-                                                                onclick="modalAction('.submit')" alt="close-btn">
-                                                        </div>
-                                                    </div>
-                                                    <div class=" account-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="firstname" class="form-label">First
-                                                                Name*</label>
-                                                            <input type="text" id="firstname" class="form-control"
-                                                                placeholder="First Name">
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="lastname" class="form-label">Last Name*</label>
-                                                            <input type="text" id="lastname" class="form-control"
-                                                                placeholder="Last Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class=" account-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="useremail" class="form-label">Email*</label>
-                                                            <input type="email" id="useremail" class="form-control"
-                                                                placeholder="user@gmail.com">
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="userphone" class="form-label">Phone*</label>
-                                                            <input type="tel" id="userphone" class="form-control"
-                                                                placeholder="+880388**0899">
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-form-name address-form">
-                                                        <label for="useraddress" class="form-label">Address*</label>
-                                                        <input type="text" id="useraddress" class="form-control"
-                                                            placeholder="Enter your Address">
-                                                    </div>
-                                                    <div class=" account-inner-form city-inner-form">
-                                                        <div class="review-form-name">
-                                                            <label for="usercity" class="form-label">Town /
-                                                                City*</label>
-                                                            <select id="usercity" class="form-select">
-                                                                <option>Choose...</option>
-                                                                <option>Newyork</option>
-                                                                <option>Dhaka</option>
-                                                                <option selected>London</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="review-form-name">
-                                                            <label for="usernumber" class="form-label">Postcode /
-                                                                ZIP*</label>
-                                                            <input type="number" id="usernumber" class="form-control"
-                                                                placeholder="0000">
-                                                        </div>
-                                                    </div>
-                                                    <div class="login-btn text-center">
-                                                        <a href="#" onclick="modalAction('.submit')"
-                                                            class="shop-btn">Add Address</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- change this -->
-
-                                        </div>
-                                    </div>
+                        <div class="tab-pane fade" id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab" tabindex="0">
+    <div class="profile-section address-section addresses">
+        <div class="row gy-md-0 g-5">
+            @if($user->addresses && $user->addresses->isNotEmpty())
+                @foreach($user->addresses as $index => $address)
+                    <div class="col-md-6">
+                        <div class="seller-info">
+                            <h5 class="heading">Address-{{ $index + 1 }}</h5>
+                            <div class="info-list">
+                                <div class="info-title">
+                                    <p>Name:</p>
+                                    <p>Email:</p>
+                                    <p>Phone:</p>
+                                    <p>City:</p>
+                                    <p>Pincode:</p>
+                                    <p>Address:</p>
+                                </div>
+                                <div class="info-details">
+                                    <p>{{ $address->first_name }} {{ $address->last_name }}</p>
+                                    <p>{{ $address->email }}</p>
+                                    <p>{{ $address->phone }}</p>
+                                    <p>{{ $address->city }}</p>
+                                    <p>{{ $address->postcode }}</p>
+                                    <p>{{ $address->address }}</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                @endforeach
+            @else
+                <p>No addresses found.</p>
+            @endif
 
+           
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6">
+                <button type="button" class="shop-btn" data-bs-toggle="modal" data-bs-target="#addAddressModal">Add New Address</button>
+            </div>
+    
                         <div class="tab-pane fade" id="v-pills-review" role="tabpanel"
                             aria-labelledby="v-pills-review-tab" tabindex="0">
 
@@ -2662,7 +2583,62 @@
     <!--------------- footer-section-end--------------->
 
 
-
+    <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addAddressModalLabel">Add New Address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('profile.addAddress') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="country" name="country" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="postcode" class="form-label">Postcode</label>
+                            <input type="text" class="form-control" id="postcode" name="postcode" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="is_default" name="is_default" value="1">
+                            <label class="form-check-label" for="is_default">Set as default address</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
