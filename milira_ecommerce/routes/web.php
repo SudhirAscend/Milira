@@ -56,7 +56,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
-    Route::post('/profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verifyOtp');
+    
+    
+Route::post('profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::post('profile/verify-otp', [ProfileController::class, 'verifyOtp'])->name('profile.verifyOtp');
 });
 
 // Checkout routes
