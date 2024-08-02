@@ -14,13 +14,7 @@
     <div class="sidebar-nav">
         <!--navigation-->
         <ul class="metismenu" id="sidenav">
-        <li>
-            <a href="{{ url('/index2') }}">
-              <div class="parent-icon"><i class="material-icons-outlined">home</i>
-              </div>
-              <div class="menu-title">Dashboard</div>
-            </a>
-          </li>
+        
           
           <li>
             <a href="javascript:;" class="has-arrow">
