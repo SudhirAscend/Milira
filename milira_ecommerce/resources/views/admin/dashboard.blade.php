@@ -42,7 +42,7 @@
                     </div>
                     <div>
                         <h4 class="mb-0">248k</h4>
-                        <p class="mb-3">Total Orders</p>
+                        <p class="mb-3">Total Customers</p>
                         <div id="chart1"></div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div>
                         <h4 class="mb-0">$47.6k</h4>
-                        <p class="mb-3">Total Sales</p>
+                        <p class="mb-3">Total Orders</p>
                         <div id="chart2"></div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <h4 class="mb-0">189K</h4>
-                        <p class="mb-3">Total Visits</p>
+                        <p class="mb-3">Total Amount</p>
                         <div id="chart3"></div>
                     </div>
                 </div>

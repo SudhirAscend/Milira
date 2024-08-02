@@ -115,6 +115,8 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
 Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+Route::get('/admin/order-details/{id}', [AdminController::class, 'orderDetails'])->name('admin.orderDetails');
+
 
 // Request Product Form
 Route::get('/request-product', [AuthController::class, 'requestProduct'])->name('request-product');
