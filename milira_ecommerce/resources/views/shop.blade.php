@@ -254,12 +254,12 @@
                     <div class="product-sidebar-section" data-aos="fade-up">
                         <div class="row g-5" id="product-list">
                             @foreach ($products as $product)
-                                <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6 mt-4 product-card" data-category="{{ $product->category }}">
+                                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mt-4 product-card" data-category="{{ $product->category }}">
                                     <div class="card product">
                                         <div class="card-body">
                                             <img src="{{ asset('storage/uploads/' . $product->title . '_0.jpg') }}" alt="" class="pdt-img">
                                             <div class="card-hover">
-                                                <div class="hover-icons text-center">
+                                                <div class="hover-icons text-end">
                                                     <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
                                                     <button class="wishlist-button {{ in_array($product->id, $wishlistProductIds) ? 'wishlisted' : '' }}" data-product-id="{{ $product->id }}">
                                                         <i class="bi bi-heart{{ in_array($product->id, $wishlistProductIds) ? '-fill' : '' }}"></i>
@@ -295,7 +295,7 @@
                                                 <div class="pdt-shop text-center mt-5">
                                                     <div class="row">
                                                         <div class="col-9 view-btn">
-                                                            <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product <i class="bi bi-bag-heart-fill"></i></button>
+                                                            <button class="buy-now-btn" data-url="{{ url('shop/' . Str::slug($product->title, '-')) }}">View Product<i class="bi bi-bag-heart-fill"></i></button>
                                                         </div>
                                                         <div class="col-3 cart-btn">
                                                             <button class="add-to-cart-btn" data-id="{{ $product->id }}">

@@ -1700,7 +1700,6 @@ button.add-to-cart-btn {
   background-color: transparent;
   border: 1px solid var(--primary-color);
   padding: 12px 0px;
-
 }
 
 .bi-cart-check-fill {
@@ -1764,7 +1763,7 @@ button.add-to-cart-btn:hover {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 575px) {
   .card.product {
     border: none;
     height: 100%;
@@ -1786,24 +1785,31 @@ button.add-to-cart-btn:hover {
     display: none;
   }
   .cart-btn {
-      display: none;
+      display: block;
+      margin-top: -10px;
+      
   }
-  .view-btn {
-    width: 100%;
+
+  .pdt-title{
+    margin-top: -10px;
   }
   .pdt-title h6 {
-    font-size: 18px;
+    font-size: 14px;
     font-family: "Ubuntu Sans";
     font-weight: 500;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
   }
   .container.pdt-content {
-    padding: 3px;
+    padding: 10px;
   }
   .pdt-price {
     margin-top: -5px;
   }
   .pdt-price h6 {
-    font-size: 14;
+    font-size: 14px;
     font-weight: 600;
     font-family: "Open Sans";
   }
@@ -1813,17 +1819,37 @@ button.add-to-cart-btn:hover {
   button.buy-now-btn {
     font-size: 12px;
     margin-top: -10px;
-    padding: 10px 0px;
-    width: 80%;
+    padding: 8px 0px;
+    width: 100%;
+  }
+
+  button.add-to-cart-btn {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    padding: 8px 0px;
   }
   .bi-bag-heart-fill {
     margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .bi-cart-check-fill {
+    font-size: 14px;
   }
   .bi-arrows-fullscreen {
     display: none;
   }
   .bi-arrow-repeat {
     display: none;
+  }
+
+  .card-hover {
+    position: absolute;
+    text-align: center;
+    top: 10px;
+    right: 3rem;
+    display: block;
   }
 
   .card.product:hover {
@@ -1835,16 +1861,12 @@ button.add-to-cart-btn:hover {
       position: absolute;
       text-align: center;
       top: 10px;
-      left: 130px;
+      right: 3rem;
       display: block;
     }
   }
-  .card-hover {
-    position: absolute;
-    text-align: center;
-    top: 10px;
-    left: 130px;
-    display: block;
-  }
+  
+
+  
 
 }
