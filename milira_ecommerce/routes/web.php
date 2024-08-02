@@ -14,6 +14,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\OrderController;
 
 // Admin routes
 Route::prefix('admin')->group(function () {
@@ -138,3 +139,5 @@ Route::prefix('admin')->group(function () {
     Route::post('collections', [CollectionController::class, 'store'])->name('collections.store');
     Route::delete('collections/{id}', [CollectionController::class, 'destroy'])->name('collections.destroy');
 });
+
+Route::get('/order/{id}', [OrderController::class, 'view'])->name('order.view');
