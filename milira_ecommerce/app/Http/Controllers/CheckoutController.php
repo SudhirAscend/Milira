@@ -20,6 +20,7 @@ class CheckoutController extends Controller
     public function showCheckoutPage()
     {
         $user = Auth::user();
+        $addresses = $user->addresses;
         $cartItemsa = CartDetail::where('user_id', $user->id)->with('product')->get();
         $addresses = Address::where('user_id', $user->id)->get();
 

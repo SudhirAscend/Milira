@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Order;
 use App\Mail\OtpMail;
+use App\Models\Address;
 
 class ProfileController extends Controller
 {
     public function showProfile()
     {
         $user = Auth::user();
+        $user = Auth::user()->load('addresses');
         $orderCount = Order::where('user_id', $user->id)->count();
         return view('profile', compact('user', 'orderCount'));
     }
@@ -109,5 +111,40 @@ class ProfileController extends Controller
 
         return response()->json(['errors' => ['otp' => ['Invalid OTP.']]], 422);
     }
-    
+    public function addAddress(Request $request)
+{
+    $request->validate([
+        'first_name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'phone' => 'required|string|max:20',
+        'country' => 'required|string|max:100',
+        'address' => 'required|string|max:500',
+        'city' => 'required|string|max:100',
+        'postcode' => 'required|string|max:20',
+    ]);
+
+    $user = Auth::user();
+
+    // If "Set as default address" is checked, set all other addresses to non-default
+    if ($request->has('is_default') && $request->is_default) {
+        Address::where('user_id', $user->id)->update(['is_default' => 0]);
+    }
+
+    // Create the new address
+    Address::create([
+        'user_id' => $user->id,
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'country' => $request->country,
+        'address' => $request->address,
+        'city' => $request->city,
+        'postcode' => $request->postcode,
+        'is_default' => $request->has('is_default') ? 1 : 0,
+    ]);
+
+    return redirect('profile');
+}
 }
