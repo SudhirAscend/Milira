@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Order;
 use App\Mail\OtpMail;
 
 class ProfileController extends Controller
@@ -13,7 +14,8 @@ class ProfileController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        $orderCount = Order::where('user_id', $user->id)->count();
+        return view('profile', compact('user', 'orderCount'));
     }
 
     public function updateProfile(Request $request)

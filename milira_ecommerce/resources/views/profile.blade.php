@@ -1012,8 +1012,12 @@
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
-                                                    <p class="paragraph">New Orders</p>
-                                                    <h3 class="heading">656</h3>
+                                                    <p class="paragraph">Orders</p>
+                                                    @if($orderCount > 0)
+                                                        <h3 class="heading">{{ $orderCount }}</h3>
+                                                    @else
+                                                        <h3 class="heading">No items</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

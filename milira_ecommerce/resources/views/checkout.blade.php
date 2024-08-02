@@ -174,6 +174,13 @@
     <script src="{{ asset('assets/js/swiper10-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/shopus.js') }}"></script>
     <script>
+    document.getElementById('addAddressBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('billingDetails').classList.toggle('d-none');
+    });
+</script>
+
+    <script>
 document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
     e.preventDefault();
 
