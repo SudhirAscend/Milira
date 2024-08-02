@@ -31,8 +31,7 @@
             <ul>
               <li><a href="{{ url('/admin/orders') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
               </li>
-              <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Order Details</a>
-              </li>
+              
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Shipments</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Invoices</a>
