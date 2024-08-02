@@ -52,9 +52,10 @@
               </li>
               <li><a href="{{ url('/admin/product_categories/') }}"><i class="material-icons-outlined">arrow_right</i>Categories</a>
               </li>
-              <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Families</a>
+              <li><a href="{{ url('/admin/collections/create/') }}"><i class="material-icons-outlined">arrow_right</i>Add Collection</a>
               </li>
-            
+              <li><a href="{{ url('/admin/collections/') }}"><i class="material-icons-outlined">arrow_right</i>Collection</a>
+              </li>
             </ul>
           </li>
 
