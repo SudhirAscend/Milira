@@ -17,7 +17,8 @@ class ProfileController extends Controller
         $user = Auth::user();
         $user = Auth::user()->load('addresses');
         $orderCount = Order::where('user_id', $user->id)->count();
-        return view('profile', compact('user', 'orderCount'));
+        $orders = Order::where('user_id', $user->id)->with('orderItems.product')->get();
+        return view('profile', compact('user', 'orderCount','orders'));
     }
 
     public function updateProfile(Request $request)
