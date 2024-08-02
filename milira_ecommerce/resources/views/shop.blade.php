@@ -311,12 +311,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-lg-12 mt-5">
-                        <div class="product-deal-section" data-aos="fade-up">
-                            <h5 class="wrapper-heading">Get the best deal for Headphones</h5>
-                            <a href="seller-sidebar.html" class="shop-btn">Shop Now</a>
-                        </div>
-                    </div>
                 </div> 
             </div>
         </div>
