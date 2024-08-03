@@ -1,41 +1,30 @@
 <?php
 
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use Notifiable;
 
     protected $fillable = [
         'full_name',
         'email',
-        'password',
         'phone_number',
-        'dob',
-        'gender',
-        'address',
-        'city',
-        'state',
-        'pin_code',
-        'country',
+        'login_type',
         'is_verified',
+        'otp',
+        'otp_expires_at',
     ];
 
     protected $hidden = [
-        'password',
-        'remember_token',
+        'otp',
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'otp_expires_at' => 'datetime',
     ];
-    public function addresses()
-{
-    return $this->hasMany(Address::class);
-}
-
 }

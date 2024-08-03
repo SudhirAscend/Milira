@@ -12,16 +12,11 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('email')->unique();
+            $table->string('phone_number')->nullable()->unique();
             $table->string('password');
-            $table->string('phone_number');
-            $table->date('dob');
-            $table->string('gender');
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('pin_code');
-            $table->string('country');
-            $table->boolean('is_verified')->default(false);
+            $table->string('login_type');
+            $table->string('otp')->nullable();
+            $table->timestamp('otp_expires_at')->nullable();
             $table->timestamps();
         });
     }

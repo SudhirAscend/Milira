@@ -15,7 +15,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\OrderController;
-
+Auth::routes();
 // Admin routes
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -40,7 +40,7 @@ Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('shop.pro
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/signup', [HomeController::class, 'showSignupForm']);
 Route::post('/signup', [AuthController::class, 'signup']);
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+
 Route::get('/verify-otp', function () {
     return view('verify');
 })->name('verify-otp');
@@ -143,3 +143,26 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/order/{id}', [OrderController::class, 'view'])->name('order.view');
+Route::get('login/{provider}', [AuthController::class, 'redirectToProvider'])->name('social.redirect');
+Route::get('login/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
+
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('register');
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
+
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('verify-otp');
+
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+Route::post('/signup/email', [AuthController::class, 'emailSignup'])->name('signup.email.submit');
+
+// Route for Phone sign up form submission
+Route::post('/signup/phone', [AuthController::class, 'phoneSignup'])->name('signup.phone.submit');
+
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('verify-otp');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.verify');
