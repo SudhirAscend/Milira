@@ -166,3 +166,6 @@ Route::get('/verify-otp', function () {
     return view('auth.verify-otp');
 })->name('verify-otp');
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.verify');
+
+Route::get('login/google', [AuthController::class, 'redirectToProvider'])->name('google.login');
+Route::get('login/google/callback', [AuthController::class, 'handleProviderCallback']);

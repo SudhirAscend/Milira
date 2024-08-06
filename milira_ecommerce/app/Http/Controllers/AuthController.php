@@ -190,33 +190,54 @@ class AuthController extends Controller
 
     }
 
-    public function redirectToProvider($provider)
-{
-    return Socialite::driver($provider)->redirect();
-}
-
-public function handleProviderCallback($provider)
-{
-    $user = Socialite::driver($provider)->stateless()->user();
-    $authUser = $this->findOrCreateUser($user, $provider);
-    Auth::login($authUser, true);
-    return redirect()->intended('/dashboard');
-}
-
-public function findOrCreateUser($providerUser, $provider)
-{
-    $authUser = User::where('email', $providerUser->getEmail())->first();
-    if ($authUser) {
-        return $authUser;
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
     }
-    
-    return User::create([
-        'full_name' => $providerUser->getName(),
-        'email' => $providerUser->getEmail(),
-        'provider_id' => $providerUser->getId(),
-        'provider' => $provider,
-    ]);
-}
 
-    
+    public function handleProviderCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            $authUser = $this->findOrCreateUser($googleUser);
+
+            Auth::login($authUser, true);
+
+            return redirect()->route('home.index');
+        } catch (\Exception $e) {
+            Log::error('Error in Google Login: ' . $e->getMessage()); // Log any errors
+            return redirect()->route('login')->with('error', 'Failed to login with Google.');
+        }
+    }
+
+    private function findOrCreateUser($googleUser)
+    {
+        // Try to find the user by their email address
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            Log::info('User found: ' . $user->email); // Log for debugging
+            // If the user exists, ensure the provider details are set
+            if (!$user->provider_id) {
+                $user->update([
+                    'provider_id' => $googleUser->getId(),
+                    'provider' => 'google',
+                ]);
+            }
+            return $user;
+        }
+
+        // If the user doesn't exist, create a new one
+        Log::info('Creating a new user for: ' . $googleUser->getEmail()); // Log for debugging
+
+        return User::create([
+            'full_name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'provider_id' => $googleUser->getId(),
+            'provider' => 'google',
+            'password' => Hash::make(Str::random(16)), // Generate a random password
+            'login_type' => 'google', // Set the login type to google
+            'is_verified' => true, // Mark the account as verified since it came from Google
+        ]);
+    }
 }

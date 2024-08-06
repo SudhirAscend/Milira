@@ -104,9 +104,9 @@
                 <!-- Social Login Buttons with icons -->
                 <div class="text-center mt-3">
                     <p>or sign up with</p>
-                    <a href="{{ route('social.redirect', 'google') }}" class="btn btn-danger">
-                        <i class="fab fa-google"></i> Google
-                    </a>
+                    <a href="{{ route('google.login') }}" class="btn btn-danger">
+    <i class="fab fa-google"></i>Google
+</a>
                     <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-primary">
                         <i class="fab fa-facebook-f"></i> Facebook
                     </a>
