@@ -398,3 +398,21 @@ function copyCouponCode() {
     document.execCommand("copy");
 }
 
+
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  let searchValue = this.value.toLowerCase();
+  let rows = document.querySelectorAll('tbody tr');
+  
+  rows.forEach(function(row) {
+      let title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+      let smallDesc = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+      let desc = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+      
+      if (title.includes(searchValue) || smallDesc.includes(searchValue) || desc.includes(searchValue)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  });
+});
