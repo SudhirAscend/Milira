@@ -12,19 +12,18 @@ class User extends Authenticatable
         'full_name',
         'email',
         'phone_number',
-        
         'login_type',
         'is_verified',
         'otp',
         'otp_expires_at',
-        'provider',          // Add this line
-        'provider_id',       // Add this line
+        'provider',
+        'provider_id',
     ];
 
     protected $hidden = [
         'otp',
-               // Ensure password is hidden
-        'remember_token',    // If you are using this feature
+        // Removed password from hidden
+        'remember_token',
     ];
 
     protected $casts = [

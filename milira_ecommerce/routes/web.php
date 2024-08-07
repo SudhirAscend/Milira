@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SignupController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
@@ -169,3 +170,30 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.veri
 
 Route::get('login/google', [AuthController::class, 'redirectToProvider'])->name('google.login');
 Route::get('login/google/callback', [AuthController::class, 'handleProviderCallback']);
+
+Route::get('/signup/phone', [SignupController::class, 'showPhoneSignupForm']);
+Route::post('/signup/phone', [SignupController::class, 'signupPhone']);
+Route::post('/verify-otp', [SignupController::class, 'verifyOtp']);
+
+// In routes/web.php or routes/api.php
+Route::post('/signup/phone', [AuthController::class, 'signupPhone'])->name('signup.phone.submit');
+Route::post('/verify-phone', [SignupController::class, 'verifyPhone'])->name('signup.phone.submit');
+
+
+
+// Route for displaying the phone signup form
+Route::get('/signup/phone', [SignupController::class, 'showPhoneSignupForm'])->name('signup.phone');
+
+// Route for handling phone signup
+Route::post('/signup/phone', [SignupController::class, 'signupPhone'])->name('signup.phone.submit');
+
+// Route for verifying OTP
+Route::post('/verify/otp', [SignupController::class, 'verifyOtp'])->name('verify.otp');
+
+// Route for displaying the email signup form
+Route::get('/signup/email', [SignupController::class, 'showEmailSignupForm'])->name('signup.email');
+
+// Route for handling email signup
+Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('signup.email.submit');
+
+Route::post('/signup-phone', [SignupController::class, 'saveUser']);
