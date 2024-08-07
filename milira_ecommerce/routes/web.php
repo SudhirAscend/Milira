@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SignupController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\OrderController;
-
+Auth::routes();
 // Admin routes
 Route::prefix('admin')->group(function () {
     Route::get('product_categories', [ProductCategoryController::class, 'index'])->name('admin.product_categories.index');
@@ -40,7 +41,7 @@ Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('shop.pro
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/signup', [HomeController::class, 'showSignupForm']);
 Route::post('/signup', [AuthController::class, 'signup']);
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+
 Route::get('/verify-otp', function () {
     return view('verify');
 })->name('verify-otp');
@@ -115,6 +116,8 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 Route::get('/admin/customers', [AdminController::class, 'customers'])->name('admin.customers');
 Route::get('/admin/customer-details/{id}', [AdminController::class, 'customerDetails'])->name('admin.customer.details');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+Route::get('/admin/order-details/{id}', [AdminController::class, 'orderDetails'])->name('admin.orderDetails');
+
 
 // Request Product Form
 Route::get('/request-product', [AuthController::class, 'requestProduct'])->name('request-product');
@@ -141,3 +144,56 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/order/{id}', [OrderController::class, 'view'])->name('order.view');
+Route::get('login/{provider}', [AuthController::class, 'redirectToProvider'])->name('social.redirect');
+Route::get('login/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
+
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('register');
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
+
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('verify-otp');
+
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+Route::post('/signup/email', [AuthController::class, 'emailSignup'])->name('signup.email.submit');
+
+// Route for Phone sign up form submission
+Route::post('/signup/phone', [AuthController::class, 'phoneSignup'])->name('signup.phone.submit');
+
+Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('verify-otp');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.verify');
+
+Route::get('login/google', [AuthController::class, 'redirectToProvider'])->name('google.login');
+Route::get('login/google/callback', [AuthController::class, 'handleProviderCallback']);
+
+Route::get('/signup/phone', [SignupController::class, 'showPhoneSignupForm']);
+Route::post('/signup/phone', [SignupController::class, 'signupPhone']);
+Route::post('/verify-otp', [SignupController::class, 'verifyOtp']);
+
+// In routes/web.php or routes/api.php
+Route::post('/signup/phone', [AuthController::class, 'signupPhone'])->name('signup.phone.submit');
+Route::post('/verify-phone', [SignupController::class, 'verifyPhone'])->name('signup.phone.submit');
+
+
+
+// Route for displaying the phone signup form
+Route::get('/signup/phone', [SignupController::class, 'showPhoneSignupForm'])->name('signup.phone');
+
+// Route for handling phone signup
+Route::post('/signup/phone', [SignupController::class, 'signupPhone'])->name('signup.phone.submit');
+
+// Route for verifying OTP
+Route::post('/verify/otp', [SignupController::class, 'verifyOtp'])->name('verify.otp');
+
+// Route for displaying the email signup form
+Route::get('/signup/email', [SignupController::class, 'showEmailSignupForm'])->name('signup.email');
+
+// Route for handling email signup
+Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('signup.email.submit');
+
+Route::post('/signup-phone', [SignupController::class, 'saveUser']);

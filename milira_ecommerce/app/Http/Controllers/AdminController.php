@@ -58,4 +58,14 @@ public function orders()
 
     return view('admin.orders', compact('orders'));
 }
+public function orderDetails($id)
+{
+    // Fetch the order by ID and load the related user and default address
+    $order = Order::with('user.addresses')->findOrFail($id);
+
+    // Get the default address for the user
+    $defaultAddress = $order->user->addresses()->where('is_default', 1)->first();
+
+    return view('admin.order-details', compact('order', 'defaultAddress'));
+}
 }

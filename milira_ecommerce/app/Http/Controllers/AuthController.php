@@ -10,87 +10,91 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wishlist;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    public function signup(Request $request)
+    public function emailSignup(Request $request)
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'phone_number' => 'required|string|max:15',
-            'dob' => 'required|date',
-            'gender' => 'required|string|max:10',
-            'address' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
-            'pin_code' => 'required|string|max:10',
-            'country' => 'required|string|max:255',
         ]);
-
-        // Store user details in session for later use
-        session([
+    
+        // Generate an OTP
+        $otp = rand(100000, 999999);
+    
+        // Create a new user
+        $user = User::create([
             'full_name' => $request->full_name,
-            'password' => $request->password,
-            'phone_number' => $request->phone_number,
-            'dob' => $request->dob,
-            'gender' => $request->gender,
-            'address' => $request->address,
-            'city' => $request->city,
-            'state' => $request->state,
-            'pin_code' => $request->pin_code,
-            'country' => $request->country,
-        ]);
-
-        $otp = Str::random(6);
-
-        OTP::create([
             'email' => $request->email,
+            'password' => Hash::make(Str::random(8)), // Random password for now
+            'login_type' => 'email',
             'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(10), // OTP valid for 10 minutes
         ]);
-
+    
+        // Send OTP via email
         Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
             $message->to($request->email)
                     ->subject('OTP Verification');
         });
-
-        return response()->json(['message' => 'OTP sent to your email.'], 200);
+    
+        // Store user ID in session for OTP verification
+        session(['user_id' => $user->id]);
+    
+        return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
     }
 
-    public function verifyOtp(Request $request)
+    // Handle phone sign-up
+    public function phoneSignup(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email|max:255',
-            'otp' => 'required|string|max:6',
+            'full_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15|unique:users',
         ]);
 
-        $otpRecord = OTP::where('email', $request->email)->where('otp', $request->otp)->first();
-
-        if (!$otpRecord) {
-            return response()->json(['message' => 'Invalid OTP'], 400);
-        }
-
-        User::create([
-            'full_name' => session('full_name'),
-            'email' => $request->email,
-            'password' => Hash::make(session('password')),
-            'phone_number' => session('phone_number'),
-            'dob' => session('dob'),
-            'gender' => session('gender'),
-            'address' => session('address'),
-            'city' => session('city'),
-            'state' => session('state'),
-            'pin_code' => session('pin_code'),
-            'country' => session('country'),
-            'is_verified' => true,
+        // Create a new user
+        $user = User::create([
+            'full_name' => $request->full_name,
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make(Str::random(8)),
+            'login_type' => 'phone', // Set the login_type
         ]);
 
-        OTP::where('email', $request->email)->delete();
+        // Send OTP and redirect to OTP verification
+        // Assuming you have a method to send OTP via SMS
+        // $this->sendOtpToPhone($user->phone_number);
 
-        return redirect('/login')->with('message', 'User registered successfully.');
+        return redirect()->route('verify-otp')->with('message', 'OTP sent to your phone.');
     }
+
+   
+
+    public function verifyOtp(Request $request)
+{
+    $request->validate([
+        'otp' => 'required|string|max:6',
+    ]);
+
+    $user = User::where('id', session('user_id'))->first();
+
+    if (!$user || $user->otp !== $request->input('otp') || $user->otp_expires_at->isPast()) {
+        return redirect()->route('verify-otp')->withErrors(['otp' => 'Invalid or expired OTP']);
+    }
+
+    $user->update([
+        'is_verified' => true,
+        'otp' => null, // Clear the OTP after verification
+        'otp_expires_at' => null,
+    ]);
+
+    Auth::login($user);
+
+    return redirect()->route('home.index')->with('message', 'Your account has been verified and you are logged in.');
+}
 
     public function sendOtp(Request $request)
     {
@@ -185,5 +189,55 @@ class AuthController extends Controller
         return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
 
     }
-    
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            $authUser = $this->findOrCreateUser($googleUser);
+
+            Auth::login($authUser, true);
+
+            return redirect()->route('home.index');
+        } catch (\Exception $e) {
+            Log::error('Error in Google Login: ' . $e->getMessage()); // Log any errors
+            return redirect()->route('login')->with('error', 'Failed to login with Google.');
+        }
+    }
+
+    private function findOrCreateUser($googleUser)
+    {
+        // Try to find the user by their email address
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            Log::info('User found: ' . $user->email); // Log for debugging
+            // If the user exists, ensure the provider details are set
+            if (!$user->provider_id) {
+                $user->update([
+                    'provider_id' => $googleUser->getId(),
+                    'provider' => 'google',
+                ]);
+            }
+            return $user;
+        }
+
+        // If the user doesn't exist, create a new one
+        Log::info('Creating a new user for: ' . $googleUser->getEmail()); // Log for debugging
+
+        return User::create([
+            'full_name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'provider_id' => $googleUser->getId(),
+            'provider' => 'google',
+            'password' => Hash::make(Str::random(16)), // Generate a random password
+            'login_type' => 'google', // Set the login type to google
+            'is_verified' => true, // Mark the account as verified since it came from Google
+        ]);
+    }
 }

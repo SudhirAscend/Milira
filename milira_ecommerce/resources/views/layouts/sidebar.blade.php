@@ -14,13 +14,7 @@
     <div class="sidebar-nav">
         <!--navigation-->
         <ul class="metismenu" id="sidenav">
-        <li>
-            <a href="{{ url('/index2') }}">
-              <div class="parent-icon"><i class="material-icons-outlined">home</i>
-              </div>
-              <div class="menu-title">Dashboard</div>
-            </a>
-          </li>
+        
           
           <li>
             <a href="javascript:;" class="has-arrow">
@@ -31,8 +25,7 @@
             <ul>
               <li><a href="{{ url('/admin/orders') }}"><i class="material-icons-outlined">arrow_right</i>Orders</a>
               </li>
-              <li><a href="{{ url('/ecommerce-order-details') }}"><i class="material-icons-outlined">arrow_right</i>Order Details</a>
-              </li>
+              
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Shipments</a>
               </li>
               <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Invoices</a>
@@ -59,9 +52,10 @@
               </li>
               <li><a href="{{ url('/admin/product_categories/') }}"><i class="material-icons-outlined">arrow_right</i>Categories</a>
               </li>
-              <li><a href="{{ url('/widgets-static') }}"><i class="material-icons-outlined">arrow_right</i>Families</a>
+              <li><a href="{{ url('/admin/collections/create/') }}"><i class="material-icons-outlined">arrow_right</i>Add Collection</a>
               </li>
-            
+              <li><a href="{{ url('/admin/collections/') }}"><i class="material-icons-outlined">arrow_right</i>Collection</a>
+              </li>
             </ul>
           </li>
 

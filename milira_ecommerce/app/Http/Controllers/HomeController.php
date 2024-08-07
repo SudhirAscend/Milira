@@ -14,22 +14,16 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Fetch categories from the database
         $categories = ProductCategory::all();
-
-        // Fetch the latest 6 products for each category
         $products = $categories->mapWithKeys(function ($category) {
             return [
                 $category->name => Product::where('category', $category->name)
-                    ->latest()  // Order by latest
-                    ->take(6)   // Limit to 6 products
+                    ->latest()
+                    ->take(6)
                     ->get()
             ];
         });
-
-        // Fetch collections from the Collection model
-        $collections = Collection::all(); // Fetch all collections from the Collection model
-
+        $collections = Collection::all();
         $featuredProducts = Product::where('collection', 'women')
             ->orWhere('collection', 'Women')
             ->latest()
@@ -46,15 +40,14 @@ class HomeController extends Controller
             return $item->product->price * $item->quantity;
         });
 
-        // Pass data to the view
         return view('index', compact('categories', 'products', 'featuredProducts', 'wishlistProductIds', 'wishlistCount', 'cartCount', 'subtotal', 'cartItems', 'collections'));
     }
 
-
     public function showSignupForm()
     {
-        return view('signup');
+        return view('signup'); // Ensure this view exists
     }
+
     public function root(Request $request)
     {
         if (view()->exists($request->path())) {
@@ -65,9 +58,9 @@ class HomeController extends Controller
     }
 
     public function profile()
-{
-    return view('profile'); // Assuming you have a profile.blade.php view file
-}
+    {
+        return view('profile');
+    }
 
 
 }
