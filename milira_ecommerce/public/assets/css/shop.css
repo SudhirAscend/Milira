@@ -1861,8 +1861,6 @@ button.add-to-cart-btn:hover {
 }
 
 .sticky-sidebar {
-  position: -webkit-sticky; /* For Safari */
   position: sticky;
-  top: 20px; /* Adjust based on your header height */
-  z-index: 100; /* Ensure it stays above other elements */
+  top: 20px;
 }
