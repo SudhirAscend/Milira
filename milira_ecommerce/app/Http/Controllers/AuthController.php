@@ -23,26 +23,21 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
         ]);
     
-        // Generate an OTP
         $otp = rand(100000, 999999);
     
-        // Create a new user
         $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
-            'password' => Hash::make(Str::random(8)), // Random password for now
+            'password' => Hash::make(Str::random(8)),
             'login_type' => 'email',
             'otp' => $otp,
-            'otp_expires_at' => now()->addMinutes(10), // OTP valid for 10 minutes
+            'otp_expires_at' => now()->addMinutes(10),
         ]);
     
-        // Send OTP via email
         Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
-            $message->to($request->email)
-                    ->subject('OTP Verification');
+            $message->to($request->email)->subject('OTP Verification');
         });
     
-        // Store user ID in session for OTP verification
         session(['user_id' => $user->id]);
     
         return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
@@ -96,6 +91,10 @@ class AuthController extends Controller
     return redirect()->route('home.index')->with('message', 'Your account has been verified and you are logged in.');
 }
 
+public function showOtpForm()
+{
+    return view('auth.verify-otp');
+}
     public function sendOtp(Request $request)
     {
         $request->validate([
