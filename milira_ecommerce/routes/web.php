@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -203,3 +204,20 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-o
 
 Route::get('/otp/verify', [AuthController::class, 'showOtpForm'])->name('otp.verify');
 Route::post('/otp/verify', [AuthController::class, 'verifyOtp']);
+
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+Route::post('/email-login', [AuthController::class, 'emailLogin'])->name('email.login');
+Route::post('/phone-login', [AuthController::class, 'phoneLogin'])->name('phone.login');
+Route::get('/verify-otp', [AuthController::class, 'showOtpForm'])->name('verify-otp');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp.submit');
+
+Route::get('/auth/{provider}', [AuthController::class, 'redirectToProvider'])->name('social.login');
+Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+
+
+
+// In routes/web.php or routes/api.php
+Route::post('/verify-phone', [AuthController::class, 'verifyPhone'])->name('verify.phone');
+Route::get('/', [HomeController::class, 'index'])->name('home');
