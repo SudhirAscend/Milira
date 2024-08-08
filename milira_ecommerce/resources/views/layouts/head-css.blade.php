@@ -23,3 +23,4 @@
 <link href="{{ URL::asset('build/css/semi-dark.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('build/css/bordered-theme.css') }}" rel="stylesheet">
 <link href="{{ URL::asset('build/css/responsive.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/css/admin.css') }}" rel="stylesheet">

@@ -20,7 +20,7 @@ class ProductsController extends Controller
 
     // Fetch products and other data as before
     $products = Product::all();
-
+    $products = Product::paginate(10);
     $user_id = Auth::id();
     $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
     $wishlistCount = Wishlist::where('user_id', $user_id)->count();
@@ -31,7 +31,7 @@ class ProductsController extends Controller
         return $sum + ($item['price'] * $item['quantity']);
     }, 0);
 
-    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections'));
+    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections','products'));
 }
 
     public function show($slug)
@@ -229,5 +229,10 @@ public function create()
     $collections = Collection::all(); // Fetch all collections
     return view('admin.products.create', compact('categories', 'collections')); // Pass categories and collections to the view
 }
-
+public function downloadPDF()
+{
+    $products = Product::all();
+    $pdf = PDF::loadView('admin.products.pdf', compact('products'));
+    return $pdf->download('products.pdf');
+}
 }
