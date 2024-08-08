@@ -58,6 +58,8 @@
                         <i class="fas fa-phone"></i>
                     </button>
                 </div>
+
+                <div id="emailForm" class="form-content active">
                 <form id="emailSignupForm" method="POST" action="{{ route('signup.submit') }}">
     @csrf
     <div class="review-form-name mb-3">
@@ -72,6 +74,7 @@
         <button type="submit" class="shop-btn">Sign Up</button>
     </div>
 </form>
+    </div>
                 <!-- Phone Form -->
                 <div id="phoneForm" class="form-content">
                     <form id="phoneSignupForm" method="POST" action="{{ route('signup.phone.submit') }}" onsubmit="return handlePhoneSignup(event)">
@@ -96,9 +99,9 @@
                     <a href="{{ route('google.login') }}" class="btn btn-danger">
                         <i class="fab fa-google"></i>Google
                     </a>
-                    <a href="{{ route('social.redirect', 'facebook') }}" class="btn btn-primary">
-                        <i class="fab fa-facebook-f"></i> Facebook
-                    </a>
+                    <a href="{{ route('facebook.login') }}" class="btn btn-primary">
+    <i class="fab fa-facebook-f"></i> Facebook
+</a>
                 </div>
 
                 <!-- Already have an account -->
@@ -163,7 +166,7 @@
             .then(data => {
                 if (data.success) {
                     // Redirect to login page
-                    window.location.href = '/login';
+                    window.location.href = '/';
                 } else {
                     console.error('Error saving user:', data.message);
                 }

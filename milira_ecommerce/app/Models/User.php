@@ -29,4 +29,10 @@ class User extends Authenticatable
     protected $casts = [
         'otp_expires_at' => 'datetime',
     ];
+    // In User model
+public function getFullNameAttribute()
+{
+    return $this->attributes['full_name'];
+}
+
 }

@@ -7,11 +7,9 @@ use App\Models\OTP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Wishlist;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\Cart;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
@@ -23,7 +21,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
         ]);
     
-        $otp = rand(100000, 999999);
+        $otp = rand(1000, 9999); // 4-digit OTP
     
         $user = User::create([
             'full_name' => $request->full_name,
@@ -43,7 +41,6 @@ class AuthController extends Controller
         return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
     }
 
-    // Handle phone sign-up
     public function phoneSignup(Request $request)
     {
         $request->validate([
@@ -51,50 +48,106 @@ class AuthController extends Controller
             'phone_number' => 'required|string|max:15|unique:users',
         ]);
 
-        // Create a new user
+        $otp = rand(1000, 9999); // 4-digit OTP
+        
         $user = User::create([
             'full_name' => $request->full_name,
             'phone_number' => $request->phone_number,
             'password' => Hash::make(Str::random(8)),
-            'login_type' => 'phone', // Set the login_type
+            'login_type' => 'phone',
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
         ]);
 
-        // Send OTP and redirect to OTP verification
-        // Assuming you have a method to send OTP via SMS
+        // Send OTP via SMS (implement this method)
         // $this->sendOtpToPhone($user->phone_number);
 
         return redirect()->route('verify-otp')->with('message', 'OTP sent to your phone.');
     }
 
-   
-
     public function verifyOtp(Request $request)
-{
-    $request->validate([
-        'otp' => 'required|string|max:6',
-    ]);
+    {
+        $request->validate([
+            'otp' => 'required|string|max:4',
+        ]);
 
-    $user = User::where('id', session('user_id'))->first();
+        $user = User::where('id', session('user_id'))->first();
 
-    if (!$user || $user->otp !== $request->input('otp') || $user->otp_expires_at->isPast()) {
-        return redirect()->route('verify-otp')->withErrors(['otp' => 'Invalid or expired OTP']);
+        if (!$user || $user->otp !== $request->input('otp') || $user->otp_expires_at->isPast()) {
+            return redirect()->route('verify-otp')->withErrors(['otp' => 'Invalid or expired OTP']);
+        }
+
+        $user->update([
+            'is_verified' => true,
+            'otp' => null,
+            'otp_expires_at' => null,
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/');
     }
 
-    $user->update([
-        'is_verified' => true,
-        'otp' => null, // Clear the OTP after verification
-        'otp_expires_at' => null,
-    ]);
+    public function emailLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255',
+        ]);
 
-    Auth::login($user);
+        $user = User::where('email', $request->email)->first();
 
-    return redirect()->route('home.index')->with('message', 'Your account has been verified and you are logged in.');
-}
+        if (!$user) {
+            return redirect()->back()->withErrors(['email' => 'Email not registered']);
+        }
 
-public function showOtpForm()
-{
-    return view('auth.verify-otp');
-}
+        $otp = rand(1000, 9999); // 4-digit OTP
+
+        // Update OTP and expiration time in users table
+        $user->update([
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
+        ]);
+
+        Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
+            $message->to($request->email)->subject('OTP Verification');
+        });
+
+        session(['user_email' => $request->email]);
+
+        return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
+    }
+
+    public function phoneLogin(Request $request)
+    {
+        $request->validate([
+            'phone_number' => 'required|string|max:15',
+        ]);
+
+        $user = User::where('phone_number', $request->phone_number)->first();
+
+        if (!$user) {
+            return redirect()->back()->withErrors(['phone_number' => 'Phone number not registered']);
+        }
+
+        $otp = rand(1000, 9999); // 4-digit OTP
+
+        // Update OTP and expiration time in users table
+        $user->update([
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(10),
+        ]);
+
+        // Send OTP via SMS (implement this method)
+        // $this->sendOtpToPhone($request->phone_number);
+
+        return redirect()->route('verify-otp')->with('message', 'OTP sent to your phone.');
+    }
+
+    public function showOtpForm()
+    {
+        return view('auth.verify-otp');
+    }
+
     public function sendOtp(Request $request)
     {
         $request->validate([
@@ -107,11 +160,11 @@ public function showOtpForm()
             return response()->json(['message' => 'Email not registered'], 400);
         }
 
-        $otp = Str::random(6);
+        $otp = rand(1000, 9999); // 4-digit OTP
 
-        $otpRecord = OTP::updateOrCreate(
+        OTP::updateOrCreate(
             ['email' => $request->email],
-            ['otp' => $otp]
+            ['otp' => $otp, 'expires_at' => now()->addMinutes(10)]
         );
 
         Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
@@ -126,11 +179,13 @@ public function showOtpForm()
     {
         $request->validate([
             'email' => 'required|string|email|max:255',
-            'otp' => 'required|string|max:6',
+            'otp' => 'required|string|max:4',
             'password' => 'required|string',
         ]);
 
-        $otpRecord = OTP::where('email', $request->email)->where('otp', $request->otp)->first();
+        $otpRecord = OTP::where('email', $request->email)
+                        ->where('otp', $request->otp)
+                        ->first();
 
         if (!$otpRecord) {
             return response()->json(['message' => 'Invalid OTP'], 400);
@@ -154,10 +209,12 @@ public function showOtpForm()
         Auth::logout();
         return redirect('/login');
     }
+
     public function showForgetPasswordForm()
     {
         return view('forget-password');
     }
+
     public function requestProduct()
     {
         $user_id = Auth::id();
@@ -171,8 +228,8 @@ public function showOtpForm()
         });
 
         return view('request-product', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
-
     }
+    
     public function contactDetails()
     {
         $user_id = Auth::id();
@@ -186,9 +243,7 @@ public function showOtpForm()
         });
 
         return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
-
     }
-
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
@@ -205,7 +260,7 @@ public function showOtpForm()
             return redirect()->route('home.index');
         } catch (\Exception $e) {
             Log::error('Error in Google Login: ' . $e->getMessage()); // Log any errors
-            return redirect()->route('login')->with('error', 'Failed to login with Google.');
+            return redirect('/');
         }
     }
 

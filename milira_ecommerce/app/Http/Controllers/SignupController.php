@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Services\MSG91Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 
 class SignupController extends Controller
@@ -19,12 +23,13 @@ class SignupController extends Controller
         $this->msg91Service = $msg91Service;
     }
 
+    // Signup with phone number
     public function signup(Request $request)
     {
         $request->validate([
             'full_name' => 'required|string|max:255',
             'phone_number' => 'required|numeric|unique:users,phone_number',
-            'otp' => 'required|digits:4', // Changed to 4 digits
+            'otp' => 'required|digits:6',
         ]);
 
         $user = User::create([
@@ -38,6 +43,8 @@ class SignupController extends Controller
 
         return redirect()->route('verify.phone')->with('message', 'Please verify your phone number.');
     }
+
+    // Signup with email
     public function signupEmail(Request $request)
     {
         $request->validate([
@@ -45,30 +52,27 @@ class SignupController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
         ]);
 
-        // Generate an OTP
-        $otp = rand(100000, 999999);
+        $otp = rand(1000, 9999);
 
-        // Create a new user
         $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
-            'password' => Hash::make(Str::random(8)), // Random password for now
+            'password' => Hash::make(Str::random(8)), 
             'login_type' => 'email',
             'otp' => $otp,
-            'otp_expires_at' => now()->addMinutes(10), // OTP valid for 10 minutes
+            'otp_expires_at' => now()->addMinutes(10),
         ]);
 
-        // Send OTP via email
         Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
             $message->to($request->email)
                     ->subject('OTP Verification');
         });
 
-        // Store user ID in session for OTP verification
         session(['user_id' => $user->id]);
 
         return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
     }
+
     public function showPhoneSignupForm()
     {
         return view('signup');
@@ -93,7 +97,7 @@ class SignupController extends Controller
     public function verifyOtp(Request $request)
     {
         $request->validate([
-            'otp' => 'required|digits:4', // Changed to 4 digits
+            'otp' => 'required|digits:6',
             'phone_number' => 'required|digits:10',
         ]);
 
@@ -111,28 +115,61 @@ class SignupController extends Controller
                 $user->otp_expires_at = null;
                 $user->save();
 
-                return redirect()->route('login')->with('success', 'Your phone number has been verified. Please log in.');
+                // Log in the user
+                Auth::login($user);
+
+                return redirect('/')->with('success', 'You are now logged in.');
             } else {
                 return back()->withErrors(['otp' => 'Invalid OTP or OTP expired.']);
             }
         } else {
-            return redirect()->back()->withErrors($response['message']);
+            return redirect()->back()->withErrors(['error' => 'Invalid OTP or request ID.']);
+        }
+    }
+
+    public function verifyPhone(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|digits:6',
+            'phone_number' => 'required|digits:10',
+        ]);
+
+        $response = $this->msg91Service->verifyOtp($request->otp, $request->phone_number);
+
+        if ($response['type'] === 'success') {
+            $user = User::where('phone_number', $request->phone_number)
+                        ->where('otp', $request->otp)
+                        ->where('otp_expires_at', '>', Carbon::now())
+                        ->first();
+
+            if ($user) {
+                $user->is_verified = true;
+                $user->otp = null;
+                $user->otp_expires_at = null;
+                $user->save();
+
+                // Log in the user
+                Auth::login($user);
+
+                return redirect('/')->with('success', 'You are now logged in.');
+            } else {
+                return back()->withErrors(['otp' => 'Invalid OTP or OTP expired.']);
+            }
+        } else {
+            return redirect()->back()->withErrors(['error' => 'Invalid OTP or request ID.']);
         }
     }
 
     public function store(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'phone_number' => 'required|unique:users,phone_number',
             'full_name' => 'required|string|max:255',
         ]);
 
-        // Create a new user record
         User::create([
             'phone_number' => $request->input('phone_number'),
             'full_name' => $request->input('full_name'),
-           
         ]);
 
         return response()->json(['message' => 'User created successfully'], 201);
@@ -140,19 +177,18 @@ class SignupController extends Controller
 
     public function saveUser(Request $request)
     {
-        // Validate the request data
         $request->validate([
             'phone_number' => 'required|unique:users,phone_number',
             'full_name' => 'required|string|max:255',
         ]);
 
-        // Create a new user record
         User::create([
             'phone_number' => $request->input('phone_number'),
             'full_name' => $request->input('full_name'),
-            
         ]);
 
         return response()->json(['success' => true], 200);
     }
+    
+    
 }
