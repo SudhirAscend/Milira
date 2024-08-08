@@ -288,14 +288,14 @@ button {
 }
 
 .pendent-set img {
-  height: 200px;
+  height: 300px;
   width: 100%;
   border-radius: 155px;
 }
 
 .categories {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 button.cat-button {
@@ -763,7 +763,7 @@ img.about-img {
 
 input.input-search {
   height: 45px;
-  width: 250px;
+  width: 500px;
   padding: 20px;
   font-size: 14px;
   color: var(--secondary-color);
@@ -2178,4 +2178,8 @@ img.popup-img {
     width: 70%;
     margin-top: 10px;
   }
+}
+
+img.cat-img {
+  clip-path: circle();
 }

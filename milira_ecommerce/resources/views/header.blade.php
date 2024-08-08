@@ -61,7 +61,7 @@
                 <div class="header-center">
                     <div class="logo">
                         <a href="/">
-                            <img src="../assets/images/logos/Milira-Logo.png" width="30%" alt="logo">
+                            <img src="../assets/images/logos/Milira-Logo.png" width="50%" alt="logo">
                         </a>
                     </div>
                     <div class="header-cart-items">
@@ -167,7 +167,7 @@
                         <div class="header-user">
                         @guest
                             <span>
-                                <p><a href="/login" class="loginclr">login</a>/<a href="/signup" class="loginclr">signup</a></p>
+                                <p><a href="/login" class="loginclr">Login</a><a href="/signup" class="signup">Signup</a></p>
                             </span>
                         @endguest
 
@@ -386,7 +386,7 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="contact-us.html">
+                                <a href="/contact">
                                     <span class="list-text">Contact</span>
                                 </a>
                             </li>
