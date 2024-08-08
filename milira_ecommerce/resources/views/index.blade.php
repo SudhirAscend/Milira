@@ -157,7 +157,7 @@
                     <div class="swiper-slide">
                         <div class="pendent-set">
                             @if($category->image)
-                                <img src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="{{ $category->name }}" loading="lazy">
+                                <img class="cat-img" src="{{ asset('storage/uploads/categories/' . $category->image) }}" alt="{{ $category->name }}" loading="lazy">
                             @else
                                 <img src="path/to/default-image.png" alt="{{ $category->name }}" loading="lazy">
                             @endif
@@ -215,7 +215,7 @@
                 <div class="swiper-slide">
                     <div class="pendent-set">
                         @if ($collection->image)
-                            <img src="{{ asset('images/collections/' . $collection->image) }}" alt="{{ $collection->name }}" loading="lazy">
+                            <img class="cat-img" src="{{ asset('images/collections/' . $collection->image) }}" alt="{{ $collection->name }}" loading="lazy">
                         @else
                             <img src="{{ asset('path/to/default-image.png') }}" alt="{{ $collection->name }}" loading="lazy">
                         @endif
@@ -604,7 +604,7 @@
         var swiper = new Swiper(".catSlider", {
             centeredSlides: false,
             slidesPerView: 5,
-            spaceBetween:10,
+            spaceBetween:5,
             autoplay: {
                 delay: 2500,
                 disableOnInteraction: false,

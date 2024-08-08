@@ -81,19 +81,24 @@
         <div class="card-body">
             <div class="customer-table">
                 <div class="table-responsive white-space-nowrap">
-                    <table class="table align-middle">
+                    <table class="table align-middle"
+                           id="customersTable"
+                           data-toggle="table"
+                           data-search="true"
+                           data-pagination="true"
+                           data-sortable="true">
                         <thead class="table-light">
                             <tr>
-                                <th>
+                                <th data-checkbox="true">
                                     <input class="form-check-input" type="checkbox">
                                 </th>
-                                <th>Customers</th>
-                                <th>Email</th>
-                                <th>Orders</th>
-                                <th>Total Spent</th>
-                                <th>Location</th>
-                                <th>Last Seen</th>
-                                <th>Last Order</th>
+                                <th data-sortable="true">Customers</th>
+                                <th data-sortable="true">Email</th>
+                                <th data-sortable="true">Orders</th>
+                                <th data-sortable="true">Total Spent</th>
+                                <th data-sortable="true">Location</th>
+                                <th data-sortable="true">Last Seen</th>
+                                <th data-sortable="true">Last Order</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -132,7 +137,13 @@
 
 @endsection
 @push('script')
-    <!--plugins-->
+    <!-- Bootstrap Table CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+
+    <!-- Bootstrap Table JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+
+    <!-- Additional plugins -->
     <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/simplebar/js/simplebar.min.js') }}"></script>

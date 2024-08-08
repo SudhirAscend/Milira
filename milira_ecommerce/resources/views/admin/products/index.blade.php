@@ -34,22 +34,26 @@
         </div>
     @endif
 
-    <table id="productTable" class="table table-bordered">
+    <table id="productTable" class="table table-bordered"
+        data-toggle="table"
+        data-search="true"
+        data-pagination="true"
+        data-sortable="true">
         <thead>
             <tr>
-                <th>S.No</th>
-                <th>Title</th>
-                <th>Small Description</th>
-                <th>Description</th>
-                <th>Category</th>
+                <th data-sortable="true">S.No</th>
+                <th data-sortable="true">Title</th>
+                <th data-sortable="true">Small Description</th>
+                <th data-sortable="true">Description</th>
+                <th data-sortable="true">Category</th>
                 <th>Images</th>
-                <th>Collection</th>
-                <th>Tags</th>
-                <th>SKU</th>
-                <th>Color</th>
-                <th>Size</th>
-                <th>Price</th>
-                <th>Stocks</th> <!-- Add Stocks Column -->
+                <th data-sortable="true">Collection</th>
+                <th data-sortable="true">Tags</th>
+                <th data-sortable="true">SKU</th>
+                <th data-sortable="true">Color</th>
+                <th data-sortable="true">Size</th>
+                <th data-sortable="true">Price</th>
+                <th data-sortable="true">Stocks</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -76,7 +80,7 @@
                     <td>{{ $product->color }}</td>
                     <td>{{ $product->size }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>{{ $product->stocks }}</td> <!-- Display Stocks -->
+                    <td>{{ $product->stocks }}</td>
                     <td class="d-flex">
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm me-2"><i class="bi bi-pencil-fill"></i></a>
                         <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">
@@ -99,7 +103,13 @@
 @endsection
 
 @push('script')
-    <!--plugins-->
+    <!-- Bootstrap Table CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+
+    <!-- Bootstrap Table JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+
+    <!-- Additional plugins -->
     <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>
@@ -107,6 +117,7 @@
     <script src="{{ URL::asset('build/plugins/peity/jquery.peity.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const { jsPDF } = window.jspdf;

@@ -14,12 +14,17 @@
         </div>
     @endif
 
-    <table class="table">
+    <table class="table table-bordered"
+           id="collectionsTable"
+           data-toggle="table"
+           data-search="true"
+           data-pagination="true"
+           data-sortable="true">
         <thead>
             <tr>
-                <th>Serial No</th>
-                <th>Name</th>
-                <th>Description</th>
+                <th data-sortable="true">Serial No</th>
+                <th data-sortable="true">Name</th>
+                <th data-sortable="true">Description</th>
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
@@ -50,8 +55,15 @@
     </table>
 </div>
 @endsection
+
 @push('script')
-    <!--plugins-->
+    <!-- Bootstrap Table CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.css">
+
+    <!-- Bootstrap Table JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.20.2/dist/bootstrap-table.min.js"></script>
+
+    <!-- Additional plugins -->
     <script src="{{ URL::asset('build/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ URL::asset('build/plugins/apexchart/apexcharts.min.js') }}"></script>

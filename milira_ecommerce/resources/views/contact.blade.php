@@ -116,7 +116,7 @@
 
     <div class="container contact">
         <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-4">
                 <div class="contact-box">
                     <div class="mail-icon text-center">
                         <i class="bi bi-envelope"></i>
@@ -131,7 +131,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-4">
                 <div class="contact-box">
                     <div class="mail-icon text-center">
                     <i class="bi bi-truck"></i>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mt-4">
                 <div class="contact-box">
                     <div class="mail-icon text-center">
                     <i class="bi bi-globe-central-south-asia"></i>
@@ -157,7 +157,6 @@
                     <div class="social-share text-center">
                         <p>
                             <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
                             <a href=""><i class="bi bi-whatsapp"></i></a>
                         </p>
                     </div>
@@ -168,29 +167,53 @@
     </div>
     <div class="container c-form">
         <h2 class="form-title">Get In Touch</h2>
-        <form action="" class="contact-form mt-5">
+        <form action="" class="contact-field mt-5">
             <div class="row">
-                <div class="col mt-4">
-                    <label for="name">Name <span class="mx-1">*</span></label>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="name">First Name <span class="mx-1">*</span></label>
                     <input type="text" class="name" id="name" name="name" placeholder="John Doe" required>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col mt-4">
-                    <label for="name">Email <span class="mx-1">*</span></label>
-                    <input type="text" class="name" id="name" name="name" placeholder="example@mail.com" required>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="name">Last Name</label>
+                    <input type="text" class="name" id="name" name="name" placeholder="J.A.," >
                 </div>
             </div>
             <div class="row">
-                <div class="col mt-4">
-                    <label for="name">Phone Number <span class="mx-1">*</span></label>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="name">Email <span class="mx-1">*</span></label>
+                    <input type="text" class="name" id="name" name="name" placeholder="example@mail.com" required>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="name">Phone Number <span class="mx-1">*</span></label>
                     <input type="text" class="name" id="name" name="name" placeholder="9876543210" required>
                 </div>
             </div>
             <div class="row">
-                <div class="col mt-4">
-                    <label for="message">Message</label>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="name">Reason <span class="mx-1">*</span></label>
+                    <select class="select-form" id="select" name="select" required>
+                        <option selected>Choose the Reason</option>
+                        <option value="1">Support</option>
+                        <option value="2">Query</option>
+                        <option value="3">Shipment Issues</option>
+                        <option value="4">Others</option>
+                    </select>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <label class="contact-label" for="subject">Subject <span class="mx-1">*</span></label>
+                    <input type="text" class="subject" id="subject" name="subject" placeholder="subject" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label class="contact-label" for="message">Message</label>
                     <textarea class="contact-textbox" name="message" id="message" placeholder="I have a query about..."></textarea>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 d-flex">
+                    <input class="check" type="checkbox" name="checkTerms" id="checkTerms">
+                    <label for="checkTerms" class="check-label mx-2" >I accept all the terms & conditions</label>
                 </div>
             </div>
             <div class="text-center mt-5">
@@ -198,8 +221,6 @@
             </div>
         </form>
     </div>
-
-
 
     <!--------------- End of Contact Details------------------>
 
@@ -221,3 +242,4 @@
 </body>
 
 </html>
+

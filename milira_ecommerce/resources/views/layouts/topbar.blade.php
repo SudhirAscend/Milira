@@ -110,7 +110,7 @@
         <li class="nav-item d-lg-none mobile-search-btn">
           <a class="nav-link" href="javascript:;"><i class="material-icons-outlined">search</i></a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown d-none">
           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="avascript:;" data-bs-toggle="dropdown"><img src="{{ URL::asset('build/images/county/02.png') }}" width="22" alt="">
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -133,8 +133,8 @@
           </ul>
         </li>
 
-        <li class="nav-item dropdown position-static d-md-flex d-none">
-          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside"
+        <li class="nav-item dropdown position-static d-md-flex ">
+          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret d-none" data-bs-auto-close="outside"
           data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">done_all</i></a>
           <div class="dropdown-menu dropdown-menu-end mega-menu shadow-lg p-4 p-lg-5">
             <div class="mega-menu-widgets">
@@ -271,7 +271,7 @@
             </div>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown d-none">
           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-auto-close="outside"
             data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">apps</i></a>
           <div class="dropdown-menu dropdown-menu-end dropdown-apps shadow-lg p-3">
@@ -413,7 +413,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" data-bs-auto-close="outside"
             data-bs-toggle="dropdown" href="javascript:;"><i class="material-icons-outlined">notifications</i>
-            <span class="badge-notify">5</span>
+            <!-- <span class="badge-notify">5</span> -->
           </a>
           <div class="dropdown-menu dropdown-notify dropdown-menu-end shadow">
             <div class="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
@@ -554,7 +554,7 @@
             <span class="badge-notify">8</span>
           </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown ">
           <a href="javascript:void(0);" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
              <img src="https://placehold.co/110x110/png" class="rounded-circle p-1 border" width="45" height="45" alt="">
           </a>

@@ -98,7 +98,7 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-3">
-                    <div class="sidebar d-none d-xl-block d-lg-block" data-aos="fade-right">
+                    <div class="sidebar sticky-sidebar d-none d-xl-block d-lg-block" data-aos="fade-right">
                         <div class="sidebar-section">
                             <div class="sidebar-wrapper">
                                 <h5 class="wrapper-heading">Product Categories</h5>
