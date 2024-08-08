@@ -197,3 +197,9 @@ Route::get('/signup/email', [SignupController::class, 'showEmailSignupForm'])->n
 Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('signup.email.submit');
 
 Route::post('/signup-phone', [SignupController::class, 'saveUser']);
+Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('signup.submit');
+Route::get('/verify-otp', [AuthController::class, 'showOtpForm'])->name('verify-otp');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp.submit');
+
+Route::get('/otp/verify', [AuthController::class, 'showOtpForm'])->name('otp.verify');
+Route::post('/otp/verify', [AuthController::class, 'verifyOtp']);

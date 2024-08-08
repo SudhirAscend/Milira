@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Services\MSG91Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -35,7 +38,37 @@ class SignupController extends Controller
 
         return redirect()->route('verify.phone')->with('message', 'Please verify your phone number.');
     }
+    public function signupEmail(Request $request)
+    {
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
 
+        // Generate an OTP
+        $otp = rand(100000, 999999);
+
+        // Create a new user
+        $user = User::create([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'password' => Hash::make(Str::random(8)), // Random password for now
+            'login_type' => 'email',
+            'otp' => $otp,
+            'otp_expires_at' => now()->addMinutes(10), // OTP valid for 10 minutes
+        ]);
+
+        // Send OTP via email
+        Mail::raw("Your OTP code is: $otp", function ($message) use ($request) {
+            $message->to($request->email)
+                    ->subject('OTP Verification');
+        });
+
+        // Store user ID in session for OTP verification
+        session(['user_id' => $user->id]);
+
+        return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
+    }
     public function showPhoneSignupForm()
     {
         return view('signup');

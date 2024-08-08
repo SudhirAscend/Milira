@@ -58,22 +58,20 @@
                         <i class="fas fa-phone"></i>
                     </button>
                 </div>
-                <div id="emailForm" class="form-content active">
-                    <form id="emailSignupForm" method="POST" action="{{ route('signup.submit') }}">
-                        @csrf
-                        <div class="review-form-name mb-3">
-                            <label for="full_name" class="form-label">Full Name*</label>
-                            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Full Name" required>
-                        </div>
-                        <div class="review-form-name mb-3">
-                            <label for="email" class="form-label">Email Address*</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="user@gmail.com" required>
-                        </div>
-                        <div class="login-btn text-center">
-                            <button type="submit" class="shop-btn">Sign Up</button>
-                        </div>
-                    </form>
-                </div>
+                <form id="emailSignupForm" method="POST" action="{{ route('signup.submit') }}">
+    @csrf
+    <div class="review-form-name mb-3">
+        <label for="full_name" class="form-label">Full Name*</label>
+        <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Full Name" required>
+    </div>
+    <div class="review-form-name mb-3">
+        <label for="email" class="form-label">Email Address*</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="user@gmail.com" required>
+    </div>
+    <div class="login-btn text-center">
+        <button type="submit" class="shop-btn">Sign Up</button>
+    </div>
+</form>
                 <!-- Phone Form -->
                 <div id="phoneForm" class="form-content">
                     <form id="phoneSignupForm" method="POST" action="{{ route('signup.phone.submit') }}" onsubmit="return handlePhoneSignup(event)">
