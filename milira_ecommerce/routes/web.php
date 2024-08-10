@@ -52,8 +52,8 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/login', [AuthController::class, 'sendOtp']);
 Route::post('/verify-login-otp', [AuthController::class, 'verifyLoginOtp']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 // Profile routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
@@ -280,3 +280,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 Route::post('/checkout/apply-coupon', [CheckoutController::class, 'apply'])->name('checkout.applyCoupon');
+
+// Show the login form
+Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+
+// Handle login request
+Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+// Handle logout request
+Route::post('logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

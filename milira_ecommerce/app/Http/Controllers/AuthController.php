@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Services\MSG91Service;
 use Laravel\Socialite\Facades\Socialite;
 
-use App\Services\MSG91Service; // Add this if you're using MSG91 for SMS
 use Carbon\Carbon;
 
 class AuthController extends Controller
@@ -93,7 +93,7 @@ class AuthController extends Controller
         return view('auth.verify-otp');
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
         return redirect('/login');

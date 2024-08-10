@@ -1,155 +1,194 @@
-@extends('layouts.guest')
-@section('title')
-    Register
-@endsection
-@section('content')
-    <div class="section-authentication-cover">
-        <div class="">
-            <div class="row g-0">
-                <div
-                    class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex border-end bg-transparent">
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
+    <style>
+        .is-invalid {
+            border-color: red;
+        }
+        .form-content {
+            display: none;
+        }
+        .form-content.active {
+            display: block;
+        }
+        .tab-button {
+            border: none;
+            background: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .tab-button.active {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
 
-                    <div class="card rounded-0 mb-0 border-0 shadow-none bg-transparent bg-none">
-                        <div class="card-body">
-                            <img src="{{ URL::asset('build/images/auth/register1.png') }}"
-                                class="img-fluid auth-img-cover-login" width="500" alt="">
-                        </div>
-                    </div>
+<!-- Header -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
+<section class="login account footer-padding">
+    <div class="container">
+        <div class="login-section account-section">
+            <div class="review-form">
+                <h5 class="comment-title">Sign Up</h5>
+
+                <!-- Tab buttons with icons -->
+                <div class="text-center mb-4">
+                    <button type="button" id="emailTab" class="tab-button active" onclick="showEmailForm()">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button type="button" id="phoneTab" class="tab-button" onclick="showPhoneForm()">
+                        <i class="fas fa-phone"></i>
+                    </button>
                 </div>
 
-                <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
-                    <div class="card rounded-0 m-3 border-0 shadow-none bg-none">
-                        <div class="card-body p-sm-5">
-                            <img src="{{ URL::asset('build/images/logo1.png') }}" class="mb-4" width="145"
-                                alt="">
-                            <h4 class="fw-bold">Get Started Now</h4>
-                            <p class="mb-0">Enter your credentials to create your account</p>
-
-                            <div class="row g-3 my-4">
-                                <div class="col-12 col-lg-6">
-                                    <button
-                                        class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img
-                                            src="{{ URL::asset('build/images/apps/05.png') }}" width="20" class="me-2"
-                                            alt="">Google</button>
-                                </div>
-                                <div class="col col-lg-6">
-                                    <button
-                                        class="btn btn-filter py-2 font-text1 fw-bold d-flex align-items-center justify-content-center w-100"><img
-                                            src="{{ URL::asset('build/images/apps/17.png') }}" width="20" class="me-2"
-                                            alt="">Facebook</button>
-                                </div>
-                            </div>
-
-                            <div class="separator section-padding">
-                                <div class="line"></div>
-                                <p class="mb-0 fw-bold">OR</p>
-                                <div class="line"></div>
-                            </div>
-
-                            <div class="form-body mt-4">
-                                <form method="POST" action="{{ route('register') }}" class="row g-3">
-                                    @csrf
-
-                                    <div class="col-12">
-                                        <label for="name" class="form-label">Name <span
-                                                class="text-danger">*</span></label>
-                                        <input id="name" type="text"
-                                            class="form-control @error('name') is-invalid @enderror" name="name"
-                                            value="{{ old('name') }}" required autocomplete="name" autofocus
-                                            placeholder="Enter your name">
-
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="email" class="form-label">Email Address <span
-                                                class="text-danger">*</span></label>
-                                        <input id="email" type="email"
-                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email"
-                                            placeholder="Enter your email">
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="inputChoosePassword" class="form-label">Password <span
-                                                class="text-danger">*</span></label>
-                                        <div class="input-group" id="show_hide_password">
-                                            <input id="password" type="password"
-                                                class="form-control @error('password') is-invalid @enderror" name="password"
-                                                required autocomplete="new-password" placeholder="Enter your password">
-                                            <a href="javascript:void(0);" class="input-group-text bg-transparent"><i
-                                                    class="bi bi-eye-slash-fill"></i></a>
-
-                                            @error('password')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="password-confirm" class="form-label">Confirm Password <span
-                                                class="text-danger">*</span></label>
-                                        <div class="input-group" id="show_hide_password">
-                                            <input id="password-confirm" type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                name="password_confirmation" required autocomplete="new-password"
-                                                placeholder="Enter your confirm password">
-                                            <a href="javascript:void(0);" class="input-group-text bg-transparent"><i
-                                                    class="bi bi-eye-slash-fill"></i></a>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="d-grid">
-                                            <button type="submit" class="btn btn-grd-danger">Register</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="text-start">
-                                            <p class="mb-0">Already have an account? <a
-                                                    href="{{ route('login') }}">Sign In</a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
+                <div id="emailForm" class="form-content active">
+                <form id="emailSignupForm" method="POST" action="{{ route('signup.submit') }}">
+    @csrf
+    <div class="review-form-name mb-3">
+        <label for="full_name" class="form-label">Full Name*</label>
+        <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Full Name" required>
+    </div>
+    <div class="review-form-name mb-3">
+        <label for="email" class="form-label">Email Address*</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="user@gmail.com" required>
+    </div>
+    <div class="login-btn text-center">
+        <button type="submit" class="shop-btn">Sign Up</button>
+    </div>
+</form>
+    </div>
+                <!-- Phone Form -->
+                <div id="phoneForm" class="form-content">
+                    <form id="phoneSignupForm" method="POST" action="{{ route('signup.phone.submit') }}" onsubmit="return handlePhoneSignup(event)">
+                        @csrf
+                        <div class="review-form-name mb-3">
+                            <label for="full_name_phone" class="form-label">Full Name*</label>
+                            <input type="text" id="full_name_phone" name="full_name" class="form-control" placeholder="Full Name" required>
                         </div>
-                    </div>
+                        <div class="review-form-name mb-3">
+                            <label for="phone_number" class="form-label">Phone Number*</label>
+                            <input type="tel" id="phone_number" name="phone_number" class="form-control" placeholder="919876543210" required maxlength="12" pattern="91\d{10}" value="91">
+                        </div>
+                        <div class="login-btn text-center">
+                            <button type="submit" class="shop-btn">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Social Login Buttons with icons -->
+                <div class="text-center mt-3">
+                    <p>or sign up with</p>
+                    <a href="{{ route('google.login') }}" class="btn btn-danger">
+                        <i class="fab fa-google"></i>Google
+                    </a>
+                    <a href="{{ route('facebook.login') }}" class="btn btn-primary">
+    <i class="fab fa-facebook-f"></i> Facebook
+</a>
+                </div>
+
+                <!-- Already have an account -->
+                <div class="a-signup text-center mt-4">
+                    <p>Already have an account? <a href="/login">Login</a></p>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@push('script')
-    <script>
-        $(document).ready(function() {
-            $("#show_hide_password a").on('click', function(event) {
-                event.preventDefault();
-                if ($('#show_hide_password input').attr("type") == "text") {
-                    $('#show_hide_password input').attr('type', 'password');
-                    $('#show_hide_password i').addClass("bi-eye-slash-fill");
-                    $('#show_hide_password i').removeClass("bi-eye-fill");
-                } else if ($('#show_hide_password input').attr("type") == "password") {
-                    $('#show_hide_password input').attr('type', 'text');
-                    $('#show_hide_password i').removeClass("bi-eye-slash-fill");
-                    $('#show_hide_password i').addClass("bi-eye-fill");
+</section>
+
+@include('footer')
+
+<script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
+<!-- JavaScript to toggle forms -->
+<script>
+    function showEmailForm() {
+        document.getElementById('emailForm').classList.add('active');
+        document.getElementById('phoneForm').classList.remove('active');
+        document.getElementById('emailTab').classList.add('active');
+        document.getElementById('phoneTab').classList.remove('active');
+    }
+
+    function showPhoneForm() {
+        document.getElementById('emailForm').classList.remove('active');
+        document.getElementById('phoneForm').classList.add('active');
+        document.getElementById('phoneTab').classList.add('active');
+        document.getElementById('emailTab').classList.remove('active');
+    }
+
+    function handlePhoneSignup(event) {
+        event.preventDefault();
+        var phoneNumber = document.getElementById('phone_number').value;
+        var fullName = document.getElementById('full_name_phone').value;
+        if (phoneNumber && fullName) {
+            configuration.identifier = phoneNumber;
+            configuration.fullName = fullName;
+            initSendOTP(configuration);
+        }
+    }
+    
+    var configuration = {
+        widgetId: "346866647844363530343839",
+        tokenAuth: "427548TbyQKcDe8pd66b1a670P1",
+        identifier: "phonenumber",
+        exposeMethods: "<true | false> (optional)",
+        success: (data) => {
+            console.log('success response', data);
+            // Make an AJAX request to save user details
+            fetch('/signup-phone', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    phone_number: configuration.identifier,
+                    full_name: configuration.fullName
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect to login page
+                    window.location.href = '/';
+                } else {
+                    console.error('Error saving user:', data.message);
                 }
-            });
-        });
-    </script>
-@endpush
+            })
+            .catch(error => console.error('Error:', error));
+        },
+        failure: (error) => {
+            console.log('failure reason', error);
+        },
+    };
+
+    function initSendOTP(config) {
+        if (window.otpProvider) {
+            window.otpProvider.init(config);
+        }
+    }
+</script>
+
+
+<!-- Include Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="https://control.msg91.com/app/assets/otp-provider/otp-provider.js"></script>
+</body>
+</html>
