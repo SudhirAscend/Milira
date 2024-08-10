@@ -88,12 +88,12 @@
             left: auto;
             right: 0;
         }
+        
     </style>
 </head>
 
 <body>
     @include('header')
-
     <section class="product product-sidebar footer-padding">
         <div class="container">
             <div class="row g-5">
@@ -104,17 +104,17 @@
                                 <h5 class="wrapper-heading">Product Categories</h5>
                                 <div class="sidebar-item">
                                 <ul class="sidebar-list">
-    @foreach ($categories as $categoryItem)
-        <li>
-            <input type="checkbox" class="category-checkbox"
-                   id="{{ $categoryItem->id }}"
-                   name="category"
-                   value="{{ $categoryItem->name }}"
-                   @if(isset($category) && $categoryItem->name == $category) checked @endif>
-            <label for="{{ $categoryItem->id }}">{{ $categoryItem->name }}</label>
-        </li>
-    @endforeach
-</ul>
+                                    @foreach ($categories as $categoryItem)
+                                        <li>
+                                            <input type="checkbox" class="category-checkbox"
+                                                id="{{ $categoryItem->id }}"
+                                                name="category"
+                                                value="{{ $categoryItem->name }}"
+                                                @if(isset($category) && $categoryItem->name == $category) checked @endif>
+                                            <label for="{{ $categoryItem->id }}">{{ $categoryItem->name }}</label>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
                                 </div>
                             </div>
@@ -123,18 +123,18 @@
                                 <h5 class="wrapper-heading">Collections</h5>
                                 <div class="sidebar-item">
                                 <ul class="sidebar-list">
-    @foreach ($collections as $collectionItem)
-        <li>
-            <input type="checkbox" 
-                   class="collection-checkbox" 
-                   id="{{ $collectionItem->id }}" 
-                   name="collection" 
-                   value="{{ $collectionItem->name }}"
-                   @if(isset($collection) && $collectionItem->name == $collection) checked @endif>
-            <label for="{{ $collectionItem->id }}">{{ $collectionItem->name }}</label>
-        </li>
-    @endforeach
-</ul>
+                                    @foreach ($collections as $collectionItem)
+                                        <li>
+                                            <input type="checkbox" 
+                                                class="collection-checkbox" 
+                                                id="{{ $collectionItem->id }}" 
+                                                name="collection" 
+                                                value="{{ $collectionItem->name }}"
+                                                @if(isset($collection) && $collectionItem->name == $collection) checked @endif>
+                                            <label for="{{ $collectionItem->id }}">{{ $collectionItem->name }}</label>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
                                 </div>
                             </div>
@@ -169,9 +169,11 @@
                             <hr>
                         </div>
                     </div>
-                    <div class="mobile-sidebar d-lg-none d-md-block d-sm-block">
-                        <button class="shop-side-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#shopSidebarMenu" aria-controls="shopSidebarMenu">
-                            <i class="bi bi-funnel-fill"><span class="filter-btn mx-1">Filter</span></i>
+                    <div class="mobile-sidebar d-lg-none d-md-block d-sm-block" id="mobTop">                                                                
+                        <div class="row">
+                            <div class="col-6">
+                            <button class="shop-side-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#shopSidebarMenu" aria-controls="shopSidebarMenu">
+                            <i class="bi bi-funnel-fill"></i><span class="filter-btn mx-1">Filter</span>
                         </button>
 
                         <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="shopSidebarMenu" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -247,7 +249,13 @@
                             <hr>
                         </div>
                         </div>
-    </div>
+                        </div>
+                            </div>
+                            <div class="col-6">
+                                <button class="shop-side-btn" type="button"><i class="bi bi-sort-alpha-down mx-2"></i>Featured</button>
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -703,6 +711,7 @@
 });
 
         </script>
+
 </body>
 
 </html>

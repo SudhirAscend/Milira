@@ -541,14 +541,14 @@
 
 <!---------------------- End of Newsletter ---------------------->
 <div class="container mt-5">
-    <div class="coupon-popup">
+    <div class="coupon-popup" id="couponPopup">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                 <img class="popup-img" src="./assets/images/hero/pop2.jpg" alt="">
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                 <div class="popup-close text-end p-3">
-                    <i class="bi bi-x-circle"></i>
+                    <i class="bi bi-x-circle" onclick="closePopup()"></i>
                 </div>
                 <div class="c-content">
                     <div class="pop-title">
@@ -563,11 +563,10 @@
                     <div class="coupon-form text-center mt-5">
                         <form action="javascript:void(0);">
                             <input type="text" id="cuponCode" name="cuponCode" class="cupon-input" value="DISCOUNT2024">
-                            <button type="copy"  onclick="copyCouponCode()">Copy</button>
+                            <button type="copy" onclick="copyCouponCode()">Copy</button>
                         </form>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -615,7 +614,7 @@
             },
             breakpoints: {
                 320: {
-                    slidesPerView: 1,
+                    slidesPerView: 2,
                 },
                 550: {
                     slidesPerView: 2,
@@ -1054,6 +1053,29 @@
 });
 
         </script>
+
+<script>
+  // Show the popup 2 seconds after the page loads
+  window.onload = function() {
+    setTimeout(function() {
+      document.getElementById('couponPopup').style.display = 'block';
+    }, 2000);
+  };
+
+  // Function to close the popup
+  function closePopup() {
+    document.getElementById('couponPopup').style.display = 'none';
+  }
+
+  // Function to copy the coupon code
+  function copyCouponCode() {
+    var couponCode = document.getElementById('cuponCode');
+    couponCode.select();
+    couponCode.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
+    alert("Coupon code copied: " + couponCode.value);
+  }
+</script>
 </body>
 
 </html>

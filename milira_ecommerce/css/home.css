@@ -271,10 +271,19 @@ button {
 }
 
 .pendent-set img {
-  height: 200px;
+  height: 300px;
   width: 100%;
   border-radius: 155px;
 }
+
+@media (max-width: 500px) {
+  .pendent-set img {
+    height: 200px !important;
+    width: 100%;
+    border-radius: 155px;
+  }
+}
+
 
 .categories {
   margin-left: 5%;

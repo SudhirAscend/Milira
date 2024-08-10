@@ -1708,17 +1708,17 @@ button.add-to-cart-btn:hover {
 }
 
 .shop-side-btn {
-  background-color: transparent;
+  width: 100%;
+  background: transparent;
   border: 1px solid var(--primary-color);
-  padding: 5px 15px;
-  margin-top: 30px;
+  padding: 12px 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Open Sans';
 }
 
-.bi-funnel-fill {
-  font-size: 16px;
-  font-weight: bolder;
-  font-style: normal;
-  font-family: 'Open Sans';
+.bi-sort-alpha-down {
+  font-size: 18px;
 }
 
 .shop-side-btn:hover {
@@ -1726,6 +1726,7 @@ button.add-to-cart-btn:hover {
   color: #fff;
   transition: 0.5s ease;
 }
+
 
 /* @media (max-width: 991px) {
   .sidebar {
@@ -1880,11 +1881,17 @@ button.add-to-cart-btn:hover {
 }
 
 .sticky-sidebar {
-  position: -webkit-sticky;
-  /* For Safari */
+  position: -webkit-sticky; /* For Safari */
   position: sticky;
-  top: 20px;
-  /* Adjust based on your header height */
-  z-index: 100;
-  /* Ensure it stays above other elements */
+  top: 50px;
+  z-index: 1000;
+  background-color: white;
 }
+
+.sticky-sidebar {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0; /* Distance from the top of the viewport */
+  z-index: 1000; /* Ensure it stays on top if necessary */
+}
+

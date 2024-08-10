@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coupon Popup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <style>
+        #couponPopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none; /* Hidden by default */
+    background-color: #fff; /* Background color of the popup */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none; /* Hidden by default */
+}
+
+.popup-close i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.popup-img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.c-content {
+    padding: 20px;
+}
+
+.cupon-input {
+    border: 2px solid #ccc;
+    padding: 10px;
+    width: 80%;
+    font-size: 18px;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+<div id="couponPopup" class="container mt-5">
+    <div class="coupon-popup">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <img class="popup-img" src="./assets/images/hero/pop2.jpg" alt="">
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                <div class="popup-close text-end p-3">
+                    <i class="bi bi-x-circle" onclick="closePopup()"></i>
+                </div>
+                <div class="c-content">
+                    <div class="pop-title">
+                        <h1>Milira</h1>
+                    </div>
+                    <div class="pop-content mt-2">
+                        <p>Join the Squad</p>
+                    </div>
+                    <div class="p-content text-center mt-3">
+                        <p>Copy the coupon code for exclusive discounts</p>
+                    </div>
+                    <div class="coupon-form text-center mt-5">
+                        <form action="javascript:void(0);">
+                            <input type="text" id="cuponCode" name="cuponCode" class="cupon-input" value="DISCOUNT2024">
+                            <button type="button" onclick="copyCouponCode()">Copy</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup-overlay"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Show the popup after the page loads
+    document.getElementById('couponPopup').style.display = 'block';
+    document.querySelector('.popup-overlay').style.display = 'block';
+});
+
+function closePopup() {
+    document.getElementById('couponPopup').style.display = 'none';
+    document.querySelector('.popup-overlay').style.display = 'none';
+}
+
+function copyCouponCode() {
+    var couponCode = document.getElementById("cuponCode");
+    couponCode.select();
+    document.execCommand("copy");
+    alert("Coupon code copied: " + couponCode.value);
+}
+
+</script>
+
+</body>
+</html>
