@@ -37,9 +37,35 @@
 .search-results a:hover {
     background-color: #f1f1f1;
 }
-    </style>
+
+@media(max-width: 500px) {
+    .sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+}
+
+
+     
+    
+    .loginclr.active {
+        background-color: #000; /* Darker blue */
+        color: #fff !important;
+    }
+    .signup.active {
+        background-color: #000; /* Darker gray */
+        color: #fff;
+    }
+
+
+
+</style>
  <header id="header" class="header">
-        <div class="header-top-section">
+        <div class="header-top-section" id="headerTop">
             <div class="container">
                 <div class="header-top">
                     <div class="header-profile">
@@ -166,9 +192,12 @@
 
                         <div class="header-user">
                         @guest
-                            <span>
-                                <p><a href="/login" class="loginclr">Login</a><a href="/signup" class="signup">Signup</a></p>
-                            </span>
+                           <span >
+                           <button class="d-flex" id="auth-switch">
+                                <a href="/login" class="loginclr active" onclick="changeBackground('login', event)">Login</a>
+                                <a href="/signup" class="signup" onclick="changeBackground('signup', event)">Signup</a>
+                            </button>
+                           </span>
                         @endguest
 
                         @auth
@@ -490,5 +519,33 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<script>
+    window.onscroll = function() {stickyHeader()};
+
+    var header = document.getElementById("headerTop");
+    var sticky = header.offsetTop;
+
+    function stickyHeader() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
    
-   
+<script>
+        function changeBackground(clicked) {
+            // Remove 'active' class from both links
+            document.querySelector('.loginclr').classList.remove('active');
+            document.querySelector('.signup').classList.remove('active');
+
+            // Add 'active' class to the clicked link
+            if (clicked === 'login') {
+                document.querySelector('.loginclr').classList.add('active');
+            } else if (clicked === 'signup') {
+                document.querySelector('.signup').classList.add('active');
+            }
+        }
+    </script>
