@@ -628,14 +628,13 @@ button {
 
 input.input-search {
   height: 45px;
-  width: 250px;
+  width: 500px;
   padding: 20px;
   font-size: 14px;
   color: var(--secondary-color);
   font-weight: 600;
   outline: none;
 }
-
 @media (max-width:1199px) {
   input.input-search {
     height: 45px;

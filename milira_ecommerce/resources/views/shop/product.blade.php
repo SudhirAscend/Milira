@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     
 </head>
-
-<body>
 <!--------------- header-section --------------->
 @include('header')
     <!--------------- header-section-end --------------->
@@ -317,7 +315,7 @@
         @endforeach
     </div>
 </div>
-
+</div>
     <!--------------- products-Review-end--------------->
 
     <!--------------- weekly-section--------------->
@@ -508,7 +506,7 @@
     <!--------------- weekly-section-end--------------->
 
     <!--------------- footer-section--------------->
-        @include('footer')
+    @include('footer')
     <!---------------End of footer-section--------------->
 
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
