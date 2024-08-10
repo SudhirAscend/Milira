@@ -35,4 +35,9 @@ public function getFullNameAttribute()
     return $this->attributes['full_name'];
 }
 
+public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
 }
