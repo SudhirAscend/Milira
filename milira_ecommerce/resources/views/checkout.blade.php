@@ -86,7 +86,7 @@
                                                         <label for="country" class="form-label">Country*</label>
                                                         <select id="country" name="country" class="form-select" required>
                                                             <option value="">Choose...</option>
-                                                            <option value="Bangladesh">Bangladesh</option>
+                                                            <option value="India">India</option>
                                                             <option value="United States">United States</option>
                                                             <option value="United Kingdom" selected>United Kingdom</option>
                                                         </select>
@@ -155,13 +155,13 @@
 
             <form id="couponForm" action="{{ route('checkout.applyCoupon') }}" method="POST">
     @csrf
-    <select name="code" required>
+    <select class="coupon-input" name="code" required>
         <option value="">Select a coupon</option>
         @foreach($coupons as $coupon)
             <option value="{{ $coupon->code }}">{{ $coupon->code }} - {{ $coupon->type == 'percentage' ? $coupon->value . '%' : '₹' . $coupon->value }}</option>
         @endforeach
     </select>
-    <button type="submit">Apply Coupon</button>
+    <button class="coupon-btn" type="submit">Apply Coupon</button>
 </form>
 
             <!-- Total Amount Section -->
@@ -178,7 +178,7 @@
                 <h5 class="wrapper-heading" id="total-amount">₹{{ number_format($totalAmount, 2) }}</h5>
             </div>
 
-            <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
+            <button id="placeOrderBtn" class="placeOrder">Place Order</button>
         </div>
     </div>
 </div>
