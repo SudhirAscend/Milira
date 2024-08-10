@@ -1474,6 +1474,7 @@ button.buy-now-btn:hover {
   color: #fff;
   transition: 0.5s ease;
 }
+
 /* Footer */
 
 footer {
@@ -1626,9 +1627,11 @@ a .bi-arrow-repeat {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.pdt-price h6::before{
+
+.pdt-price h6::before {
   content: '₹';
 }
+
 .pdt-price h6 {
   font-weight: bold;
   font-size: 20px;
@@ -1697,6 +1700,7 @@ button.add-to-cart-btn {
 button.add-to-cart-btn:hover {
   background-color: var(--primary-color);
   transition: 0.5s ease;
+
   .bi-cart-check-fill {
     font-size: 16px;
     color: #fff;
@@ -1710,7 +1714,7 @@ button.add-to-cart-btn:hover {
   margin-top: 30px;
 }
 
-.bi-funnel-fill  {
+.bi-funnel-fill {
   font-size: 16px;
   font-weight: bolder;
   font-style: normal;
@@ -1746,6 +1750,7 @@ button.add-to-cart-btn:hover {
   .product-sidebar-section.aos-init.aos-animate {
     margin-top: 15px;
   }
+
   .sidebar-section {
     margin-top: 5px;
   }
@@ -1756,6 +1761,7 @@ button.add-to-cart-btn:hover {
     border: none;
     height: 100%;
   }
+
   .product-card {
     width: 50%;
     padding: 3px;
@@ -1764,46 +1770,55 @@ button.add-to-cart-btn:hover {
   .card-body {
     padding: 0px;
   }
+
   img.pdt-img {
     width: 100%;
     height: 180px;
     object-fit: cover;
   }
+
   .pdt-rating {
     display: none;
   }
+
   .cart-btn {
-      display: block;
-      margin-top: -10px;
-      
+    display: block;
+    margin-top: -10px;
+
   }
 
-  .pdt-title{
+  .pdt-title {
     margin-top: -10px;
   }
+
   .pdt-title h6 {
     font-size: 14px;
     font-family: "Ubuntu Sans";
     font-weight: 500;
     width: 150px;
     white-space: nowrap;
-    overflow: hidden; 
+    overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .container.pdt-content {
     padding: 10px;
   }
+
   .pdt-price {
     margin-top: -5px;
   }
+
   .pdt-price h6 {
     font-size: 14px;
     font-weight: 600;
     font-family: "Open Sans";
   }
+
   .view-btn {
     padding-bottom: 10px;
   }
+
   button.buy-now-btn {
     font-size: 12px;
     margin-top: -10px;
@@ -1817,6 +1832,7 @@ button.add-to-cart-btn:hover {
     border: 1px solid var(--primary-color);
     padding: 8px 0px;
   }
+
   .bi-bag-heart-fill {
     margin-left: 10px;
     font-size: 14px;
@@ -1825,9 +1841,11 @@ button.add-to-cart-btn:hover {
   .bi-cart-check-fill {
     font-size: 14px;
   }
+
   .bi-arrows-fullscreen {
     display: none;
   }
+
   .bi-arrow-repeat {
     display: none;
   }
@@ -1840,10 +1858,11 @@ button.add-to-cart-btn:hover {
     padding-right: 50px;
     display: block;
   }
+
   .card.product:hover {
     border: none;
 
-  
+
     .card-hover {
       position: absolute;
       text-align: center;
@@ -1852,7 +1871,7 @@ button.add-to-cart-btn:hover {
       padding-right: 50px;
       display: block;
     }
-  
+
     img.pdt-img {
       filter: none;
     }
@@ -1861,8 +1880,11 @@ button.add-to-cart-btn:hover {
 }
 
 .sticky-sidebar {
-  position: -webkit-sticky; /* For Safari */
+  position: -webkit-sticky;
+  /* For Safari */
   position: sticky;
-  top: 20px; /* Adjust based on your header height */
-  z-index: 100; /* Ensure it stays above other elements */
+  top: 20px;
+  /* Adjust based on your header height */
+  z-index: 100;
+  /* Ensure it stays above other elements */
 }
