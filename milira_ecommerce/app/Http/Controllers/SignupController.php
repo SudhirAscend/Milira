@@ -41,6 +41,9 @@ class SignupController extends Controller
             'is_verified' => false,
         ]);
 
+        // Automatically log in the user
+        Auth::login($user);
+
         return redirect()->route('verify.phone')->with('message', 'Please verify your phone number.');
     }
 
@@ -57,7 +60,7 @@ class SignupController extends Controller
         $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
-            'password' => Hash::make(Str::random(8)), 
+            'password' => Hash::make(Str::random(8)),
             'login_type' => 'email',
             'otp' => $otp,
             'otp_expires_at' => now()->addMinutes(10),
@@ -69,6 +72,9 @@ class SignupController extends Controller
         });
 
         session(['user_id' => $user->id]);
+
+        // Automatically log in the user
+        Auth::login($user);
 
         return redirect()->route('verify-otp')->with('message', 'OTP sent to your email.');
     }
@@ -167,12 +173,15 @@ class SignupController extends Controller
             'full_name' => 'required|string|max:255',
         ]);
 
-        User::create([
+        $user = User::create([
             'phone_number' => $request->input('phone_number'),
             'full_name' => $request->input('full_name'),
         ]);
 
-        return response()->json(['message' => 'User created successfully'], 201);
+        // Automatically log in the user
+        Auth::login($user);
+
+        return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
     }
 
     public function saveUser(Request $request)
@@ -182,13 +191,66 @@ class SignupController extends Controller
             'full_name' => 'required|string|max:255',
         ]);
 
-        User::create([
+        $user = User::create([
             'phone_number' => $request->input('phone_number'),
             'full_name' => $request->input('full_name'),
         ]);
 
-        return response()->json(['success' => true], 200);
+        // Automatically log in the user
+        Auth::login($user);
+
+        return response()->json(['success' => true, 'user' => $user], 200);
     }
-    
-    
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+            $authUser = $this->findOrCreateUser($googleUser);
+
+            Auth::login($authUser, true);
+
+            return redirect()->route('home.index');
+        } catch (\Exception $e) {
+            Log::error('Error in Google Login: ' . $e->getMessage()); // Log any errors
+            return redirect('/');
+        }
+    }
+
+    private function findOrCreateUser($googleUser)
+    {
+        // Try to find the user by their email address
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            Log::info('User found: ' . $user->email); // Log for debugging
+            // If the user exists, ensure the provider details are set
+            if (!$user->provider_id) {
+                $user->update([
+                    'provider_id' => $googleUser->getId(),
+                    'provider' => 'google',
+                ]);
+            }
+            return $user;
+        }
+
+        // If the user doesn't exist, create a new one
+        Log::info('Creating a new user for: ' . $googleUser->getEmail()); // Log for debugging
+
+        return User::create([
+            'full_name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'provider_id' => $googleUser->getId(),
+            'provider' => 'google',
+            'password' => Hash::make(Str::random(16)), // Generate a random password
+            'login_type' => 'google', // Set the login type to google
+            'is_verified' => true, // Mark the account as verified since it came from Google
+        ]);
+    }
+
 }
+

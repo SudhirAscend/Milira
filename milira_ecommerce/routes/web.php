@@ -220,4 +220,6 @@ Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderC
 
 // In routes/web.php or routes/api.php
 Route::post('/verify-phone', [AuthController::class, 'verifyPhone'])->name('verify.phone');
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
