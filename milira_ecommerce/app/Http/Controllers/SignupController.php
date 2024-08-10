@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 use Carbon\Carbon;
 
 class SignupController extends Controller
@@ -188,4 +189,6 @@ class SignupController extends Controller
 
         return response()->json(['success' => true], 200);
     }
+    
+    
 }

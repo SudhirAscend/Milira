@@ -586,7 +586,7 @@ button {
 
 input.input-search {
   height: 45px;
-  width: 250px;
+  width: 500px;
   padding: 20px;
   font-size: 14px;
   color: var(--secondary-color);
@@ -1172,6 +1172,7 @@ hr {
 .product-sidebar-section.aos-init.aos-animate {
   margin-top: 84px;
 }
+
 
 .sidebar-section {
   background: #FFFFFF;
@@ -1857,4 +1858,11 @@ button.add-to-cart-btn:hover {
     }
   }
 
+}
+
+.sticky-sidebar {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 20px; /* Adjust based on your header height */
+  z-index: 100; /* Ensure it stays above other elements */
 }

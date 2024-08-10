@@ -244,7 +244,6 @@ class AuthController extends Controller
 
         return view('contact', compact('wishlistProductIds', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
     }
-
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
@@ -260,20 +259,39 @@ class AuthController extends Controller
 
             return redirect()->route('home.index');
         } catch (\Exception $e) {
-            Log::error('Google login failed', ['error' => $e->getMessage()]);
-            return redirect()->route('login')->withErrors(['login' => 'Login failed.']);
+            Log::error('Error in Google Login: ' . $e->getMessage()); // Log any errors
+            return redirect('/');
         }
     }
 
     private function findOrCreateUser($googleUser)
     {
-        return User::firstOrCreate([
-            'google_id' => $googleUser->id
-        ], [
-            'name' => $googleUser->name,
-            'email' => $googleUser->email,
-            'avatar' => $googleUser->avatar,
-            'password' => bcrypt(Str::random(16)),
+        // Try to find the user by their email address
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if ($user) {
+            Log::info('User found: ' . $user->email); // Log for debugging
+            // If the user exists, ensure the provider details are set
+            if (!$user->provider_id) {
+                $user->update([
+                    'provider_id' => $googleUser->getId(),
+                    'provider' => 'google',
+                ]);
+            }
+            return $user;
+        }
+
+        // If the user doesn't exist, create a new one
+        Log::info('Creating a new user for: ' . $googleUser->getEmail()); // Log for debugging
+
+        return User::create([
+            'full_name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'provider_id' => $googleUser->getId(),
+            'provider' => 'google',
+            'password' => Hash::make(Str::random(16)), // Generate a random password
+            'login_type' => 'google', // Set the login type to google
+            'is_verified' => true, // Mark the account as verified since it came from Google
         ]);
     }
 }

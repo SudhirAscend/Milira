@@ -49,11 +49,8 @@
   padding: 50px;
 }
 
-.contact-form label {
-  display: block;
-}
 
-.contact-form label {
+ label.contact-label {
   font-size:18px;
   font-family: "Ubuntu Sans";
   color: var(--primary-color);
@@ -61,7 +58,7 @@
   padding: 8px 0px;
 }
 
-.contact-form input {
+  input {
   width: 100%;
   padding: 10px 15px;
   background-color: #7b7b7b30;
@@ -109,4 +106,43 @@ button.contact-btn {
   font-size: 16px;
   font-family: 'Open Sans';
   font-weight: bold;
+}
+
+select.select-form {
+  width: 100%;
+  background-color: #7b7b7b30;
+  color: var(--primary-color);
+  font-family: 'Open Sans';
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+}
+
+input.check {
+  width: 40px;
+}
+
+.check-label {
+  font-size: 14px;
+  font-family: 'Open Sans';
+  color: var(--primary-color);
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+@media (max-width: 490px) {
+  input.check {
+    width: 20px;
+  }
+  .check-label {
+    font-size: 12px;
+    font-family: 'Open Sans';
+    color: var(--primary-color);
+  }
+  
+
 }
