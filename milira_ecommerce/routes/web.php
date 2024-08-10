@@ -43,9 +43,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/signup', [HomeController::class, 'showSignupForm']);
 Route::post('/signup', [AuthController::class, 'signup']);
 
-Route::get('/verify-otp', function () {
-    return view('verify');
-})->name('verify-otp');
 
 // Auth routes
 Route::get('/login', function () {
@@ -152,9 +149,7 @@ Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('register');
 Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
 
-Route::get('/verify-otp', function () {
-    return view('auth.verify-otp');
-})->name('verify-otp');
+
 
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 Route::post('/signup/email', [AuthController::class, 'emailSignup'])->name('signup.email.submit');
@@ -164,10 +159,7 @@ Route::post('/signup/phone', [AuthController::class, 'phoneSignup'])->name('sign
 
 Route::get('/signup', [HomeController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup.submit');
-Route::get('/verify-otp', function () {
-    return view('auth.verify-otp');
-})->name('verify-otp');
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('otp.verify');
+
 
 Route::get('login/google', [AuthController::class, 'redirectToProvider'])->name('google.login');
 Route::get('login/google/callback', [AuthController::class, 'handleProviderCallback']);
@@ -199,8 +191,7 @@ Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('si
 
 Route::post('/signup-phone', [SignupController::class, 'saveUser']);
 Route::post('/signup/email', [SignupController::class, 'signupEmail'])->name('signup.submit');
-Route::get('/verify-otp', [AuthController::class, 'showOtpForm'])->name('verify-otp');
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-otp.submit');
+
 
 Route::get('/otp/verify', [AuthController::class, 'showOtpForm'])->name('otp.verify');
 Route::post('/otp/verify', [AuthController::class, 'verifyOtp']);
