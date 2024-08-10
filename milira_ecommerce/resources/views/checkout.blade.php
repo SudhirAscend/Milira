@@ -22,6 +22,7 @@
 </head>
 <body>
     <!-- header -->
+     @include('header')
     <!-- Add your header code here -->
    
     <section class="checkout product footer-padding">
@@ -188,7 +189,7 @@
     </section>
 
     <!-- footer -->
-    <!-- Add your footer code here -->
+    @include('footer')
 
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap_5.3.2.bundle.min.js') }}"></script>

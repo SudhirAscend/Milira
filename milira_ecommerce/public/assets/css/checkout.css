@@ -449,7 +449,7 @@ button {
 
 input.input-search {
   height: 45px;
-  width: 250px;
+  width: 500px;
   padding: 20px;
   font-size: 14px;
   color: var(--secondary-color);
@@ -485,7 +485,10 @@ button.search-btn {
   font-size: 16px;
 }
 
-
+button.shop-btn {
+  font-family: 'Open Sans';
+  font-weight: bold;
+}
 input.input-search::placeholder {
   font-weight: normal;
   font-family: "inter", "serif";
