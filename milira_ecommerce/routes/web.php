@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\AuthController as AdminAuthController; 
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -212,3 +214,69 @@ Route::post('/verify-otp', [SignupController::class, 'verifyOtp'])->name('verify
 // In routes/web.php or routes/api.php
 Route::post('/verify-phone', [AuthController::class, 'verifyPhone'])->name('verify.phone');
 
+Route::prefix('admin')->middleware('auth:admin')->group(function() {
+    Route::resource('coupons', 'Admin\CouponController');
+});
+
+Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.applyCoupon');
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('admin.login');
+Route::post('login', [AuthController::class, 'login'])->name('admin.login.submit');
+Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+Route::middleware('auth:admin')->group(function() {
+    Route::get('/dashboard', function() {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+
+    Route::resource('coupons', 'Admin\CouponController');
+});
+Route::middleware('auth:admin')->group(function() {
+    Route::get('/coupons/create', 'Admin\CouponController@create')->name('admin.coupons.create');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login']);
+    Route::get('signup', [AdminAuthController::class, 'showSignupForm'])->name('signup');
+    Route::post('signup', [AdminAuthController::class, 'signup']);
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware('auth:admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
+
+// routes/web.php
+Route::post('/send-otp', [AdminAuthController::class, 'sendOtp'])->name('send.otp');
+Route::post('/verify-otp', [AdminAuthController::class, 'verifyOtp'])->name('verify.otp');
+// OTP Verification Route
+Route::post('/admin/verify-otp', [AdminAuthController::class, 'verifyOtp'])->name('verify.otp');
+
+Route::get('admin/signup', [AdminAuthController::class, 'showSignupForm'])->name('admin.signup.form');
+Route::post('admin/signup', [AdminAuthController::class, 'signup'])->name('admin.signup');
+Route::post('verify-otp', [AdminAuthController::class, 'verifyOtp'])->name('verify.otp');
+
+Route::post('admin/signup', [App\Http\Controllers\Admin\AuthController::class, 'signup'])->name('admin.signup');
+Route::post('verify/otp', [App\Http\Controllers\Admin\AuthController::class, 'verifyOtp'])->name('verify.otp');
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+    Route::post('coupons/store', [CouponController::class, 'store'])->name('coupons.store');
+});
+
+Route::get('coupons/create', [CouponController::class, 'create'])->name('admin.coupons.create');
+Route::post('coupons', [CouponController::class, 'store'])->name('admin.coupons.store');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');
+    Route::get('coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+    Route::post('coupons', [CouponController::class, 'store'])->name('coupons.store');
+    Route::delete('coupons/{coupon}', [CouponController::class, 'destroy'])->name('coupons.destroy');
+});
+
+
+
+Route::post('/checkout/apply-coupon', [CheckoutController::class, 'apply'])->name('checkout.applyCoupon');

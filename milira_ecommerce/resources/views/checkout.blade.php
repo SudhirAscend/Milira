@@ -23,7 +23,7 @@
 <body>
     <!-- header -->
     <!-- Add your header code here -->
-    @include('header')
+   
     <section class="checkout product footer-padding">
         <div class="container">
             <div class="checkout-section">
@@ -123,39 +123,62 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-    <div class="checkout-wrapper">
-        <a href="#" class="shop-btn">Enter Coupon Code</a>
-        <div class="account-section billing-section">
-            <h5 class="wrapper-heading">Order Summary</h5>
-            <div class="order-summery">
-    <div class="subtotal product-total">
-        <h5 class="wrapper-heading">PRODUCT</h5>
-        <h5 class="wrapper-heading">TOTAL</h5>
-    </div>
-    <hr>
-    <div id="product-list" class="subtotal product-total">
-        <ul class="product-list">
-            @foreach($cartItemsa as $item)
-                <li id="product-{{ $item->product->id }}">
-                    <div class="product-info">
-                        <h5 class="wrapper-heading">{{ $item->product->title }}</h5>
-                        <p class="paragraph">{{ $item->product->small_description }}, Quantity: {{ $item->quantity }}</p>
-                    </div>
-                    <div class="price">
-                        <h5 class="wrapper-heading">₹{{ number_format($item->price * $item->quantity, 2) }}</h5>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
-    </div>
-    <hr>
-    <div class="subtotal product-total">
-        <h5 class="wrapper-heading">SUBTOTAL</h5>
-        <h5 class="wrapper-heading" id="subtotal-amount">₹{{ number_format($totalAmount, 2) }}</h5>
-    </div>
-    <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
-</div>
+                    <div class="checkout-wrapper">
+    <div class="account-section billing-section">
+        <h5 class="wrapper-heading">Order Summary</h5>
+        <div class="order-summery">
+            <div class="subtotal product-total">
+                <h5 class="wrapper-heading">PRODUCT</h5>
+                <h5 class="wrapper-heading">TOTAL</h5>
+            </div>
+            <hr>
+            <div id="product-list" class="subtotal product-total">
+                <ul class="product-list">
+                    @foreach($cartItemsa as $item)
+                        <li id="product-{{ $item->product->id }}">
+                            <div class="product-info">
+                                <h5 class="wrapper-heading">{{ $item->product->title }}</h5>
+                                <p class="paragraph">{{ $item->product->small_description }}, Quantity: {{ $item->quantity }}</p>
+                            </div>
+                            <div class="price">
+                                <h5 class="wrapper-heading">₹{{ number_format($item->price * $item->quantity, 2) }}</h5>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <hr>
+            <div class="subtotal product-total">
+                <h5 class="wrapper-heading">SUBTOTAL</h5>
+                <h5 class="wrapper-heading" id="subtotal-amount">₹{{ number_format($totalAmount, 2) }}</h5>
+            </div>
 
+            <form id="couponForm" action="{{ route('checkout.applyCoupon') }}" method="POST">
+    @csrf
+    <select name="code" required>
+        <option value="">Select a coupon</option>
+        @foreach($coupons as $coupon)
+            <option value="{{ $coupon->code }}">{{ $coupon->code }} - {{ $coupon->type == 'percentage' ? $coupon->value . '%' : '₹' . $coupon->value }}</option>
+        @endforeach
+    </select>
+    <button type="submit">Apply Coupon</button>
+</form>
+
+            <!-- Total Amount Section -->
+            <div class="subtotal product-total">
+                <h5 class="wrapper-heading">SUBTOTAL</h5>
+                <h5 class="wrapper-heading" id="subtotal-amount">₹{{ number_format($totalAmount, 2) }}</h5>
+            </div>
+            <div class="subtotal product-total" id="discount-section" style="display: none;">
+                <h5 class="wrapper-heading">DISCOUNT ({{ session('coupon')['code'] ?? '' }})</h5>
+                <h5 class="wrapper-heading" id="discount-amount">- ₹0.00</h5>
+            </div>
+            <div class="subtotal product-total">
+                <h5 class="wrapper-heading">TOTAL</h5>
+                <h5 class="wrapper-heading" id="total-amount">₹{{ number_format($totalAmount, 2) }}</h5>
+            </div>
+
+            <button id="placeOrderBtn" class="btn btn-primary">Place Order</button>
         </div>
     </div>
 </div>
@@ -187,6 +210,11 @@ document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
     // Hide product details before processing the order
     document.getElementById('product-list').style.display = 'none';
 
+    // Calculate discounted total
+    var subtotal = parseFloat(document.getElementById('subtotal-amount').textContent.replace('₹', '').replace(',', ''));
+    var discount = parseFloat(document.getElementById('discount-amount').textContent.replace('₹', '').replace(',', '')) || 0;
+    var total = subtotal - discount;
+
     const formData = new FormData(document.getElementById('checkoutForm'));
 
     fetch("{{ route('checkout.storeOrder') }}", {
@@ -201,7 +229,7 @@ document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
         if (data.razorpay_order_id) {
             var options = {
                 "key": "{{ env('RAZORPAY_KEY') }}",
-                "amount": "{{ $totalAmount * 100 }}",
+                "amount": total * 100, // Use the discounted total amount
                 "currency": "INR",
                 "name": "Milira Ecommerce",
                 "description": "Test Transaction",
@@ -256,6 +284,33 @@ document.getElementById('placeOrderBtn').addEventListener('click', function(e) {
         console.error('Error:', error);
         alert('Order failed. Please try again.');
         document.getElementById('product-list').style.display = 'block'; // Show products again if the order fails
+    });
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#couponForm').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response.success) {
+                    var subtotal = parseFloat($('#subtotal-amount').text().replace('₹', '').replace(',', ''));
+                    var discount = parseFloat(response.discount);
+                    var total = subtotal - discount;
+
+                    $('#discount-section').show();
+                    $('#discount-amount').text('- ₹' + discount.toFixed(2));
+                    $('#total-amount').text('₹' + total.toFixed(2));
+                } else {
+                    alert(response.message);
+                }
+            }
+        });
     });
 });
 </script>

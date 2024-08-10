@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\Coupon;
 use App\Models\Wishlist;
 use App\Models\Cart;
 use App\Models\CartDetail;
@@ -23,7 +24,7 @@ class CheckoutController extends Controller
         $addresses = $user->addresses;
         $cartItemsa = CartDetail::where('user_id', $user->id)->with('product')->get();
         $addresses = Address::where('user_id', $user->id)->get();
-
+        $coupons = Coupon::where('expiry_date', '>', now())->get();
         $totalAmount = $cartItemsa->sum(function ($item) {
             return $item->price * $item->quantity;
         });
@@ -39,7 +40,7 @@ class CheckoutController extends Controller
             return $item->product->price * $item->quantity;
         });
 
-        return view('checkout', compact('cartItemsa', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
+        return view('checkout', compact('cartItemsa', 'addresses', 'totalAmount','wishlistCount', 'cartItems', 'cartCount', 'subtotal','coupons'));
     }
 
     public function storeOrder(Request $request)
@@ -49,18 +50,27 @@ class CheckoutController extends Controller
         $totalAmount = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
-
+    
+        // Retrieve coupon details from session or default to zero
+        $discount = session('coupon')['value'] ?? 0;
+    
+        // Apply the discount
+        $totalAmountAfterDiscount = $totalAmount - $discount;
+    
+        // Ensure total amount is not negative
+        $totalAmountAfterDiscount = max(0, $totalAmountAfterDiscount);
+    
         DB::beginTransaction();
-
+    
         try {
             // Create a new order
             $order = Order::create([
                 'user_id' => $user->id,
                 'order_id' => 'ORD_' . strtoupper(uniqid()),
                 'status' => 'pending',
-                'total_amount' => $totalAmount,
+                'total_amount' => $totalAmountAfterDiscount,
             ]);
-
+    
             foreach ($cartItems as $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
@@ -69,40 +79,58 @@ class CheckoutController extends Controller
                     'price' => $item->price,
                 ]);
             }
-
+    
             // Initialize Razorpay payment
             $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
             $razorpayOrder = $api->order->create([
                 'receipt' => $order->order_id,
-                'amount' => $totalAmount * 100,
+                'amount' => $totalAmountAfterDiscount * 100, // Amount in paise
                 'currency' => 'INR'
             ]);
-
+    
             $order->payment_id = $razorpayOrder->id;
             $order->save();
-
+    
             DB::commit();
-
+    
             return response()->json(['order_id' => $order->order_id, 'razorpay_order_id' => $razorpayOrder->id]);
         } catch (\Exception $e) {
             DB::rollBack();
-
+    
             Log::error('Order creation failed', [
                 'error' => $e->getMessage(),
                 'user_id' => $user->id,
                 'cartItems' => $cartItems,
                 'totalAmount' => $totalAmount,
+                'discount' => $discount,
             ]);
-
+    
             if (isset($order)) {
                 $order->status = 'failed';
                 $order->save();
             }
-
+    
             return response()->json(['message' => 'Order failed. Please try again.'], 500);
         }
     }
-
+    
+    public function showCheckout()
+    {
+        $user = Auth::user();
+        $cartItems = CartDetail::where('user_id', $user->id)->with('product')->get();
+        $totalAmount = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+    
+        // Fetch available coupons
+        $coupons = Coupon::where('expiry_date', '>=', now())->get(); // Adjust as needed
+    
+        return view('checkout', [
+            'cartItemsa' => $cartItems,
+            'totalAmount' => $totalAmount,
+            'coupons' => $coupons
+        ]);
+    }
     public function paymentSuccess(Request $request)
     {
         $order_id = $request->input('order_id');
@@ -170,5 +198,37 @@ class CheckoutController extends Controller
         ]);
     
         return redirect('checkout');
+    }
+
+    public function apply(Request $request)
+    {
+        $code = $request->input('code');
+        $coupon = Coupon::where('code', $code)->first();
+    
+        if ($coupon) {
+            $cartItems = CartDetail::where('user_id', Auth::id())->with('product')->get();
+            $subtotal = $cartItems->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+    
+            $discount = $coupon->type == 'percentage' 
+                ? ($subtotal * ($coupon->value / 100)) 
+                : $coupon->value;
+    
+            // Store coupon details in session
+            session(['coupon' => [
+                'code' => $coupon->code,
+                'value' => $discount,
+                'type' => $coupon->type,
+            ]]);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Coupon applied successfully.',
+                'discount' => $discount
+            ]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Invalid coupon code.']);
+        }
     }
 }
