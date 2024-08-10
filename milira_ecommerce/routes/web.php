@@ -39,7 +39,7 @@ Route::post('/shop/filter', [ShopController::class, 'filterByCategory'])->name('
 Route::get('/shop/{title}', [ProductsController::class, 'show'])->name('shop.product');
 
 // Home routes
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
 Route::get('/signup', [HomeController::class, 'showSignupForm']);
 Route::post('/signup', [AuthController::class, 'signup']);
 
@@ -206,11 +206,9 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-o
 
 Route::get('/auth/{provider}', [AuthController::class, 'redirectToProvider'])->name('social.login');
 Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
-
+Route::post('/verify-otp', [SignupController::class, 'verifyOtp'])->name('verify-otp');
 // In routes/web.php or routes/api.php
 Route::post('/verify-phone', [AuthController::class, 'verifyPhone'])->name('verify.phone');
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-});
+

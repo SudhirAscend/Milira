@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Models\User;
 use App\Models\OTP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Facades\Log;
+
 use App\Services\MSG91Service; // Add this if you're using MSG91 for SMS
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -94,47 +99,48 @@ class AuthController extends Controller
         return redirect('/login');
     }
     public function verifyOtp(Request $request)
-    {
-        $request->validate([
-            'otp' => 'required|string|max:4',
-        ]);
-    
-        $user = null;
-    
-        // Check if OTP is for phone login
-        if ($request->session()->has('user_phone')) {
-            $phone = $request->session()->get('user_phone');
-            $user = User::where('phone_number', $phone)->first();
-        }
-        
-        // Check if OTP is for email login
-        if (!$user && $request->session()->has('user_email')) {
-            $email = $request->session()->get('user_email');
-            $user = User::where('email', $email)->first();
-        }
-    
-        // Check if user exists and OTP matches
-        if (!$user || $user->otp !== $request->input('otp') || $user->otp_expires_at->isPast()) {
-            // If OTP is invalid or expired, redirect back with error message
-            return redirect()->route('verify-otp')->withErrors(['otp' => 'Invalid or expired OTP']);
-        }
-    
-        // Clear OTP and expiration time after successful verification
-        $user->update([
-            'is_verified' => true,
-            'otp' => null,
-            'otp_expires_at' => null,
-        ]);
-    
-        // Log in the user
-        Auth::login($user);
-    
-        // Clear session data
-        $request->session()->forget(['user_phone', 'user_email']);
-    
-        // Redirect to the home page or a different location
-        return redirect('/');
+{
+    $request->validate([
+        'otp' => 'required|string|max:4',
+    ]);
+
+    $user = null;
+
+    // Check if OTP is for phone login
+    if ($request->session()->has('user_phone')) {
+        $phone = $request->session()->get('user_phone');
+        $user = User::where('phone_number', $phone)->first();
     }
+    
+    // Check if OTP is for email login
+    if (!$user && $request->session()->has('user_email')) {
+        $email = $request->session()->get('user_email');
+        $user = User::where('email', $email)->first();
+    }
+
+    // Check if user exists and OTP matches
+    if (!$user || $user->otp !== $request->input('otp') || $user->otp_expires_at->isPast()) {
+        // If OTP is invalid or expired, redirect back with error message
+        return redirect()->route('verify-otp')->withErrors(['otp' => 'Invalid or expired OTP']);
+    }
+
+    // Clear OTP and expiration time after successful verification
+    $user->update([
+        'is_verified' => true,
+        'otp' => null,
+        'otp_expires_at' => null,
+    ]);
+
+    // Log in the user
+    Auth::login($user);
+
+    // Clear session data
+    $request->session()->forget(['user_phone', 'user_email']);
+
+    // Redirect to the intended page or home
+    return redirect()->intended('/');
+}
+
     // Google Login
     public function redirectToProvider()
     {
