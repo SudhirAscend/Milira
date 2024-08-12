@@ -22,7 +22,7 @@ class ShopController extends Controller
         // Debugging - Log the categories and collections
         Log::info('Categories:', $categories->toArray());
         Log::info('Collections:', $collections->toArray());
-
+       
         $colors = Product::select('color')->distinct()->pluck('color');
 
         $products = Product::when($category, function ($query, $category) {
@@ -117,13 +117,13 @@ class ShopController extends Controller
         $user_id = Auth::id();
         $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
         $wishlistCount = Wishlist::where('user_id', $user_id)->count();
-
+        $randomProducts = Product::inRandomOrder()->take(4)->get();
         $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
         $cartCount = $cartItems->count();
         $subtotal = $cartItems->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
 
-        return view('shop.product', compact('product', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal'));
+        return view('shop.product', compact('product', 'wishlistCount', 'cartItems', 'cartCount', 'subtotal','randomProducts','wishlistProductIds'));
     }
 }

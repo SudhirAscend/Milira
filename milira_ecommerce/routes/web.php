@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
-
+use App\Http\Controllers\Admin\CouponPopupController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Admin\CouponController;
@@ -175,6 +175,9 @@ Route::post('/verify-otp', [RegisterController::class, 'verifyOtp']);
 Route::post('/signup/phone', [AuthController::class, 'signupPhone'])->name('signup.phone.submit');
 Route::post('/verify-phone', [RegisterController::class, 'verifyPhone'])->name('signup.phone.submit');
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('coupon_popups', Admin\CouponPopupController::class);
+});
 
 
 // Route for displaying the phone signup form
@@ -326,3 +329,7 @@ Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->name('verify-o
 // Logout Route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/signup-phone', [RegisterController::class, 'signupPhone']);
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('coupon_popups', CouponPopupController::class);
+});
