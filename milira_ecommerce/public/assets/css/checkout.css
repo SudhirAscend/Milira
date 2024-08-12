@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
 /* google-font */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 /* Colors */
@@ -448,7 +449,7 @@ button {
 
 input.input-search {
   height: 45px;
-  width: 250px;
+  width: 500px;
   padding: 20px;
   font-size: 14px;
   color: var(--secondary-color);
@@ -484,7 +485,10 @@ button.search-btn {
   font-size: 16px;
 }
 
-
+button.shop-btn {
+  font-family: 'Open Sans';
+  font-weight: bold;
+}
 input.input-search::placeholder {
   font-weight: normal;
   font-family: "inter", "serif";
@@ -1239,9 +1243,12 @@ hr {
 .order-summery .total .wrapper-heading {
   font-size: 20px;
   font-weight: bold;
-  font-family: "inter", "serif";
+  font-family: "Ubuntu Sans";
 }
-
+h5.wrapper-heading  {
+  font-family: "Ubuntu Sans";
+  font-weight: bold !important;
+}
 .order-summery .total .price {
   color: var(--primary-color);
 }
@@ -1453,5 +1460,53 @@ footer {
   .social p {
     text-align: start;
     margin-top: 20px;
+  }
+}
+
+select.coupon-input {
+  padding: 12px 20px;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  font-family: "Open Sans";
+  font-weight: bold;
+  outline: none;
+  width: 75%;
+
+}
+
+button.coupon-btn {
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1.3rem;
+  padding: 12px 20px;
+  font-family: 'Open Sans';
+  font-weight: bold;
+}
+
+button.placeOrder {
+  background: var(--primary-color);
+  color: #fff;
+  font-family: 'Open Sans';
+  font-size: 1.5rem;
+  font-weight: bold;
+  width: 100%;
+  padding: 12px 0px;
+  border-radius: 5px;
+}
+
+
+@media(max-width: 1199px) and (min-width: 992px) {
+  select.coupon-input {
+    width: 65%;
+  }
+}
+
+@media (max-width: 627px) {
+  select.coupon-input {
+    width: 100%;
+  }
+  button.coupon-btn {
+    width: 100%;
+    margin-top: 5px;
   }
 }
