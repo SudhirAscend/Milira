@@ -540,11 +540,14 @@
 </div>
 
 <!---------------------- End of Newsletter ---------------------->
+@if($latestPopup)
 <div class="container mt-5">
     <div class="coupon-popup" id="couponPopup">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <img class="popup-img" src="./assets/images/hero/pop2.jpg" alt="">
+                @if($latestPopup->image)
+                    <img class="popup-img" src="{{ Storage::url($latestPopup->image) }}" alt="">
+                @endif
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                 <div class="popup-close text-end p-3">
@@ -552,17 +555,17 @@
                 </div>
                 <div class="c-content">
                     <div class="pop-title">
-                        <h1>Milira</h1>
+                        <h1>{{ $latestPopup->title }}</h1>
                     </div>
                     <div class="pop-content mt-2">
-                        <p>Join the Squad</p>
+                        <p>{{ $latestPopup->description }}</p>
                     </div>
                     <div class="p-content text-center mt-3">
                         <p>Copy the coupon code for the exclusive discounts</p>
                     </div>
                     <div class="coupon-form text-center mt-5">
                         <form action="javascript:void(0);">
-                            <input type="text" id="cuponCode" name="cuponCode" class="cupon-input" value="DISCOUNT2024">
+                            <input type="text" id="cuponCode" name="cuponCode" class="cupon-input" value="{{ $latestPopup->coupon_code }}">
                             <button type="copy" onclick="copyCouponCode()">Copy</button>
                         </form>
                     </div>
@@ -571,6 +574,7 @@
         </div>
     </div>
 </div>
+@endif>
 
 
 <!-----------------------Footer --------------------------------->

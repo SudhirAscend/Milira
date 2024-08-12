@@ -136,6 +136,7 @@
         event.preventDefault();
         var phoneNumber = document.getElementById('phone_number').value;
         var fullName = document.getElementById('full_name_phone').value;
+
         if (phoneNumber && fullName) {
             configuration.identifier = phoneNumber;
             configuration.fullName = fullName;
@@ -150,28 +151,34 @@
         exposeMethods: "<true | false> (optional)",
         success: (data) => {
             console.log('success response', data);
-            // Make an AJAX request to save user details
-            fetch('/signup-phone', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    phone_number: configuration.identifier,
-                    full_name: configuration.fullName
+
+            // Handle the response from the OTP provider
+            if (data.success) {
+                // Make an AJAX request to save user details
+                fetch('/signup-phone', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        phone_number: configuration.identifier,
+                        full_name: configuration.fullName
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Redirect to login page
-                    window.location.href = '/';
-                } else {
-                    console.error('Error saving user:', data.message);
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect to home page after successful signup
+                        window.location.href = '/';
+                    } else {
+                        console.error('Error saving user:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                console.error('OTP Provider Error:', data.message);
+            }
         },
         failure: (error) => {
             console.log('failure reason', error);
@@ -184,6 +191,7 @@
         }
     }
 </script>
+
 
 
 <!-- Include Font Awesome for icons -->

@@ -24,14 +24,14 @@ class ProductsController extends Controller
     $user_id = Auth::id();
     $wishlistProductIds = Wishlist::where('user_id', $user_id)->pluck('product_id')->toArray();
     $wishlistCount = Wishlist::where('user_id', $user_id)->count();
-
+    $randomProducts = Product::inRandomOrder()->take(4)->get();
     $cart = session()->get('cart', []);
     $cartCount = count($cart);
     $subtotal = array_reduce($cart, function($sum, $item) {
         return $sum + ($item['price'] * $item['quantity']);
     }, 0);
 
-    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections','products'));
+    return view('admin.products.index', compact('products', 'wishlistCount', 'cartCount', 'subtotal', 'wishlistProductIds', 'collections','products','randomProducts'));
 }
 
     public function show($slug)
