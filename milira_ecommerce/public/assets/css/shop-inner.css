@@ -2422,3 +2422,15 @@ footer {
     margin-top: 20px;
   }
 }
+
+.shipment {
+  border: 1px solid var(--primary-color);
+  width: 100%;
+  padding: 0px 25px;
+}
+
+.ship-box h6 {
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+}
