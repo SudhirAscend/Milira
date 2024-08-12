@@ -24,7 +24,7 @@ class MSG91Service
             'mobile' => $phoneNumber,
             'message' => 'Your OTP code is {{otp}}',
             'otp' => true,
-            'template_id' => 'your_template_id', // Replace with your template ID
+           
         ]);
 
         return $response->json();
