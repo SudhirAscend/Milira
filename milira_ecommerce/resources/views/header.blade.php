@@ -195,7 +195,7 @@
                            <span >
                            <button class="d-flex" id="auth-switch">
                                 <a href="/login" class="loginclr active" onclick="changeBackground('login', event)">Login</a>
-                                <a href="/signup" class="signup" onclick="changeBackground('signup', event)">Signup</a>
+                                <a href="/register" class="signup" onclick="changeBackground('signup', event)">Signup</a>
                             </button>
                            </span>
                         @endguest
