@@ -28,10 +28,15 @@
     <a href="{{ route('admin.orderDetails', $order->id) }}">#{{ $order->order_id }}</a>
 </td>
 
-                                    <!-- Customer Name -->
-                                    <td>
-                                        <p class="mb-0 customer-name fw-bold">{{ $order->user->full_name }}</p>
-                                    </td>
+                                  <!-- Customer Name -->
+<td>
+    @if ($order->user)
+        <p class="mb-0 customer-name fw-bold">{{ $order->user->full_name }}</p>
+    @else
+        <p class="mb-0 customer-name fw-bold text-danger">User Not Found</p>
+    @endif
+</td>
+
 
                                     <!-- Total Amount Paid -->
                                     <td>₹{{ number_format($order->total_amount, 2) }}</td>
