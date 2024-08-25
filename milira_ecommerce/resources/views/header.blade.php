@@ -61,7 +61,110 @@
         color: #fff;
     }
 
+/* Ensure modal appears on top of the overlay */
+.modal-backdrop {
+    z-index: 1040 !important; /* Default value for Bootstrap */
+}
 
+.modal {
+    z-index: 1050 !important; /* Higher value than the backdrop */
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+/* Navbar Tabs */
+.nav-tabs {
+    border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    border-color: #007bff;
+    background-color: white;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #007bff;
+    background-color: #f1f1f1;
+}
+
+/* Form Fields */
+.form-control {
+    border-radius: 30px;
+    padding-left: 1.5rem;
+    font-size: 1.2rem;
+    border: 1px solid #ced4da;
+}
+
+.form-control-lg {
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 30px;
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Icons in Buttons */
+.btn .bi {
+    font-size: 1.5rem;
+}
+
+/* Spacing */
+.d-flex {
+    gap: 1rem;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 0 1rem;
+    }
+}
 
 </style>
  <header id="header" class="header">
@@ -193,9 +296,9 @@
                         <div class="header-user">
                         @guest
                            <span >
-                           <button class="d-flex" id="auth-switch">
-                                <a href="/login" class="loginclr active" onclick="changeBackground('login', event)">Login</a>
-                                <a href="/register" class="signup" onclick="changeBackground('signup', event)">Signup</a>
+                           <button class="d-flex" id="auth-switch" data-bs-toggle="modal" data-bs-target="#authModal">
+                            <a href="#" class="loginclr active">Login</a>
+                            <a href="#" class="signup">Signup</a>
                             </button>
                            </span>
                         @endguest
@@ -221,7 +324,81 @@
                 </div>
             </div>
         </div>
-
+ <!-- Modal -->
+ <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <ul class="nav nav-tabs w-100" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Signup</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab-content" id="authTabsContent">
+                        <!-- Login Tab -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                                    <a href="#" class="text-decoration-none">Forgot Password?</a>
+                                </div>
+                                <div class="d-flex flex-column gap-2">
+                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-google me-2"></i> Login with Google
+                                    </button>
+                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-facebook me-2"></i> Login with Facebook
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Signup Tab -->
+                        <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="signupName" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="signupName" placeholder="Enter your name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="signupPassword" placeholder="Enter your password">
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-primary w-100">Signup</button>
+                                </div>
+                                <div class="d-flex flex-column gap-2">
+                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-google me-2"></i> Signup with Google
+                                    </button>
+                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-facebook me-2"></i> Signup with Facebook
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
         <nav class="mobile-menu d-block d-lg-none">
             <div class="mobile-menu-header d-flex justify-content-between align-items-center">
                 <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
