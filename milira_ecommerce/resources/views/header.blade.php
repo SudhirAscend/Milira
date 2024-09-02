@@ -293,15 +293,16 @@
 </div>
 
 
-                        <div class="header-user">
-                        @guest
-                           <span >
-                           <button class="d-flex" id="auth-switch" data-bs-toggle="modal" data-bs-target="#authModal">
-                            <a href="#" class="loginclr active">Login</a>
-                            <a href="#" class="signup">Signup</a>
-                            </button>
-                           </span>
-                        @endguest
+<div class="header-user">
+    @guest
+        <span>
+            <button class="d-flex" id="auth-switch">
+                <a href="#" class="loginclr active" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                <a href="#" class="signup" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</a>
+            </button>
+        </span>
+    @endguest
+</div>
 
                         @auth
                             <div class="dropdown">
@@ -324,81 +325,143 @@
                 </div>
             </div>
         </div>
- <!-- Modal -->
- <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <ul class="nav nav-tabs w-100" id="authTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="login-tab" data-bs-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="signup-tab" data-bs-toggle="tab" href="#signup" role="tab" aria-controls="signup" aria-selected="false">Signup</a>
-                        </li>
-                    </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="tab-content" id="authTabsContent">
-                        <!-- Login Tab -->
-                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <button type="submit" class="btn btn-primary w-100">Login</button>
-                                    <a href="#" class="text-decoration-none">Forgot Password?</a>
-                                </div>
-                                <div class="d-flex flex-column gap-2">
-                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-google me-2"></i> Login with Google
-                                    </button>
-                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-facebook me-2"></i> Login with Facebook
-                                    </button>
-                                </div>
-                            </form>
+<!--------------- Modals for Authentication --------------->
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="signupTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="email-signup-tab" data-bs-toggle="tab" data-bs-target="#email-signup" type="button" role="tab" aria-controls="email-signup" aria-selected="true">Email</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="phone-signup-tab" data-bs-toggle="tab" data-bs-target="#phone-signup" type="button" role="tab" aria-controls="phone-signup" aria-selected="false">Phone</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="signupTabContent">
+                    <div class="tab-pane fade show active" id="email-signup" role="tabpanel" aria-labelledby="email-signup-tab">
+                        <!-- Email Signup Form -->
+                        <form id="emailSignupForm">
+                            <div class="mb-3">
+                                <label for="signupEmailName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="signupEmailName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="signupEmail" required>
+                            </div>
+                            <div class="mb-3 otp-field" style="display:none;">
+                                <label for="signupEmailOTP" class="form-label">OTP</label>
+                                <input type="text" class="form-control" id="signupEmailOTP" required>
+                            </div>
+                            <button type="button" class="btn btn-primary send-otp">Send OTP</button>
+                            <button type="submit" class="btn btn-success verify-otp" style="display:none;">Verify</button>
+                        </form>
+                        <!-- Social Media Buttons -->
+                        <div class="social-buttons">
+                            <button class="btn btn-danger mt-2">Login with Google</button>
+                            <button class="btn btn-primary mt-2">Login with Facebook</button>
                         </div>
-                        <!-- Signup Tab -->
-                        <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
-                            <form>
-                                <div class="mb-3">
-                                    <label for="signupName" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="signupName" placeholder="Enter your name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="signupEmail" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="signupPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="signupPassword" placeholder="Enter your password">
-                                </div>
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary w-100">Signup</button>
-                                </div>
-                                <div class="d-flex flex-column gap-2">
-                                    <button type="button" class="btn btn-danger d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-google me-2"></i> Signup with Google
-                                    </button>
-                                    <button type="button" class="btn btn-primary d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-facebook me-2"></i> Signup with Facebook
-                                    </button>
-                                </div>
-                            </form>
+                    </div>
+                    <div class="tab-pane fade" id="phone-signup" role="tabpanel" aria-labelledby="phone-signup-tab">
+                        <!-- Phone Signup Form -->
+                        <form id="phoneSignupForm">
+                            <div class="mb-3">
+                                <label for="signupPhoneName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="signupPhoneName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupPhone" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="signupPhone" required>
+                            </div>
+                            <div class="mb-3 otp-field" style="display:none;">
+                                <label for="signupPhoneOTP" class="form-label">OTP</label>
+                                <input type="text" class="form-control" id="signupPhoneOTP" required>
+                            </div>
+                            <button type="button" class="btn btn-primary send-otp">Send OTP</button>
+                            <button type="submit" class="btn btn-success verify-otp" style="display:none;">Verify</button>
+                        </form>
+                        <!-- Social Media Buttons -->
+                        <div class="social-buttons">
+                            <button class="btn btn-danger mt-2">Login with Google</button>
+                            <button class="btn btn-primary mt-2">Login with Facebook</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" id="loginTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="email-login-tab" data-bs-toggle="tab" data-bs-target="#email-login" type="button" role="tab" aria-controls="email-login" aria-selected="true">Email</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="phone-login-tab" data-bs-toggle="tab" data-bs-target="#phone-login" type="button" role="tab" aria-controls="phone-login" aria-selected="false">Phone</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="loginTabContent">
+                    <div class="tab-pane fade show active" id="email-login" role="tabpanel" aria-labelledby="email-login-tab">
+                        <!-- Email Login Form -->
+                        <form id="emailLoginForm">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="loginEmail" required>
+                            </div>
+                            <div class="mb-3 otp-field" style="display:none;">
+                                <label for="loginEmailOTP" class="form-label">OTP</label>
+                                <input type="text" class="form-control" id="loginEmailOTP" required>
+                            </div>
+                            <button type="button" class="btn btn-primary send-otp">Send OTP</button>
+                            <button type="submit" class="btn btn-success verify-otp" style="display:none;">Verify</button>
+                        </form>
+                        <!-- Social Media Buttons -->
+                        <div class="social-buttons">
+                            <button class="btn btn-danger mt-2">Login with Google</button>
+                            <button class="btn btn-primary mt-2">Login with Facebook</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="phone-login" role="tabpanel" aria-labelledby="phone-login-tab">
+                        <!-- Phone Login Form -->
+                        <form id="phoneLoginForm">
+                            <div class="mb-3">
+                                <label for="loginPhone" class="form-label">Phone Number</label>
+                                <input type="text" class="form-control" id="loginPhone" required>
+                            </div>
+                            <div class="mb-3 otp-field" style="display:none;">
+                                <label for="loginPhoneOTP" class="form-label">OTP</label>
+                                <input type="text" class="form-control" id="loginPhoneOTP" required>
+                            </div>
+                            <button type="button" class="btn btn-primary send-otp">Send OTP</button>
+                            <button type="submit" the "btn btn-success verify-otp" style="display:none;">Verify</button>
+                        </form>
+                        <!-- Social Media Buttons -->
+                        <div class="social-buttons">
+                            <button class="btn btn-danger mt-2">Login with Google</button>
+                            <button class="btn btn-primary mt-2">Login with Facebook</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
         <nav class="mobile-menu d-block d-lg-none">
             <div class="mobile-menu-header d-flex justify-content-between align-items-center">
                 <button class="" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
@@ -724,3 +787,4 @@ $(document).ready(function() {
             }
         }
     </script>
+    
