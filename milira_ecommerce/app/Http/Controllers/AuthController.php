@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Services\MSG91Service;
 use Carbon\Carbon;
+use Laravel\Socialite\Facades\Socialite;
+
 
 class AuthController extends Controller
 {
@@ -176,6 +178,56 @@ class AuthController extends Controller
         // Redirect to the intended page or home
         return redirect()->intended('/');
     }
+    public function redirectToProvider()
+{
+    return Socialite::driver('google')->redirect();
+}
+public function handleProviderCallback()
+{
+    try {
+        // Get user information from Google
+        $googleUser = Socialite::driver('google')->stateless()->user();
+
+        // Check if a user with this email already exists
+        $existingUser = User::where('email', $googleUser->getEmail())->first();
+
+        if ($existingUser) {
+            // If the user already exists but doesn't have a Google ID, update it
+            if (!$existingUser->google_id) {
+                $existingUser->update([
+                    'google_id' => $googleUser->getId(),
+                    'is_verified' => true // Mark them verified if needed
+                ]);
+            }
+            // Log in the user
+            Auth::login($existingUser);
+        } else {
+            // Create a new user if they don't exist
+            $newUser = User::create([
+                'full_name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
+                'google_id' => $googleUser->getId(),
+                'is_verified' => true, // Consider SSO users as verified
+                'password' => Hash::make(Str::random(16)), // Assign a random password
+            ]);
+
+            // Log in the newly created user
+            Auth::login($newUser);
+        }
+
+        // Redirect to the intended page or home after successful login
+        return redirect()->intended('/');
+
+    } catch (\Exception $e) {
+        // Log the error for debugging purposes
+        \Log::error('Google login error: ' . $e->getMessage());
+
+        // Redirect to the login page with an error message
+        return redirect('/login')->withErrors(['error' => 'Unable to login with Google.']);
+    }
+}
+
+
 
     public function showOtpForm()
     {

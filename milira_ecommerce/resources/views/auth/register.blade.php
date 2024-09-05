@@ -31,7 +31,9 @@
     </style>
 </head>
 <body>
-
+    <!--------------- header-section --------------->
+    @include('header')
+    <!--------------- header-section-end --------------->
 <!-- Header -->
 @if ($errors->any())
     <div class="alert alert-danger">

@@ -32,7 +32,9 @@
     </style>
 </head>
 <body>
-
+ <!--------------- header-section --------------->
+ @include('header')
+    <!--------------- header-section-end --------------->
 <!-- Header -->
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -90,18 +92,18 @@
 
                 <!-- Social Login Buttons with icons -->
                 <div class="text-center mt-3">
-                    <p>or login with</p>
-                    <a href="" class="btn btn-danger">
-                        <i class="fab fa-google"></i> Google
+                    <p>or sign up with</p>
+                    <a href="{{ route('google.login') }}" class="btn btn-danger">
+                        <i class="fab fa-google"></i>Google
                     </a>
-                    <a href="" class="btn btn-primary">
-                        <i class="fab fa-facebook-f"></i> Facebook
-                    </a>
+                    <a href="{{ route('facebook.login') }}" class="btn btn-primary">
+    <i class="fab fa-facebook-f"></i> Facebook
+</a>
                 </div>
 
                 <!-- Don't have an account -->
                 <div class="a-signup text-center mt-4">
-                    <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                    <p>Don't have an account? <a href="/register">Sign Up</a></p>
                 </div>
             </div>
         </div>

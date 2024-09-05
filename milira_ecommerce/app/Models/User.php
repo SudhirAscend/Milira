@@ -18,6 +18,7 @@ class User extends Authenticatable
         'otp_expires_at',
         'provider',
         'provider_id',
+        'google_id',
     ];
 
     protected $hidden = [
