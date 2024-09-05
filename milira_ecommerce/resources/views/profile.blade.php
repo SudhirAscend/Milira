@@ -38,6 +38,8 @@
 
 <!--------------- additional-css ---------------->
 <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
 </head>
 
 <body>

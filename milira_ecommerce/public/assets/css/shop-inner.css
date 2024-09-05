@@ -231,7 +231,7 @@ button {
 
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg rect {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg path {
@@ -738,7 +738,7 @@ input.mob-search::placeholder {
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
@@ -915,7 +915,7 @@ input.mob-search::placeholder {
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
@@ -1026,7 +1026,7 @@ input.mob-search::placeholder {
 
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-nav .header-nav-menu .menu-list .mega-menu {
@@ -1432,7 +1432,7 @@ button.cat-dropdown::before {
 }
 
 .product-info-content .product-size .size-title {
-  color: #AE1C9A;
+  color: #000000;
   margin-bottom: 1rem;
 }
 
@@ -1483,7 +1483,7 @@ button.cat-dropdown::before {
 }
 
 .product-info-content .product-size .size-option .option:hover {
-  background: #AE1C9A;
+  background: #000000;
   color: #FFFFFF;
 }
 

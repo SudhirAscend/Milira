@@ -149,7 +149,7 @@ input {
 }
 
 input[type=checkbox] {
-  accent-color: #AE1C9A;
+  accent-color: #000000;
 }
 
 button {
@@ -286,7 +286,7 @@ button {
 
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg rect {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg path {
@@ -320,7 +320,7 @@ button {
 }
 
 .product-wrapper:hover {
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .product-wrapper:hover .product-cart-items {
@@ -456,13 +456,13 @@ button {
   padding: 1.2rem 1.6rem 1.2rem 2.5rem;
   border-top-left-radius: 3rem;
   background: rgba(174, 28, 154, 0.188);
-  color: #AE1C9A;
+  color: #000000;
   font-size: 1.6rem;
   transition: all 0.4s;
 }
 
 .product-btn:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
   color: #FFFFFF;
 }
 
@@ -829,7 +829,7 @@ button {
   width: 62rem;
   height: 6rem;
   border-radius: 3rem;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
   overflow: hidden;
 }
 
@@ -857,7 +857,7 @@ button {
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
@@ -1035,7 +1035,7 @@ input.mob-search::placeholder {
 .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span svg,
 .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span rect {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .header-bottom {
@@ -1094,7 +1094,7 @@ input.mob-search::placeholder {
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
@@ -1205,7 +1205,7 @@ input.mob-search::placeholder {
 
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-nav .header-nav-menu .menu-list .mega-menu {
@@ -1474,7 +1474,7 @@ button.cat-dropdown::before {
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .wrapper-section .wrapper-subtitle {
@@ -1484,7 +1484,7 @@ button.cat-dropdown::before {
 
 .wrapper-section .wrapper-subtitle .wrapper-inner-title {
   font-size: 4rem;
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .wrapper-section .shop-btn {
@@ -1493,7 +1493,7 @@ button.cat-dropdown::before {
   text-align: center;
   border-radius: 3rem;
   display: inline-block;
-  background: #AE1C9A;
+  background: #000000;
   font-size: 1.6rem;
   font-weight: 500;
   position: relative;
@@ -1530,7 +1530,7 @@ button.cat-dropdown::before {
 
 .wrapper-section .shop-btn:hover {
   color: #FFFFFF;
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .wrapper-section .shop-btn:hover::after {
@@ -1844,7 +1844,7 @@ button.cat-dropdown::before {
   text-align: center;
   border-radius: 3rem;
   display: inline-block;
-  background: #AE1C9A;
+  background: #000000;
   font-size: 1.4rem;
   font-weight: 500;
   position: relative;
@@ -1881,7 +1881,7 @@ button.cat-dropdown::before {
 
 .wrapper-two .shop-btn:hover {
   color: #FFFFFF;
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .wrapper-two .shop-btn:hover::after {
@@ -1942,7 +1942,7 @@ button.cat-dropdown::before {
 }
 
 .category-section .product-wrapper:hover {
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .category-section .product-wrapper:hover .wrapper-img img {
@@ -2829,7 +2829,7 @@ footer {
 }
 
 .product-info-content .product-availability .inner-text {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .product-info-content .product-size {
@@ -2839,7 +2839,7 @@ footer {
 }
 
 .product-info-content .product-size .size-title {
-  color: #AE1C9A;
+  color: #000000;
   margin-bottom: 1rem;
 }
 
@@ -2890,7 +2890,7 @@ footer {
 }
 
 .product-info-content .product-size .size-option .option:hover {
-  background: #AE1C9A;
+  background: #000000;
   color: #FFFFFF;
 }
 
@@ -2913,7 +2913,7 @@ footer {
 }
 
 .product-info-content .product-size.active .size-option .option:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .product-info-content .product-size.active .chevron {
@@ -2974,7 +2974,7 @@ footer {
 }
 
 .product-info-content .product-details .inner-text {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .product-info-content .product-report {
@@ -3051,7 +3051,7 @@ hr {
   padding: 1rem 2.4rem;
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
-  color: #AE1C9A;
+  color: #000000;
   font-weight: 600;
 }
 
@@ -3060,7 +3060,7 @@ hr {
 }
 
 .product-description .nav-item .nav-link.active {
-  background: #AE1C9A;
+  background: #000000;
   color: #FFFFFF;
 }
 
@@ -3205,7 +3205,7 @@ hr {
 }
 
 .sidebar-section .sidebar-range .noUi-connect {
-  background: #AE1C9A;
+  background: #000000;
 }
 
 .sidebar-section .sidebar-range .example-val {
@@ -3240,7 +3240,7 @@ hr {
 
 .deal-btn::after {
   padding: 0;
-  background: #AE1C9A;
+  background: #000000;
   width: 0;
   height: 2px;
   top: 2rem;
@@ -3394,7 +3394,7 @@ hr {
   font-size: 1.8rem;
   font-weight: 500;
   position: relative;
-  color: #AE1C9A;
+  color: #000000;
   font-family: "Inter", sans-serif;
   transition: all 0.3s;
   overflow: hidden;
@@ -3448,7 +3448,7 @@ hr {
 }
 
 .blogs-wrapper .shop-btn:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .blogs-wrapper .shop-btn::after {
@@ -3497,9 +3497,9 @@ hr {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background: #AE1C9A;
+  background: #000000;
   transition: all 0.2s;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .blog-details .blogs-form-section .social-item a svg {
@@ -3513,7 +3513,7 @@ hr {
 }
 
 .blog-details .blogs-form-section .social-item a:hover svg {
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 @media (max-width:767px) {
@@ -3691,7 +3691,7 @@ hr {
 
 .blog-post-section .blog-post .blogs-wrapper .wrapper-info svg {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .blog-post-section .blog-post .category-list {
@@ -3709,7 +3709,7 @@ hr {
 }
 
 .blog-post-section .blog-post .category-list a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .blog-post-section .newsletter {
@@ -3791,7 +3791,7 @@ hr {
 }
 
 .cart-section .table-row .table-wrapper .heading:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .cart-section .table-row .wrapper-product {
@@ -3866,7 +3866,7 @@ table .ticket-row:hover {
 }
 
 .table-row .table-wrapper .heading:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .table-row .table-wrapper .table-heading {
@@ -3912,7 +3912,7 @@ table .ticket-row:hover {
 }
 
 .table-row .table-wrapper-center path:hover {
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .table-row .table-wrapper-img {
@@ -4103,7 +4103,7 @@ table .ticket-row:hover {
 }
 
 .order-summery .total .price {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .order-summery .payment-type {
@@ -4127,7 +4127,7 @@ table .ticket-row:hover {
 }
 
 .order-summery .payment-type .checkbox-item input {
-  accent-color: #AE1C9A;
+  accent-color: #000000;
 }
 
 .order-summery .payment-type .checkbox-item:hover {
@@ -4227,7 +4227,7 @@ table .ticket-row:hover {
 }
 
 .checkbox .forget-pass p {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .checkbox-item {
@@ -4558,7 +4558,7 @@ table .ticket-row:hover {
 }
 
 .img-upload-section .logo-wrapper label {
-  background: #AE1C9A;
+  background: #000000;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -4594,7 +4594,7 @@ table .ticket-row:hover {
   height: 17rem;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .img-upload-section .logo-wrapper .logo-upload .upload-input {
@@ -4608,7 +4608,7 @@ table .ticket-row:hover {
   width: 100%;
   height: 15rem;
   border-radius: 0.5rem;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .img-upload-section .logo-wrapper .cover-upload .cover-input {
@@ -4681,7 +4681,7 @@ table .ticket-row:hover {
   justify-content: center;
   gap: 2rem;
   width: 100%;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
   height: 19.6rem;
   border-radius: 0.5rem;
 }
@@ -4783,7 +4783,7 @@ table .ticket-row:hover {
 .product-compair .cart-center .search input {
   border: none;
   outline: none;
-  color: #AE1C9A;
+  color: #000000;
   flex: 1 1 0%;
 }
 
@@ -4792,7 +4792,7 @@ table .ticket-row:hover {
   height: 2rem;
   object-fit: cover;
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .product-compair .cart-center .wrapper .wrapper-img {
@@ -4981,7 +4981,7 @@ table .ticket-row:hover {
 }
 
 .about-details:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 @media (max-width:767px) {
@@ -5007,7 +5007,7 @@ table .ticket-row:hover {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #AE1C9A;
+  background: #000000;
   z-index: 10;
   opacity: 0.6;
 }
@@ -5149,7 +5149,7 @@ table .ticket-row:hover {
 }
 
 .testimonial-wrapper .testimonial-info .title-inner {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 @media (max-width:1023px) {
@@ -5243,7 +5243,7 @@ table .ticket-row:hover {
 }
 
 .user-profile-section .dashboard-heading .dashboard-switch .switch-icon.active {
-  background: #AE1C9A;
+  background: #000000;
 }
 
 .user-profile-section .dashboard-heading .dashboard-switch .switch-icon.active::before {
@@ -5461,13 +5461,13 @@ table .ticket-row:hover {
 }
 
 .user-dashboard .nav-item .nav-link.active svg {
-  fill: #AE1C9A;
+  fill: #000000;
   transform: scale(1.1);
 }
 
 .user-dashboard .nav-item .nav-link.active .text {
   transform: translateX(5px);
-  color: #AE1C9A;
+  color: #000000;
   font-weight: 600;
 }
 
@@ -5504,7 +5504,7 @@ table .ticket-row:hover {
 .user-dashboard .nav-content .profile-section .product-wrapper svg,
 .user-dashboard .nav-content .profile-section .product-wrapper path {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .user-dashboard .nav-content .profile-section .product-wrapper rect {
@@ -5521,7 +5521,7 @@ table .ticket-row:hover {
 }
 
 .user-dashboard .nav-content .profile-section .product-wrapper:hover {
-  background: #AE1C9A;
+  background: #000000;
 }
 
 .user-dashboard .nav-content .profile-section .product-wrapper:hover .paragraph,
@@ -5661,7 +5661,7 @@ table .ticket-row:hover {
 
 .user-dashboard .nav-content .payment-section .shop-btn {
   margin: 0;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 
 .user-dashboard .nav-content .payment-section .shop-btn::after {

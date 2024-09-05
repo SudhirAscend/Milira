@@ -7,6 +7,8 @@
     <title>Sign Up</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     <style>
         .is-invalid {
             border-color: red;

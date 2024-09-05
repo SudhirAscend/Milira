@@ -68,6 +68,9 @@ class HomeController extends Controller
         $latestPopup = CouponPopup::latest()->first();
         return view('checkout', compact('latestPopup'));
     }
+    public function contactDetails() {
+        return view('contact'); // Assuming you have a contact.blade.php view
+    }
     
 
 }

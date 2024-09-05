@@ -155,7 +155,7 @@ button {
 }
 .shop-btn:hover {
   color: #FFFFFF;
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 .shop-btn:hover::after {
   right: auto;
@@ -396,7 +396,7 @@ img.about-img {
 }
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg rect {
   fill: currentColor;
-  fill: #AE1C9A;
+  fill: #000000;
 }
 .product-wrapper .product-img .product-cart-items .cart-item:hover svg path {
   fill: currentColor;
@@ -423,7 +423,7 @@ img.about-img {
   transition: all 0.4s;
 }
 .product-wrapper:hover {
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
 }
 .product-wrapper:hover .product-cart-items {
   bottom: 15%;
@@ -479,12 +479,12 @@ img.about-img {
   padding: 1.2rem 1.6rem 1.2rem 2.5rem;
   border-top-left-radius: 3rem;
   background: rgba(174, 28, 154, 0.188);
-  color: #AE1C9A;
+  color: #000000;
   font-size: 1.6rem;
   transition: all 0.4s;
 }
 .product-btn:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
   color: #FFFFFF;
 }
 
@@ -576,7 +576,7 @@ img.about-img {
 }
 
 .header-top-section {
-  border-bottom: 1px solid #AE1C9A;
+  border-bottom: 1px solid #000000;
   background: var(--primary-color);
 }
 
@@ -816,7 +816,7 @@ input.mob-search::placeholder {
   width: 62rem;
   height: 6rem;
   border-radius: 3rem;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
   overflow: hidden;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section {
@@ -841,7 +841,7 @@ input.mob-search::placeholder {
   flex: 1 1 0%;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
   border-top-left-radius: 0;
@@ -996,7 +996,7 @@ input.mob-search::placeholder {
   width: 100%;
 }
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
   color: #FFFFFF;
@@ -1090,7 +1090,7 @@ input.mob-search::placeholder {
 }
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 .header-nav .header-nav-menu .menu-list .mega-menu {
   position: unset;

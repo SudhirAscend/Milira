@@ -265,7 +265,7 @@ button {
 
 /* Header */
 .header-top-section {
-  border-bottom: 1px solid #AE1C9A;
+  border-bottom: 1px solid #000000;
   background: var(--primary-color);
 }
 
@@ -442,7 +442,7 @@ button {
   width: 62rem;
   height: 6rem;
   border-radius: 3rem;
-  border: 1px solid #AE1C9A;
+  border: 1px solid #000000;
   overflow: hidden;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section {
@@ -467,7 +467,7 @@ button {
   flex: 1 1 0%;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
   border-top-left-radius: 0;
@@ -622,7 +622,7 @@ button {
   width: 100%;
 }
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
   color: #FFFFFF;
@@ -716,7 +716,7 @@ button {
 }
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 .header-nav .header-nav-menu .menu-list .mega-menu {
   position: unset;
@@ -1065,7 +1065,7 @@ button.cat-dropdown::before{
   overflow: hidden;
 }
 .about-details:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 @media (max-width:767px) {
   .about-details {

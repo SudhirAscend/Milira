@@ -239,4 +239,7 @@ public function handleProviderCallback()
         Auth::logout();
         return redirect('/login');
     }
+    public function contactDetails() {
+        return view('contact'); // Assuming you have a contact.blade.php in resources/views
+    }
 }

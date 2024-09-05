@@ -3,41 +3,35 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords"
-        content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template,dashboard,bootstrap-dashboard">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta name="keywords" content="ShopUS, bootstrap-5, bootstrap, sass, css, HTML Template, HTML,html, bootstrap template, free template, figma, web design, web development,front end, bootstrap datepicker, bootstrap timepicker, javascript, ecommerce template">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="{{ asset('assets/images/logos/favicon.png') }}">
+
+    <title>Milira-Shop</title>
+
+    <!--------------- swiper-css ---------------->
+    <link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
+
+    <!--------------- bootstrap-css ---------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!---------------------- Range Slider ------------------->
+    <link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css" rel="stylesheet">
+
+    <!---------------------- Scroll ------------------->
+    <link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
+
+    <!--------------- additional-css ---------------->
+    <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-.is-invalid {
-    border-color: red !important;
-}
 
-.is-valid {
-    border-color: green !important;
-}
-</style>
-<!-- Bootstrap JS (if not included in your Laravel Mix setup) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" href="{{ asset('assets/images/homepage-one/icon.png') }}">
-
-<!--title  -->
-<title>Milira-Dashboard</title>
-
-<!--------------- swiper-css ---------------->
-<link rel="stylesheet" href="{{ asset('assets/css/swiper10-bundle.min.css') }}">
-
-<!--------------- bootstrap-css ---------------->
-<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
-
-<!---------------------- Range Slider ------------------->
-<link rel="stylesheet" href="{{ asset('assets/css/nouislider.min.css') }}">
-
-<!---------------------- Scroll ------------------->
-<link rel="stylesheet" href="{{ asset('assets/css/aos-3.0.0.css') }}">
-
-<!--------------- additional-css ---------------->
-<link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
 </head>
 
 <body>
@@ -82,9 +76,7 @@
                             data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home"
                             aria-selected="true">
                             <span>
-                                <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-</svg>
+                             
                             </span>
                             <span class="text">Dashboard</span>
                         </button>
@@ -93,26 +85,10 @@
                             data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
                             aria-selected="false">
                             <span>
-                                <svg width="14" height="19" viewBox="0 0 14 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
+                             
                             </span>
                             <span class="text">
-                                Parsonal Info
-                            </span>
-                        </button>
-
-                        <button class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-payment" type="button" role="tab" aria-controls="v-pills-payment"
-                            aria-selected="false">
-                            <span>
-                                <svg width="17" height="12" viewBox="0 0 17 12" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
-
-                            </span>
-                            <span class="text">
-                                Payment Method
+                                Personal Info
                             </span>
                         </button>
 
@@ -120,26 +96,10 @@
                             data-bs-target="#v-pills-order" type="button" role="tab" aria-controls="v-pills-order"
                             aria-selected="false">
                             <span>
-                                <svg width="15" height="18" viewBox="0 0 15 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                      </svg>
+                               
                             </span>
                             <span class="text">
                                 Order
-                            </span>
-                        </button>
-
-                        <button class="nav-link" id="v-pills-wishlist-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-wishlist" type="button" role="tab" aria-controls="v-pills-wishlist"
-                            aria-selected="false">
-                            <span>
-                                <svg width="16" height="14" viewBox="0 0 16 14" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    
-                                </svg>
-                            </span>
-                            <span class="text">
-                                Wishlist
                             </span>
                         </button>
 
@@ -147,22 +107,7 @@
                             data-bs-target="#v-pills-address" type="button" role="tab" aria-controls="v-pills-address"
                             aria-selected="false">
                             <span>
-                                <svg width="14" height="20" viewBox="0 0 14 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.864 15.9822C11.4632 12.6506 9.25877 11.1118 7.04363 11.0545C5.70166 11.0223 4.5422 11.5126 3.57598 12.4609C2.60976 13.4057 2.19465 14.5938 1.99067 16.0288C1.37873 15.7461 0.809733 15.5063 0.272945 15.2128C0.147695 15.1449 0.0582333 14.8944 0.0582333 14.7262C0.0439189 13.5631 -0.0849134 12.3822 0.0940158 11.2478C0.365988 9.54079 1.99067 8.23819 3.71555 8.05568C4.60661 7.96264 5.46547 7.9519 6.35296 8.1702C6.88617 8.3026 7.51243 8.19167 8.06711 8.05926C10.2357 7.52963 13.1559 8.64973 13.7571 10.9973C14.0577 12.1675 14.0577 13.3663 13.8751 14.5615C13.8107 14.9981 13.6068 15.3202 13.1737 15.4812C12.7336 15.6387 12.3042 15.8105 11.864 15.9822Z" />
-                                    <path
-                                        d="M10.6071 3.72194C10.5928 5.77962 8.96814 7.38999 6.93193 7.36494C4.8814 7.33989 3.24241 5.7009 3.26388 3.69331C3.28535 1.59984 4.90287 -0.0212607 6.94982 0.000210833C9.01824 0.0181038 10.6215 1.64994 10.6071 3.72194Z" />
-                                    <path
-                                        d="M10.9467 16.0178C10.9109 18.2795 9.07512 19.9972 6.74188 19.9507C4.58041 19.9077 2.77681 18.0719 2.80902 15.9498C2.8448 13.7454 4.69493 11.9776 6.9387 12.0062C9.17174 12.0384 10.9789 13.8492 10.9467 16.0178ZM6.84208 18.4834C7.27509 18.462 7.76893 18.4262 8.26278 18.419C8.62779 18.4154 8.74947 18.2222 8.74947 17.8966C8.74947 17.1808 8.75305 16.4687 8.74589 15.753C8.74589 15.6599 8.70652 15.5025 8.65642 15.4882C8.32719 15.4059 8.40234 15.1482 8.38087 14.9263C8.36298 14.7367 8.34151 14.547 8.30572 14.3645C8.15542 13.6309 7.64011 13.2122 6.91723 13.2229C6.22299 13.2337 5.64683 13.7418 5.52874 14.4432C5.4679 14.8154 5.65041 15.2735 5.17088 15.5096C5.14941 15.5204 5.14941 15.5919 5.14941 15.6349C5.14941 16.4508 5.1351 17.2667 5.16015 18.0826C5.16372 18.19 5.34981 18.3689 5.4679 18.3868C5.90449 18.4477 6.34108 18.4548 6.84208 18.4834Z" />
-                                    <path
-                                        d="M7.78818 15.3706C7.81323 14.8159 7.93491 14.2684 7.41601 13.9069C7.09036 13.6815 6.70745 13.6851 6.40327 13.9499C5.95953 14.3328 6.03826 14.8481 6.08836 15.3706C6.66451 15.3706 7.19414 15.3706 7.78818 15.3706ZM6.76113 17.643C6.8828 17.643 7.00448 17.643 7.11899 17.643C7.15836 17.3209 7.22635 17.0239 7.21561 16.7304C7.21204 16.6088 7.02953 16.4978 6.92933 16.3797C6.83986 16.4835 6.6824 16.5837 6.67883 16.6911C6.67167 16.9988 6.72892 17.3137 6.76113 17.643Z"
-                                        fill="white" />
-                                    <path
-                                        d="M7.78818 15.3706C7.19414 15.3706 6.66451 15.3706 6.08836 15.3706C6.03826 14.8445 5.95953 14.3328 6.40327 13.9499C6.71103 13.6851 7.09394 13.6815 7.41601 13.9069C7.93491 14.2684 7.81323 14.8159 7.78818 15.3706Z" />
-                                    <path
-                                        d="M6.76261 17.6421C6.7304 17.3129 6.67314 17.0016 6.6803 16.6902C6.68388 16.5865 6.84134 16.4827 6.9308 16.3789C7.031 16.4934 7.21351 16.6079 7.21709 16.7296C7.22782 17.0231 7.15983 17.3201 7.12046 17.6421C7.00595 17.6421 6.88786 17.6421 6.76261 17.6421Z" />
-                                </svg>
+                        
                             </span>
                             <span class="text">
                                 Address
@@ -173,9 +118,7 @@
                             data-bs-target="#v-pills-review" type="button" role="tab" aria-controls="v-pills-review"
                             aria-selected="false">
                             <span>
-                                <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                </svg>
+                              
                             </span>
                             <span class="text">
                                 Reviews
@@ -186,35 +129,17 @@
                             data-bs-target="#v-pills-password" type="button" role="tab" aria-controls="v-pills-password"
                             aria-selected="false">
                             <span>
-                                <svg width="16" height="19" viewBox="0 0 16 19" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
+                                
                             </span>
                             <span class="text">
                                 Change Password
                             </span>
                         </button>
 
-                        <button class="nav-link" id="v-pills-ticket-tab" data-bs-toggle="pill"
-                            data-bs-target="#v-pills-ticket" type="button" role="tab" aria-controls="v-pills-ticket"
-                            aria-selected="false">
-                            <span>
-                                <svg width="18" height="20" viewBox="0 0 18 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    </svg>
-                            </span>
-                            <span class="text">
-                                Support Ticket
-                            </span>
-                        </button>
-
                         <div class="nav-link">
                             <a href="login.html">
                                 <span>
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                       
-                                    </svg>
+                                   
                                 </span>
                                 <span class="text">
                                     Logout
@@ -240,9 +165,7 @@
                                             <div class="product-wrapper">
                                                 <div class="wrapper-img">
                                                     <span>
-                                                        <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            </svg>
+                                                      
                                                     </span>
                                                 </div>
                                                 <div class="wrapper-content">
@@ -255,39 +178,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="product-wrapper">
-                                                <div class="wrapper-img">
-                                                    <span>
-                                                        <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                             </svg>
-
-                                                    </span>
-                                                </div>
-                                                <div class="wrapper-content">
-                                                    <p class="paragraph">Delivery Completed</p>
-                                                    <h3 class="heading">99783</h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="product-wrapper">
-                                                <div class="wrapper-img">
-                                                    <span>
-                                                        <svg width="62" height="62" viewBox="0 0 62 62" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                           
-                                                        </svg>
-
-                                                    </span>
-                                                </div>
-                                                <div class="wrapper-content">
-                                                    <p class="paragraph">Support Tickets</p>
-                                                    <h3 class="heading">09</h3>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="col-lg-12">
                                             <div class="info-section">
                                                 <div class="seller-info">
@@ -297,33 +188,11 @@
                                                             <p>Name:</p>
                                                             <p>Email:</p>
                                                             <p>Phone:</p>
-                                                            <p>City:</p>
-                                                            <p>pincode:</p>
                                                         </div>
                                                         <div class="info-details">
                                                         <p>{{ $user->full_name }}</p>
                                                         <p>{{ $user->email }}</p>
                                                         <p>{{ $user->phone_number }}</p>
-                                                        <p>{{ $user->city }}</p>
-                                                        <p>{{ $user->pin_code }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="devider"></div>
-                                                
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="info-section">
-                                                <div class="seller-info">
-                                                    <h5 class="heading">Address</h5>
-                                                    <div class="info-list">
-                                                        <div class="info-title">
-                                                            <p>Address:</p>
-                                                        </div>
-                                                        <div class="info-details">
-                                                        <p>{{ $user->address }}</p>
-                                                        
                                                         </div>
                                                     </div>
                                                 </div>
@@ -376,32 +245,7 @@
                                         <option value="Other" {{ $user->gender == 'Other' ? 'selected' : '' }}>Other</option>
                                     </select>
                                 </div>
-                                <div class="review-form-name address-form">
-                                    <label for="address" class="form-label">Address*</label>
-                                    <input type="text" id="address" name="address" class="form-control" value="{{ $user->address }}" required>
-                                </div>
-                                <div class="review-form-name address-form">
-                                    <label for="city" class="form-label">City*</label>
-                                    <input type="text" id="city" name="city" class="form-control" value="{{ $user->city }}" required>
-                                </div>
-                                <div class="review-form-name address-form">
-                                    <label for="state" class="form-label">State*</label>
-                                    <input type="text" id="state" name="state" class="form-control" value="{{ $user->state }}" required>
-                                </div>
-                                <div class="review-form-name address-form">
-                                    <label for="pin_code" class="form-label">Pin Code*</label>
-                                    <input type="text" id="pin_code" name="pin_code" class="form-control" value="{{ $user->pin_code }}" required>
-                                </div>
-                                <div class="review-form-name">
-                                    <label for="country" class="form-label">Country*</label>
-                                    <select id="country" name="country" class="form-select" required>
-                                        <option value="">Choose...</option>
-                                        <option value="Bangladesh" {{ $user->country == 'Bangladesh' ? 'selected' : '' }}>Bangladesh</option>
-                                        <option value="United States" {{ $user->country == 'United States' ? 'selected' : '' }}>United States</option>
-                                        <option value="United Kingdom" {{ $user->country == 'United Kingdom' ? 'selected' : '' }}>United Kingdom</option>
-                                        <option value="India" {{ $user->country == 'India' ? 'selected' : '' }}>India</option>
-                                    </select>
-                                </div>
+                            
                                 <div class="submit-btn">
                                     <a href="#" class="shop-btn cancel-btn">Cancel</a>
                                     <button type="submit" class="shop-btn update-btn">Update Profile</button>
@@ -415,164 +259,6 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
-                            aria-labelledby="v-pills-order-tab" tabindex="0">
-                            <div class="payment-section">
-                                <div class="wrapper">
-                                    <div class="wrapper-item">
-                                        <div class="wrapper-img">
-                                            <img src="./assets/images/homepage-one/payment-img-1.png" alt="payment">
-                                        </div>
-                                        <div class="wrapper-content">
-                                            <h5 class="heading">Dutch Bangl Bank Lmtd</h5>
-                                            <p class="paragraph">Bank **********5535</p>
-                                            <p class="verified">Verified</p>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="shop-btn">Manage</a>
-                                </div>
-                                <hr>
-                                <div class="wrapper">
-                                    <div class="wrapper-item">
-                                        <div class="wrapper-img">
-                                            <img src="./assets/images/homepage-one/payment-img-2.png" alt="payment">
-                                        </div>
-                                        <div class="wrapper-content">
-                                            <h5 class="heading">Master Card</h5>
-                                            <p class="paragraph">Bank **********5535</p>
-                                            <p class="verified">Verified</p>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="shop-btn">Manage</a>
-                                </div>
-                                <hr>
-                                <div class="wrapper">
-                                    <div class="wrapper-item">
-                                        <div class="wrapper-img">
-                                            <img src="./assets/images/homepage-one/payment-img-3.png" alt="payment">
-                                        </div>
-                                        <div class="wrapper-content">
-                                            <h5 class="heading">Paypal Account</h5>
-                                            <p class="paragraph">Bank **********5535</p>
-                                            <p class="verified">Verified</p>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="shop-btn">Manage</a>
-                                </div>
-                                <hr>
-                                <div class="wrapper">
-                                    <div class="wrapper-item">
-                                        <div class="wrapper-img">
-                                            <img src="./assets/images/homepage-one/payment-img-4.png" alt="payment">
-                                        </div>
-                                        <div class="wrapper-content">
-                                            <h5 class="heading">Visa Card</h5>
-                                            <p class="paragraph">Bank **********5535</p>
-                                            <p class="verified">Verified</p>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="shop-btn">Manage</a>
-                                </div>
-                                <hr>
-                                <div class="wrapper-btn">
-                                    <a href="#" class="shop-btn" onclick="modalAction('.cart')">Add Cart</a>
-
-                                    <!-- cart-modal -->
-                                    <div class="modal-wrapper cart">
-                                        <div onclick="modalAction('.cart')" class="anywhere-away"></div>
-
-                                        <!-- change this -->
-                                        <div class="login-section account-section modal-main">
-                                            <div class="review-form">
-                                                <div class="review-content">
-                                                    <h5 class="comment-title">Add New Card</h5>
-                                                    <div class="close-btn">
-                                                        <img src="./assets/images/homepage-one/close-btn.png"
-                                                            onclick="modalAction('.cart')" alt="close-btn">
-                                                    </div>
-                                                </div>
-                                                <div class="review-form-name address-form">
-                                                    <label for="cnumber" class="form-label">Card Number*</label>
-                                                    <input type="number" id="cnumber" class="form-control"
-                                                        placeholder="*** *** ***">
-                                                </div>
-                                                <div class="review-form-name address-form">
-                                                    <label for="holdername" class="form-label">Card Holder Name*</label>
-                                                    <input type="text" id="holdername" class="form-control"
-                                                        placeholder="Demo Name">
-                                                </div>
-                                                <div class=" account-inner-form">
-                                                    <div class="review-form-name">
-                                                        <label for="expirydate" class="form-label">Expiry Date*</label>
-                                                        <input type="date" id="expirydate" class="form-control">
-                                                    </div>
-                                                    <div class="review-form-name">
-                                                        <label for="cvv" class="form-label">CVV*</label>
-                                                        <input type="number" id="cvv" class="form-control"
-                                                            placeholder="21232">
-                                                    </div>
-                                                </div>
-                                                <div class="login-btn text-center">
-                                                    <a href="#" onclick="modalAction('.cart')" class="shop-btn">Add
-                                                        Card</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- change this -->
-
-                                    </div>
-                                    <a href="#" class="shop-btn bank-btn" onclick="modalAction('.bank')">Add Bank</a>
-
-                                    <!-- bank-modal -->
-                                    <div class="modal-wrapper bank">
-                                        <div onclick="modalAction('.bank')" class="anywhere-away"></div>
-
-                                        <!-- change this -->
-                                        <div class="login-section account-section modal-main">
-                                            <div class="review-form">
-                                                <div class="review-content">
-                                                    <h5 class="comment-title">Add Bank Account</h5>
-                                                    <div class="close-btn">
-                                                        <img src="./assets/images/homepage-one/close-btn.png"
-                                                            onclick="modalAction('.bank')" alt="close-btn">
-                                                    </div>
-                                                </div>
-                                                <div class="review-form-name address-form">
-                                                    <label for="accountnumber" class="form-label">Account
-                                                        Number*</label>
-                                                    <input type="number" id="accountnumber" class="form-control"
-                                                        placeholder="*** *** ***">
-                                                </div>
-                                                <div class="review-form-name address-form">
-                                                    <label for="accountholdername" class="form-label">Card Holder
-                                                        Name*</label>
-                                                    <input type="text" id="accountholdername" class="form-control"
-                                                        placeholder="Demo Name">
-                                                </div>
-                                                <div class=" account-inner-form">
-                                                    <div class="review-form-name">
-                                                        <label for="branchname" class="form-label">Branch*</label>
-                                                        <input type="text" id="branchname" class="form-control"
-                                                            placeholder="Demo Branch">
-                                                    </div>
-                                                    <div class="review-form-name">
-                                                        <label for="ipscode" class="form-label">IPSC Code</label>
-                                                        <input type="number" id="ipscode" class="form-control"
-                                                            placeholder="21232">
-                                                    </div>
-                                                </div>
-                                                <div class="login-btn text-center">
-                                                    <a href="#" onclick="modalAction('.bank')" class="shop-btn">Add Bank
-                                                        Account</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- change this -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="tab-pane fade" id="v-pills-order" role="tabpanel" aria-labelledby="v-pills-order-tab" tabindex="0">
     <div class="cart-section">
@@ -646,152 +332,6 @@
 
 
 
-                        <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel"
-                            aria-labelledby="v-pills-wishlist-tab" tabindex="0">
-
-                            <div class="wishlist">
-                                <div class="cart-content">
-                                    <h5 class="cart-heading">SpaceRace</h5>
-                                    <p>Order ID: <span class="inner-text">#4345</span></p>
-                                </div>
-                                <div class="cart-section wishlist-section">
-                                    <table>
-                                        <tbody>
-                                            <tr class="table-row table-top-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <h5 class="table-heading">PRODUCT</h5>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">PRICE</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">ACTION</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-1.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Design Skart</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-2.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Black Suit</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper ">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-3.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Blue Party Dress</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper wrapper-product">
-                                                    <div class="wrapper">
-                                                        <div class="wrapper-img">
-                                                            <img src="./assets/images/homepage-one/product-img/product-img-4.webp"
-                                                                alt="img">
-                                                        </div>
-                                                        <div class="wrapper-content">
-                                                            <h5 class="heading">Classic Party Dress</h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="heading">$20.00</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <span>
-                                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                
-                                                            </svg>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="wishlist-btn">
-                                    <a href="#" class="clean-btn">Clean Wishlist</a>
-                                    <a href="#" class="shop-btn">View Cards</a>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="tab-pane fade" id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab" tabindex="0">
     <div class="profile-section address-section addresses">
@@ -852,10 +392,7 @@
                                                 </div>
                                                 <div class="ratings">
                                                     <span>
-                                                        <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            
-                                                        </svg>
+                                                      
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
@@ -883,10 +420,6 @@
                                                 </div>
                                                 <div class="ratings">
                                                     <span>
-                                                        <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                           
-                                                        </svg>
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
@@ -914,10 +447,7 @@
                                                 </div>
                                                 <div class="ratings">
                                                     <span>
-                                                        <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                      
-                                                        </svg>
+                                                   
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
@@ -945,10 +475,7 @@
                                                 </div>
                                                 <div class="ratings">
                                                     <span>
-                                                        <svg width="75" height="15" viewBox="0 0 75 15" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                           
-                                                        </svg>
+                                             
                                                     </span>
                                                 </div>
                                                 <div class="product-description">
@@ -1036,349 +563,6 @@
     </div>
 </div>
 
-                        <div class="tab-pane fade" id="v-pills-ticket" role="tabpanel"
-                            aria-labelledby="v-pills-ticket-tab" tabindex="0">
-                            <div class="support-ticket">
-                                <a href="#" class="shop-btn" onclick="modalAction('.ticket')">Add New Support</a>
-
-                                <!-- ticket-modal -->
-                                <div class="modal-wrapper ticket">
-                                    <div onclick="modalAction('.ticket')" class="anywhere-away"></div>
-
-                                    <!-- change this -->
-                                    <div class="login-section account-section modal-main">
-                                        <div class="review-form">
-                                            <div class="review-content">
-                                                <h5 class="comment-title">Add New Ticket</h5>
-                                                <div class="close-btn">
-                                                    <img src="./assets/images/homepage-one/close-btn.png"
-                                                        onclick="modalAction('.ticket')" alt="close-btn">
-                                                </div>
-                                            </div>
-                                            <div class="review-form-name address-form">
-                                                <label for="ticket" class="form-label">First Name*</label>
-                                                <input type="text" id="ticket" class="form-control" placeholder="Name">
-                                            </div>
-                                            <div class=" account-inner-form">
-                                                <div class="review-form-name">
-                                                    <label for="ticketaddress" class="form-label">Email Address*</label>
-                                                    <input type="email" id="ticketaddress" class="form-control"
-                                                        placeholder="email@gmail.com">
-                                                </div>
-                                                <div class="review-form-name">
-                                                    <label for="ticketphone" class="form-label">Phone Number*</label>
-                                                    <input type="tel" id="ticketphone" class="form-control"
-                                                        placeholder="******">
-                                                </div>
-                                            </div>
-                                            <div class="review-form-name address-form">
-                                                <label for="ticketmassage" class="form-label">Description*</label>
-                                                <textarea name="ticketmassage" id="ticketmassage" cols="10" rows="3"
-                                                    class="form-control"
-                                                    placeholder="Write Here your Description"></textarea>
-                                            </div>
-                                            <div class="login-btn text-center">
-                                                <a href="#" onclick="modalAction('.ticket')" class="shop-btn">Add Ticekt
-                                                    Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- change this -->
-
-                                </div>
-                                <div class="ticket-section">
-                                    <table>
-                                        <tbody>
-                                            <tr class="table-row table-top-row">
-                                                <td class="table-wrapper">
-                                                    <h5 class="table-heading">NO</h5>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">TIME</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">REPORT</h5>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <h5 class="table-heading">ACTION</h5>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#354</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#355</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#356</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#357</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#358</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#359</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="table-row ticket-row">
-                                                <td class="table-wrapper">
-                                                    <p class="ticker-number">#360</p>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-date">11th Oct, 2023</p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center">
-                                                        <p class="ticket-info">Printing and typesetting industry
-                                                            standard <span class="inner-text">dummy text ever
-                                                                since</span></p>
-                                                    </div>
-                                                </td>
-                                                <td class="table-wrapper">
-                                                    <div class="table-wrapper-center table-wrapper-img">
-                                                        <div class="comment-img">
-                                                            <span>
-                                                                <svg width="18" height="17" viewBox="0 0 18 17"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-                                                            </span>
-                                                        </div>
-                                                        <div class="delete-img">
-                                                            <span>
-                                                                <svg width="16" height="19" viewBox="0 0 16 19"
-                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                   
-                                                                </svg>
-
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -1386,7 +570,11 @@
         </div>
     </section>
     <!--------------- user-profile-section-end --------------->
+
+    
     <!--------------- footer-section-end--------------->
+
+
     <div class="modal fade" id="addAddressModal" tabindex="-1" aria-labelledby="addAddressModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -1445,7 +633,153 @@
 </div>
 
 
-
+    <!--------------- footer-section --------------->
+    <footer id="footer">
+        <div class="footer-details">
+            <div class="foot-logo py-5">
+                <img src="../assets/images/logos/Milira-White-Logo.png" alt="Milira-White-Logo">
+            </div>
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Navigation</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="about.html">About</a>
+                                    </li>
+                                    <li>
+                                        <a href="shop.html">Shop</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Categories</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">Pendemt Set</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Chain</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Stud</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Earrings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Bracelet</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Necklace</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Account</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">My Account</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Account Settings</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Payments</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Subscription</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Dashboard</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="foot-navigation">
+                            <div class="foot-title">
+                                <h4>Legal</h4>
+                            </div>
+                            <div class="foot-items">
+                                <ul>
+                                    <li>
+                                        <a href="#">Terms & Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Privacy Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Shipping Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Payment Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Refund Policy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyrights mt-4">
+                <div class="row pt-4">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="copy">
+                            <p>©<span id="demo"></span> by milira, All rights reserved</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="social">
+                            <p>
+                                <span>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </span>
+                                <span>
+                                    <a href=""><i class="bi bi-youtube"></i></a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--------------- footer-section-end --------------->
 
     <script src="{{ asset('assets/js/jquery_3.7.1.min.js') }}"></script>
 

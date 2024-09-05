@@ -125,6 +125,8 @@ Route::get('/request-product', [AuthController::class, 'requestProduct'])->name(
 
 // contact Page
 Route::get('/contact', [AuthController::class, 'contactDetails'])->name('contact');
+Route::post('/contact', [HomeController::class, 'submitContactForm'])->name('contact.submit');
+
 Route::get('/shop/{title}', [ShopController::class, 'showProduct'])->name('shop.product');
 Route::get('/product/{slug}', [ProductsController::class, 'show'])->name('product.show');
 Route::resource('products', ProductsController::class);
@@ -222,10 +224,25 @@ Route::prefix('admin')->middleware('auth:admin')->group(function() {
     Route::resource('coupons', 'Admin\CouponController');
 });
 
-Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.applyCoupon');
-Route::get('login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-Route::post('login', [AuthController::class, 'login'])->name('admin.login.submit');
-Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Unauthenticated routes
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login']);
+    Route::get('signup', [AdminAuthController::class, 'showSignupForm'])->name('signup');
+    Route::post('signup', [AdminAuthController::class, 'signup']);
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+
+    // Authenticated routes
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::resource('coupons', 'App\Http\Controllers\Admin\CouponController');
+    });
+});
+
 
 Route::middleware('auth:admin')->group(function() {
     Route::get('/dashboard', function() {

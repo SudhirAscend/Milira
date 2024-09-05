@@ -7,6 +7,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-5.3.2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/account-create.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/shop.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/header.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         .is-invalid {

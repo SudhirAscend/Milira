@@ -118,7 +118,7 @@ button {
   text-align: center;
   border-radius: 3rem;
   display: inline-block;
-  background: #AE1C9A;
+  background: #000000;
   font-size: 1.4rem;
   font-weight: 500;
   position: relative;
@@ -152,7 +152,7 @@ button {
 }
 .shop-btn:hover {
   color: #FFFFFF;
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 .shop-btn:hover::after {
   right: auto;
@@ -423,7 +423,7 @@ button {
     width: 62rem;
     height: 6rem;
     border-radius: 3rem;
-    border: 1px solid #AE1C9A;
+    border: 1px solid #000000;
     overflow: hidden;
   }
   .header-center .header-cart-items .header-search .modal-main .search-section {
@@ -448,7 +448,7 @@ button {
     flex: 1 1 0%;
   }
   .header-center .header-cart-items .header-search .modal-main .search-section input {
-    color: #AE1C9A;
+    color: #000000;
   }
   .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
     border-top-left-radius: 0;
@@ -550,7 +550,7 @@ button {
   .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span svg,
   .offcanvas-body .category-dropdown .category-list .dropdown-item .drop-down-list-icon span rect {
     fill: currentColor;
-    fill: #AE1C9A;
+    fill: #000000;
   }
   
   .header-bottom {
@@ -603,7 +603,7 @@ button {
     width: 100%;
   }
   .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-    background-color: #AE1C9A;
+    background-color: #000000;
   }
   .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
     color: #FFFFFF;
@@ -697,7 +697,7 @@ button {
   }
   .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
   .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-    color: #AE1C9A;
+    color: #000000;
   }
   .header-nav .header-nav-menu .menu-list .mega-menu {
     position: unset;
@@ -969,7 +969,7 @@ table {
 .product-compair .cart-center .search input {
   border: none;
   outline: none;
-  color: #AE1C9A;
+  color: #000000;
   flex: 1 1 0%;
 }
 .product-compair .cart-center .search span svg {

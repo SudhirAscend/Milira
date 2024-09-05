@@ -711,6 +711,128 @@
 });
 
         </script>
+<script>
+    $(document).ready(function() {
+        var slider = document.getElementById('priceRangeSlider');
+
+        // Use the minPrice and maxPrice from the backend (in INR)
+        var minPrice = {{ $minPrice }};
+        var maxPrice = {{ $maxPrice }};
+
+        noUiSlider.create(slider, {
+            start: [minPrice, maxPrice], // Set initial range
+            connect: true,
+            range: {
+                'min': minPrice, // Dynamically set min price
+                'max': maxPrice  // Dynamically set max price
+            },
+            tooltips: [true, true],
+            format: {
+                to: function (value) {
+                    return '₹' + Math.round(value); // Format with ₹ symbol
+                },
+                from: function (value) {
+                    return Number(value.replace('₹', '').trim()); // Remove ₹ when parsing
+                }
+            }
+        });
+
+        var minValueSpan = document.getElementById('slider-margin-value-min');
+        var maxValueSpan = document.getElementById('slider-margin-value-max');
+
+        // Update the display values for min and max on slider drag
+        slider.noUiSlider.on('update', function (values, handle) {
+            if (handle === 0) {
+                minValueSpan.innerHTML = values[handle];
+            } else {
+                maxValueSpan.innerHTML = values[handle];
+            }
+        });
+
+        // When the price range is changed, send the new range to filter products
+        slider.noUiSlider.on('change', function (values) {
+            filterProducts(values); // Call filterProducts when range changes
+        });
+
+        // Function to filter products based on selected filters and price range
+        function filterProducts(priceRange) {
+            let selectedCategories = [];
+            $('.category-checkbox:checked').each(function () {
+                selectedCategories.push($(this).val());
+            });
+
+            let selectedCollections = [];
+            $('.collection-checkbox:checked').each(function () {
+                selectedCollections.push($(this).val());
+            });
+
+            $.ajax({
+                url: '{{ route('shop.filterByCategory') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    categories: selectedCategories,
+                    collections: selectedCollections,
+                    price_min: priceRange[0].replace('₹', '').trim(),  // Send min price (without ₹)
+                    price_max: priceRange[1].replace('₹', '').trim()   // Send max price (without ₹)
+                },
+                success: function (response) {
+                    $('#product-list').empty();
+                    response.products.forEach(product => {
+                        $('#product-list').append(`
+                            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mt-4 product-card" data-category="${product.category}">
+                                <div class="card product">
+                                    <div class="card-body">
+                                        <img src="/storage/uploads/${product.title}_0.jpg" alt="" class="pdt-img">
+                                        <div class="card-hover">
+                                            <div class="hover-icons text-center">
+                                                <a href="#"><i class="bi bi-arrows-fullscreen"></i></a>
+                                                <button class="wishlist-button ${product.in_wishlist ? 'wishlisted' : ''}" data-product-id="${product.id}">
+                                                    <i class="bi bi-heart${product.in_wishlist ? '-fill' : ''}"></i>
+                                                </button>
+                                                <a href="#"><i class="bi bi-arrow-repeat"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="pdt-title">
+                                                <h6>${product.title}</h6>
+                                            </div>
+                                            <div class="pdt-price">
+                                                <h6>₹${product.price}</h6> <!-- Display price in INR -->
+                                            </div>
+                                            <div class="pdt-rating mt-4">
+                                                <p>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-half"></i>
+                                                    <span>(${product.reviews} reviews)</span>
+                                                </p>
+                                            </div>
+                                            <div class="pdt-shop text-center mt-5">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <button class="buy-now-btn" data-url="/shop/${product.title.replace(/\s+/g, '-').replace(/'/g, '')}">View Product <i class="bi bi-bag-heart-fill"></i></button>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button class="add-to-cart-btn" data-id="${product.id}"><i class="bi bi-cart-check-fill"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `);
+                    });
+
+                    rebindEventHandlers(); // Reattach event handlers after the DOM update
+                }
+            });
+        }
+    });
+</script
 
 </body>
 

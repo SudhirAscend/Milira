@@ -113,7 +113,7 @@ input {
 }
 
 input[type=checkbox] {
-  accent-color: #AE1C9A;
+  accent-color: #000000;
 }
 
 button {
@@ -128,7 +128,7 @@ button {
   text-align: center;
   border-radius: 3rem;
   display: inline-block;
-  background: #AE1C9A;
+  background: #000000;
   font-size: 1.4rem;
   font-weight: 500;
   position: relative;
@@ -166,7 +166,7 @@ button {
 
 .shop-btn:hover {
   color: #FFFFFF;
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .shop-btn:hover::after {
@@ -563,7 +563,7 @@ input.mob-search::placeholder {
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
@@ -740,7 +740,7 @@ input.mob-search::placeholder {
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
@@ -851,7 +851,7 @@ input.mob-search::placeholder {
 
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-nav .header-nav-menu .menu-list .mega-menu {

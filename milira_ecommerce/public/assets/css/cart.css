@@ -555,7 +555,7 @@ input.mob-search::placeholder {
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section input {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-center .header-cart-items .header-search .modal-main .search-section .shop-btn {
@@ -732,7 +732,7 @@ input.mob-search::placeholder {
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover {
-  background-color: #AE1C9A;
+  background-color: #000000;
 }
 
 .header-nav .category-menu-section .category-dropdown .category-list-item:hover .dropdown-text {
@@ -843,7 +843,7 @@ input.mob-search::placeholder {
 
 .header-nav .header-nav-menu .menu-list .header-sub-menu a:hover,
 .header-nav .header-nav-menu .menu-list .shop-menu a:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .header-nav .header-nav-menu .menu-list .mega-menu {
@@ -1184,7 +1184,7 @@ table .ticket-row:hover {
 }
 
 .table-row .table-wrapper .heading:hover {
-  color: #AE1C9A;
+  color: #000000;
 }
 
 .table-row .table-wrapper .table-heading {
@@ -1218,7 +1218,7 @@ table .ticket-row:hover {
 }
 
 .table-row .table-wrapper-center path:hover {
-  fill: #AE1C9A;
+  fill: #000000;
 }
 
 .quantity {
